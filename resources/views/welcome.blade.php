@@ -1,9 +1,10 @@
+{{--
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>LearnLoop</title>
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 
@@ -334,3 +335,4 @@
 
 </body>
 </html>
+--}}
