@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LearnLoop - Admin Dashboard</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+
 <div id="homecontainer">
 
     <nav class="navbar">
@@ -26,7 +35,6 @@
             </li>
         </ul>
     </nav>
-
 
     <main class="main-content">
 
@@ -59,3 +67,6 @@
     </main>
 
 </div>
+
+</body>
+</html>
