@@ -18,9 +18,6 @@
             <button type="submit">Login</button>
         </form>
 
-        <br>
-        <a href="{{ route('register') }}"><button type="button">Register</button></a>
-
         <p class="forgot">
             <a href="{{ route('password.request') }}"><span>Forgot Password?</span></a>
         </p>
