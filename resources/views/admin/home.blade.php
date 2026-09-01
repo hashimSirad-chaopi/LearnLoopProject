@@ -27,25 +27,25 @@
 
         <nav class="sidebar-nav">
 
-            <a href="#" class="nav-item active">
-                Dashboard
-            </a>
+            <a href="{{ route('admin.home') }}" class="nav-item active">
+    Dashboard
+</a>
 
-            <a href="#" class="nav-item">
-                User Management
-            </a>
+<a href="{{ route('admin.users') }}" class="nav-item">
+    User Management
+</a>
 
-            <a href="#" class="nav-item">
-                Listings
-            </a>
+<a href="{{ route('admin.listings') }}" class="nav-item">
+    Listings
+</a>
 
-            <a href="#" class="nav-item">
-                Reports
-            </a>
+<a href="{{ route('admin.reports') }}" class="nav-item">
+    Reports
+</a>
 
-            <a href="#" class="nav-item">
-                Settings
-            </a>
+<a href="{{ route('admin.settings') }}" class="nav-item">
+    Settings
+</a>
 
         </nav>
 
