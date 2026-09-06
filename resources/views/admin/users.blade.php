@@ -6,11 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+
 <title>LearnLoop - User Management</title>
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-```
+
 
 </head>
 
@@ -18,7 +18,7 @@
 
 <div class="admin-container">
 
-```
+
 <!-- SIDEBAR -->
 <aside class="sidebar">
 
@@ -121,116 +121,63 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                
+<tbody>
 
-                    <tr>
-                        <td>Harold Caño</td>
+    @foreach($users as $user)
 
-                        <td>
-                            harold@example.com
-                        </td>
+        <tr>
 
-                        <td>
-                            <span class="role-badge">
-                                Admin
-                            </span>
-                        </td>
+            <td>
+                {{ $user->name }}
+            </td>
 
-                        <td>
-                            <span class="status-badge active-status">
-                                Active
-                            </span>
-                        </td>
+            <td>
+                {{ $user->email }}
+            </td>
 
-                        <td>
-                            <button class="table-btn">
-                                View
-                            </button>
-                        </td>
-                    </tr>
+            <td>
+                <span class="role-badge">
+                    {{ $user->role ?? 'User' }}
+                </span>
+            </td>
 
+            <td>
+                <span class="status-badge active-status">
+                    Active
+                </span>
+            </td>
 
-                    <tr>
-                        <td>Myra Balaba</td>
+            <td class="action-buttons">
 
-                        <td>
-                            myra@example.com
-                        </td>
+                <button class="table-btn">
+                    View
+                </button>
 
-                        <td>
-                            <span class="role-badge">
-                                User
-                            </span>
-                        </td>
+                <form
+                    method="POST"
+                    action="{{ route('admin.users.delete', $user->id) }}"
+                    onsubmit="return confirm('Are you sure you want to delete {{ $user->name }}?');"
+                >
 
-                        <td>
-                            <span class="status-badge active-status">
-                                Active
-                            </span>
-                        </td>
+                    @csrf
+                    @method('DELETE')
 
-                        <td>
-                            <button class="table-btn">
-                                View
-                            </button>
-                        </td>
-                    </tr>
+                    <button type="submit" class="delete-btn">
+                        Delete
+                    </button>
 
+                </form>
 
-                    <tr>
-                        <td>Richard Formoso</td>
+            </td>
 
-                        <td>
-                            richard@example.com
-                        </td>
+        </tr>
 
-                        <td>
-                            <span class="role-badge">
-                                User
-                            </span>
-                        </td>
+    @endforeach
 
-                        <td>
-                            <span class="status-badge active-status">
-                                Active
-                            </span>
-                        </td>
-
-                        <td>
-                            <button class="table-btn">
-                                View
-                            </button>
-                        </td>
-                    </tr>
+</tbody>
 
 
-                    <tr>
-                        <td>Christian Jay Ayunan</td>
-
-                        <td>
-                            christian@example.com
-                        </td>
-
-                        <td>
-                            <span class="role-badge">
-                                User
-                            </span>
-                        </td>
-
-                        <td>
-                            <span class="status-badge inactive-status">
-                                Inactive
-                            </span>
-                        </td>
-
-                        <td>
-                            <button class="table-btn">
-                                View
-                            </button>
-                        </td>
-                    </tr>
-
-                </tbody>
 
             </table>
 
@@ -239,7 +186,7 @@
     </section>
 
 </main>
-```
+
 
 </div>
 

@@ -1,0 +1,515 @@
+/* =========================================================
+   LEARNLOOP ADMIN — SETTINGS
+   MODERN MINIMALIST
+   WHITE + LIGHT GREY + BLACK + ORANGE
+   ========================================================= */
+
+
+/* =========================================================
+   SETTINGS CONTENT
+   ========================================================= */
+
+.settings-content {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 115px 34px 40px;
+}
+
+
+/* =========================================================
+   SETTINGS CARD
+   ========================================================= */
+
+.settings-card {
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.settings-card:hover {
+    border-color: #fed7aa;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   SETTINGS CARD HEADER
+   ========================================================= */
+
+.settings-card-header {
+    margin-bottom: 23px;
+
+    padding-bottom: 17px;
+
+    border-bottom: 1px solid #f1f3f5;
+}
+
+
+.settings-card-header h2 {
+    margin: 0 0 5px;
+
+    color: #172033;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+
+.settings-card-header p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SETTINGS FORM
+   ========================================================= */
+
+.settings-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   SETTINGS FIELD
+   ========================================================= */
+
+.settings-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.settings-field label {
+    color: #475569;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.settings-field input,
+.settings-field textarea,
+.settings-field select {
+    width: 100%;
+
+    height: 45px;
+
+    padding: 0 13px;
+
+    background: #f8fafc;
+
+    color: #172033;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.settings-field textarea {
+    height: auto;
+
+    min-height: 110px;
+
+    padding: 12px 13px;
+
+    resize: vertical;
+}
+
+
+.settings-field input::placeholder,
+.settings-field textarea::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+   ========================================================= */
+
+.settings-field input:focus,
+.settings-field textarea:focus,
+.settings-field select:focus {
+    background: #ffffff;
+
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.10);
+}
+
+
+/* =========================================================
+   SETTINGS ACTIONS
+   ========================================================= */
+
+.settings-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 5px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #f1f3f5;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+
+.settings-save-btn {
+    min-height: 40px;
+
+    padding: 10px 18px;
+
+    background: #f97316;
+
+    color: #ffffff;
+
+    border: 1px solid #f97316;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.settings-save-btn:hover {
+    background: #ea580c;
+
+    border-color: #ea580c;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 15px rgba(249, 115, 22, 0.20);
+}
+
+
+.settings-save-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SYSTEM SETTINGS OPTION
+   ========================================================= */
+
+.settings-option {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid #f1f3f5;
+}
+
+
+.settings-option:first-of-type {
+    padding-top: 0;
+}
+
+
+.settings-option:last-child {
+    border-bottom: none;
+
+    padding-bottom: 0;
+}
+
+
+/* =========================================================
+   OPTION TEXT
+   ========================================================= */
+
+.settings-option > div {
+    flex: 1;
+}
+
+
+.settings-option h3 {
+    margin: 0 0 5px;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.settings-option p {
+    margin: 0;
+
+    max-width: 650px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TOGGLE
+   ========================================================= */
+
+.toggle {
+    position: relative;
+
+    width: 46px;
+
+    height: 25px;
+
+    flex-shrink: 0;
+}
+
+
+/* Hide checkbox */
+
+.toggle input {
+    width: 0;
+
+    height: 0;
+
+    opacity: 0;
+}
+
+
+/* =========================================================
+   TOGGLE SLIDER
+   ========================================================= */
+
+.toggle-slider {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: #cbd5e1;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* Toggle circle */
+
+.toggle-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 19px;
+    height: 19px;
+
+    left: 2px;
+    top: 2px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+/* =========================================================
+   TOGGLE ACTIVE
+   ========================================================= */
+
+.toggle input:checked + .toggle-slider {
+    background: #f97316;
+
+    border-color: #f97316;
+}
+
+
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(21px);
+}
+
+
+/* =========================================================
+   TOGGLE HOVER
+   ========================================================= */
+
+.toggle:hover .toggle-slider {
+    border-color: #f97316;
+}
+
+
+/* =========================================================
+   SETTINGS SELECT
+   ========================================================= */
+
+.settings-field select {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .settings-content {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .settings-content {
+        padding: 30px 20px 35px;
+    }
+
+
+    .settings-card {
+        padding: 20px;
+    }
+
+
+    .settings-card-header {
+        margin-bottom: 20px;
+    }
+
+
+    .settings-option {
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .settings-actions {
+        justify-content: stretch;
+    }
+
+
+    .settings-save-btn {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .settings-content {
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+
+    .settings-card {
+        padding: 17px;
+    }
+
+
+    .settings-option {
+        flex-direction: column;
+    }
+
+
+    .toggle {
+        align-self: flex-start;
+    }
+
+}

@@ -1,0 +1,616 @@
+/* =========================================================
+   LEARNLOOP ADMIN — REPORTS
+   MODERN MINIMALIST
+   WHITE + LIGHT GREY + BLACK + ORANGE
+   ========================================================= */
+
+
+/* =========================================================
+   REPORT TOOLS
+   ========================================================= */
+
+.report-tools {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.report-search {
+    flex: 1;
+
+    height: 46px;
+
+    padding: 0 15px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.report-search::placeholder {
+    color: #94a3b8;
+}
+
+
+.report-search:focus {
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.10);
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+.report-filter {
+    width: 160px;
+
+    height: 46px;
+
+    padding: 0 13px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.report-filter:focus {
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.10);
+}
+
+
+/* =========================================================
+   REPORTS CONTAINER
+   ========================================================= */
+
+.reports-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   REPORT CARD
+   ========================================================= */
+
+.report-card {
+    position: relative;
+
+    width: 100%;
+
+    padding: 22px 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* Orange side accent */
+
+.report-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: #f97316;
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.report-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #fed7aa;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   REPORT HEADER
+   ========================================================= */
+
+.report-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   REPORT ICON
+   ========================================================= */
+
+.report-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #fff7ed;
+
+    color: #f97316;
+
+    border: 1px solid #fed7aa;
+
+    border-radius: 50%;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   REPORT TITLE
+   ========================================================= */
+
+.report-title {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.report-title h3 {
+    margin: 0 0 3px;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.report-title span {
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   REPORT STATUS
+   ========================================================= */
+
+.report-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 75px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PENDING
+   ========================================================= */
+
+.report-status.pending {
+    background: #fff7ed;
+
+    color: #ea580c;
+
+    border: 1px solid #fed7aa;
+}
+
+
+/* =========================================================
+   RESOLVED
+   ========================================================= */
+
+.report-status.resolved {
+    background: #ecfdf5;
+
+    color: #059669;
+
+    border: 1px solid #a7f3d0;
+}
+
+
+/* =========================================================
+   DISMISSED
+   ========================================================= */
+
+.report-status.dismissed {
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+/* =========================================================
+   REPORT CONTENT
+   ========================================================= */
+
+.report-content {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    padding: 18px 0;
+
+    border-top: 1px solid #f1f3f5;
+
+    border-bottom: 1px solid #f1f3f5;
+}
+
+
+/* =========================================================
+   REPORT DETAIL
+   ========================================================= */
+
+.report-detail {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.detail-label {
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+
+.report-detail strong {
+    color: #172033;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.report-detail p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   REPORT FOOTER
+   ========================================================= */
+
+.report-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-top: 16px;
+}
+
+
+.report-footer > span {
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   REPORT ACTIONS
+   ========================================================= */
+
+.report-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+/* =========================================================
+   ALL REPORT BUTTONS
+   ========================================================= */
+
+.report-actions button {
+    min-height: 34px;
+
+    padding: 7px 13px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.report-actions button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+   ========================================================= */
+
+.report-view-btn {
+    background: #ffffff;
+
+    color: #475569;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+.report-view-btn:hover {
+    background: #f8fafc;
+
+    color: #172033;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   RESOLVE BUTTON
+   ========================================================= */
+
+.report-resolve-btn {
+    background: #fff7ed;
+
+    color: #ea580c;
+
+    border: 1px solid #fed7aa;
+}
+
+
+.report-resolve-btn:hover {
+    background: #f97316;
+
+    color: #ffffff;
+
+    border-color: #f97316;
+}
+
+
+/* =========================================================
+   DISMISS BUTTON
+   ========================================================= */
+
+.report-dismiss-btn {
+    background: #ffffff;
+
+    color: #64748b;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+.report-dismiss-btn:hover {
+    background: #f1f5f9;
+
+    color: #334155;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .report-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .report-tools {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .report-filter {
+        width: 100%;
+    }
+
+
+    .report-card {
+        padding: 18px;
+    }
+
+
+    .report-header {
+        flex-wrap: wrap;
+
+        align-items: flex-start;
+    }
+
+
+    .report-status {
+        margin-left: auto;
+    }
+
+
+    .report-content {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .report-footer {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .report-actions {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        width: 100%;
+    }
+
+
+    .report-actions button {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .report-header {
+        align-items: flex-start;
+    }
+
+
+    .report-status {
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+
+    .report-actions {
+        grid-template-columns: 1fr;
+    }
+
+}

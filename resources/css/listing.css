@@ -1,0 +1,643 @@
+/* =========================================================
+   LEARNLOOP ADMIN — LISTINGS
+   MODERN MINIMALIST
+   WHITE + LIGHT GREY + BLACK + ORANGE
+   ========================================================= */
+
+
+/* =========================================================
+   LISTING TOOLS
+   ========================================================= */
+
+.listing-tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.listing-search {
+    flex: 1;
+
+    height: 46px;
+
+    padding: 0 15px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.listing-search::placeholder {
+    color: #94a3b8;
+}
+
+
+.listing-search:focus {
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.10);
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+.listing-filter {
+    width: 150px;
+
+    height: 46px;
+
+    padding: 0 13px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.listing-filter:focus {
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.10);
+}
+
+
+/* =========================================================
+   LISTINGS FEED
+   ========================================================= */
+
+.listings-feed {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   LISTING POST
+   ========================================================= */
+
+.listing-post {
+    position: relative;
+
+    width: 100%;
+
+    padding: 22px 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* Orange side accent */
+
+.listing-post::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: #f97316;
+}
+
+
+/* =========================================================
+   POST HOVER
+   ========================================================= */
+
+.listing-post:hover {
+    transform: translateY(-2px);
+
+    border-color: #fed7aa;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   LISTING POST HEADER
+   ========================================================= */
+
+.listing-post-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.listing-avatar {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #fff7ed;
+
+    color: #f97316;
+
+    border: 1px solid #fed7aa;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   LISTING USER
+   ========================================================= */
+
+.listing-user {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.listing-user h3 {
+    margin: 0 0 2px;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.listing-user span {
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.listing-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 70px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* Active */
+
+.listing-status.active {
+    background: #ecfdf5;
+
+    color: #059669;
+
+    border: 1px solid #a7f3d0;
+}
+
+
+/* Pending */
+
+.listing-status.pending {
+    background: #fff7ed;
+
+    color: #ea580c;
+
+    border: 1px solid #fed7aa;
+}
+
+
+/* Disabled */
+
+.listing-status.inactive {
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+/* =========================================================
+   LISTING CONTENT
+   ========================================================= */
+
+.listing-post-content {
+    padding-left: 54px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.listing-category {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    padding: 5px 9px;
+
+    background: #fff7ed;
+
+    color: #ea580c;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   LISTING TITLE
+   ========================================================= */
+
+.listing-post-content h2 {
+    margin: 0 0 7px;
+
+    color: #172033;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   LISTING DESCRIPTION
+   ========================================================= */
+
+.listing-post-content p {
+    margin: 0;
+
+    max-width: 850px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   LISTING FOOTER
+   ========================================================= */
+
+.listing-post-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-top: 16px;
+
+    margin-left: 54px;
+
+    border-top: 1px solid #f1f3f5;
+}
+
+
+.listing-post-footer > span {
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.listing-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+/* =========================================================
+   ALL BUTTONS
+   ========================================================= */
+
+.listing-actions button {
+    min-height: 34px;
+
+    padding: 7px 12px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.listing-actions button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   VIEW
+   ========================================================= */
+
+.listing-view-btn {
+    background: #ffffff;
+
+    color: #475569;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+.listing-view-btn:hover {
+    background: #f8fafc;
+
+    color: #172033;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   APPROVE
+   ========================================================= */
+
+.listing-approve-btn {
+    background: #fff7ed;
+
+    color: #ea580c;
+
+    border: 1px solid #fed7aa;
+}
+
+
+.listing-approve-btn:hover {
+    background: #f97316;
+
+    color: #ffffff;
+
+    border-color: #f97316;
+}
+
+
+/* =========================================================
+   DISABLE
+   ========================================================= */
+
+.listing-disable-btn {
+    background: #f8fafc;
+
+    color: #64748b;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+.listing-disable-btn:hover {
+    background: #e2e8f0;
+
+    color: #334155;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   DELETE
+   ========================================================= */
+
+.listing-delete-btn {
+    background: #ffffff;
+
+    color: #dc2626;
+
+    border: 1px solid #fecaca;
+}
+
+
+.listing-delete-btn:hover {
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+    border-color: #fca5a5;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .listing-post-content {
+        padding-left: 0;
+    }
+
+
+    .listing-post-footer {
+        margin-left: 0;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .listing-tools {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .listing-filter {
+        width: 100%;
+    }
+
+
+    .listing-post {
+        padding: 18px;
+    }
+
+
+    .listing-post-header {
+        flex-wrap: wrap;
+    }
+
+
+    .listing-status {
+        margin-left: auto;
+    }
+
+
+    .listing-post-content {
+        padding-left: 0;
+    }
+
+
+    .listing-post-footer {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        margin-left: 0;
+    }
+
+
+    .listing-actions {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 7px;
+    }
+
+
+    .listing-actions button {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .listing-post-header {
+        align-items: flex-start;
+    }
+
+
+    .listing-status {
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+
+    .listing-actions {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -55,6 +55,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/settings', [PageController::class, 'adminSettings'])
         ->name('admin.settings');
+    
+        Route::delete('/admin/users/{user}', [PageController::class, 'deleteUser'])
+    ->name('admin.users.delete');
 
 });
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+
 
 class PageController extends Controller
 {
@@ -11,10 +13,12 @@ class PageController extends Controller
         return view('admin.home');
     }
 
-    public function adminUsers()
-    {
-        return view('admin.users');
-    }
+   public function adminUsers()
+{
+    $users = User::all();
+
+    return view('admin.users', compact('users'));
+}
 
     public function adminListings()
     {
@@ -29,5 +33,14 @@ class PageController extends Controller
     public function adminSettings()
     {
         return view('admin.settings');
+
     }
+    public function deleteUser(User $user)
+{
+    $user->delete();
+
+    return redirect()
+        ->route('admin.users')
+        ->with('success', 'User deleted successfully.');
+}
 }

@@ -1,0 +1,436 @@
+/* =========================================================
+   LEARNLOOP — USER MANAGEMENT
+   MINIMALIST WHITE + GREY + BLACK + ORANGE
+   ========================================================= */
+
+
+/* =========================
+   SEARCH AREA
+   ========================= */
+
+.user-tools {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+.user-search {
+    width: 100%;
+    max-width: 420px;
+    height: 46px;
+    padding: 0 15px;
+
+    background: #ffffff;
+    color: #172033;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+
+    outline: none;
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.user-search::placeholder {
+    color: #94a3b8;
+}
+
+.user-search:focus {
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.10);
+}
+
+
+/* =========================
+   TABLE CONTAINER
+   ========================= */
+
+.users-table-container {
+    width: 100%;
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* =========================
+   USER TABLE
+   ========================= */
+
+.users-table {
+    width: 100%;
+    min-width: 750px;
+
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+
+/* =========================
+   TABLE HEADER
+   ========================= */
+
+.users-table thead {
+    background: #f8fafc;
+}
+
+.users-table th {
+    padding: 16px 20px;
+
+    color: #64748b;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================
+   TABLE BODY
+   ========================= */
+
+.users-table tbody tr {
+    transition:
+        background 0.2s ease;
+}
+
+.users-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.users-table td {
+    padding: 17px 20px;
+
+    color: #475569;
+
+    border-bottom: 1px solid #f1f3f5;
+
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================
+   NAME
+   ========================= */
+
+.users-table td:first-child {
+    color: #172033;
+    font-weight: 700;
+}
+
+
+/* =========================
+   EMAIL
+   ========================= */
+
+.users-table td:nth-child(2) {
+    color: #64748b;
+}
+
+
+/* =========================
+   ROLE BADGE
+   ========================= */
+
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 65px;
+    padding: 5px 10px;
+
+    background: #f1f5f9;
+    color: #475569;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   STATUS BADGE
+   ========================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 68px;
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ACTIVE */
+
+.active-status {
+    background: #ecfdf5;
+    color: #059669;
+
+    border: 1px solid #a7f3d0;
+}
+
+
+/* INACTIVE */
+
+.inactive-status {
+    background: #f1f5f9;
+    color: #64748b;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+   ========================= */
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+/* =========================
+   GENERAL TABLE BUTTON
+   ========================= */
+
+.table-btn,
+.delete-btn {
+    min-height: 34px;
+    padding: 7px 12px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.table-btn:hover,
+.delete-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   VIEW BUTTON
+   ========================= */
+
+.table-btn {
+    background: #ffffff;
+    color: #475569;
+
+    border: 1px solid #cbd5e1;
+}
+
+.table-btn:hover {
+    background: #f8fafc;
+    color: #172033;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================
+   DELETE BUTTON
+   ========================= */
+
+.delete-btn {
+    background: #ffffff;
+    color: #dc2626;
+
+    border: 1px solid #fecaca;
+}
+
+.delete-btn:hover {
+    background: #fef2f2;
+    color: #b91c1c;
+
+    border-color: #fca5a5;
+
+    box-shadow:
+        0 4px 12px rgba(220, 38, 38, 0.08);
+}
+
+
+/* =========================
+   BUTTON ACTIVE
+   ========================= */
+
+.table-btn:active,
+.delete-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   EMPTY TABLE
+   ========================= */
+
+.users-table tbody:empty::after {
+    content: "No users found.";
+
+    display: block;
+
+    padding: 40px;
+
+    color: #94a3b8;
+
+    text-align: center;
+    font-size: 13px;
+}
+
+
+/* =========================
+   TABLE SCROLLBAR
+   ========================= */
+
+.users-table-container::-webkit-scrollbar {
+    height: 7px;
+}
+
+.users-table-container::-webkit-scrollbar-track {
+    background: #f1f3f5;
+}
+
+.users-table-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.users-table-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* =========================
+   RESPONSIVE — TABLET
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .user-search {
+        max-width: 100%;
+    }
+
+    .users-table-container {
+        border-radius: 9px;
+    }
+
+}
+
+
+/* =========================
+   RESPONSIVE — MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+
+    .user-tools {
+        margin-bottom: 18px;
+    }
+
+    .user-search {
+        height: 44px;
+    }
+
+    .users-table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .users-table {
+        min-width: 700px;
+    }
+
+    .users-table th {
+        padding: 14px 16px;
+        font-size: 10px;
+    }
+
+    .users-table td {
+        padding: 15px 16px;
+        font-size: 12px;
+    }
+
+    .action-buttons {
+        gap: 6px;
+    }
+
+    .table-btn,
+    .delete-btn {
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 400px) {
+
+    .user-search {
+        height: 42px;
+        font-size: 12px;
+    }
+
+    .users-table {
+        min-width: 650px;
+    }
+
+    .users-table th {
+        padding: 13px 14px;
+    }
+
+    .users-table td {
+        padding: 14px;
+    }
+
+}

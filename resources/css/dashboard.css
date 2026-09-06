@@ -1,0 +1,589 @@
+/* =========================================================
+   ADMIN DASHBOARD
+   MINIMALIST ORANGE + GREY + BLACK
+   ========================================================= */
+
+
+/* =========================================================
+   MAIN ADMIN CONTAINER
+   ========================================================= */
+
+.admin-container {
+    min-height: 100vh;
+    background: #e5e7eb;
+    color: #181a1f;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   WHITE + GREY
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 240px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 16px;
+
+    background: #f3f4f6;
+
+    border-right: 1px solid #d1d5db;
+
+    box-shadow:
+        5px 0 18px rgba(0, 0, 0, 0.12);
+
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.sidebar .logo {
+    padding: 0 10px;
+
+    margin-bottom: 35px;
+
+    color: #181a1f;
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* Orange logo accent */
+
+.sidebar .logo span {
+    color: #f97316;
+}
+
+
+/* =========================================================
+   SIDEBAR NAV
+   ========================================================= */
+
+.sidebar-nav {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+/* =========================================================
+   NAV ITEM
+   ========================================================= */
+
+.nav-item {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 11px 13px;
+
+    background: transparent;
+
+    color: #4b5563;
+
+    text-decoration: none;
+
+    border: 1px solid transparent;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   NAV HOVER
+   ========================================================= */
+
+.nav-item:hover {
+    background: #e5e7eb;
+
+    color: #181a1f;
+
+    border-color: #d1d5db;
+}
+
+
+/* =========================================================
+   ACTIVE NAV
+   ========================================================= */
+
+.nav-item.active {
+    background: darkorange;
+
+    color: black;
+
+    font-weight: 700;
+
+    border-color: #d1d5db;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #d1d5db;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.logout-btn {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    padding: 11px 13px;
+
+    background: darkorange;
+
+    color: black;
+
+    border: 1px solid transparent;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.logout-btn:hover {
+    background: #e5e7eb;
+
+    color: #f97316;
+
+    border-color: #d1d5db;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    margin-left: 240px;
+
+    min-height: 100vh;
+
+    background: #e5e7eb;
+}
+
+
+/* =========================================================
+   FIXED TOP HEADER
+   ========================================================= */
+
+.top-header {
+    position: fixed;
+
+    top: 0;
+
+    right: 0;
+
+    left: 240px;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #d1d5db;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.18);
+
+    z-index: 900;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+   ========================================================= */
+
+.top-header h1,
+.top-header .page-title {
+    color: darkorange;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+/* Orange accent */
+
+.top-header .page-title span {
+    color: #8f4d1e;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-content {
+    padding: 105px 30px 35px;
+}
+
+
+/* =========================================================
+   DASHBOARD HEADING
+   ========================================================= */
+
+.dashboard-heading {
+    margin-bottom: 25px;
+}
+
+
+.dashboard-heading h2 {
+    color:black;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+
+.dashboard-heading p {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   STATISTICS CARDS
+   ========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.card {
+    position: relative;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.16);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   ORANGE ACCENT
+   ========================================================= */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: #f97316;
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.card:hover {
+    transform: translateY(-3px);
+
+    border-color: #f97316;
+
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.card h3 {
+    margin-bottom: 8px;
+
+    color: #080808;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CARD NUMBER
+   ========================================================= */
+
+.card p,
+.card .number {
+    color: darkorange;
+
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+
+/* Orange number */
+
+.card .accent {
+    color: #f97316;
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY
+   ========================================================= */
+
+.recent-activity {
+    margin-top: 25px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+
+/* =========================================================
+   ACTIVITY TITLE
+   ========================================================= */
+
+.recent-activity h2 {
+    margin-bottom: 18px;
+
+    color: #181a1f;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ACTIVITY ITEM
+   ========================================================= */
+
+.activity-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+
+.activity-item p {
+    color: #374151;
+
+    font-size: 14px;
+}
+
+
+.activity-item small {
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ORANGE UTILITY
+   ========================================================= */
+
+.orange {
+    color: #f97316;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+        padding: 15px;
+
+        box-shadow:
+            0 5px 18px rgba(0, 0, 0, 0.12);
+    }
+
+
+    .sidebar .logo {
+        margin-bottom: 15px;
+    }
+
+
+    .sidebar-nav {
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+
+    .nav-item {
+        width: auto;
+    }
+
+
+    .sidebar-bottom {
+        margin-top: 15px;
+    }
+
+
+    .main-content {
+        margin-left: 0;
+    }
+
+
+    .top-header {
+        position: relative;
+
+        left: 0;
+
+        right: auto;
+
+        height: 60px;
+
+        padding: 0 20px;
+
+        box-shadow:
+            0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+
+    .dashboard-content {
+        padding: 25px 20px;
+    }
+
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
