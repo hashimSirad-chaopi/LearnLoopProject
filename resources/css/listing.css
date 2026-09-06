@@ -1,643 +1,467 @@
 /* =========================================================
-   LEARNLOOP ADMIN — LISTINGS
-   MODERN MINIMALIST
-   WHITE + LIGHT GREY + BLACK + ORANGE
+   LEARNLOOP - SETTINGS
+   DARK GREY + BLACK + WHITE + ORANGE
    ========================================================= */
 
 
 /* =========================================================
-   LISTING TOOLS
+   SETTINGS PAGE
    ========================================================= */
 
-.listing-tools {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    width: 100%;
-
-    margin-bottom: 22px;
-}
-
-
-/* =========================================================
-   SEARCH
-   ========================================================= */
-
-.listing-search {
+.settings-page {
     flex: 1;
+    min-height: 0;
 
-    height: 46px;
-
-    padding: 0 15px;
-
-    background: #ffffff;
-
-    color: #172033;
-
-    border: 1px solid #e2e8f0;
-
-    border-radius: 9px;
-
-    outline: none;
-
-    font-size: 13px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.listing-search::placeholder {
-    color: #94a3b8;
-}
-
-
-.listing-search:focus {
-    border-color: #f97316;
-
-    box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.10);
-}
-
-
-/* =========================================================
-   FILTER
-   ========================================================= */
-
-.listing-filter {
-    width: 150px;
-
-    height: 46px;
-
-    padding: 0 13px;
-
-    background: #ffffff;
-
-    color: #475569;
-
-    border: 1px solid #e2e8f0;
-
-    border-radius: 9px;
-
-    outline: none;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.listing-filter:focus {
-    border-color: #f97316;
-
-    box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.10);
-}
-
-
-/* =========================================================
-   LISTINGS FEED
-   ========================================================= */
-
-.listings-feed {
     display: flex;
-
     flex-direction: column;
-
-    gap: 16px;
-
-    width: 100%;
-}
-
-
-/* =========================================================
-   LISTING POST
-   ========================================================= */
-
-.listing-post {
-    position: relative;
-
-    width: 100%;
-
-    padding: 22px 24px;
-
-    background: #ffffff;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 11px;
-
-    box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.05);
 
     overflow: hidden;
 
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-}
+    padding: 0 40px 30px;
 
-
-/* Orange side accent */
-
-.listing-post::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 4px;
-    height: 100%;
-
-    background: #f97316;
+    box-sizing: border-box;
 }
 
 
 /* =========================================================
-   POST HOVER
+   SCROLL AREA
+   ONLY SETTINGS CONTENT SCROLLS
    ========================================================= */
 
-.listing-post:hover {
-    transform: translateY(-2px);
+.settings-scroll-area {
+    flex: 1;
+    min-height: 0;
 
-    border-color: #fed7aa;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 5px 6px 30px 2px;
+
+    box-sizing: border-box;
+
+    scrollbar-width: thin;
+    scrollbar-color: #8a867e transparent;
+}
+
+
+/* Chrome / Edge / Safari */
+
+.settings-scroll-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.settings-scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.settings-scroll-area::-webkit-scrollbar-thumb {
+    background: #8a867e;
+
+    border-radius: 10px;
+}
+
+.settings-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #5f5b55;
+}
+
+
+/* =========================================================
+   SETTINGS CARD
+   ========================================================= */
+
+.settings-card {
+    width: 100%;
+
+    margin-bottom: 22px;
+
+    padding: 26px;
+
+    box-sizing: border-box;
+
+    background: #faf9f6;
+
+    border-radius: 12px;
 
     box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.08);
+        0 10px 25px rgba(0, 0, 0, 0.14),
+        0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Remove margin from last card */
+
+.settings-card:last-child {
+    margin-bottom: 0;
 }
 
 
 /* =========================================================
-   LISTING POST HEADER
+   CARD HEADER
    ========================================================= */
 
-.listing-post-header {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-bottom: 20px;
+.settings-card-header {
+    margin-bottom: 24px;
 }
 
 
-/* =========================================================
-   AVATAR
-   ========================================================= */
+.settings-card-header h2 {
+    margin: 0 0 6px;
 
-.listing-avatar {
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    background: #fff7ed;
-
-    color: #f97316;
-
-    border: 1px solid #fed7aa;
-
-    border-radius: 50%;
-
-    font-size: 14px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   LISTING USER
-   ========================================================= */
-
-.listing-user {
-    flex: 1;
-
-    min-width: 0;
-}
-
-
-.listing-user h3 {
-    margin: 0 0 2px;
-
-    color: #172033;
-
-    font-size: 14px;
-
-    font-weight: 700;
-}
-
-
-.listing-user span {
-    color: #94a3b8;
-
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-.listing-status {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-width: 70px;
-
-    padding: 5px 10px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-}
-
-
-/* Active */
-
-.listing-status.active {
-    background: #ecfdf5;
-
-    color: #059669;
-
-    border: 1px solid #a7f3d0;
-}
-
-
-/* Pending */
-
-.listing-status.pending {
-    background: #fff7ed;
-
-    color: #ea580c;
-
-    border: 1px solid #fed7aa;
-}
-
-
-/* Disabled */
-
-.listing-status.inactive {
-    background: #f1f5f9;
-
-    color: #64748b;
-
-    border: 1px solid #cbd5e1;
-}
-
-
-/* =========================================================
-   LISTING CONTENT
-   ========================================================= */
-
-.listing-post-content {
-    padding-left: 54px;
-
-    margin-bottom: 20px;
-}
-
-
-/* =========================================================
-   CATEGORY
-   ========================================================= */
-
-.listing-category {
-    display: inline-block;
-
-    margin-bottom: 8px;
-
-    padding: 5px 9px;
-
-    background: #fff7ed;
-
-    color: #ea580c;
-
-    border-radius: 6px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   LISTING TITLE
-   ========================================================= */
-
-.listing-post-content h2 {
-    margin: 0 0 7px;
-
-    color: #172033;
-
-    font-size: 18px;
-
+    font-size: 20px;
     font-weight: 700;
 
-    line-height: 1.35;
+    color: #171717;
 }
 
 
-/* =========================================================
-   LISTING DESCRIPTION
-   ========================================================= */
-
-.listing-post-content p {
+.settings-card-header p {
     margin: 0;
-
-    max-width: 850px;
-
-    color: #64748b;
 
     font-size: 13px;
 
-    line-height: 1.6;
+    line-height: 1.5;
+
+    color: #77736c;
 }
 
 
 /* =========================================================
-   LISTING FOOTER
+   SETTINGS FORM
    ========================================================= */
 
-.listing-post-footer {
+.settings-form {
+    width: 100%;
+
+    max-width: 650px;
+}
+
+
+/* =========================================================
+   SETTINGS FIELD
+   ========================================================= */
+
+.settings-field {
     display: flex;
+    flex-direction: column;
 
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    padding-top: 16px;
-
-    margin-left: 54px;
-
-    border-top: 1px solid #f1f3f5;
+    margin-bottom: 18px;
 }
 
 
-.listing-post-footer > span {
-    color: #94a3b8;
+.settings-field label {
+    margin-bottom: 7px;
 
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 600;
 
-    font-weight: 500;
+    color: #333333;
 }
 
 
-/* =========================================================
-   ACTIONS
-   ========================================================= */
+.settings-field input {
+    width: 100%;
 
-.listing-actions {
-    display: flex;
+    height: 44px;
 
-    align-items: center;
+    padding: 0 13px;
 
-    gap: 7px;
-}
+    box-sizing: border-box;
 
-
-/* =========================================================
-   ALL BUTTONS
-   ========================================================= */
-
-.listing-actions button {
-    min-height: 34px;
-
-    padding: 7px 12px;
+    border: 1px solid #d0ccc4;
 
     border-radius: 7px;
 
-    font-size: 12px;
+    background: #ffffff;
 
+    color: #222222;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.settings-field input::placeholder {
+    color: #a19d95;
+}
+
+
+.settings-field input:focus {
+    border-color: #f97316;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+
+/* =========================================================
+   SETTINGS ACTIONS
+   ========================================================= */
+
+.settings-actions {
+    display: flex;
+
+    justify-content: flex-start;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+
+.settings-save-btn {
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #171717;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
     font-weight: 600;
 
     cursor: pointer;
 
     transition:
         background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.15s ease;
 }
 
 
-.listing-actions button:hover {
+.settings-save-btn:hover {
+    background: #f97316;
+
     transform: translateY(-1px);
 }
 
 
+.settings-save-btn:active {
+    transform: translateY(0);
+}
+
+
 /* =========================================================
-   VIEW
+   SYSTEM OPTIONS
    ========================================================= */
 
-.listing-view-btn {
+.settings-option {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 18px 0;
+
+    border-top: 1px solid #dedad2;
+}
+
+
+.settings-option:first-of-type {
+    border-top: none;
+}
+
+
+.settings-option h3 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #222222;
+}
+
+
+.settings-option p {
+    margin: 0;
+
+    max-width: 600px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #77736c;
+}
+
+
+/* =========================================================
+   TOGGLE
+   ========================================================= */
+
+.toggle {
+    position: relative;
+
+    display: inline-block;
+
+    width: 46px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+}
+
+
+.toggle input {
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+
+.toggle-slider {
+    position: absolute;
+
+    inset: 0;
+
+    background: #c8c4bc;
+
+    border-radius: 30px;
+
+    transition: 0.2s ease;
+}
+
+
+.toggle-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    left: 3px;
+    top: 3px;
+
     background: #ffffff;
 
-    color: #475569;
+    border-radius: 50%;
 
-    border: 1px solid #cbd5e1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+
+    transition: 0.2s ease;
 }
 
 
-.listing-view-btn:hover {
-    background: #f8fafc;
-
-    color: #172033;
-
-    border-color: #94a3b8;
-}
-
-
-/* =========================================================
-   APPROVE
-   ========================================================= */
-
-.listing-approve-btn {
-    background: #fff7ed;
-
-    color: #ea580c;
-
-    border: 1px solid #fed7aa;
-}
-
-
-.listing-approve-btn:hover {
+.toggle input:checked + .toggle-slider {
     background: #f97316;
+}
 
-    color: #ffffff;
 
-    border-color: #f97316;
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(22px);
 }
 
 
 /* =========================================================
-   DISABLE
-   ========================================================= */
-
-.listing-disable-btn {
-    background: #f8fafc;
-
-    color: #64748b;
-
-    border: 1px solid #cbd5e1;
-}
-
-
-.listing-disable-btn:hover {
-    background: #e2e8f0;
-
-    color: #334155;
-
-    border-color: #94a3b8;
-}
-
-
-/* =========================================================
-   DELETE
-   ========================================================= */
-
-.listing-delete-btn {
-    background: #ffffff;
-
-    color: #dc2626;
-
-    border: 1px solid #fecaca;
-}
-
-
-.listing-delete-btn:hover {
-    background: #fef2f2;
-
-    color: #b91c1c;
-
-    border-color: #fca5a5;
-}
-
-
-/* =========================================================
-   TABLET
+   RESPONSIVE
    ========================================================= */
 
 @media (max-width: 900px) {
 
-    .listing-post-content {
-        padding-left: 0;
-    }
-
-
-    .listing-post-footer {
-        margin-left: 0;
+    .settings-page {
+        padding-left: 25px;
+        padding-right: 25px;
     }
 
 }
 
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
 @media (max-width: 768px) {
 
-    .listing-tools {
-        flex-direction: column;
-
-        align-items: stretch;
+    .settings-page {
+        padding: 0 18px 20px;
     }
 
 
-    .listing-filter {
-        width: 100%;
+    .settings-card {
+        padding: 22px;
+
+        margin-bottom: 18px;
     }
 
 
-    .listing-post {
+    .settings-card-header h2 {
+        font-size: 18px;
+    }
+
+
+    .settings-option {
+        gap: 20px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .settings-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+    .settings-card {
         padding: 18px;
     }
 
 
-    .listing-post-header {
-        flex-wrap: wrap;
+    .settings-card-header {
+        margin-bottom: 20px;
     }
 
 
-    .listing-status {
-        margin-left: auto;
+    .settings-card-header h2 {
+        font-size: 17px;
     }
 
 
-    .listing-post-content {
-        padding-left: 0;
+    .settings-card-header p {
+        font-size: 12px;
     }
 
 
-    .listing-post-footer {
-        flex-direction: column;
-
-        align-items: stretch;
-
-        margin-left: 0;
-    }
-
-
-    .listing-actions {
-        width: 100%;
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 7px;
-    }
-
-
-    .listing-actions button {
-        width: 100%;
-    }
-
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 400px) {
-
-    .listing-post-header {
+    .settings-option {
         align-items: flex-start;
+
+        gap: 15px;
     }
 
 
-    .listing-status {
+    .settings-option h3 {
+        font-size: 13px;
+    }
+
+
+    .settings-option p {
+        font-size: 11px;
+    }
+
+
+    .settings-field input {
+        height: 42px;
+
+        font-size: 13px;
+    }
+
+
+    .settings-save-btn {
         width: 100%;
-
-        margin-left: 0;
-    }
-
-
-    .listing-actions {
-        grid-template-columns: 1fr;
     }
 
 }

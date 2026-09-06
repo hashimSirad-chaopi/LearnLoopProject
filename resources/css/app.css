@@ -3,11 +3,19 @@
    ========================================================= */
 
 @import './global.css';
+
 @import './auth.css';
+
 @import './dashboard.css';
+
 @import './home.css';
+
 @import './users.css';
+
 @import './listing.css';
+
 @import './reports.css';
+
 @import './settings.css';
+
 @import './forgot.css';

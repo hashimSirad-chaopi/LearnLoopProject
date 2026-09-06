@@ -1,446 +1,523 @@
 /* =========================================================
-   LEARNLOOP ADMIN — SETTINGS
-   MODERN MINIMALIST
-   WHITE + LIGHT GREY + BLACK + ORANGE
+   LEARNLOOP
+   LISTINGS PAGE
    ========================================================= */
 
 
 /* =========================================================
-   SETTINGS CONTENT
+   LISTING PAGE
    ========================================================= */
 
-.settings-content {
-    width: 100%;
+.listing-page {
 
-    max-width: 1000px;
+    flex: 1;
 
-    margin: 0 auto;
+    min-height: 0;
 
-    padding: 115px 34px 40px;
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    padding: 0 40px 30px;
+
 }
 
 
 /* =========================================================
-   SETTINGS CARD
+   SEARCH AREA
+   DOES NOT SCROLL
    ========================================================= */
 
-.settings-card {
+.listing-toolbar {
+
+    flex-shrink: 0;
+
+    padding: 0 0 20px;
+
+    background: #e9e6df;
+
+}
+
+
+.listing-search {
+
     width: 100%;
 
-    margin-bottom: 20px;
+    height: 52px;
 
-    padding: 25px;
+    padding: 0 18px;
 
-    background: #ffffff;
+    background: #faf9f6;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid #d1cdc5;
 
-    border-radius: 11px;
+    border-radius: 9px;
+
+    color: #222222;
+
+    outline: none;
+
+    font-size: 14px;
 
     box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.05);
+        0 7px 17px rgba(0, 0, 0, 0.14);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
 }
 
 
-.settings-card:hover {
-    border-color: #fed7aa;
+.listing-search::placeholder {
+
+    color: #85817a;
+
+}
+
+
+.listing-search:focus {
+
+    border-color: #f97316;
 
     box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.08);
+        0 0 0 3px rgba(249, 115, 22, 0.10),
+        0 8px 19px rgba(0, 0, 0, 0.16);
+
 }
 
 
 /* =========================================================
-   SETTINGS CARD HEADER
+   SCROLL AREA
+   ONLY LISTINGS SCROLL
    ========================================================= */
 
-.settings-card-header {
-    margin-bottom: 23px;
+.listings-scroll-area {
 
-    padding-bottom: 17px;
+    flex: 1;
 
-    border-bottom: 1px solid #f1f3f5;
-}
+    min-height: 0;
 
+    overflow-y: auto;
 
-.settings-card-header h2 {
-    margin: 0 0 5px;
+    overflow-x: hidden;
 
-    color: #172033;
+    padding: 4px 5px 30px 2px;
 
-    font-size: 18px;
-
-    font-weight: 700;
-}
-
-
-.settings-card-header p {
-    margin: 0;
-
-    color: #94a3b8;
-
-    font-size: 13px;
 }
 
 
 /* =========================================================
-   SETTINGS FORM
+   LISTING FEED
    ========================================================= */
 
-.settings-form {
+.listings-feed {
+
     display: flex;
 
     flex-direction: column;
 
     gap: 18px;
+
 }
 
 
 /* =========================================================
-   SETTINGS FIELD
+   LISTING CARD
    ========================================================= */
 
-.settings-field {
-    display: flex;
+.listing-post {
 
-    flex-direction: column;
+    flex-shrink: 0;
 
-    gap: 7px;
-}
-
-
-.settings-field label {
-    color: #475569;
-
-    font-size: 13px;
-
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   INPUT
-   ========================================================= */
-
-.settings-field input,
-.settings-field textarea,
-.settings-field select {
     width: 100%;
 
-    height: 45px;
+    padding: 22px 24px;
 
-    padding: 0 13px;
+    background: #faf9f6;
 
-    background: #f8fafc;
+    border: 1px solid #d4d0c8;
 
-    color: #172033;
-
-    border: 1px solid #e2e8f0;
-
-    border-radius: 8px;
-
-    outline: none;
-
-    font-size: 13px;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.settings-field textarea {
-    height: auto;
-
-    min-height: 110px;
-
-    padding: 12px 13px;
-
-    resize: vertical;
-}
-
-
-.settings-field input::placeholder,
-.settings-field textarea::placeholder {
-    color: #94a3b8;
-}
-
-
-/* =========================================================
-   INPUT FOCUS
-   ========================================================= */
-
-.settings-field input:focus,
-.settings-field textarea:focus,
-.settings-field select:focus {
-    background: #ffffff;
-
-    border-color: #f97316;
+    border-radius: 11px;
 
     box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.10);
+        0 10px 24px rgba(0, 0, 0, 0.17),
+        0 2px 7px rgba(0, 0, 0, 0.11);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.listing-post:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 29px rgba(0, 0, 0, 0.21),
+        0 3px 8px rgba(0, 0, 0, 0.12);
+
 }
 
 
 /* =========================================================
-   SETTINGS ACTIONS
+   POST HEADER
    ========================================================= */
 
-.settings-actions {
+.listing-post-header {
+
     display: flex;
 
     align-items: center;
 
-    justify-content: flex-end;
+    gap: 13px;
 
-    gap: 10px;
+    margin-bottom: 19px;
 
-    margin-top: 5px;
-
-    padding-top: 18px;
-
-    border-top: 1px solid #f1f3f5;
 }
 
 
-/* =========================================================
-   SAVE BUTTON
-   ========================================================= */
+.listing-avatar {
 
-.settings-save-btn {
-    min-height: 40px;
+    width: 44px;
+    height: 44px;
 
-    padding: 10px 18px;
+    flex-shrink: 0;
 
-    background: #f97316;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #1b1b1b;
 
     color: #ffffff;
 
-    border: 1px solid #f97316;
+    font-size: 12px;
 
-    border-radius: 8px;
+    font-weight: 800;
 
-    font-size: 13px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 
-.settings-save-btn:hover {
-    background: #ea580c;
+.listing-user {
 
-    border-color: #ea580c;
+    flex: 1;
 
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 6px 15px rgba(249, 115, 22, 0.20);
 }
 
 
-.settings-save-btn:active {
-    transform: translateY(0);
+.listing-user h3 {
+
+    margin-bottom: 4px;
+
+    color: #191919;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+}
+
+
+.listing-user p {
+
+    color: #817d76;
+
+    font-size: 11px;
+
 }
 
 
 /* =========================================================
-   SYSTEM SETTINGS OPTION
+   STATUS
    ========================================================= */
 
-.settings-option {
+.listing-status {
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+.listing-status.active {
+
+    background: #ffe1cf;
+
+    color: #e9630d;
+
+}
+
+
+.listing-status.pending {
+
+    background: #e5e2dc;
+
+    color: #5b5751;
+
+}
+
+
+.listing-status.inactive {
+
+    background: #d8d5cf;
+
+    color: #56524d;
+
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.listing-post-content {
+
+    padding-bottom: 20px;
+
+}
+
+
+.listing-category {
+
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    padding: 5px 10px;
+
+    background: #202020;
+
+    border-radius: 5px;
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+}
+
+
+.listing-post-content h2 {
+
+    margin-bottom: 8px;
+
+    color: #181818;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+}
+
+
+.listing-post-content p {
+
+    max-width: 850px;
+
+    color: #6f6b65;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.listing-post-footer {
+
     display: flex;
 
     align-items: center;
 
     justify-content: space-between;
 
-    gap: 25px;
+    gap: 20px;
 
-    padding: 17px 0;
+    padding-top: 16px;
 
-    border-bottom: 1px solid #f1f3f5;
+    border-top: 1px solid #dedad2;
+
 }
 
 
-.settings-option:first-of-type {
-    padding-top: 0;
-}
+.listing-date {
 
+    color: #89857e;
 
-.settings-option:last-child {
-    border-bottom: none;
+    font-size: 10px;
 
-    padding-bottom: 0;
+    font-weight: 600;
+
 }
 
 
 /* =========================================================
-   OPTION TEXT
+   ACTIONS
    ========================================================= */
 
-.settings-option > div {
-    flex: 1;
+.listing-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
 }
 
 
-.settings-option h3 {
-    margin: 0 0 5px;
+.listing-actions button {
 
-    color: #172033;
+    min-height: 35px;
 
-    font-size: 14px;
+    padding: 0 14px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-size: 10px;
 
     font-weight: 700;
+
+    transition: 0.2s ease;
+
 }
 
 
-.settings-option p {
-    margin: 0;
+.listing-actions button:hover {
 
-    max-width: 650px;
+    transform: translateY(-1px);
 
-    color: #94a3b8;
-
-    font-size: 12px;
-
-    line-height: 1.5;
 }
 
 
-/* =========================================================
-   TOGGLE
-   ========================================================= */
+/* VIEW */
 
-.toggle {
-    position: relative;
+.listing-actions .view-btn {
 
-    width: 46px;
+    background: #1a1a1a;
 
-    height: 25px;
+    color: #ffffff;
 
-    flex-shrink: 0;
 }
 
 
-/* Hide checkbox */
+.listing-actions .view-btn:hover {
 
-.toggle input {
-    width: 0;
+    background: #333333;
 
-    height: 0;
-
-    opacity: 0;
 }
 
 
-/* =========================================================
-   TOGGLE SLIDER
-   ========================================================= */
+/* APPROVE */
 
-.toggle-slider {
-    position: absolute;
+.listing-actions .approve-btn {
 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    background: #cbd5e1;
-
-    border: 1px solid #cbd5e1;
-
-    border-radius: 30px;
-
-    cursor: pointer;
-
-    transition:
-        background 0.25s ease,
-        border-color 0.25s ease;
-}
-
-
-/* Toggle circle */
-
-.toggle-slider::before {
-    content: "";
-
-    position: absolute;
-
-    width: 19px;
-    height: 19px;
-
-    left: 2px;
-    top: 2px;
-
-    background: #ffffff;
-
-    border-radius: 50%;
-
-    box-shadow:
-        0 2px 5px rgba(0, 0, 0, 0.15);
-
-    transition:
-        transform 0.25s ease;
-}
-
-
-/* =========================================================
-   TOGGLE ACTIVE
-   ========================================================= */
-
-.toggle input:checked + .toggle-slider {
     background: #f97316;
 
-    border-color: #f97316;
+    color: #ffffff;
+
 }
 
 
-.toggle input:checked + .toggle-slider::before {
-    transform: translateX(21px);
+.listing-actions .approve-btn:hover {
+
+    background: #e9650c;
+
+}
+
+
+/* DISABLE */
+
+.listing-actions .disable-btn {
+
+    background: #dedbd4;
+
+    color: #35322e;
+
+}
+
+
+.listing-actions .disable-btn:hover {
+
+    background: #cbc7bf;
+
+}
+
+
+/* DELETE */
+
+.listing-actions .delete-btn {
+
+    background: #4b4b4b;
+
+    color: #ffffff;
+
+}
+
+
+.listing-actions .delete-btn:hover {
+
+    background: #242424;
+
 }
 
 
 /* =========================================================
-   TOGGLE HOVER
+   SCROLLBAR FOR LISTINGS
    ========================================================= */
 
-.toggle:hover .toggle-slider {
-    border-color: #f97316;
+.listings-scroll-area::-webkit-scrollbar {
+
+    width: 7px;
+
 }
 
 
-/* =========================================================
-   SETTINGS SELECT
-   ========================================================= */
+.listings-scroll-area::-webkit-scrollbar-track {
 
-.settings-field select {
-    cursor: pointer;
+    background: transparent;
+
 }
 
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+.listings-scroll-area::-webkit-scrollbar-thumb {
 
-@media (max-width: 900px) {
+    background: #aaa69e;
 
-    .settings-content {
-        max-width: 100%;
-    }
+    border-radius: 20px;
+
+}
+
+
+.listings-scroll-area::-webkit-scrollbar-thumb:hover {
+
+    background: #77736d;
 
 }
 
@@ -451,65 +528,62 @@
 
 @media (max-width: 768px) {
 
-    .settings-content {
-        padding: 30px 20px 35px;
-    }
+    .listing-page {
 
+        padding: 0 22px 25px;
 
-    .settings-card {
-        padding: 20px;
-    }
-
-
-    .settings-card-header {
-        margin-bottom: 20px;
-    }
-
-
-    .settings-option {
-        align-items: flex-start;
-
-        gap: 15px;
-    }
-
-
-    .settings-actions {
-        justify-content: stretch;
-    }
-
-
-    .settings-save-btn {
-        width: 100%;
     }
 
 }
 
 
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
+@media (max-width: 620px) {
 
-@media (max-width: 400px) {
+    .listing-post {
 
-    .settings-content {
-        padding-left: 15px;
+        padding: 19px;
 
-        padding-right: 15px;
     }
 
 
-    .settings-card {
-        padding: 17px;
-    }
+    .listing-post-footer {
 
-
-    .settings-option {
         flex-direction: column;
+
+        align-items: flex-start;
+
     }
 
 
-    .toggle {
-        align-self: flex-start;
+    .listing-actions {
+
+        flex-wrap: wrap;
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .listing-post-header {
+
+        align-items: flex-start;
+
+    }
+
+
+    .listing-status {
+
+        margin-left: auto;
+
+    }
+
+
+    .listing-post-content h2 {
+
+        font-size: 18px;
+
     }
 
 }
