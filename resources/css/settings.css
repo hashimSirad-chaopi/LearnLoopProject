@@ -1,589 +1,174 @@
-/* =========================================================
-   LEARNLOOP
-   LISTINGS PAGE
-   ========================================================= */
-
 
 /* =========================================================
-   LISTING PAGE
+   SETTINGS
    ========================================================= */
 
-.listing-page {
-
-    flex: 1;
-
-    min-height: 0;
-
-    display: flex;
-
-    flex-direction: column;
-
+.settings-page {
+    height: 100vh;
     overflow: hidden;
-
-    padding: 0 40px 30px;
-
+    padding-top: 108px;
 }
 
-
-/* =========================================================
-   SEARCH AREA
-   DOES NOT SCROLL
-   ========================================================= */
-
-.listing-toolbar {
-
-    flex-shrink: 0;
-
-    padding: 0 0 20px;
-
-    background: #e9e6df;
-
-}
-
-
-.listing-search {
-
-    width: 100%;
-
-    height: 52px;
-
-    padding: 0 18px;
-
-    background: #faf9f6;
-
-    border: 1px solid #d1cdc5;
-
-    border-radius: 9px;
-
-    color: #222222;
-
-    outline: none;
-
-    font-size: 14px;
-
-    box-shadow:
-        0 7px 17px rgba(0, 0, 0, 0.14);
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-
-}
-
-
-.listing-search::placeholder {
-
-    color: #85817a;
-
-}
-
-
-.listing-search:focus {
-
-    border-color: #f97316;
-
-    box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.10),
-        0 8px 19px rgba(0, 0, 0, 0.16);
-
-}
-
-
-/* =========================================================
-   SCROLL AREA
-   ONLY LISTINGS SCROLL
-   ========================================================= */
-
-.listings-scroll-area {
-
-    flex: 1;
-
-    min-height: 0;
-
+.settings-scroll-area {
+    height: calc(100vh - 108px);
     overflow-y: auto;
-
-    overflow-x: hidden;
-
-    padding: 4px 5px 30px 2px;
-
+    padding: 30px 40px 50px;
 }
 
-
-/* =========================================================
-   LISTING FEED
-   ========================================================= */
-
-.listings-feed {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 18px;
-
+.settings-card {
+    max-width: 900px;
+    margin-bottom: 22px;
+    padding: 25px;
+    background: #f2f0eb;
+    border: 1px solid #c8c4bc;
+    border-radius: 10px;
+    box-shadow: 0 7px 18px rgba(0, 0, 0, .15);
 }
 
-
-/* =========================================================
-   LISTING CARD
-   ========================================================= */
-
-.listing-post {
-
-    flex-shrink: 0;
-
-    width: 100%;
-
-    padding: 22px 24px;
-
-    background: #faf9f6;
-
-    border: 1px solid #d4d0c8;
-
-    border-radius: 11px;
-
-    box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.17),
-        0 2px 7px rgba(0, 0, 0, 0.11);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-
+.settings-card-header {
+    margin-bottom: 22px;
 }
 
-
-.listing-post:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 14px 29px rgba(0, 0, 0, 0.21),
-        0 3px 8px rgba(0, 0, 0, 0.12);
-
+.settings-card-header h2 {
+    font-size: 19px;
+    font-weight: 800;
 }
 
-
-/* =========================================================
-   POST HEADER
-   ========================================================= */
-
-.listing-post-header {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-    margin-bottom: 19px;
-
-}
-
-
-.listing-avatar {
-
-    width: 44px;
-    height: 44px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #1b1b1b;
-
-    color: #ffffff;
-
+.settings-card-header p {
+    margin-top: 5px;
+    color: #77736d;
     font-size: 12px;
-
-    font-weight: 800;
-
+    line-height: 1.5;
 }
 
-
-.listing-user {
-
-    flex: 1;
-
+.settings-form {
+    max-width: 600px;
 }
 
-
-.listing-user h3 {
-
-    margin-bottom: 4px;
-
-    color: #191919;
-
-    font-size: 15px;
-
-    font-weight: 800;
-
+.settings-field {
+    margin-bottom: 18px;
 }
 
-
-.listing-user p {
-
-    color: #817d76;
-
-    font-size: 11px;
-
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-.listing-status {
-
-    padding: 6px 12px;
-
-    border-radius: 20px;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.4px;
-
-}
-
-
-.listing-status.active {
-
-    background: #ffe1cf;
-
-    color: #e9630d;
-
-}
-
-
-.listing-status.pending {
-
-    background: #e5e2dc;
-
-    color: #5b5751;
-
-}
-
-
-.listing-status.inactive {
-
-    background: #d8d5cf;
-
-    color: #56524d;
-
-}
-
-
-/* =========================================================
-   CONTENT
-   ========================================================= */
-
-.listing-post-content {
-
-    padding-bottom: 20px;
-
-}
-
-
-.listing-category {
-
-    display: inline-block;
-
-    margin-bottom: 9px;
-
-    padding: 5px 10px;
-
-    background: #202020;
-
-    border-radius: 5px;
-
-    color: #ffffff;
-
-    font-size: 9px;
-
+.settings-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: #383531;
+    font-size: 12px;
     font-weight: 700;
-
-    text-transform: uppercase;
-
 }
 
-
-.listing-post-content h2 {
-
-    margin-bottom: 8px;
-
-    color: #181818;
-
-    font-size: 20px;
-
-    font-weight: 800;
-
-}
-
-
-.listing-post-content p {
-
-    max-width: 850px;
-
-    color: #6f6b65;
-
-    font-size: 13px;
-
-    line-height: 1.65;
-
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.listing-post-footer {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding-top: 16px;
-
-    border-top: 1px solid #dedad2;
-
-}
-
-
-.listing-date {
-
-    color: #89857e;
-
-    font-size: 10px;
-
-    font-weight: 600;
-
-}
-
-
-/* =========================================================
-   ACTIONS
-   ========================================================= */
-
-.listing-actions {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-}
-
-
-.listing-actions button {
-
-    min-height: 35px;
-
-    padding: 0 14px;
-
-    border: none;
-
+.settings-field input {
+    width: 100%;
+    height: 42px;
+    padding: 0 13px;
+    border: 1px solid #bbb7af;
     border-radius: 7px;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    transition: 0.2s ease;
-
+    background: #e9e6df;
+    color: #222222;
+    outline: none;
 }
 
-
-.listing-actions button:hover {
-
-    transform: translateY(-1px);
-
+.settings-field input:focus {
+    border-color: #f97316;
 }
 
-
-/* VIEW */
-
-.listing-actions .view-btn {
-
-    background: #1a1a1a;
-
-    color: #ffffff;
-
+.settings-actions {
+    margin-top: 5px;
 }
 
-
-.listing-actions .view-btn:hover {
-
-    background: #333333;
-
-}
-
-
-/* APPROVE */
-
-.listing-actions .approve-btn {
-
+.settings-save-btn {
+    min-height: 40px;
+    padding: 0 17px;
+    border: none;
+    border-radius: 7px;
     background: #f97316;
-
     color: #ffffff;
-
+    font-size: 12px;
+    font-weight: 800;
 }
 
-
-.listing-actions .approve-btn:hover {
-
-    background: #e9650c;
-
+.settings-save-btn:hover {
+    background: #df6410;
 }
 
+/* =========================
+   SETTINGS OPTIONS
+   ========================= */
 
-/* DISABLE */
-
-.listing-actions .disable-btn {
-
-    background: #dedbd4;
-
-    color: #35322e;
-
+.settings-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 18px 0;
+    border-top: 1px solid #d5d1ca;
 }
 
-
-.listing-actions .disable-btn:hover {
-
-    background: #cbc7bf;
-
+.settings-option h3 {
+    font-size: 13px;
 }
 
-
-/* DELETE */
-
-.listing-actions .delete-btn {
-
-    background: #4b4b4b;
-
-    color: #ffffff;
-
+.settings-option p {
+    margin-top: 4px;
+    color: #77736d;
+    font-size: 11px;
+    line-height: 1.5;
 }
 
+/* =========================
+   TOGGLE
+   ========================= */
 
-.listing-actions .delete-btn:hover {
-
-    background: #242424;
-
+.toggle {
+    position: relative;
+    flex-shrink: 0;
+    width: 44px;
+    height: 24px;
 }
 
-
-/* =========================================================
-   SCROLLBAR FOR LISTINGS
-   ========================================================= */
-
-.listings-scroll-area::-webkit-scrollbar {
-
-    width: 7px;
-
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-
-.listings-scroll-area::-webkit-scrollbar-track {
-
-    background: transparent;
-
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    background: #aaa69f;
+    cursor: pointer;
+    transition: .2s;
 }
 
-
-.listings-scroll-area::-webkit-scrollbar-thumb {
-
-    background: #aaa69e;
-
-    border-radius: 20px;
-
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: .2s;
 }
 
-
-.listings-scroll-area::-webkit-scrollbar-thumb:hover {
-
-    background: #77736d;
-
+.toggle input:checked + .toggle-slider {
+    background: #f97316;
 }
 
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(20px);
+}
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+@media (max-width: 700px) {
 
-@media (max-width: 768px) {
-
-    .listing-page {
-
-        padding: 0 22px 25px;
-
+    .settings-scroll-area {
+        padding: 25px;
     }
 
-}
-
-
-@media (max-width: 620px) {
-
-    .listing-post {
-
-        padding: 19px;
-
-    }
-
-
-    .listing-post-footer {
-
-        flex-direction: column;
-
+    .settings-option {
         align-items: flex-start;
-
     }
-
-
-    .listing-actions {
-
-        flex-wrap: wrap;
-
-    }
-
 }
 
-
-@media (max-width: 450px) {
-
-    .listing-post-header {
-
-        align-items: flex-start;
-
-    }
-
-
-    .listing-status {
-
-        margin-left: auto;
-
-    }
-
-
-    .listing-post-content h2 {
-
-        font-size: 18px;
-
-    }
-
-}

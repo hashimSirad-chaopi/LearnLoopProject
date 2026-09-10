@@ -1,69 +1,73 @@
+```blade
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>LearnLoop - Reports</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body>
 
 <div class="admin-container">
 
-
     <!-- =========================================
          SIDEBAR
          ========================================= -->
-
     <aside class="sidebar">
 
-        <div class="logo">
-            LearnLoop
+        <div class="sidebar-top">
+
+            <div class="logo">
+                LearnLoop
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="{{ route('admin.home') }}"
+                   class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ route('admin.users') }}"
+                   class="nav-item">
+                    User Management
+                </a>
+
+                <a href="{{ route('admin.listings') }}"
+                   class="nav-item">
+                    Listings
+                </a>
+
+                <a href="{{ route('admin.reports') }}"
+                   class="nav-item active">
+                    Reports
+                </a>
+
+                <a href="{{ route('admin.settings') }}"
+                   class="nav-item">
+                    Settings
+                </a>
+
+            </nav>
+
         </div>
 
 
-        <nav class="sidebar-nav">
-
-            <a href="{{ route('admin.home') }}" class="nav-item">
-                Dashboard
-            </a>
-
-            <a href="{{ route('admin.users') }}" class="nav-item">
-                User Management
-            </a>
-
-            <a href="{{ route('admin.listings') }}" class="nav-item">
-                Listings
-            </a>
-
-            <a href="{{ route('admin.reports') }}" class="nav-item active">
-                Reports
-            </a>
-
-            <a href="{{ route('admin.settings') }}" class="nav-item">
-                Settings
-            </a>
-
-        </nav>
-
-
+        <!-- =====================================
+             LOGOUT
+             ===================================== -->
         <div class="sidebar-bottom">
 
             <form method="POST" action="{{ route('logout') }}">
-
                 @csrf
 
                 <button type="submit" class="logout-btn">
                     Log Out
                 </button>
-
             </form>
 
         </div>
@@ -71,28 +75,29 @@
     </aside>
 
 
-
     <!-- =========================================
          MAIN CONTENT
          ========================================= -->
-
     <main class="main-content">
 
 
         <!-- =====================================
-             HEADER
+             TOP HEADER
              ===================================== -->
-
         <header class="top-header">
 
-            <div>
+            <div class="header-left">
+
+                <span class="header-label">
+                    ADMIN PANEL
+                </span>
 
                 <h1>
                     Reports
                 </h1>
 
                 <p>
-                    Review and manage reports submitted by users.
+                    Review and manage reports submitted by LearnLoop users.
                 </p>
 
             </div>
@@ -100,51 +105,53 @@
         </header>
 
 
-
         <!-- =====================================
-             REPORTS PAGE
+             REPORTS CONTENT
              ===================================== -->
-
         <section class="reports-page">
 
 
             <!-- =================================
-                 FIXED REPORT HEADER + FILTERS
+                 REPORTS TOOLBAR
                  ================================= -->
-
             <div class="reports-toolbar">
-
-
-                <!-- PAGE TITLE -->
 
                 <div class="dashboard-heading">
 
-                    <h2>
-                        Reported Issues
-                    </h2>
+                    <div>
 
-                    <p>
-                        Monitor reported users and listings that require
-                        administrative attention.
-                    </p>
+                        <span class="section-label">
+                            REPORTS
+                        </span>
+
+                        <h2>
+                            Reported Issues
+                        </h2>
+
+                        <p>
+                            Monitor reported users and listings that require
+                            administrative attention.
+                        </p>
+
+                    </div>
 
                 </div>
 
 
-
                 <!-- SEARCH + FILTER -->
-
                 <div class="report-tools">
 
                     <input
-                        type="text"
+                        type="search"
                         class="report-search"
                         placeholder="Search reports..."
+                        aria-label="Search reports"
                     >
 
-
-                    <select class="report-filter">
-
+                    <select
+                        class="report-filter"
+                        aria-label="Filter reports"
+                    >
                         <option value="all">
                             All Reports
                         </option>
@@ -160,26 +167,17 @@
                         <option value="dismissed">
                             Dismissed
                         </option>
-
                     </select>
 
                 </div>
 
-
             </div>
-
 
 
             <!-- =================================
                  SCROLLABLE REPORTS AREA
                  ================================= -->
-
             <div class="reports-scroll-area">
-
-
-                <!-- =================================
-                     REPORTS
-                     ================================= -->
 
                 <div class="reports-container">
 
@@ -187,17 +185,13 @@
                     <!-- =================================
                          REPORT 1
                          ================================= -->
-
                     <article class="report-card">
 
-
-                        <div class="report-header">
-
+                        <header class="report-header">
 
                             <div class="report-icon">
                                 !
                             </div>
-
 
                             <div class="report-title">
 
@@ -211,18 +205,14 @@
 
                             </div>
 
-
                             <span class="report-status pending">
                                 Pending
                             </span>
 
-
-                        </div>
-
+                        </header>
 
 
                         <div class="report-content">
-
 
                             <div class="report-detail">
 
@@ -257,23 +247,20 @@
                                 </span>
 
                                 <p>
-                                    The listing contains inappropriate
-                                    or misleading information.
+                                    The listing contains inappropriate or
+                                    misleading information.
                                 </p>
 
                             </div>
 
-
                         </div>
 
 
-
-                        <div class="report-footer">
+                        <footer class="report-footer">
 
                             <span>
-                                Submitted recently
+                                Requires administrative review
                             </span>
-
 
                             <div class="report-actions">
 
@@ -284,14 +271,12 @@
                                     View
                                 </button>
 
-
                                 <button
                                     type="button"
                                     class="report-resolve-btn"
                                 >
                                     Resolve
                                 </button>
-
 
                                 <button
                                     type="button"
@@ -302,27 +287,21 @@
 
                             </div>
 
-                        </div>
-
+                        </footer>
 
                     </article>
-
 
 
                     <!-- =================================
                          REPORT 2
                          ================================= -->
-
                     <article class="report-card">
 
-
-                        <div class="report-header">
-
+                        <header class="report-header">
 
                             <div class="report-icon">
                                 !
                             </div>
-
 
                             <div class="report-title">
 
@@ -336,18 +315,14 @@
 
                             </div>
 
-
                             <span class="report-status pending">
                                 Pending
                             </span>
 
-
-                        </div>
-
+                        </header>
 
 
                         <div class="report-content">
-
 
                             <div class="report-detail">
 
@@ -382,23 +357,20 @@
                                 </span>
 
                                 <p>
-                                    Suspicious behavior was observed
-                                    during a tutoring interaction.
+                                    Suspicious behavior was reported during
+                                    a tutoring interaction.
                                 </p>
 
                             </div>
 
-
                         </div>
 
 
-
-                        <div class="report-footer">
+                        <footer class="report-footer">
 
                             <span>
-                                Submitted recently
+                                Requires administrative review
                             </span>
-
 
                             <div class="report-actions">
 
@@ -409,14 +381,12 @@
                                     View
                                 </button>
 
-
                                 <button
                                     type="button"
                                     class="report-resolve-btn"
                                 >
                                     Resolve
                                 </button>
-
 
                                 <button
                                     type="button"
@@ -427,27 +397,21 @@
 
                             </div>
 
-                        </div>
-
+                        </footer>
 
                     </article>
-
 
 
                     <!-- =================================
                          REPORT 3
                          ================================= -->
-
                     <article class="report-card">
 
-
-                        <div class="report-header">
-
+                        <header class="report-header">
 
                             <div class="report-icon">
                                 !
                             </div>
-
 
                             <div class="report-title">
 
@@ -461,18 +425,14 @@
 
                             </div>
 
-
                             <span class="report-status resolved">
                                 Resolved
                             </span>
 
-
-                        </div>
-
+                        </header>
 
 
                         <div class="report-content">
-
 
                             <div class="report-detail">
 
@@ -507,23 +467,20 @@
                                 </span>
 
                                 <p>
-                                    Duplicate or spam content was
-                                    submitted multiple times.
+                                    The listing appears to be duplicated
+                                    or contains spam content.
                                 </p>
 
                             </div>
 
-
                         </div>
 
 
-
-                        <div class="report-footer">
+                        <footer class="report-footer">
 
                             <span>
-                                Submitted recently
+                                Report has been resolved
                             </span>
-
 
                             <div class="report-actions">
 
@@ -534,14 +491,12 @@
                                     View
                                 </button>
 
-
                                 <button
                                     type="button"
                                     class="report-resolve-btn"
                                 >
                                     Resolve
                                 </button>
-
 
                                 <button
                                     type="button"
@@ -552,27 +507,21 @@
 
                             </div>
 
-                        </div>
-
+                        </footer>
 
                     </article>
 
 
                 </div>
 
-
             </div>
-
 
         </section>
 
-
     </main>
-
 
 </div>
 
-
 </body>
-
 </html>
+```

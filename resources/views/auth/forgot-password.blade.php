@@ -1,37 +1,63 @@
+```blade
 <x-guest-layout>
 
     <div id="forgot-container">
 
         <div class="forgot-card">
 
-            <h1>LEARN LOOP</h1>
-
-            <h2>FORGOT PASSWORD</h2>
-
-            <p class="description">
-                Forgot your password? No problem. Just enter your email
-                address and we will send you a password reset link.
-            </p>
+            <!-- =========================================
+                 LOGO / BRAND
+                 ========================================= -->
+            <div class="auth-brand">
+                LEARN LOOP
+            </div>
 
 
-            <!-- Session Status -->
+            <!-- =========================================
+                 HEADER
+                 ========================================= -->
+            <div class="auth-header">
 
+                <span class="auth-label">
+                    ACCOUNT RECOVERY
+                </span>
+
+                <h1>
+                    FORGOT PASSWORD
+                </h1>
+
+                <p>
+                    Forgot your password? No problem. Enter your
+                    email address and we will send you a password
+                    reset link.
+                </p>
+
+            </div>
+
+
+            <!-- =========================================
+                 SESSION STATUS
+                 ========================================= -->
             <x-auth-session-status
-                class="mb-4"
+                class="auth-status"
                 :status="session('status')"
             />
 
 
-            <!-- Forgot Password Form -->
-
-            <form method="POST" action="{{ route('password.email') }}">
+            <!-- =========================================
+                 RESET PASSWORD FORM
+                 ========================================= -->
+            <form
+                method="POST"
+                action="{{ route('password.email') }}"
+                class="auth-form"
+            >
 
                 @csrf
 
 
-                <!-- Email -->
-
-                <div class="forgot-field">
+                <!-- EMAIL -->
+                <div class="auth-field">
 
                     <label for="email">
                         Email
@@ -45,36 +71,48 @@
                         placeholder="Enter your email"
                         required
                         autofocus
+                        autocomplete="username"
                     >
 
-                    <x-input-error
-                        :messages="$errors->get('email')"
-                        class="forgot-error"
-                    />
+                    @error('email')
+
+                        <p class="auth-error">
+                            {{ $message }}
+                        </p>
+
+                    @enderror
 
                 </div>
 
 
-                <!-- Submit -->
-
-                <button type="submit">
-                    Email Password Reset Link
+                <!-- RESET BUTTON -->
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+                    Send Reset Link
                 </button>
 
             </form>
 
 
-            <!-- Back to Login -->
+            <!-- =========================================
+                 BACK TO LOGIN
+                 ========================================= -->
+            <div class="auth-footer">
 
-            <a
-                href="{{ route('login') }}"
-                class="back-login"
-            >
-                ← Back to Login
-            </a>
+                <a
+                    href="{{ route('login') }}"
+                    class="forgot-link"
+                >
+                    ← Back to Login
+                </a>
+
+            </div>
 
         </div>
 
     </div>
 
 </x-guest-layout>
+```

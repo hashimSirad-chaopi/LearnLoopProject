@@ -1,52 +1,185 @@
+```blade
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+    <div id="container">
+
+        <!-- =========================================
+             LOGO / BRAND
+             ========================================= -->
+        <div class="auth-brand">
+            LEARN LOOP
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+        <!-- =========================================
+             REGISTER HEADER
+             ========================================= -->
+        <div class="auth-header">
+
+            <span class="auth-label">
+                ADMIN PANEL
+            </span>
+
+            <h1>
+                CREATE ACCOUNT
+            </h1>
+
+            <p>
+                Create a new LearnLoop account.
+            </p>
+
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+        <!-- =========================================
+             REGISTER FORM
+             ========================================= -->
+        <form
+            method="POST"
+            action="{{ route('register') }}"
+            class="auth-form"
+        >
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            @csrf
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <!-- NAME -->
+            <div class="auth-field">
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+                <label for="name">
+                    Name
+                </label>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+                <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value="{{ old('name') }}"
+                    placeholder="Enter your name"
+                    required
+                    autofocus
+                    autocomplete="name"
+                >
+
+                @error('name')
+
+                    <p class="auth-error">
+                        {{ $message }}
+                    </p>
+
+                @enderror
+
+            </div>
+
+
+            <!-- EMAIL -->
+            <div class="auth-field">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    placeholder="Enter your email"
+                    required
+                    autocomplete="username"
+                >
+
+                @error('email')
+
+                    <p class="auth-error">
+                        {{ $message }}
+                    </p>
+
+                @enderror
+
+            </div>
+
+
+            <!-- PASSWORD -->
+            <div class="auth-field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="new-password"
+                >
+
+                @error('password')
+
+                    <p class="auth-error">
+                        {{ $message }}
+                    </p>
+
+                @enderror
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+            <div class="auth-field">
+
+                <label for="password_confirmation">
+                    Confirm Password
+                </label>
+
+                <input
+                    id="password_confirmation"
+                    type="password"
+                    name="password_confirmation"
+                    placeholder="Confirm your password"
+                    required
+                    autocomplete="new-password"
+                >
+
+                @error('password_confirmation')
+
+                    <p class="auth-error">
+                        {{ $message }}
+                    </p>
+
+                @enderror
+
+            </div>
+
+
+            <!-- REGISTER BUTTON -->
+            <button
+                type="submit"
+                class="auth-submit"
+            >
+                Register
+            </button>
+
+        </form>
+
+
+        <!-- =========================================
+             BACK TO LOGIN
+             ========================================= -->
+        <div class="auth-footer">
+
+            <a
+                href="{{ route('login') }}"
+                class="forgot-link"
+            >
+                Already have an account? Log In
             </a>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
         </div>
-    </form>
+
+    </div>
+
 </x-guest-layout>
+```

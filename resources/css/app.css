@@ -1,21 +1,33 @@
+
 /* =========================================================
-   LEARNLOOP CSS IMPORTS
+   LEARNLOOP
+   MAIN CSS FILE
    ========================================================= */
 
-@import './global.css';
 
-@import './auth.css';
+/* =========================================================
+   GLOBAL STYLES
+   ========================================================= */
 
-@import './dashboard.css';
+@import "./global.css";
 
-@import './home.css';
 
-@import './users.css';
+/* =========================================================
+   AUTHENTICATION
+   ========================================================= */
 
-@import './listing.css';
+@import "./auth.css";
+@import "./forgot.css";
 
-@import './reports.css';
 
-@import './settings.css';
+/* =========================================================
+   ADMIN PAGES
+   ========================================================= */
 
-@import './forgot.css';
+@import "./dashboard.css";
+@import "./home.css";
+@import "./users.css";
+@import "./listing.css";
+@import "./reports.css";
+@import "./settings.css";
+

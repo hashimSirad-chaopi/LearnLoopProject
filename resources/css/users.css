@@ -1,6 +1,6 @@
 /* =========================================================
-   LEARNLOOP - USER MANAGEMENT
-   DARK GREY + BLACK + WHITE + ORANGE
+   LEARNLOOP — USER MANAGEMENT
+   DARK GREY + DIRTY WHITE + BLACK + ORANGE
    ========================================================= */
 
 
@@ -9,101 +9,125 @@
    ========================================================= */
 
 .users-page {
-    flex: 1;
-    min-height: 0;
+    width: 100%;
+    height: calc(100vh - 108px);
 
-    display: flex;
-    flex-direction: column;
-
-    overflow: hidden;
-
-    padding: 0 40px 30px;
+    margin: 0;
+    padding: 0;
 
     box-sizing: border-box;
+
+    background: #dedbd4;
+
+    overflow: hidden;
 }
 
 
 /* =========================================================
    USERS TOOLBAR
-   TITLE + DESCRIPTION + SEARCH
-   DOES NOT SCROLL
    ========================================================= */
 
 .users-toolbar {
-    flex-shrink: 0;
+    width: 100%;
 
-    padding-bottom: 20px;
+    padding: 25px 40px 22px;
 
-    background: #e9e6df;
+    box-sizing: border-box;
+
+    background: #dedbd4;
+
+    border-bottom: 1px solid #c4c0b8;
 }
 
 
-/* =========================================================
-   PAGE TITLE
-   ========================================================= */
+/* Heading */
 
 .users-toolbar .dashboard-heading {
-    margin-bottom: 20px;
+    margin: 0 0 18px;
+    padding: 0;
 }
 
-.users-toolbar .dashboard-heading h2 {
-    margin: 0 0 5px;
 
-    font-size: 22px;
-    font-weight: 700;
+.users-toolbar .section-label {
+    display: block;
 
-    color: #171717;
+    margin-bottom: 6px;
+
+    color: #f97316;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+
+    text-transform: uppercase;
 }
 
-.users-toolbar .dashboard-heading p {
+
+.users-toolbar h2 {
     margin: 0;
 
-    font-size: 14px;
+    color: #181818;
 
-    color: #66625b;
+    font-size: 25px;
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+.users-toolbar p {
+    margin: 7px 0 0;
+
+    color: #706c65;
+
+    font-size: 13px;
+
+    line-height: 1.5;
 }
 
 
 /* =========================================================
-   SEARCH AREA
+   SEARCH
    ========================================================= */
 
 .user-tools {
-    display: flex;
-    align-items: center;
-
     width: 100%;
+
+    margin: 0;
+    padding: 0;
 }
 
 
 .user-search {
+    display: block;
+
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
 
-    height: 44px;
+    height: 43px;
 
-    padding: 0 16px;
+    margin: 0;
+    padding: 0 15px;
 
     box-sizing: border-box;
 
-    border: 1px solid #d0ccc4;
+    border: 1px solid #bcb8b0;
     border-radius: 8px;
 
-    background: #faf9f6;
+    background: #f4f2ed;
 
     color: #222;
 
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
 
     outline: none;
 
-    box-shadow:
-        0 4px 10px rgba(0, 0, 0, 0.08);
-
     transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 }
 
 
@@ -113,74 +137,58 @@
 
 
 .user-search:focus {
+    background: #faf9f6;
+
     border-color: #f97316;
 
     box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.12),
-        0 4px 10px rgba(0, 0, 0, 0.08);
+        0 0 0 3px rgba(249, 115, 22, .10);
 }
 
 
 /* =========================================================
    SCROLLABLE USERS AREA
-   ONLY THIS AREA SCROLLS
    ========================================================= */
 
 .users-scroll-area {
-    flex: 1;
-    min-height: 0;
+    width: 100%;
 
-    overflow-y: auto;
-    overflow-x: hidden;
+    height: calc(100vh - 300px);
 
-    padding: 4px 6px 30px 2px;
+    margin: 0;
+
+    padding: 28px 40px 45px;
 
     box-sizing: border-box;
 
-    scrollbar-width: thin;
-    scrollbar-color: #8a867e transparent;
-}
-
-
-/* Chrome / Edge / Safari scrollbar */
-
-.users-scroll-area::-webkit-scrollbar {
-    width: 8px;
-}
-
-.users-scroll-area::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.users-scroll-area::-webkit-scrollbar-thumb {
-    background: #8a867e;
-
-    border-radius: 10px;
-}
-
-.users-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: #5f5b55;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 
 /* =========================================================
-   USER TABLE CONTAINER
+   TABLE CONTAINER
    ========================================================= */
 
 .users-table-container {
     width: 100%;
 
-    background: #faf9f6;
+    min-width: 760px;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    background: #f3f1ec;
+
+    border: 1px solid #c5c1b9;
 
     border-radius: 12px;
 
-    overflow-x: auto;
-
-    box-sizing: border-box;
+    overflow: hidden;
 
     box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.14),
-        0 3px 8px rgba(0, 0, 0, 0.08);
+        0 7px 18px rgba(0, 0, 0, .14);
 }
 
 
@@ -191,11 +199,11 @@
 .users-table {
     width: 100%;
 
-    min-width: 750px;
-
     border-collapse: collapse;
 
-    background: #faf9f6;
+    table-layout: fixed;
+
+    background: #f3f1ec;
 }
 
 
@@ -204,19 +212,25 @@
    ========================================================= */
 
 .users-table thead {
-    background: #171717;
-
-    color: #ffffff;
+    background: #292929;
 }
 
 
 .users-table th {
-    padding: 16px 18px;
+    height: 48px;
+
+    padding: 0 18px;
+
+    color: #f5f3ee;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .8px;
 
     text-align: left;
 
-    font-size: 13px;
-    font-weight: 600;
+    text-transform: uppercase;
 
     white-space: nowrap;
 
@@ -228,42 +242,101 @@
    TABLE BODY
    ========================================================= */
 
-.users-table tbody {
-    background: #faf9f6;
+.users-table tbody tr {
+    border-bottom: 1px solid #d5d1c9;
+
+    transition:
+        background .18s ease;
 }
 
 
-.users-table td {
-    padding: 16px 18px;
-
-    font-size: 14px;
-
-    color: #333333;
-
-    border-bottom: 1px solid #ddd9d1;
-
-    vertical-align: middle;
-}
-
-
-/* Remove border from last row */
-
-.users-table tbody tr:last-child td {
+.users-table tbody tr:last-child {
     border-bottom: none;
 }
 
 
-/* =========================================================
-   TABLE HOVER
-   ========================================================= */
-
-.users-table tbody tr {
-    transition: background 0.15s ease;
+.users-table tbody tr:hover {
+    background: #e9e6df;
 }
 
 
-.users-table tbody tr:hover {
-    background: #f0ede7;
+.users-table td {
+    height: 62px;
+
+    padding: 10px 18px;
+
+    box-sizing: border-box;
+
+    color: #3e3b36;
+
+    font-size: 12px;
+
+    vertical-align: middle;
+
+    border: none;
+}
+
+
+/* =========================================================
+   COLUMN SIZES
+   ========================================================= */
+
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+    width: 20%;
+}
+
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+    width: 30%;
+}
+
+
+.users-table th:nth-child(3),
+.users-table td:nth-child(3) {
+    width: 15%;
+}
+
+
+.users-table th:nth-child(4),
+.users-table td:nth-child(4) {
+    width: 15%;
+}
+
+
+.users-table th:nth-child(5),
+.users-table td:nth-child(5) {
+    width: 20%;
+}
+
+
+/* =========================================================
+   NAME
+   ========================================================= */
+
+.users-table td:first-child {
+    color: #202020;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   EMAIL
+   ========================================================= */
+
+.users-table td:nth-child(2) {
+    color: #706c65;
+
+    font-size: 12px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
 }
 
 
@@ -275,20 +348,23 @@
     display: inline-flex;
 
     align-items: center;
-    justify-content: center;
 
-    padding: 5px 11px;
+    min-height: 25px;
 
-    border-radius: 20px;
+    padding: 0 10px;
 
-    background: #e5e1d9;
+    box-sizing: border-box;
 
-    color: #333333;
+    border-radius: 15px;
 
-    font-size: 12px;
-    font-weight: 600;
+    background: #e4e1da;
 
-    white-space: nowrap;
+    color: #55514b;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .3px;
 }
 
 
@@ -300,25 +376,38 @@
     display: inline-flex;
 
     align-items: center;
-    justify-content: center;
 
-    padding: 5px 11px;
+    min-height: 25px;
 
-    border-radius: 20px;
+    padding: 0 10px;
 
-    font-size: 12px;
-    font-weight: 600;
+    box-sizing: border-box;
 
-    white-space: nowrap;
+    border-radius: 15px;
+
+    font-size: 9px;
+    font-weight: 800;
 }
 
 
-/* ACTIVE */
-
 .active-status {
-    background: #e5f3e7;
+    background: #e1e6df;
 
-    color: #287a32;
+    color: #485347;
+}
+
+
+.active-status::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    margin-right: 6px;
+
+    border-radius: 50%;
+
+    background: #5f7059;
 }
 
 
@@ -331,16 +420,7 @@
 
     align-items: center;
 
-    gap: 8px;
-
-    white-space: nowrap;
-}
-
-
-.action-buttons form {
-    margin: 0;
-
-    padding: 0;
+    gap: 7px;
 }
 
 
@@ -349,38 +429,38 @@
    ========================================================= */
 
 .table-btn {
-    border: none;
+    height: 32px;
 
-    padding: 8px 13px;
+    padding: 0 13px;
 
-    border-radius: 6px;
+    border: 1px solid #292929;
 
-    background: #222222;
+    border-radius: 7px;
+
+    background: #292929;
 
     color: #ffffff;
 
     font-family: inherit;
 
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 800;
 
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        transform 0.15s ease;
+        background .2s ease,
+        border-color .2s ease,
+        transform .15s ease;
 }
 
 
 .table-btn:hover {
+    border-color: #f97316;
+
     background: #f97316;
 
     transform: translateY(-1px);
-}
-
-
-.table-btn:active {
-    transform: translateY(0);
 }
 
 
@@ -389,32 +469,37 @@
    ========================================================= */
 
 .delete-btn {
-    border: none;
+    height: 32px;
 
-    padding: 8px 13px;
+    padding: 0 13px;
 
-    border-radius: 6px;
+    border: 1px solid #c4c0b8;
 
-    background: #e4e0d8;
+    border-radius: 7px;
 
-    color: #333333;
+    background: transparent;
+
+    color: #6a655e;
 
     font-family: inherit;
 
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 800;
 
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.15s ease;
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .15s ease;
 }
 
 
 .delete-btn:hover {
-    background: #dc2626;
+    border-color: #9b4d3f;
+
+    background: #9b4d3f;
 
     color: #ffffff;
 
@@ -422,109 +507,119 @@
 }
 
 
-.delete-btn:active {
-    transform: translateY(0);
-}
-
-
 /* =========================================================
-   EMPTY TABLE
+   EMPTY USERS
    ========================================================= */
 
-.users-table tbody:empty::after {
-    content: "No users found.";
+.empty-users {
+    height: 150px !important;
 
-    display: block;
+    color: #858078 !important;
 
-    padding: 30px;
+    font-size: 12px !important;
 
-    text-align: center;
+    font-weight: 600 !important;
 
-    color: #77736c;
-
-    font-size: 14px;
+    text-align: center !important;
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   SCROLLBAR
+   ========================================================= */
+
+.users-scroll-area::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+
+.users-scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.users-scroll-area::-webkit-scrollbar-thumb {
+    background: #aaa69f;
+
+    border-radius: 10px;
+}
+
+
+.users-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #858078;
+}
+
+
+/* =========================================================
+   TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
 
-    .users-page {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-
-}
-
-
-@media (max-width: 768px) {
-
-    .users-page {
-        padding: 0 18px 20px;
+    .users-toolbar {
+        padding: 24px 28px 21px;
     }
 
 
-    .users-toolbar .dashboard-heading h2 {
-        font-size: 20px;
-    }
-
-
-    .users-toolbar .dashboard-heading p {
-        font-size: 13px;
-    }
-
-
-    .user-search {
-        max-width: 100%;
+    .users-scroll-area {
+        padding: 25px 28px 40px;
     }
 
 
     .users-table-container {
-        border-radius: 9px;
+        min-width: 720px;
     }
 
 }
 
 
 /* =========================================================
-   SMALL MOBILE
+   MOBILE
    ========================================================= */
 
-@media (max-width: 480px) {
-
-    .users-page {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
+@media (max-width: 650px) {
 
     .users-toolbar {
-        padding-bottom: 15px;
+        padding: 20px;
     }
 
 
-    .users-toolbar .dashboard-heading {
-        margin-bottom: 15px;
-    }
-
-
-    .users-toolbar .dashboard-heading h2 {
-        font-size: 18px;
-    }
-
-
-    .users-toolbar .dashboard-heading p {
-        font-size: 12px;
+    .users-toolbar h2 {
+        font-size: 22px;
     }
 
 
     .user-search {
-        height: 42px;
+        max-width: none;
+    }
 
-        font-size: 13px;
+
+    .users-scroll-area {
+        height: calc(100vh - 290px);
+
+        padding: 20px;
+    }
+
+
+    .users-table-container {
+        min-width: 700px;
+
+        border-radius: 10px;
+    }
+
+
+    .users-table th {
+        height: 44px;
+
+        padding: 0 14px;
+    }
+
+
+    .users-table td {
+        height: 58px;
+
+        padding: 9px 14px;
     }
 
 }

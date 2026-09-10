@@ -1,185 +1,151 @@
-/* =========================================================
-   LEARNLOOP
-   AUTHENTICATION
-   ========================================================= */
-
 
 /* =========================================================
-   LOGIN PAGE
+   LEARNLOOP AUTHENTICATION
+   LOGIN + REGISTER
    ========================================================= */
+
+body:has(#container),
+body:has(#forgot-container) {
+    background: #dedbd4;
+}
 
 #container {
-    width: 100%;
+    width: min(430px, calc(100% - 35px));
     min-height: 100vh;
-
+    margin: auto;
+    padding: 55px 0;
     display: flex;
-
     flex-direction: column;
-
-    align-items: center;
     justify-content: center;
-
-    padding: 30px;
-
-    background: #e9e6df;
 }
 
-
-#container h1 {
-    margin-bottom: 7px;
-
-    color: #151515;
-
-    font-size: 31px;
+.auth-brand {
+    margin-bottom: 35px;
+    color: #171717;
+    font-size: 26px;
     font-weight: 900;
-
-    letter-spacing: 2px;
+    letter-spacing: -1px;
 }
 
-
-#container h3 {
+.auth-header {
     margin-bottom: 25px;
+}
 
+.auth-label {
+    display: block;
+    margin-bottom: 7px;
     color: #f97316;
-
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 800;
-
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
 }
 
+.auth-header h1 {
+    font-size: 28px;
+    font-weight: 900;
+}
 
-/* =========================================================
-   LOGIN FORM
-   ========================================================= */
+.auth-header p {
+    max-width: 380px;
+    margin-top: 7px;
+    color: #706c65;
+    font-size: 13px;
+    line-height: 1.6;
+}
 
-#container form {
-    width: 100%;
-    max-width: 360px;
-
+.auth-form {
     display: flex;
-
     flex-direction: column;
-
-    align-items: center;
-
-    gap: 13px;
-
-    padding: 30px;
-
-    background: #faf9f6;
-
-    border: 1px solid #d4d0c8;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 13px 30px rgba(0, 0, 0, 0.20),
-        0 3px 8px rgba(0, 0, 0, 0.12);
+    gap: 18px;
 }
 
-
-#container input {
-    width: 100%;
-
-    height: 45px;
-
-    padding: 0 13px;
-
-    background: #ffffff;
-
-    border: 1px solid #d0ccc4;
-
-    border-radius: 8px;
-
-    color: #222222;
-
-    outline: none;
-
-    font-size: 13px;
-}
-
-
-#container input:focus {
-    border-color: #f97316;
-
-    box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.10);
-}
-
-
-/* =========================================================
-   LOGIN BUTTON
-   ========================================================= */
-
-#container button {
-    width: 100%;
-    max-width: 300px;
-
-    height: 45px;
-
-    margin-top: 4px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #191919;
-
-    color: #ffffff;
-
-    font-size: 13px;
+.auth-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: #35322e;
+    font-size: 12px;
     font-weight: 700;
-
-    transition: 0.2s ease;
 }
 
-
-#container button:hover {
-    background: #f97316;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 16px rgba(0, 0, 0, 0.20);
+.auth-field input {
+    width: 100%;
+    height: 45px;
+    padding: 0 13px;
+    border: 1px solid #bdb9b1;
+    border-radius: 7px;
+    background: #f2f0eb;
+    color: #171717;
+    outline: none;
 }
 
+.auth-field input:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, .08);
+}
 
-/* =========================================================
-   FORGOT PASSWORD LINK
-   ========================================================= */
+.password-wrapper {
+    position: relative;
+}
 
-#container .forgot {
-    margin-top: 15px;
+.password-wrapper input {
+    padding-right: 45px;
+}
 
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #77736d;
+}
+
+.auth-error {
+    margin-top: 6px;
+    color: #c2410c;
+    font-size: 11px;
+}
+
+.auth-status {
+    margin-bottom: 18px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: #ebe8e1;
+    color: #55514b;
     font-size: 12px;
 }
 
-
-#container .forgot span {
-    color: #66625c;
-
-    transition: 0.2s ease;
+.auth-submit {
+    width: 100%;
+    height: 45px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 7px;
+    background: #f97316;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    transition: .2s;
 }
 
+.auth-submit:hover {
+    background: #df6410;
+}
 
-#container .forgot span:hover {
+.auth-footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.forgot-link {
+    color: #5d5953;
+    font-size: 12px;
+}
+
+.forgot-link:hover {
     color: #f97316;
 }
 
-
-@media (max-width: 480px) {
-
-    #container {
-        padding: 20px;
-    }
-
-    #container h1 {
-        font-size: 27px;
-    }
-
-    #container form {
-        padding: 25px 20px;
-    }
-
-}

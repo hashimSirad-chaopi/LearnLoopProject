@@ -1,209 +1,38 @@
+
 /* =========================================================
-   LEARNLOOP
    FORGOT PASSWORD
    ========================================================= */
 
 #forgot-container {
     width: 100%;
     min-height: 100vh;
-
+    padding: 35px 18px;
     display: flex;
-
     align-items: center;
     justify-content: center;
-
-    padding: 30px;
-
-    background: #e9e6df;
 }
-
 
 .forgot-card {
-    width: 100%;
-    max-width: 430px;
-
-    padding: 34px;
-
-    background: #faf9f6;
-
-    border: 1px solid #d4d0c8;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 13px 30px rgba(0, 0, 0, 0.20),
-        0 3px 8px rgba(0, 0, 0, 0.12);
-
-    text-align: center;
+    width: min(430px, 100%);
+    padding: 38px;
+    background: #f2f0eb;
+    border: 1px solid #c8c4bc;
+    border-radius: 10px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
 }
 
-
-.forgot-card h1 {
-    margin-bottom: 8px;
-
-    color: #151515;
-
-    font-size: 28px;
-    font-weight: 900;
-
-    letter-spacing: 2px;
+.forgot-card .auth-brand {
+    margin-bottom: 30px;
 }
 
-
-.forgot-card h2 {
-    margin-bottom: 20px;
-
-    color: #f97316;
-
-    font-size: 13px;
-
-    letter-spacing: 1.5px;
-}
-
-
-.forgot-card .description {
+.forgot-card .auth-header {
     margin-bottom: 24px;
-
-    color: #706d67;
-
-    font-size: 13px;
-
-    line-height: 1.6;
 }
 
-
-/* =========================================================
-   FIELD
-   ========================================================= */
-
-.forgot-card form {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 17px;
-
-    text-align: left;
-}
-
-
-.forgot-field {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 7px;
-}
-
-
-.forgot-field label {
-    color: #35322e;
-
-    font-size: 12px;
-    font-weight: 700;
-}
-
-
-.forgot-field input {
-    width: 100%;
-
-    height: 45px;
-
-    padding: 0 13px;
-
-    background: #ffffff;
-
-    border: 1px solid #d0ccc4;
-
-    border-radius: 8px;
-
-    color: #222222;
-
-    outline: none;
-
-    font-size: 13px;
-}
-
-
-.forgot-field input:focus {
-    border-color: #f97316;
-
-    box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.10);
-}
-
-
-/* =========================================================
-   BUTTON
-   ========================================================= */
-
-.forgot-card button {
-    width: 100%;
-
-    height: 45px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #191919;
-
-    color: #ffffff;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    transition: 0.2s ease;
-}
-
-
-.forgot-card button:hover {
-    background: #f97316;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 16px rgba(0, 0, 0, 0.20);
-}
-
-
-/* =========================================================
-   BACK LOGIN
-   ========================================================= */
-
-.back-login {
-    display: inline-block;
-
-    margin-top: 22px;
-
-    color: #66625c;
-
-    font-size: 12px;
-
-    transition: 0.2s ease;
-}
-
-
-.back-login:hover {
-    color: #f97316;
-}
-
-
-.forgot-error {
-    color: #d9534f;
-
-    font-size: 11px;
-}
-
-
-@media (max-width: 480px) {
-
-    #forgot-container {
-        padding: 20px;
-    }
+@media (max-width: 500px) {
 
     .forgot-card {
-        padding: 25px 20px;
+        padding: 28px 22px;
     }
-
 }
+

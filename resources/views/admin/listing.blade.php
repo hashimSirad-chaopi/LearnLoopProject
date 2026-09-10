@@ -13,48 +13,55 @@
 
 <div class="admin-container">
 
-    <!-- =========================
+    <!-- =========================================
          SIDEBAR
-         ========================= -->
-
+    ========================================== -->
     <aside class="sidebar">
 
-        <div class="logo">
-            LearnLoop
+        <div class="sidebar-top">
+
+            <div class="logo">
+                LearnLoop
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="{{ route('admin.home') }}" class="nav-item">
+                    Dashboard
+                </a>
+
+                <a href="{{ route('admin.users') }}" class="nav-item">
+                    User Management
+                </a>
+
+                <a href="{{ route('admin.listings') }}" class="nav-item active">
+                    Listings
+                </a>
+
+                <a href="{{ route('admin.reports') }}" class="nav-item">
+                    Reports
+                </a>
+
+                <a href="{{ route('admin.settings') }}" class="nav-item">
+                    Settings
+                </a>
+
+            </nav>
+
         </div>
 
-        <nav class="sidebar-nav">
 
-            <a href="{{ route('admin.home') }}" class="nav-item">
-                Dashboard
-            </a>
-
-            <a href="{{ route('admin.users') }}" class="nav-item">
-                User Management
-            </a>
-
-            <a href="{{ route('admin.listings') }}" class="nav-item active">
-                Listings
-            </a>
-
-            <a href="{{ route('admin.reports') }}" class="nav-item">
-                Reports
-            </a>
-
-            <a href="{{ route('admin.settings') }}" class="nav-item">
-                Settings
-            </a>
-
-        </nav>
-
+        <!-- LOG OUT -->
         <div class="sidebar-bottom">
 
             <form method="POST" action="{{ route('logout') }}">
+
                 @csrf
 
                 <button type="submit" class="logout-btn">
                     Log Out
                 </button>
+
             </form>
 
         </div>
@@ -62,75 +69,103 @@
     </aside>
 
 
-    <!-- =========================
+    <!-- =========================================
          MAIN CONTENT
-         ========================= -->
-
+    ========================================== -->
     <main class="main-content">
 
-
-        <!-- =========================
-             FIXED TOP HEADER
-             ========================= -->
-
+        <!-- FIXED HEADER -->
         <header class="top-header">
 
-            <h1>Listings</h1>
+            <div class="header-left">
 
-            <p>
-                Review and manage listings posted by LearnLoop users.
-            </p>
+                <span class="header-label">
+                    ADMIN PANEL
+                </span>
+
+                <h1>
+                    Listings
+                </h1>
+
+                <p>
+                    Review and manage listings posted by LearnLoop users.
+                </p>
+
+            </div>
 
         </header>
 
 
-        <!-- =========================
-             LISTING PAGE
-             ========================= -->
-
+        <!-- =====================================
+             LISTINGS PAGE
+        ====================================== -->
         <section class="listing-page">
 
-
-            <!-- =========================
-                 SEARCH BAR
-                 FIXED ABOVE LISTINGS
-                 ========================= -->
-
+            <!-- TOOLBAR -->
             <div class="listing-toolbar">
 
+                <div class="dashboard-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            LISTINGS
+                        </span>
+
+                        <h2>
+                            All Listings
+                        </h2>
+
+                        <p>
+                            Review, disable, or remove user-created listings.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH -->
                 <input
-                    type="text"
+                    type="search"
                     class="listing-search"
                     placeholder="Search listings..."
+                    aria-label="Search listings"
                 >
 
             </div>
 
 
-            <!-- =========================
-                 ONLY THIS PART SCROLLS
-                 ========================= -->
-
+            <!-- =================================
+                 SCROLLABLE LISTINGS
+            ================================== -->
             <div class="listings-scroll-area">
 
                 <div class="listings-feed">
 
 
-                    <!-- LISTING 1 -->
-
+                    <!-- =================================
+                         LISTING 1
+                    ================================== -->
                     <article class="listing-post">
 
                         <div class="listing-post-header">
 
-                            <div class="listing-avatar">
-                                HC
-                            </div>
-
                             <div class="listing-user">
 
-                                <h3>Harold Caño</h3>
+                                <div class="listing-avatar">
+                                    HC
+                                </div>
 
-                                <p>Posted recently</p>
+                                <div>
+                                    <h3>
+                                        Harold Caño
+                                    </h3>
+
+                                    <span>
+                                        Mathematics
+                                    </span>
+                                </div>
 
                             </div>
 
@@ -141,7 +176,7 @@
                         </div>
 
 
-                        <div class="listing-post-content">
+                        <div class="listing-content">
 
                             <span class="listing-category">
                                 Mathematics
@@ -152,34 +187,41 @@
                             </h2>
 
                             <p>
-                                I can help students understand basic
-                                mathematics, algebra, and problem solving.
+                                I can help students understand basic math,
+                                algebra, problem solving, and other
+                                mathematics topics.
                             </p>
 
                         </div>
 
 
-                        <div class="listing-post-footer">
+                        <div class="listing-footer">
 
                             <span class="listing-date">
-                                LearnLoop Listing
+                                Posted recently
                             </span>
+
 
                             <div class="listing-actions">
 
-                                <button class="view-btn">
+                                <button
+                                    type="button"
+                                    class="view-btn"
+                                >
                                     View
                                 </button>
 
-                                <button class="approve-btn">
-                                    Approve
-                                </button>
-
-                                <button class="disable-btn">
+                                <button
+                                    type="button"
+                                    class="disable-btn"
+                                >
                                     Disable
                                 </button>
 
-                                <button class="delete-btn">
+                                <button
+                                    type="button"
+                                    class="delete-btn"
+                                >
                                     Delete
                                 </button>
 
@@ -191,21 +233,28 @@
 
 
 
-                    <!-- LISTING 2 -->
-
+                    <!-- =================================
+                         LISTING 2
+                    ================================== -->
                     <article class="listing-post">
 
                         <div class="listing-post-header">
 
-                            <div class="listing-avatar">
-                                MB
-                            </div>
-
                             <div class="listing-user">
 
-                                <h3>Myra Balaba</h3>
+                                <div class="listing-avatar">
+                                    MB
+                                </div>
 
-                                <p>Posted recently</p>
+                                <div>
+                                    <h3>
+                                        Myra Balaba
+                                    </h3>
+
+                                    <span>
+                                        English
+                                    </span>
+                                </div>
 
                             </div>
 
@@ -216,7 +265,7 @@
                         </div>
 
 
-                        <div class="listing-post-content">
+                        <div class="listing-content">
 
                             <span class="listing-category">
                                 English
@@ -227,34 +276,40 @@
                             </h2>
 
                             <p>
-                                Looking for students who want to improve
-                                their English communication and speaking skills.
+                                Practice English communication and speaking
+                                skills through friendly conversation sessions.
                             </p>
 
                         </div>
 
 
-                        <div class="listing-post-footer">
+                        <div class="listing-footer">
 
                             <span class="listing-date">
-                                LearnLoop Listing
+                                Posted recently
                             </span>
+
 
                             <div class="listing-actions">
 
-                                <button class="view-btn">
+                                <button
+                                    type="button"
+                                    class="view-btn"
+                                >
                                     View
                                 </button>
 
-                                <button class="approve-btn">
-                                    Approve
-                                </button>
-
-                                <button class="disable-btn">
+                                <button
+                                    type="button"
+                                    class="disable-btn"
+                                >
                                     Disable
                                 </button>
 
-                                <button class="delete-btn">
+                                <button
+                                    type="button"
+                                    class="delete-btn"
+                                >
                                     Delete
                                 </button>
 
@@ -266,21 +321,28 @@
 
 
 
-                    <!-- LISTING 3 -->
-
+                    <!-- =================================
+                         LISTING 3
+                    ================================== -->
                     <article class="listing-post">
 
                         <div class="listing-post-header">
 
-                            <div class="listing-avatar">
-                                RF
-                            </div>
-
                             <div class="listing-user">
 
-                                <h3>Richard Formoso</h3>
+                                <div class="listing-avatar">
+                                    RF
+                                </div>
 
-                                <p>Posted recently</p>
+                                <div>
+                                    <h3>
+                                        Richard Formoso
+                                    </h3>
+
+                                    <span>
+                                        Programming
+                                    </span>
+                                </div>
 
                             </div>
 
@@ -291,7 +353,7 @@
                         </div>
 
 
-                        <div class="listing-post-content">
+                        <div class="listing-content">
 
                             <span class="listing-category">
                                 Programming
@@ -302,34 +364,40 @@
                             </h2>
 
                             <p>
-                                Offering tutoring sessions for beginners
-                                who want to learn programming fundamentals.
+                                Learn programming fundamentals and improve
+                                your understanding of basic coding concepts.
                             </p>
 
                         </div>
 
 
-                        <div class="listing-post-footer">
+                        <div class="listing-footer">
 
                             <span class="listing-date">
-                                LearnLoop Listing
+                                Posted recently
                             </span>
+
 
                             <div class="listing-actions">
 
-                                <button class="view-btn">
+                                <button
+                                    type="button"
+                                    class="view-btn"
+                                >
                                     View
                                 </button>
 
-                                <button class="approve-btn">
-                                    Approve
-                                </button>
-
-                                <button class="disable-btn">
+                                <button
+                                    type="button"
+                                    class="disable-btn"
+                                >
                                     Disable
                                 </button>
 
-                                <button class="delete-btn">
+                                <button
+                                    type="button"
+                                    class="delete-btn"
+                                >
                                     Delete
                                 </button>
 
@@ -341,21 +409,28 @@
 
 
 
-                    <!-- LISTING 4 -->
-
+                    <!-- =================================
+                         LISTING 4
+                    ================================== -->
                     <article class="listing-post">
 
                         <div class="listing-post-header">
 
-                            <div class="listing-avatar">
-                                CJ
-                            </div>
-
                             <div class="listing-user">
 
-                                <h3>Christian Jay Ayunan</h3>
+                                <div class="listing-avatar">
+                                    CJ
+                                </div>
 
-                                <p>Posted recently</p>
+                                <div>
+                                    <h3>
+                                        Christian Jay Ayunan
+                                    </h3>
+
+                                    <span>
+                                        Science
+                                    </span>
+                                </div>
 
                             </div>
 
@@ -366,7 +441,7 @@
                         </div>
 
 
-                        <div class="listing-post-content">
+                        <div class="listing-content">
 
                             <span class="listing-category">
                                 Science
@@ -377,34 +452,41 @@
                             </h2>
 
                             <p>
-                                Providing study assistance for students
-                                who need help with science subjects.
+                                Get assistance with different science
+                                subjects and improve your understanding
+                                through guided study sessions.
                             </p>
 
                         </div>
 
 
-                        <div class="listing-post-footer">
+                        <div class="listing-footer">
 
                             <span class="listing-date">
-                                LearnLoop Listing
+                                Posted recently
                             </span>
+
 
                             <div class="listing-actions">
 
-                                <button class="view-btn">
+                                <button
+                                    type="button"
+                                    class="view-btn"
+                                >
                                     View
                                 </button>
 
-                                <button class="approve-btn">
-                                    Approve
-                                </button>
-
-                                <button class="disable-btn">
+                                <button
+                                    type="button"
+                                    class="disable-btn"
+                                >
                                     Disable
                                 </button>
 
-                                <button class="delete-btn">
+                                <button
+                                    type="button"
+                                    class="delete-btn"
+                                >
                                     Delete
                                 </button>
 

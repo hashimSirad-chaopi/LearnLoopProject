@@ -1,54 +1,66 @@
+```blade
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>LearnLoop - Admin Dashboard</title>
 
-<title>LearnLoop - Admin Dashboard</title>
-
-@vite(['resources/css/app.css', 'resources/js/app.js'])
-
-
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
 
-
 <div class="admin-container">
 
-    <!-- SIDEBAR -->
+    <!-- =========================================
+         SIDEBAR
+         ========================================= -->
     <aside class="sidebar">
 
-        <div class="logo">
-            LearnLoop
+        <div class="sidebar-top">
+
+            <div class="logo">
+                LearnLoop
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="{{ route('admin.home') }}"
+                   class="nav-item active">
+                    Dashboard
+                </a>
+
+                <a href="{{ route('admin.users') }}"
+                   class="nav-item">
+                    User Management
+                </a>
+
+                <a href="{{ route('admin.listings') }}"
+                   class="nav-item">
+                    Listings
+                </a>
+
+                <a href="{{ route('admin.reports') }}"
+                   class="nav-item">
+                    Reports
+                </a>
+
+                <a href="{{ route('admin.settings') }}"
+                   class="nav-item">
+                    Settings
+                </a>
+
+            </nav>
+
         </div>
 
-        <nav class="sidebar-nav">
 
-            <a href="{{ route('admin.home') }}" class="nav-item active">
-    Dashboard
-</a>
-
-<a href="{{ route('admin.users') }}" class="nav-item">
-    User Management
-</a>
-
-<a href="{{ route('admin.listings') }}" class="nav-item">
-    Listings
-</a>
-
-<a href="{{ route('admin.reports') }}" class="nav-item">
-    Reports
-</a>
-
-<a href="{{ route('admin.settings') }}" class="nav-item">
-    Settings
-</a>
-
-        </nav>
-
+        <!-- =====================================
+             SIDEBAR LOGOUT
+             SEPARATED FROM NAVIGATION
+             ===================================== -->
         <div class="sidebar-bottom">
 
             <form method="POST" action="{{ route('logout') }}">
@@ -64,65 +76,192 @@
     </aside>
 
 
-    <!-- MAIN CONTENT -->
+    <!-- =========================================
+         MAIN CONTENT
+         ========================================= -->
     <main class="main-content">
 
-        <!-- TOP HEADER -->
+
+        <!-- =====================================
+             FIXED TOP HEADER
+             ===================================== -->
         <header class="top-header">
 
-            <div>
-                <h1>Dashboard</h1>
-                <p>Welcome to LearnLoop Admin</p>
+            <div class="header-left">
+
+                <span class="header-label">
+                    ADMIN PANEL
+                </span>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Welcome to your LearnLoop administration panel.
+                </p>
+
             </div>
 
         </header>
 
 
-        <!-- DASHBOARD -->
+        <!-- =====================================
+             DASHBOARD CONTENT
+             ===================================== -->
         <section class="dashboard-content">
 
+
+            <!-- =================================
+                 OVERVIEW
+                 ================================= -->
             <div class="dashboard-heading">
-                <h2>Overview</h2>
-                <p>System statistics and activity</p>
+
+                <div>
+                    <span class="section-label">
+                        OVERVIEW
+                    </span>
+
+                    <h2>
+                        System Overview
+                    </h2>
+
+                    <p>
+                        Monitor the current activity and statistics of LearnLoop.
+                    </p>
+                </div>
+
             </div>
 
 
-            <!-- STATISTICS -->
+            <!-- =================================
+                 STATISTICS
+                 ================================= -->
             <div class="cards">
 
+
+                <!-- TOTAL USERS -->
                 <div class="card">
-                    <h3>Total Users</h3>
-                    <h2>{{ \App\Models\User::count() }}</h2>
+
+                    <div class="card-top">
+                        <span class="card-label">
+                            TOTAL USERS
+                        </span>
+                    </div>
+
+                    <h2>
+                        {{ \App\Models\User::count() }}
+                    </h2>
+
+                    <p class="card-description">
+                        Registered users
+                    </p>
+
                 </div>
 
+
+                <!-- ACTIVE TUTORS -->
                 <div class="card">
-                    <h3>Active Tutors</h3>
-                    <h2>10</h2>
+
+                    <div class="card-top">
+                        <span class="card-label">
+                            ACTIVE TUTORS
+                        </span>
+                    </div>
+
+                    <h2>
+                        10
+                    </h2>
+
+                    <p class="card-description">
+                        Currently active tutors
+                    </p>
+
                 </div>
 
+
+                <!-- ACTIVE SESSIONS -->
                 <div class="card">
-                    <h3>Active Sessions</h3>
-                    <h2>3</h2>
+
+                    <div class="card-top">
+                        <span class="card-label">
+                            ACTIVE SESSIONS
+                        </span>
+                    </div>
+
+                    <h2>
+                        3
+                    </h2>
+
+                    <p class="card-description">
+                        Ongoing tutoring sessions
+                    </p>
+
                 </div>
 
+
+                <!-- AVERAGE RATING -->
                 <div class="card">
-                    <h3>Average Rating</h3>
-                    <h2>3.45</h2>
+
+                    <div class="card-top">
+                        <span class="card-label">
+                            AVERAGE RATING
+                        </span>
+                    </div>
+
+                    <h2>
+                        3.45
+                    </h2>
+
+                    <p class="card-description">
+                        Overall user rating
+                    </p>
+
                 </div>
 
             </div>
 
 
-            <!-- RECENT ACTIVITY -->
+            <!-- =================================
+                 RECENT ACTIVITY
+                 ================================= -->
             <div class="recent-activity">
 
-                <h2>Recent Activity</h2>
+                <div class="activity-header">
+
+                    <div>
+                        <span class="section-label">
+                            ACTIVITY
+                        </span>
+
+                        <h2>
+                            Recent Activity
+                        </h2>
+                    </div>
+
+                </div>
+
 
                 <div class="activity-item">
-                    <p>No recent activity available.</p>
+
+                    <div class="activity-indicator"></div>
+
+                    <div class="activity-text">
+
+                        <strong>
+                            No recent activity
+                        </strong>
+
+                        <p>
+                            There is currently no recent administrative activity to display.
+                        </p>
+
+                    </div>
+
                 </div>
 
             </div>
+
 
         </section>
 
@@ -130,6 +269,6 @@
 
 </div>
 
-
 </body>
 </html>
+```

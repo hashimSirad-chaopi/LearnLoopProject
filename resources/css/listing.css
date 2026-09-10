@@ -1,370 +1,553 @@
 /* =========================================================
-   LEARNLOOP - SETTINGS
-   DARK GREY + BLACK + WHITE + ORANGE
+   LEARNLOOP - LISTINGS
+   DARK GREY + DIRTY WHITE + BLACK + ORANGE
    ========================================================= */
 
 
 /* =========================================================
-   SETTINGS PAGE
+   LISTINGS PAGE
    ========================================================= */
 
-.settings-page {
-    flex: 1;
-    min-height: 0;
+.listing-page {
+    width: 100%;
+    height: calc(100vh - 116px);
 
     display: flex;
     flex-direction: column;
 
     overflow: hidden;
 
-    padding: 0 40px 30px;
+    padding: 0 32px 28px;
+}
 
-    box-sizing: border-box;
+
+/* =========================================================
+   LISTING TOOLBAR
+   ========================================================= */
+
+.listing-toolbar {
+    flex-shrink: 0;
+
+    width: 100%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 0 0 22px;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.listing-toolbar .dashboard-heading {
+    margin: 0;
+    padding: 0;
+}
+
+.listing-toolbar .dashboard-heading > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 2px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #f97316;
+}
+
+.listing-toolbar h2 {
+    margin: 0;
+
+    font-size: 22px;
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    color: #202020;
+}
+
+.listing-toolbar p {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #77736d;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.listing-search {
+    width: 260px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    padding: 0 14px;
+
+    border: 1px solid #c7c3bb;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #f3f0ea;
+
+    color: #252525;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.06);
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.listing-search::placeholder {
+    color: #99948c;
+}
+
+.listing-search:focus {
+    border-color: #f97316;
+
+    background: #fffdf9;
+
+    box-shadow:
+        0 0 0 3px rgba(249, 115, 22, 0.10);
 }
 
 
 /* =========================================================
    SCROLL AREA
-   ONLY SETTINGS CONTENT SCROLLS
    ========================================================= */
 
-.settings-scroll-area {
+.listings-scroll-area {
     flex: 1;
+
     min-height: 0;
+
+    width: 100%;
 
     overflow-y: auto;
     overflow-x: hidden;
 
-    padding: 5px 6px 30px 2px;
-
-    box-sizing: border-box;
-
-    scrollbar-width: thin;
-    scrollbar-color: #8a867e transparent;
+    padding-right: 7px;
 }
 
 
-/* Chrome / Edge / Safari */
+/* =========================================================
+   CUSTOM SCROLLBAR
+   ========================================================= */
 
-.settings-scroll-area::-webkit-scrollbar {
-    width: 8px;
+.listings-scroll-area::-webkit-scrollbar {
+    width: 7px;
 }
 
-.settings-scroll-area::-webkit-scrollbar-track {
+.listings-scroll-area::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.settings-scroll-area::-webkit-scrollbar-thumb {
-    background: #8a867e;
-
+.listings-scroll-area::-webkit-scrollbar-thumb {
+    background: #aaa59c;
     border-radius: 10px;
 }
 
-.settings-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: #5f5b55;
+.listings-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #858078;
+}
+
+
+/* Firefox */
+
+.listings-scroll-area {
+    scrollbar-width: thin;
+    scrollbar-color: #aaa59c transparent;
 }
 
 
 /* =========================================================
-   SETTINGS CARD
+   LISTINGS FEED
    ========================================================= */
 
-.settings-card {
+.listings-feed {
     width: 100%;
 
-    margin-bottom: 22px;
-
-    padding: 26px;
-
-    box-sizing: border-box;
-
-    background: #faf9f6;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.14),
-        0 3px 8px rgba(0, 0, 0, 0.08);
-}
-
-
-/* Remove margin from last card */
-
-.settings-card:last-child {
-    margin-bottom: 0;
-}
-
-
-/* =========================================================
-   CARD HEADER
-   ========================================================= */
-
-.settings-card-header {
-    margin-bottom: 24px;
-}
-
-
-.settings-card-header h2 {
-    margin: 0 0 6px;
-
-    font-size: 20px;
-    font-weight: 700;
-
-    color: #171717;
-}
-
-
-.settings-card-header p {
-    margin: 0;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    color: #77736c;
-}
-
-
-/* =========================================================
-   SETTINGS FORM
-   ========================================================= */
-
-.settings-form {
-    width: 100%;
-
-    max-width: 650px;
-}
-
-
-/* =========================================================
-   SETTINGS FIELD
-   ========================================================= */
-
-.settings-field {
     display: flex;
     flex-direction: column;
 
-    margin-bottom: 18px;
+    gap: 14px;
+
+    padding-bottom: 10px;
 }
 
 
-.settings-field label {
-    margin-bottom: 7px;
+/* =========================================================
+   LISTING POST
+   ========================================================= */
 
-    font-size: 13px;
-    font-weight: 600;
-
-    color: #333333;
-}
-
-
-.settings-field input {
+.listing-post {
     width: 100%;
 
-    height: 44px;
+    flex-shrink: 0;
 
-    padding: 0 13px;
+    padding: 20px 22px;
 
-    box-sizing: border-box;
+    border: 1px solid #cbc7bf;
+    border-radius: 10px;
 
-    border: 1px solid #d0ccc4;
-
-    border-radius: 7px;
-
-    background: #ffffff;
-
-    color: #222222;
-
-    font-family: inherit;
-    font-size: 14px;
-
-    outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.settings-field input::placeholder {
-    color: #a19d95;
-}
-
-
-.settings-field input:focus {
-    border-color: #f97316;
+    background: #f5f2ec;
 
     box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.12);
-}
-
-
-/* =========================================================
-   SETTINGS ACTIONS
-   ========================================================= */
-
-.settings-actions {
-    display: flex;
-
-    justify-content: flex-start;
-
-    margin-top: 8px;
-}
-
-
-/* =========================================================
-   SAVE BUTTON
-   ========================================================= */
-
-.settings-save-btn {
-    padding: 10px 18px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #171717;
-
-    color: #ffffff;
-
-    font-family: inherit;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    cursor: pointer;
+        0 5px 12px rgba(0, 0, 0, 0.10),
+        0 1px 3px rgba(0, 0, 0, 0.08);
 
     transition:
-        background 0.2s ease,
-        transform 0.15s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
 }
 
+.listing-post:hover {
+    transform: translateY(-2px);
 
-.settings-save-btn:hover {
-    background: #f97316;
+    border-color: #b8b3aa;
 
-    transform: translateY(-1px);
-}
-
-
-.settings-save-btn:active {
-    transform: translateY(0);
+    box-shadow:
+        0 9px 20px rgba(0, 0, 0, 0.13),
+        0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 
 /* =========================================================
-   SYSTEM OPTIONS
+   POST HEADER
    ========================================================= */
 
-.settings-option {
+.listing-post-header {
     display: flex;
 
     align-items: center;
     justify-content: space-between;
 
-    gap: 30px;
+    gap: 15px;
 
-    padding: 18px 0;
+    padding-bottom: 15px;
 
-    border-top: 1px solid #dedad2;
-}
-
-
-.settings-option:first-of-type {
-    border-top: none;
-}
-
-
-.settings-option h3 {
-    margin: 0 0 5px;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    color: #222222;
-}
-
-
-.settings-option p {
-    margin: 0;
-
-    max-width: 600px;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-    color: #77736c;
+    border-bottom: 1px solid #d8d4cc;
 }
 
 
 /* =========================================================
-   TOGGLE
+   USER
    ========================================================= */
 
-.toggle {
-    position: relative;
+.listing-user {
+    display: flex;
 
-    display: inline-block;
+    align-items: center;
 
-    width: 46px;
-    height: 24px;
+    gap: 11px;
+
+    min-width: 0;
+}
+
+.listing-avatar {
+    width: 40px;
+    height: 40px;
 
     flex-shrink: 0;
 
-    cursor: pointer;
-}
+    display: flex;
 
-
-.toggle input {
-    opacity: 0;
-
-    width: 0;
-    height: 0;
-}
-
-
-.toggle-slider {
-    position: absolute;
-
-    inset: 0;
-
-    background: #c8c4bc;
-
-    border-radius: 30px;
-
-    transition: 0.2s ease;
-}
-
-
-.toggle-slider::before {
-    content: "";
-
-    position: absolute;
-
-    width: 18px;
-    height: 18px;
-
-    left: 3px;
-    top: 3px;
-
-    background: #ffffff;
+    align-items: center;
+    justify-content: center;
 
     border-radius: 50%;
 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+    background: #292929;
 
-    transition: 0.2s ease;
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: .5px;
+}
+
+.listing-user h3 {
+    margin: 0 0 3px;
+
+    color: #252525;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.listing-user span {
+    display: block;
+
+    color: #858078;
+
+    font-size: 10px;
+    font-weight: 500;
 }
 
 
-.toggle input:checked + .toggle-slider {
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.listing-status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 65px;
+    height: 25px;
+
+    padding: 0 10px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .4px;
+
+    text-transform: uppercase;
+}
+
+
+/* ACTIVE */
+
+.listing-status.active {
+    background: #dedfd8;
+    color: #4e5349;
+}
+
+
+/* PENDING */
+
+.listing-status.pending {
+    background: #f2dfc8;
+    color: #9a5c22;
+}
+
+
+/* INACTIVE */
+
+.listing-status.inactive {
+    background: #dedbd7;
+    color: #77716a;
+}
+
+
+/* =========================================================
+   LISTING CONTENT
+   ========================================================= */
+
+.listing-content {
+    padding: 17px 0 16px;
+}
+
+.listing-category {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+
+    color: #f97316;
+}
+
+.listing-content h2 {
+    margin: 0 0 7px;
+
+    color: #242424;
+
+    font-size: 16px;
+    line-height: 1.35;
+
+    font-weight: 800;
+}
+
+.listing-content p {
+    max-width: 850px;
+
+    margin: 0;
+
+    color: #716d67;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.listing-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #d8d4cc;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.listing-date {
+    color: #969189;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.listing-actions {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin: 0;
+    padding: 0;
+}
+
+.listing-actions button {
+    height: 34px;
+
+    margin: 0;
+    padding: 0 14px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .15s ease,
+        box-shadow .2s ease;
+}
+
+.listing-actions button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+   ========================================================= */
+
+.view-btn {
+    border: 1px solid #292929;
+
+    background: #292929;
+
+    color: #ffffff;
+}
+
+.view-btn:hover {
+    border-color: #f97316;
+
     background: #f97316;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 9px rgba(249, 115, 22, 0.20);
 }
 
 
-.toggle input:checked + .toggle-slider::before {
-    transform: translateX(22px);
+/* =========================================================
+   DISABLE BUTTON
+   ========================================================= */
+
+.disable-btn {
+    border: 1px solid #c4c0b8;
+
+    background: #e8e5df;
+
+    color: #55514b;
+}
+
+.disable-btn:hover {
+    border-color: #292929;
+
+    background: #292929;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+   ========================================================= */
+
+.delete-btn {
+    border: 1px solid #c4c0b8;
+
+    background: transparent;
+
+    color: #6a655e;
+}
+
+.delete-btn:hover {
+    border-color: #9b4d3f;
+
+    background: #9b4d3f;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 9px rgba(155, 77, 63, 0.18);
 }
 
 
@@ -374,94 +557,57 @@
 
 @media (max-width: 900px) {
 
-    .settings-page {
-        padding-left: 25px;
-        padding-right: 25px;
+    .listing-page {
+        padding-left: 22px;
+        padding-right: 22px;
     }
 
-}
+    .listing-toolbar {
+        align-items: stretch;
 
-
-@media (max-width: 768px) {
-
-    .settings-page {
-        padding: 0 18px 20px;
-    }
-
-
-    .settings-card {
-        padding: 22px;
-
-        margin-bottom: 18px;
-    }
-
-
-    .settings-card-header h2 {
-        font-size: 18px;
-    }
-
-
-    .settings-option {
-        gap: 20px;
-    }
-
-}
-
-
-@media (max-width: 480px) {
-
-    .settings-page {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-
-    .settings-card {
-        padding: 18px;
-    }
-
-
-    .settings-card-header {
-        margin-bottom: 20px;
-    }
-
-
-    .settings-card-header h2 {
-        font-size: 17px;
-    }
-
-
-    .settings-card-header p {
-        font-size: 12px;
-    }
-
-
-    .settings-option {
-        align-items: flex-start;
+        flex-direction: column;
 
         gap: 15px;
     }
 
-
-    .settings-option h3 {
-        font-size: 13px;
-    }
-
-
-    .settings-option p {
-        font-size: 11px;
-    }
-
-
-    .settings-field input {
-        height: 42px;
-
-        font-size: 13px;
-    }
-
-
-    .settings-save-btn {
+    .listing-search {
         width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .listing-page {
+        height: calc(100vh - 100px);
+
+        padding:
+            0
+            15px
+            20px;
+    }
+
+    .listing-post {
+        padding: 17px;
+    }
+
+    .listing-post-header {
+        align-items: flex-start;
+    }
+
+    .listing-footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .listing-actions {
+        width: 100%;
+    }
+
+    .listing-actions button {
+        flex: 1;
     }
 
 }
