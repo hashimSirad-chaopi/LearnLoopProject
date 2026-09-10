@@ -1,4 +1,4 @@
-```blade
+
 <x-guest-layout>
 
     <div id="forgot-container">
@@ -115,4 +115,4 @@
     </div>
 
 </x-guest-layout>
-```
+

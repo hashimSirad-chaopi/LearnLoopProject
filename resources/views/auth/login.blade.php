@@ -1,4 +1,4 @@
-```blade
+
 <x-guest-layout>
 
     <div id="container">
@@ -205,4 +205,4 @@
     </script>
 
 </x-guest-layout>
-```
+

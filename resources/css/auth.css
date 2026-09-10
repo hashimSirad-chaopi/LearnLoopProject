@@ -1,57 +1,130 @@
-
 /* =========================================================
-   LEARNLOOP AUTHENTICATION
-   LOGIN + REGISTER
+   LEARN LOOP — AUTH PAGES (Login / Forgot Password)
    ========================================================= */
 
-body:has(#container),
-body:has(#forgot-container) {
-    background: #dedbd4;
+:root {
+    --ll-primary: #ea580c;
+    --ll-primary-dark: #c2410c;
+    --ll-primary-light: #fff1e8;
+    --ll-text: #111827;
+    --ll-text-muted: #6b7280;
+    --ll-border: #d1d5db;
+    --ll-error: #b91c1c;
+    --ll-bg: #f3f4f6;
+    --ll-white: #ffffff;
+    --ll-radius: 14px;
+    --ll-shadow: 0 10px 30px rgba(17, 24, 39, 0.10);
 }
 
-#container {
-    width: min(430px, calc(100% - 35px));
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(180deg, #f9fafb 0%, #eef1f5 100%);
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--ll-text);
+    margin: 0;
     min-height: 100vh;
-    margin: auto;
-    padding: 55px 0;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* =========================================================
+   PAGE CONTAINERS
+   - #container (login) IS the card itself — it directly holds
+     brand/header/form/footer, so it must NOT be display:flex
+     or its children get laid out as a row instead of stacking.
+   - #forgot-container just centers .forgot-card (the real card).
+   ========================================================= */
+
+#forgot-container {
+    width: 100%;
+    display: flex;
     justify-content: center;
 }
 
-.auth-brand {
-    margin-bottom: 35px;
-    color: #171717;
-    font-size: 26px;
-    font-weight: 900;
-    letter-spacing: -1px;
+#container,
+.forgot-card {
+    max-width: 420px;
+    width: 100%;
+    background: var(--ll-white);
+    border-radius: var(--ll-radius);
+    box-shadow: var(--ll-shadow);
+    padding: 40px 36px;
+    border: 1px solid var(--ll-border);
 }
 
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.auth-brand {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--ll-primary);
+    margin-bottom: 28px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .auth-header {
-    margin-bottom: 25px;
+    text-align: center;
+    margin-bottom: 28px;
 }
 
 .auth-label {
-    display: block;
-    margin-bottom: 7px;
-    color: #f97316;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--ll-primary);
+    background: var(--ll-primary-light);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
 }
 
 .auth-header h1 {
-    font-size: 28px;
-    font-weight: 900;
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 0 10px;
+    letter-spacing: 0.5px;
 }
 
 .auth-header p {
-    max-width: 380px;
-    margin-top: 7px;
-    color: #706c65;
-    font-size: 13px;
+    font-size: 14px;
+    color: var(--ll-text-muted);
     line-height: 1.6;
+    margin: 0;
 }
+
+/* =========================================================
+   SESSION STATUS
+   ========================================================= */
+
+.auth-status {
+    display: block;
+    background: #f3f4f6;
+    color: #111827;
+    border: 1px solid #d1d5db;
+    border-left: 3px solid var(--ll-primary);
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
 
 .auth-form {
     display: flex;
@@ -59,93 +132,127 @@ body:has(#forgot-container) {
     gap: 18px;
 }
 
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
 .auth-field label {
-    display: block;
-    margin-bottom: 7px;
-    color: #35322e;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ll-text);
 }
 
 .auth-field input {
     width: 100%;
-    height: 45px;
-    padding: 0 13px;
-    border: 1px solid #bdb9b1;
-    border-radius: 7px;
-    background: #f2f0eb;
-    color: #171717;
+    padding: 12px 14px;
+    font-size: 14px;
+    border: 1.5px solid var(--ll-border);
+    border-radius: 10px;
     outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    background: #fafafa;
 }
 
 .auth-field input:focus {
-    border-color: #f97316;
-    box-shadow: 0 0 0 2px rgba(249, 115, 22, .08);
+    border-color: var(--ll-primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    background: var(--ll-white);
 }
+
+.auth-field input::placeholder {
+    color: #9ca3af;
+}
+
+.auth-error {
+    font-size: 12px;
+    color: var(--ll-error);
+    margin: 2px 0 0;
+}
+
+/* Password field with show/hide toggle */
 
 .password-wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .password-wrapper input {
-    padding-right: 45px;
+    padding-right: 42px;
 }
 
 .password-toggle {
     position: absolute;
-    top: 50%;
-    right: 8px;
-    width: 34px;
-    height: 34px;
-    transform: translateY(-50%);
+    right: 10px;
+    background: none;
     border: none;
-    background: transparent;
-    color: #77736d;
+    cursor: pointer;
+    color: var(--ll-text-muted);
+    display: flex;
+    align-items: center;
+    padding: 4px;
 }
 
-.auth-error {
-    margin-top: 6px;
-    color: #c2410c;
-    font-size: 11px;
+.password-toggle:hover {
+    color: var(--ll-primary);
 }
 
-.auth-status {
-    margin-bottom: 18px;
-    padding: 10px 12px;
-    border-radius: 6px;
-    background: #ebe8e1;
-    color: #55514b;
-    font-size: 12px;
-}
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
 
 .auth-submit {
+    margin-top: 6px;
     width: 100%;
-    height: 45px;
-    margin-top: 5px;
+    padding: 13px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--ll-white);
+    background: var(--ll-primary);
     border: none;
-    border-radius: 7px;
-    background: #f97316;
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 800;
-    transition: .2s;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.05s ease;
 }
 
 .auth-submit:hover {
-    background: #df6410;
+    background: var(--ll-primary-dark);
 }
 
+.auth-submit:active {
+    transform: translateY(1px);
+}
+
+/* =========================================================
+   FOOTER / LINKS
+   ========================================================= */
+
 .auth-footer {
-    margin-top: 20px;
     text-align: center;
+    margin-top: 22px;
 }
 
 .forgot-link {
-    color: #5d5953;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ll-primary);
+    text-decoration: none;
 }
 
 .forgot-link:hover {
-    color: #f97316;
+    text-decoration: underline;
 }
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 480px) {
+    #container,
+    .forgot-card {
+        padding: 30px 22px;
+    }
+}
