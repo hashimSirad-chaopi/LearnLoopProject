@@ -1,24 +1,35 @@
-
 /* =========================================================
    FORGOT PASSWORD
+   FOREST GRAPHITE + ACID MINT
    ========================================================= */
 
 #forgot-container {
     width: 100%;
+
     min-height: 100vh;
+
     padding: 35px 18px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 }
 
 .forgot-card {
     width: min(430px, 100%);
+
     padding: 38px;
-    background: #f2f0eb;
-    border: 1px solid #c8c4bc;
+
+    background: #F2F7F0;
+
+    border: 1px solid #C9D3CA;
+
     border-radius: 10px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+
+    box-shadow:
+        0 12px 30px rgba(24, 37, 29, .16);
 }
 
 .forgot-card .auth-brand {
@@ -34,5 +45,5 @@
     .forgot-card {
         padding: 28px 22px;
     }
-}
 
+}

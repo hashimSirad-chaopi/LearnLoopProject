@@ -1,6 +1,6 @@
 /* =========================================================
    LEARNLOOP — USER MANAGEMENT
-   DARK GREY + DIRTY WHITE + BLACK + ORANGE
+   FOREST GRAPHITE + ACID MINT
    ========================================================= */
 
 
@@ -10,14 +10,17 @@
 
 .users-page {
     width: 100%;
-    height: calc(100vh - 108px);
+    height: 100vh;
 
     margin: 0;
-    padding: 0;
+    padding: 108px 0 0;
 
     box-sizing: border-box;
 
-    background: #dedbd4;
+    background: #E8EEE6;
+
+    display: flex;
+    flex-direction: column;
 
     overflow: hidden;
 }
@@ -30,30 +33,33 @@
 .users-toolbar {
     width: 100%;
 
+    flex-shrink: 0;
+
     padding: 25px 40px 22px;
 
     box-sizing: border-box;
 
-    background: #dedbd4;
+    background: #E8EEE6;
 
-    border-bottom: 1px solid #c4c0b8;
+    border-bottom: 1px solid #C9D3CA;
 }
 
 
-/* Heading */
+/* =========================================================
+   HEADING
+   ========================================================= */
 
 .users-toolbar .dashboard-heading {
     margin: 0 0 18px;
     padding: 0;
 }
 
-
 .users-toolbar .section-label {
     display: block;
 
     margin-bottom: 6px;
 
-    color: #f97316;
+    color: #55783B;
 
     font-size: 10px;
     font-weight: 800;
@@ -63,11 +69,10 @@
     text-transform: uppercase;
 }
 
-
 .users-toolbar h2 {
     margin: 0;
 
-    color: #181818;
+    color: #18251D;
 
     font-size: 25px;
     font-weight: 800;
@@ -75,11 +80,10 @@
     line-height: 1.2;
 }
 
-
 .users-toolbar p {
     margin: 7px 0 0;
 
-    color: #706c65;
+    color: #68736C;
 
     font-size: 13px;
 
@@ -98,7 +102,6 @@
     padding: 0;
 }
 
-
 .user-search {
     display: block;
 
@@ -112,17 +115,21 @@
 
     box-sizing: border-box;
 
-    border: 1px solid #bcb8b0;
+    border: 1px solid #B7C4BA;
+
     border-radius: 8px;
 
-    background: #f4f2ed;
+    background: #F7FAF5;
 
-    color: #222;
+    color: #18251D;
 
     font-family: inherit;
     font-size: 13px;
 
     outline: none;
+
+    box-shadow:
+        0 4px 10px rgba(24, 37, 29, .08);
 
     transition:
         border-color .2s ease,
@@ -130,19 +137,25 @@
         background .2s ease;
 }
 
-
 .user-search::placeholder {
-    color: #99958d;
+    color: #8A958D;
 }
 
-
-.user-search:focus {
-    background: #faf9f6;
-
-    border-color: #f97316;
+.user-search:hover {
+    border-color: #9EADA1;
 
     box-shadow:
-        0 0 0 3px rgba(249, 115, 22, .10);
+        0 5px 12px rgba(24, 37, 29, .11);
+}
+
+.user-search:focus {
+    background: #FFFFFF;
+
+    border-color: #91D94E;
+
+    box-shadow:
+        0 0 0 3px rgba(183, 255, 114, .25),
+        0 5px 12px rgba(24, 37, 29, .10);
 }
 
 
@@ -153,7 +166,9 @@
 .users-scroll-area {
     width: 100%;
 
-    height: calc(100vh - 300px);
+    flex: 1;
+
+    min-height: 0;
 
     margin: 0;
 
@@ -163,6 +178,12 @@
 
     overflow-y: auto;
     overflow-x: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #89958C
+        transparent;
 }
 
 
@@ -174,21 +195,21 @@
     width: 100%;
 
     min-width: 760px;
-
     max-width: 1100px;
 
     margin: 0 auto;
 
-    background: #f3f1ec;
+    background: #F7FAF5;
 
-    border: 1px solid #c5c1b9;
+    border: 1px solid #C9D3CA;
 
     border-radius: 12px;
 
     overflow: hidden;
 
     box-shadow:
-        0 7px 18px rgba(0, 0, 0, .14);
+        0 9px 22px rgba(24, 37, 29, .16),
+        0 3px 7px rgba(24, 37, 29, .07);
 }
 
 
@@ -203,7 +224,7 @@
 
     table-layout: fixed;
 
-    background: #f3f1ec;
+    background: #F7FAF5;
 }
 
 
@@ -212,16 +233,15 @@
    ========================================================= */
 
 .users-table thead {
-    background: #292929;
+    background: #18251D;
 }
-
 
 .users-table th {
     height: 48px;
 
     padding: 0 18px;
 
-    color: #f5f3ee;
+    color: #F4F8F2;
 
     font-size: 10px;
     font-weight: 800;
@@ -243,22 +263,19 @@
    ========================================================= */
 
 .users-table tbody tr {
-    border-bottom: 1px solid #d5d1c9;
+    border-bottom: 1px solid #D4DED5;
 
     transition:
         background .18s ease;
 }
 
-
 .users-table tbody tr:last-child {
     border-bottom: none;
 }
 
-
 .users-table tbody tr:hover {
-    background: #e9e6df;
+    background: #EDF5E9;
 }
-
 
 .users-table td {
     height: 62px;
@@ -267,7 +284,7 @@
 
     box-sizing: border-box;
 
-    color: #3e3b36;
+    color: #3E4A42;
 
     font-size: 12px;
 
@@ -286,24 +303,20 @@
     width: 20%;
 }
 
-
 .users-table th:nth-child(2),
 .users-table td:nth-child(2) {
     width: 30%;
 }
-
 
 .users-table th:nth-child(3),
 .users-table td:nth-child(3) {
     width: 15%;
 }
 
-
 .users-table th:nth-child(4),
 .users-table td:nth-child(4) {
     width: 15%;
 }
-
 
 .users-table th:nth-child(5),
 .users-table td:nth-child(5) {
@@ -316,7 +329,7 @@
    ========================================================= */
 
 .users-table td:first-child {
-    color: #202020;
+    color: #18251D;
 
     font-size: 13px;
     font-weight: 800;
@@ -328,7 +341,7 @@
    ========================================================= */
 
 .users-table td:nth-child(2) {
-    color: #706c65;
+    color: #68736C;
 
     font-size: 12px;
 
@@ -357,9 +370,9 @@
 
     border-radius: 15px;
 
-    background: #e4e1da;
+    background: #E2EBDD;
 
-    color: #55514b;
+    color: #52634F;
 
     font-size: 9px;
     font-weight: 800;
@@ -390,12 +403,15 @@
 }
 
 
+/* =========================================================
+   ACTIVE STATUS
+   ========================================================= */
+
 .active-status {
-    background: #e1e6df;
+    background: #E2F7D0;
 
-    color: #485347;
+    color: #42612E;
 }
-
 
 .active-status::before {
     content: "";
@@ -407,7 +423,7 @@
 
     border-radius: 50%;
 
-    background: #5f7059;
+    background: #78B83E;
 }
 
 
@@ -433,13 +449,13 @@
 
     padding: 0 13px;
 
-    border: 1px solid #292929;
+    border: 1px solid #18251D;
 
     border-radius: 7px;
 
-    background: #292929;
+    background: #18251D;
 
-    color: #ffffff;
+    color: #FFFFFF;
 
     font-family: inherit;
 
@@ -451,16 +467,22 @@
     transition:
         background .2s ease,
         border-color .2s ease,
-        transform .15s ease;
+        transform .15s ease,
+        color .2s ease,
+        box-shadow .2s ease;
 }
 
-
 .table-btn:hover {
-    border-color: #f97316;
+    border-color: #B7FF72;
 
-    background: #f97316;
+    background: #B7FF72;
+
+    color: #18251D;
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(24, 37, 29, .14);
 }
 
 
@@ -473,13 +495,13 @@
 
     padding: 0 13px;
 
-    border: 1px solid #c4c0b8;
+    border: 1px solid #C2CCC4;
 
     border-radius: 7px;
 
     background: transparent;
 
-    color: #6a655e;
+    color: #66716A;
 
     font-family: inherit;
 
@@ -495,13 +517,12 @@
         transform .15s ease;
 }
 
-
 .delete-btn:hover {
-    border-color: #9b4d3f;
+    border-color: #A94A45;
 
-    background: #9b4d3f;
+    background: #A94A45;
 
-    color: #ffffff;
+    color: #FFFFFF;
 
     transform: translateY(-1px);
 }
@@ -514,7 +535,7 @@
 .empty-users {
     height: 150px !important;
 
-    color: #858078 !important;
+    color: #7C8780 !important;
 
     font-size: 12px !important;
 
@@ -533,21 +554,18 @@
     height: 7px;
 }
 
-
 .users-scroll-area::-webkit-scrollbar-track {
     background: transparent;
 }
 
-
 .users-scroll-area::-webkit-scrollbar-thumb {
-    background: #aaa69f;
+    background: #89958C;
 
     border-radius: 10px;
 }
 
-
 .users-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: #858078;
+    background: #66716A;
 }
 
 
@@ -557,15 +575,17 @@
 
 @media (max-width: 900px) {
 
+    .users-page {
+        padding-top: 108px;
+    }
+
     .users-toolbar {
         padding: 24px 28px 21px;
     }
 
-
     .users-scroll-area {
         padding: 25px 28px 40px;
     }
-
 
     .users-table-container {
         min-width: 720px;
@@ -580,27 +600,33 @@
 
 @media (max-width: 650px) {
 
+    .users-page {
+        height: 100vh;
+
+        padding-top: 100px;
+
+        box-sizing: border-box;
+    }
+
     .users-toolbar {
         padding: 20px;
     }
-
 
     .users-toolbar h2 {
         font-size: 22px;
     }
 
-
     .user-search {
         max-width: none;
     }
 
-
     .users-scroll-area {
-        height: calc(100vh - 290px);
+        flex: 1;
+
+        height: auto;
 
         padding: 20px;
     }
-
 
     .users-table-container {
         min-width: 700px;
@@ -608,13 +634,11 @@
         border-radius: 10px;
     }
 
-
     .users-table th {
         height: 44px;
 
         padding: 0 14px;
     }
-
 
     .users-table td {
         height: 58px;

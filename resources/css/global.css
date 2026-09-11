@@ -1,7 +1,26 @@
-
 /* =========================================================
-   LEARNLOOP GLOBAL CSS
+   LEARNLOOP — FOREST GRAPHITE + ACID MINT
    ========================================================= */
+
+:root {
+    --ll-forest: #18251D;
+    --ll-forest-2: #223329;
+
+    --ll-mint: #B7FF72;
+    --ll-mint-dark: #91D94E;
+
+    --ll-bg: #E8EEE6;
+
+    --ll-surface: #F7FAF5;
+    --ll-surface-2: #F2F7F0;
+
+    --ll-border: #C9D3CA;
+
+    --ll-text: #1F2B24;
+    --ll-muted: #68736C;
+
+    --ll-danger: #A94A45;
+}
 
 * {
     margin: 0;
@@ -17,8 +36,8 @@ body {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #dedbd4;
-    color: #171717;
+    background: var(--ll-bg);
+    color: var(--ll-text);
 }
 
 button,
@@ -38,8 +57,8 @@ a {
 }
 
 ::selection {
-    background: #f97316;
-    color: #ffffff;
+    background: var(--ll-mint);
+    color: var(--ll-forest);
 }
 
 ::-webkit-scrollbar {
@@ -47,15 +66,14 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-    background: #d1cec7;
+    background: #D5DED6;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #77736d;
+    background: #8B958E;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #55514c;
+    background: #66716A;
 }
-

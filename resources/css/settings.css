@@ -1,49 +1,142 @@
+/* =========================================================
+   LEARNLOOP — SETTINGS
+   FOREST GRAPHITE + ACID MINT
+   ========================================================= */
+
 
 /* =========================================================
-   SETTINGS
+   SETTINGS PAGE
    ========================================================= */
 
 .settings-page {
     height: 100vh;
+
     overflow: hidden;
+
     padding-top: 108px;
+
+    background: #E8EEE6;
 }
+
+
+/* =========================================================
+   SCROLL AREA
+   ========================================================= */
 
 .settings-scroll-area {
     height: calc(100vh - 108px);
+
     overflow-y: auto;
+
     padding: 30px 40px 50px;
+
+    background: #E8EEE6;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #89958C
+        transparent;
 }
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.settings-scroll-area::-webkit-scrollbar {
+    width: 7px;
+}
+
+.settings-scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.settings-scroll-area::-webkit-scrollbar-thumb {
+    background: #89958C;
+
+    border-radius: 10px;
+}
+
+.settings-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #66716A;
+}
+
+
+/* =========================================================
+   SETTINGS CARD
+   ========================================================= */
 
 .settings-card {
     max-width: 900px;
+
     margin-bottom: 22px;
+
     padding: 25px;
-    background: #f2f0eb;
-    border: 1px solid #c8c4bc;
-    border-radius: 10px;
-    box-shadow: 0 7px 18px rgba(0, 0, 0, .15);
+
+    background: #F7FAF5;
+
+    border: 1px solid #C9D3CA;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 20px rgba(24, 37, 29, .14);
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
+
+.settings-card:hover {
+    border-color: #B8C9B9;
+
+    box-shadow:
+        0 10px 24px rgba(24, 37, 29, .16);
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
 
 .settings-card-header {
     margin-bottom: 22px;
 }
 
 .settings-card-header h2 {
+    color: #18251D;
+
     font-size: 19px;
+
     font-weight: 800;
+
+    line-height: 1.3;
 }
 
 .settings-card-header p {
     margin-top: 5px;
-    color: #77736d;
+
+    color: #737E76;
+
     font-size: 12px;
+
     line-height: 1.5;
 }
+
+
+/* =========================================================
+   SETTINGS FORM
+   ========================================================= */
 
 .settings-form {
     max-width: 600px;
 }
+
+
+/* =========================================================
+   SETTINGS FIELD
+   ========================================================= */
 
 .settings-field {
     margin-bottom: 18px;
@@ -51,26 +144,56 @@
 
 .settings-field label {
     display: block;
+
     margin-bottom: 7px;
-    color: #383531;
+
+    color: #39473F;
+
     font-size: 12px;
+
     font-weight: 700;
 }
 
 .settings-field input {
     width: 100%;
+
     height: 42px;
+
     padding: 0 13px;
-    border: 1px solid #bbb7af;
+
+    border: 1px solid #B7C4BA;
+
     border-radius: 7px;
-    background: #e9e6df;
-    color: #222222;
+
+    background: #EEF4EC;
+
+    color: #18251D;
+
     outline: none;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.settings-field input::placeholder {
+    color: #89948C;
 }
 
 .settings-field input:focus {
-    border-color: #f97316;
+    background: #FFFFFF;
+
+    border-color: #91D94E;
+
+    box-shadow:
+        0 0 0 3px rgba(183, 255, 114, .23);
 }
+
+
+/* =========================================================
+   SETTINGS ACTIONS
+   ========================================================= */
 
 .settings-actions {
     margin-top: 5px;
@@ -78,97 +201,207 @@
 
 .settings-save-btn {
     min-height: 40px;
+
     padding: 0 17px;
+
     border: none;
+
     border-radius: 7px;
-    background: #f97316;
-    color: #ffffff;
+
+    background: #B7FF72;
+
+    color: #18251D;
+
     font-size: 12px;
+
     font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .15s ease,
+        box-shadow .2s ease;
 }
 
 .settings-save-btn:hover {
-    background: #df6410;
+    background: #91D94E;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 13px rgba(24, 37, 29, .14);
 }
 
-/* =========================
+
+/* =========================================================
    SETTINGS OPTIONS
-   ========================= */
+   ========================================================= */
 
 .settings-option {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     gap: 25px;
+
     padding: 18px 0;
-    border-top: 1px solid #d5d1ca;
+
+    border-top: 1px solid #D5DED6;
+}
+
+.settings-option:first-child {
+    border-top: none;
 }
 
 .settings-option h3 {
+    color: #18251D;
+
     font-size: 13px;
+
+    font-weight: 800;
 }
 
 .settings-option p {
     margin-top: 4px;
-    color: #77736d;
+
+    color: #737E76;
+
     font-size: 11px;
+
     line-height: 1.5;
 }
 
-/* =========================
+
+/* =========================================================
    TOGGLE
-   ========================= */
+   ========================================================= */
 
 .toggle {
     position: relative;
+
     flex-shrink: 0;
+
     width: 44px;
+
     height: 24px;
 }
 
 .toggle input {
     opacity: 0;
+
     width: 0;
     height: 0;
 }
 
 .toggle-slider {
     position: absolute;
+
     inset: 0;
+
     border-radius: 30px;
-    background: #aaa69f;
+
+    background: #9AA59D;
+
     cursor: pointer;
-    transition: .2s;
+
+    transition: .2s ease;
 }
 
 .toggle-slider::before {
     content: "";
+
     position: absolute;
+
     width: 18px;
     height: 18px;
+
     left: 3px;
     top: 3px;
+
     border-radius: 50%;
-    background: #ffffff;
-    transition: .2s;
+
+    background: #FFFFFF;
+
+    box-shadow:
+        0 1px 3px rgba(24, 37, 29, .18);
+
+    transition: .2s ease;
 }
 
 .toggle input:checked + .toggle-slider {
-    background: #f97316;
+    background: #B7FF72;
 }
 
 .toggle input:checked + .toggle-slider::before {
     transform: translateX(20px);
 }
 
+
+/* =========================================================
+   SECURITY / WARNING STYLE
+   ========================================================= */
+
+.settings-warning {
+    margin-top: 15px;
+
+    padding: 12px 14px;
+
+    border-left: 3px solid #91D94E;
+
+    border-radius: 7px;
+
+    background: #EDF6E8;
+
+    color: #53634F;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media (max-width: 700px) {
 
     .settings-scroll-area {
-        padding: 25px;
+        padding:
+            25px
+            25px
+            40px;
+    }
+
+    .settings-card {
+        padding: 21px;
     }
 
     .settings-option {
         align-items: flex-start;
     }
+
 }
 
+
+@media (max-width: 500px) {
+
+    .settings-scroll-area {
+        padding:
+            20px
+            18px
+            35px;
+    }
+
+    .settings-card {
+        padding: 18px;
+    }
+
+    .settings-option {
+        gap: 15px;
+    }
+
+}

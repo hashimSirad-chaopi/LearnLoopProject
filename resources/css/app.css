@@ -1,33 +1,22 @@
-
 /* =========================================================
-   LEARNLOOP
-   MAIN CSS FILE
-   ========================================================= */
-
-
-/* =========================================================
-   GLOBAL STYLES
+   LEARNLOOP — MAIN CSS FILE
+   FOREST GRAPHITE + ACID MINT
    ========================================================= */
 
 @import "./global.css";
 
-
-/* =========================================================
-   AUTHENTICATION
-   ========================================================= */
-
 @import "./auth.css";
+
 @import "./forgot.css";
 
-
-/* =========================================================
-   ADMIN PAGES
-   ========================================================= */
-
 @import "./dashboard.css";
-@import "./home.css";
-@import "./users.css";
-@import "./listing.css";
-@import "./reports.css";
-@import "./settings.css";
 
+@import "./home.css";
+
+@import "./users.css";
+
+@import "./listing.css";
+
+@import "./reports.css";
+
+@import "./settings.css";

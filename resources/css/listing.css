@@ -1,6 +1,6 @@
 /* =========================================================
-   LEARNLOOP - LISTINGS
-   DARK GREY + DIRTY WHITE + BLACK + ORANGE
+   LEARNLOOP — LISTINGS
+   FOREST GRAPHITE + ACID MINT
    ========================================================= */
 
 
@@ -10,14 +10,22 @@
 
 .listing-page {
     width: 100%;
-    height: calc(100vh - 116px);
+    height: 100vh;
 
     display: flex;
     flex-direction: column;
 
     overflow: hidden;
 
-    padding: 0 32px 28px;
+    /*
+       Space for the fixed top header
+       so toolbar and content are not covered.
+    */
+    padding: 108px 32px 28px;
+
+    box-sizing: border-box;
+
+    background: #E8EEE6;
 }
 
 
@@ -51,11 +59,13 @@
 
 .listing-toolbar .dashboard-heading > div {
     display: flex;
+
     flex-direction: column;
+
     gap: 5px;
 }
 
-.section-label {
+.listing-toolbar .section-label {
     display: block;
 
     margin-bottom: 2px;
@@ -65,7 +75,7 @@
 
     letter-spacing: 2px;
 
-    color: #f97316;
+    color: #55783B;
 }
 
 .listing-toolbar h2 {
@@ -76,7 +86,7 @@
 
     font-weight: 800;
 
-    color: #202020;
+    color: #18251D;
 }
 
 .listing-toolbar p {
@@ -85,7 +95,7 @@
     font-size: 12px;
     line-height: 1.5;
 
-    color: #77736d;
+    color: #68736C;
 }
 
 
@@ -101,20 +111,24 @@
 
     padding: 0 14px;
 
-    border: 1px solid #c7c3bb;
+    box-sizing: border-box;
+
+    border: 1px solid #B7C4BA;
+
     border-radius: 8px;
 
     outline: none;
 
-    background: #f3f0ea;
+    background: #F7FAF5;
 
-    color: #252525;
+    color: #18251D;
 
     font-family: inherit;
+
     font-size: 12px;
 
     box-shadow:
-        0 3px 8px rgba(0, 0, 0, 0.06);
+        0 4px 10px rgba(24, 37, 29, .10);
 
     transition:
         border-color .2s ease,
@@ -123,16 +137,24 @@
 }
 
 .listing-search::placeholder {
-    color: #99948c;
+    color: #8A958D;
+}
+
+.listing-search:hover {
+    border-color: #9EADA1;
+
+    box-shadow:
+        0 5px 12px rgba(24, 37, 29, .13);
 }
 
 .listing-search:focus {
-    border-color: #f97316;
+    border-color: #91D94E;
 
-    background: #fffdf9;
+    background: #FFFFFF;
 
     box-shadow:
-        0 0 0 3px rgba(249, 115, 22, 0.10);
+        0 0 0 3px rgba(183, 255, 114, .24),
+        0 5px 12px rgba(24, 37, 29, .10);
 }
 
 
@@ -150,12 +172,24 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-    padding-right: 7px;
+    /*
+       Keeps the first listing separated from
+       the toolbar and keeps scrollbar visible.
+    */
+    padding: 5px 7px 20px 0;
+
+    box-sizing: border-box;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #89958C
+        transparent;
 }
 
 
 /* =========================================================
-   CUSTOM SCROLLBAR
+   SCROLLBAR
    ========================================================= */
 
 .listings-scroll-area::-webkit-scrollbar {
@@ -167,20 +201,13 @@
 }
 
 .listings-scroll-area::-webkit-scrollbar-thumb {
-    background: #aaa59c;
+    background: #89958C;
+
     border-radius: 10px;
 }
 
 .listings-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: #858078;
-}
-
-
-/* Firefox */
-
-.listings-scroll-area {
-    scrollbar-width: thin;
-    scrollbar-color: #aaa59c transparent;
+    background: #66716A;
 }
 
 
@@ -192,6 +219,7 @@
     width: 100%;
 
     display: flex;
+
     flex-direction: column;
 
     gap: 14px;
@@ -211,14 +239,17 @@
 
     padding: 20px 22px;
 
-    border: 1px solid #cbc7bf;
-    border-radius: 10px;
+    box-sizing: border-box;
 
-    background: #f5f2ec;
+    border: 1px solid #C9D3CA;
+
+    border-radius: 12px;
+
+    background: #F7FAF5;
 
     box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.10),
-        0 1px 3px rgba(0, 0, 0, 0.08);
+        0 7px 18px rgba(24, 37, 29, .13),
+        0 2px 5px rgba(24, 37, 29, .07);
 
     transition:
         transform .2s ease,
@@ -229,11 +260,11 @@
 .listing-post:hover {
     transform: translateY(-2px);
 
-    border-color: #b8b3aa;
+    border-color: #AFC5A9;
 
     box-shadow:
-        0 9px 20px rgba(0, 0, 0, 0.13),
-        0 2px 5px rgba(0, 0, 0, 0.08);
+        0 11px 24px rgba(24, 37, 29, .17),
+        0 3px 7px rgba(24, 37, 29, .08);
 }
 
 
@@ -251,7 +282,7 @@
 
     padding-bottom: 15px;
 
-    border-bottom: 1px solid #d8d4cc;
+    border-bottom: 1px solid #D8E1D9;
 }
 
 
@@ -282,9 +313,9 @@
 
     border-radius: 50%;
 
-    background: #292929;
+    background: #18251D;
 
-    color: #ffffff;
+    color: #B7FF72;
 
     font-size: 11px;
     font-weight: 800;
@@ -295,7 +326,7 @@
 .listing-user h3 {
     margin: 0 0 3px;
 
-    color: #252525;
+    color: #18251D;
 
     font-size: 13px;
     font-weight: 800;
@@ -304,7 +335,7 @@
 .listing-user span {
     display: block;
 
-    color: #858078;
+    color: #7A857D;
 
     font-size: 10px;
     font-weight: 500;
@@ -326,6 +357,8 @@
 
     padding: 0 10px;
 
+    flex-shrink: 0;
+
     border-radius: 20px;
 
     font-size: 9px;
@@ -340,24 +373,27 @@
 /* ACTIVE */
 
 .listing-status.active {
-    background: #dedfd8;
-    color: #4e5349;
+    background: #E2F7D0;
+
+    color: #42612E;
 }
 
 
 /* PENDING */
 
 .listing-status.pending {
-    background: #f2dfc8;
-    color: #9a5c22;
+    background: #EEF5D9;
+
+    color: #647536;
 }
 
 
 /* INACTIVE */
 
 .listing-status.inactive {
-    background: #dedbd7;
-    color: #77716a;
+    background: #E1E7E2;
+
+    color: #66716A;
 }
 
 
@@ -381,13 +417,13 @@
 
     text-transform: uppercase;
 
-    color: #f97316;
+    color: #55783B;
 }
 
 .listing-content h2 {
     margin: 0 0 7px;
 
-    color: #242424;
+    color: #18251D;
 
     font-size: 16px;
     line-height: 1.35;
@@ -400,7 +436,7 @@
 
     margin: 0;
 
-    color: #716d67;
+    color: #68736C;
 
     font-size: 11px;
     line-height: 1.7;
@@ -421,7 +457,7 @@
 
     padding-top: 14px;
 
-    border-top: 1px solid #d8d4cc;
+    border-top: 1px solid #D8E1D9;
 }
 
 
@@ -430,7 +466,7 @@
    ========================================================= */
 
 .listing-date {
-    color: #969189;
+    color: #8A958D;
 
     font-size: 10px;
     font-weight: 500;
@@ -458,6 +494,7 @@
     height: 34px;
 
     margin: 0;
+
     padding: 0 14px;
 
     border-radius: 7px;
@@ -487,22 +524,44 @@
    ========================================================= */
 
 .view-btn {
-    border: 1px solid #292929;
+    border: 1px solid #18251D;
 
-    background: #292929;
+    background: #18251D;
 
-    color: #ffffff;
+    color: #FFFFFF;
 }
 
 .view-btn:hover {
-    border-color: #f97316;
+    border-color: #B7FF72;
 
-    background: #f97316;
+    background: #B7FF72;
 
-    color: #ffffff;
+    color: #18251D;
 
     box-shadow:
-        0 4px 9px rgba(249, 115, 22, 0.20);
+        0 4px 10px rgba(24, 37, 29, .16);
+}
+
+
+/* =========================================================
+   APPROVE BUTTON
+   ========================================================= */
+
+.approve-btn {
+    border: 1px solid #91D94E;
+
+    background: #B7FF72;
+
+    color: #18251D;
+}
+
+.approve-btn:hover {
+    border-color: #91D94E;
+
+    background: #91D94E;
+
+    box-shadow:
+        0 4px 10px rgba(24, 37, 29, .13);
 }
 
 
@@ -511,19 +570,19 @@
    ========================================================= */
 
 .disable-btn {
-    border: 1px solid #c4c0b8;
+    border: 1px solid #C2CCC4;
 
-    background: #e8e5df;
+    background: #E6ECE6;
 
-    color: #55514b;
+    color: #536059;
 }
 
 .disable-btn:hover {
-    border-color: #292929;
+    border-color: #18251D;
 
-    background: #292929;
+    background: #18251D;
 
-    color: #ffffff;
+    color: #FFFFFF;
 }
 
 
@@ -532,27 +591,27 @@
    ========================================================= */
 
 .delete-btn {
-    border: 1px solid #c4c0b8;
+    border: 1px solid #C2CCC4;
 
     background: transparent;
 
-    color: #6a655e;
+    color: #66716A;
 }
 
 .delete-btn:hover {
-    border-color: #9b4d3f;
+    border-color: #A94A45;
 
-    background: #9b4d3f;
+    background: #A94A45;
 
-    color: #ffffff;
+    color: #FFFFFF;
 
     box-shadow:
-        0 4px 9px rgba(155, 77, 63, 0.18);
+        0 4px 9px rgba(169, 74, 69, .18);
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
@@ -577,15 +636,21 @@
 }
 
 
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
 @media (max-width: 600px) {
 
     .listing-page {
-        height: calc(100vh - 100px);
+        height: 100vh;
 
         padding:
-            0
+            100px
             15px
             20px;
+
+        box-sizing: border-box;
     }
 
     .listing-post {
