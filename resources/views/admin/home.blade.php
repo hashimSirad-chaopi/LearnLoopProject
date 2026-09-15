@@ -1,4 +1,4 @@
-```blade
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -181,23 +181,14 @@
 
 
                 <!-- ACTIVE SESSIONS -->
-                <div class="card">
-
-                    <div class="card-top">
-                        <span class="card-label">
-                            ACTIVE SESSIONS
-                        </span>
-                    </div>
-
-                    <h2>
-                        3
-                    </h2>
-
-                    <p class="card-description">
-                        Ongoing tutoring sessions
-                    </p>
-
-                </div>
+               <!-- ACTIVE SESSIONS -->
+<div class="card">
+    <div class="card-top">
+        <span class="card-label">ACTIVE SESSIONS</span>
+    </div>
+    <h2>{{ $activeSessions }}</h2>
+    <p class="card-description">Ongoing tutoring sessions</p>
+</div>
 
 
                 <!-- AVERAGE RATING -->
@@ -210,7 +201,7 @@
                     </div>
 
                     <h2>
-                        3.45
+                        No data available yet
                     </h2>
 
                     <p class="card-description">
@@ -271,4 +262,4 @@
 
 </body>
 </html>
-```
+

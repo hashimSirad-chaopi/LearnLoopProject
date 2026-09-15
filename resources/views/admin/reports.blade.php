@@ -185,334 +185,54 @@
                     <!-- =================================
                          REPORT 1
                          ================================= -->
-                    <article class="report-card">
-
-                        <header class="report-header">
-
-                            <div class="report-icon">
-                                !
-                            </div>
-
-                            <div class="report-title">
-
-                                <h3>
-                                    Inappropriate Listing
-                                </h3>
-
-                                <span>
-                                    Reported by Harold Caño
-                                </span>
-
-                            </div>
-
-                            <span class="report-status pending">
-                                Pending
-                            </span>
-
-                        </header>
-
-
-                        <div class="report-content">
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Reported User
-                                </span>
-
-                                <strong>
-                                    User Account
-                                </strong>
-
-                            </div>
-
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Reported Listing
-                                </span>
-
-                                <strong>
-                                    Mathematics Tutoring
-                                </strong>
-
-                            </div>
-
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Reason
-                                </span>
-
-                                <p>
-                                    The listing contains inappropriate or
-                                    misleading information.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <footer class="report-footer">
-
-                            <span>
-                                Requires administrative review
-                            </span>
-
-                            <div class="report-actions">
-
-                                <button
-                                    type="button"
-                                    class="report-view-btn"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="report-resolve-btn"
-                                >
-                                    Resolve
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="report-dismiss-btn"
-                                >
-                                    Dismiss
-                                </button>
-
-                            </div>
-
-                        </footer>
-
-                    </article>
-
-
-                    <!-- =================================
-                         REPORT 2
-                         ================================= -->
-                    <article class="report-card">
-
-                        <header class="report-header">
-
-                            <div class="report-icon">
-                                !
-                            </div>
-
-                            <div class="report-title">
-
-                                <h3>
-                                    Suspicious User Activity
-                                </h3>
-
-                                <span>
-                                    Reported by Myra Balaba
-                                </span>
-
-                            </div>
-
-                            <span class="report-status pending">
-                                Pending
-                            </span>
-
-                        </header>
-
-
-                        <div class="report-content">
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Reported User
-                                </span>
-
-                                <strong>
-                                    User Account
-                                </strong>
-
-                            </div>
-
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Type
-                                </span>
-
-                                <strong>
-                                    User
-                                </strong>
-
-                            </div>
-
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Reason
-                                </span>
-
-                                <p>
-                                    Suspicious behavior was reported during
-                                    a tutoring interaction.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <footer class="report-footer">
-
-                            <span>
-                                Requires administrative review
-                            </span>
-
-                            <div class="report-actions">
-
-                                <button
-                                    type="button"
-                                    class="report-view-btn"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="report-resolve-btn"
-                                >
-                                    Resolve
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="report-dismiss-btn"
-                                >
-                                    Dismiss
-                                </button>
-
-                            </div>
-
-                        </footer>
-
-                    </article>
-
-
-                    <!-- =================================
-                         REPORT 3
-                         ================================= -->
-                    <article class="report-card">
-
-                        <header class="report-header">
-
-                            <div class="report-icon">
-                                !
-                            </div>
-
-                            <div class="report-title">
-
-                                <h3>
-                                    Spam Listing
-                                </h3>
-
-                                <span>
-                                    Reported by Richard Formoso
-                                </span>
-
-                            </div>
-
-                            <span class="report-status resolved">
-                                Resolved
-                            </span>
-
-                        </header>
-
-
-                        <div class="report-content">
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Reported Listing
-                                </span>
-
-                                <strong>
-                                    Web Development Help
-                                </strong>
-
-                            </div>
-
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Type
-                                </span>
-
-                                <strong>
-                                    Listing
-                                </strong>
-
-                            </div>
-
-
-                            <div class="report-detail">
-
-                                <span class="detail-label">
-                                    Reason
-                                </span>
-
-                                <p>
-                                    The listing appears to be duplicated
-                                    or contains spam content.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <footer class="report-footer">
-
-                            <span>
-                                Report has been resolved
-                            </span>
-
-                            <div class="report-actions">
-
-                                <button
-                                    type="button"
-                                    class="report-view-btn"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="report-resolve-btn"
-                                >
-                                    Resolve
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="report-dismiss-btn"
-                                >
-                                    Dismiss
-                                </button>
-
-                            </div>
-
-                        </footer>
-
-                    </article>
-
-
-                </div>
+                    @forelse($reports as $report)
+        <article class="report-card">
+        <header class="report-header">
+            <div class="report-icon">!</div>
+            <div class="report-title">
+                <h3>{{ $report->title }}</h3>
+                <span>Reported by {{ $report->reporter->name ?? 'Unknown' }}</span>
+            </div>
+            <span class="report-status {{ $report->status }}">{{ ucfirst($report->status) }}</span>
+        </header>
+
+        <div class="report-content">
+            <div class="report-detail">
+                <span class="detail-label">Reported User</span>
+                <strong>{{ $report->reportedUser->name ?? 'N/A' }}</strong>
+            </div>
+            <div class="report-detail">
+                <span class="detail-label">Reported Listing</span>
+                <strong>{{ $report->listing->title ?? 'N/A' }}</strong>
+            </div>
+            <div class="report-detail">
+                <span class="detail-label">Reason</span>
+                <p>{{ $report->reason }}</p>
+            </div>
+        </div>
+
+        <footer class="report-footer">
+            <span>Requires administrative review</span>
+            <div class="report-actions">
+                @if($report->status === 'pending')
+                    <form method="POST" action="{{ route('admin.reports.resolve', $report->id) }}">
+                        @csrf @method('PATCH')
+                        <button type="submit" class="report-resolve-btn">Resolve</button>
+                    </form>
+                    <form method="POST" action="{{ route('admin.reports.dismiss', $report->id) }}">
+                        @csrf @method('PATCH')
+                        <button type="submit" class="report-dismiss-btn">Dismiss</button>
+                    </form>
+                @endif
+            </div>
+        </footer>
+    </article>
+    @empty
+    <p>No reports found.</p>
+        @endforelse
+
+
+            </div>
 
             </div>
 
