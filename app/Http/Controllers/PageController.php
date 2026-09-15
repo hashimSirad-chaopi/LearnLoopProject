@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
-
+use App\Models\Report;
+use App\Models\Listing;
+use App\Models\Exchange;
 class PageController extends Controller
 {
     public function adminHome()
-    {
-        return view('admin.home');
-    }
+{
+    $totalUsers = User::count();
+    $totalListings = Listing::count();
+    $activeListings = Listing::where('status', 'active')->count();
+    $activeSessions = Exchange::where('status', 'ongoing')->count();
+    $pendingReports = Report::where('status', 'pending')->count();
+
+    return view('admin.home', compact('totalUsers', 'totalListings', 'activeListings', 'activeSessions', 'pendingReports'));
+}
 
    public function adminUsers()
 {
@@ -21,14 +28,12 @@ class PageController extends Controller
 }
 
     public function adminListings()
-    {
-        return view('admin.listing');
-    }
+{
+    $listings = Listing::with('user')->latest()->get();
 
-    public function adminReports()
-    {
-        return view('admin.reports');
-    }
+    return view('admin.listing', compact('listings'));
+}
+    
 
     public function adminSettings()
     {
@@ -43,4 +48,29 @@ class PageController extends Controller
         ->route('admin.users')
         ->with('success', 'User deleted successfully.');
 }
+
+
+public function adminReports()
+{
+    $reports = Report::with(['reporter', 'reportedUser', 'listing'])->latest()->get();
+
+    return view('admin.reports', compact('reports'));
+}
+
+public function resolveReport(Report $report)
+{
+    $report->status = 'resolved';
+    $report->save();
+
+    return back()->with('success', 'Report resolved.');
+}
+
+public function dismissReport(Report $report)
+{
+    $report->status = 'dismissed';
+    $report->save();
+
+    return back()->with('success', 'Report dismissed.');
+}
+
 }

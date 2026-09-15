@@ -147,354 +147,42 @@
                     <!-- =================================
                          LISTING 1
                     ================================== -->
-                    <article class="listing-post">
-
-                        <div class="listing-post-header">
-
-                            <div class="listing-user">
-
-                                <div class="listing-avatar">
-                                    HC
-                                </div>
-
-                                <div>
-                                    <h3>
-                                        Harold Caño
-                                    </h3>
-
-                                    <span>
-                                        Mathematics
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <span class="listing-status active">
-                                Active
-                            </span>
-
-                        </div>
-
-
-                        <div class="listing-content">
-
-                            <span class="listing-category">
-                                Mathematics
-                            </span>
-
-                            <h2>
-                                Mathematics Tutoring
-                            </h2>
-
-                            <p>
-                                I can help students understand basic math,
-                                algebra, problem solving, and other
-                                mathematics topics.
-                            </p>
-
-                        </div>
-
-
-                        <div class="listing-footer">
-
-                            <span class="listing-date">
-                                Posted recently
-                            </span>
-
-
-                            <div class="listing-actions">
-
-                                <button
-                                    type="button"
-                                    class="view-btn"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="disable-btn"
-                                >
-                                    Disable
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="delete-btn"
-                                >
-                                    Delete
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- =================================
-                         LISTING 2
-                    ================================== -->
-                    <article class="listing-post">
-
-                        <div class="listing-post-header">
-
-                            <div class="listing-user">
-
-                                <div class="listing-avatar">
-                                    MB
-                                </div>
-
-                                <div>
-                                    <h3>
-                                        Myra Balaba
-                                    </h3>
-
-                                    <span>
-                                        English
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <span class="listing-status pending">
-                                Pending
-                            </span>
-
-                        </div>
-
-
-                        <div class="listing-content">
-
-                            <span class="listing-category">
-                                English
-                            </span>
-
-                            <h2>
-                                English Conversation Practice
-                            </h2>
-
-                            <p>
-                                Practice English communication and speaking
-                                skills through friendly conversation sessions.
-                            </p>
-
-                        </div>
-
-
-                        <div class="listing-footer">
-
-                            <span class="listing-date">
-                                Posted recently
-                            </span>
-
-
-                            <div class="listing-actions">
-
-                                <button
-                                    type="button"
-                                    class="view-btn"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="disable-btn"
-                                >
-                                    Disable
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="delete-btn"
-                                >
-                                    Delete
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- =================================
-                         LISTING 3
-                    ================================== -->
-                    <article class="listing-post">
-
-                        <div class="listing-post-header">
-
-                            <div class="listing-user">
-
-                                <div class="listing-avatar">
-                                    RF
-                                </div>
-
-                                <div>
-                                    <h3>
-                                        Richard Formoso
-                                    </h3>
-
-                                    <span>
-                                        Programming
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <span class="listing-status active">
-                                Active
-                            </span>
-
-                        </div>
-
-
-                        <div class="listing-content">
-
-                            <span class="listing-category">
-                                Programming
-                            </span>
-
-                            <h2>
-                                Beginner Programming Tutor
-                            </h2>
-
-                            <p>
-                                Learn programming fundamentals and improve
-                                your understanding of basic coding concepts.
-                            </p>
-
-                        </div>
-
-
-                        <div class="listing-footer">
-
-                            <span class="listing-date">
-                                Posted recently
-                            </span>
-
-
-                            <div class="listing-actions">
-
-                                <button
-                                    type="button"
-                                    class="view-btn"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="disable-btn"
-                                >
-                                    Disable
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="delete-btn"
-                                >
-                                    Delete
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- =================================
-                         LISTING 4
-                    ================================== -->
-                    <article class="listing-post">
-
-                        <div class="listing-post-header">
-
-                            <div class="listing-user">
-
-                                <div class="listing-avatar">
-                                    CJ
-                                </div>
-
-                                <div>
-                                    <h3>
-                                        Christian Jay Ayunan
-                                    </h3>
-
-                                    <span>
-                                        Science
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <span class="listing-status inactive">
-                                Inactive
-                            </span>
-
-                        </div>
-
-
-                        <div class="listing-content">
-
-                            <span class="listing-category">
-                                Science
-                            </span>
-
-                            <h2>
-                                Science Study Assistance
-                            </h2>
-
-                            <p>
-                                Get assistance with different science
-                                subjects and improve your understanding
-                                through guided study sessions.
-                            </p>
-
-                        </div>
-
-
-                        <div class="listing-footer">
-
-                            <span class="listing-date">
-                                Posted recently
-                            </span>
-
-
-                            <div class="listing-actions">
-
-                                <button
-                                    type="button"
-                                    class="view-btn"
-                                >
-                                    View
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="disable-btn"
-                                >
-                                    Disable
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="delete-btn"
-                                >
-                                    Delete
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
+                   @forelse($listings as $listing)
+    <article class="listing-post">
+        <div class="listing-post-header">
+            <div class="listing-user">
+                <div class="listing-avatar">{{ strtoupper(substr($listing->user->name, 0, 2)) }}</div>
+                <div>
+                    <h3>{{ $listing->user->name }}</h3>
+                    <span>{{ $listing->category }}</span>
+                </div>
+            </div>
+            <span class="listing-status {{ $listing->status }}">{{ ucfirst($listing->status) }}</span>
+        </div>
+
+        <div class="listing-content">
+            <span class="listing-category">{{ $listing->category }}</span>
+            <h2>{{ $listing->title }}</h2>
+            <p>{{ $listing->description }}</p>
+        </div>
+
+        <div class="listing-footer">
+            <span class="listing-date">Posted {{ $listing->created_at->diffForHumans() }}</span>
+            <div class="listing-actions">
+                <form method="POST" action="{{ route('admin.listings.disable', $listing->id) }}">
+                    @csrf @method('PATCH')
+                    <button type="submit" class="disable-btn">Disable</button>
+                </form>
+                <form method="POST" action="{{ route('admin.listings.delete', $listing->id) }}" onsubmit="return confirm('Delete this listing?');">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </div>
+        </div>
+    </article>
+@empty
+    <p>No listings found.</p>
+@endforelse
 
 
                 </div>

@@ -135,7 +135,9 @@
                     </div>
 
 
-                    <form class="settings-form">
+                    <form class="settings-form" method="POST" action="{{ route('profile.update') }}">
+    @csrf
+    @method('PATCH')
 
                         <div class="settings-field">
 
@@ -143,11 +145,7 @@
                                 Name
                             </label>
 
-                            <input
-                                id="admin-name"
-                                type="text"
-                                value="Administrator"
-                            >
+                            <input id="admin-name" name="name" type="text" value="{{ old('name', auth()->user()->name) }}">
 
                         </div>
 
@@ -158,24 +156,14 @@
                                 Email
                             </label>
 
-                            <input
-                                id="admin-email"
-                                type="email"
-                                value="admin@learnloop.com"
-                            >
+                            <input id="admin-email" name="email" type="email" value="{{ old('email', auth()->user()->email) }}">
 
                         </div>
 
 
                         <div class="settings-actions">
 
-                            <button
-                                type="button"
-                                class="settings-save-btn"
-                            >
-                                Save Changes
-                            </button>
-
+                            <button type="submit" class="settings-save-btn">Save Changes</button>
                         </div>
 
                     </form>
@@ -205,7 +193,9 @@
                     </div>
 
 
-                    <form class="settings-form">
+                    <form class="settings-form" method="POST" action="{{ route('password.update') }}">
+    @csrf
+    @method('PUT')
 
                         <div class="settings-field">
 
@@ -213,11 +203,7 @@
                                 Current Password
                             </label>
 
-                            <input
-                                id="current-password"
-                                type="password"
-                                placeholder="Enter current password"
-                            >
+                            <input id="current-password" name="current_password" type="password" placeholder="Enter current password">
 
                         </div>
 
@@ -228,11 +214,8 @@
                                 New Password
                             </label>
 
-                            <input
-                                id="new-password"
-                                type="password"
-                                placeholder="Enter new password"
-                            >
+                            <input id="new-password" name="password" type="password" placeholder="Enter new password">
+
 
                         </div>
 
@@ -243,23 +226,14 @@
                                 Confirm New Password
                             </label>
 
-                            <input
-                                id="confirm-password"
-                                type="password"
-                                placeholder="Confirm new password"
-                            >
+                           <input id="confirm-password" name="password_confirmation" type="password" placeholder="Confirm new password">
 
                         </div>
 
 
                         <div class="settings-actions">
 
-                            <button
-                                type="button"
-                                class="settings-save-btn"
-                            >
-                                Update Password
-                            </button>
+                           <button type="submit" class="settings-save-btn">Update Password</button>
 
                         </div>
 

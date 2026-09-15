@@ -56,10 +56,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/settings', [PageController::class, 'adminSettings'])
         ->name('admin.settings');
     
-        Route::delete('/admin/users/{user}', [PageController::class, 'deleteUser'])
-    ->name('admin.users.delete');
+    Route::delete('/admin/users/{user}', [PageController::class, 'deleteUser'])
+        ->name('admin.users.delete');
 
+    Route::patch('/admin/reports/{report}/resolve', [PageController::class, 'resolveReport'])
+        ->name('admin.reports.resolve');
+
+    Route::patch('/admin/reports/{report}/dismiss', [PageController::class, 'dismissReport'])
+        ->name('admin.reports.dismiss');
+
+    Route::patch('/admin/listings/{listing}/disable', [PageController::class, 'disableListing'])
+        ->name('admin.listings.disable');
+
+    Route::delete('/admin/listings/{listing}', [PageController::class, 'deleteListing'])
+        ->name('admin.listings.delete');
 });
+
+
 
 
 require __DIR__.'/auth.php';
