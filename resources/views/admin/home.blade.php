@@ -161,23 +161,13 @@
 
 
                 <!-- ACTIVE TUTORS -->
-                <div class="card">
-
-                    <div class="card-top">
-                        <span class="card-label">
-                            ACTIVE TUTORS
-                        </span>
-                    </div>
-
-                    <h2>
-                        10
-                    </h2>
-
-                    <p class="card-description">
-                        Currently active tutors
-                    </p>
-
-                </div>
+<div class="card">
+    <div class="card-top">
+        <span class="card-label">ACTIVE TUTORS</span>
+    </div>
+    <h2>{{ $activeTutors }}</h2>
+    <p class="card-description">Currently active tutors</p>
+</div>
 
 
                 <!-- ACTIVE SESSIONS -->

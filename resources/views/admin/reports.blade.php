@@ -147,7 +147,7 @@
                         placeholder="Search reports..."
                         aria-label="Search reports"
                     >
-
+                    <a href="{{ route('admin.reports.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ File Report</a>
                     <select
                         class="report-filter"
                         aria-label="Filter reports"
@@ -214,17 +214,21 @@
         <footer class="report-footer">
             <span>Requires administrative review</span>
             <div class="report-actions">
-                @if($report->status === 'pending')
-                    <form method="POST" action="{{ route('admin.reports.resolve', $report->id) }}">
-                        @csrf @method('PATCH')
-                        <button type="submit" class="report-resolve-btn">Resolve</button>
-                    </form>
-                    <form method="POST" action="{{ route('admin.reports.dismiss', $report->id) }}">
-                        @csrf @method('PATCH')
-                        <button type="submit" class="report-dismiss-btn">Dismiss</button>
-                    </form>
-                @endif
-            </div>
+    @if($report->status === 'pending')
+        <form method="POST" action="{{ route('admin.reports.resolve', $report->id) }}">
+            @csrf @method('PATCH')
+            <button type="submit" class="report-resolve-btn">Resolve</button>
+        </form>
+        <form method="POST" action="{{ route('admin.reports.dismiss', $report->id) }}">
+            @csrf @method('PATCH')
+            <button type="submit" class="report-dismiss-btn">Dismiss</button>
+        </form>
+    @endif
+    <form method="POST" action="{{ route('admin.reports.delete', $report->id) }}" onsubmit="return confirm('Delete this report?');">
+        @csrf @method('DELETE')
+        <button type="submit" class="delete-btn">Delete</button>
+    </form>
+</div>
         </footer>
     </article>
     @empty
