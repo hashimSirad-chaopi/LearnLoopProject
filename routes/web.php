@@ -70,6 +70,21 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/admin/listings/{listing}', [PageController::class, 'deleteListing'])
         ->name('admin.listings.delete');
+
+    Route::get('/admin/users/create', [PageController::class, 'createUser'])->name('admin.users.create');
+    Route::post('/admin/users', [PageController::class, 'storeUser'])->name('admin.users.store');
+    Route::get('/admin/users/{user}', [PageController::class, 'showUser'])->name('admin.users.show');
+    Route::get('/admin/users/{user}/edit', [PageController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [PageController::class, 'updateUser'])->name('admin.users.update');    
+    Route::get('/admin/listings/create', [PageController::class, 'createListing'])->name('admin.listings.create');
+Route::post('/admin/listings', [PageController::class, 'storeListing'])->name('admin.listings.store');
+Route::get('/admin/listings/{listing}/edit', [PageController::class, 'editListing'])->name('admin.listings.edit');
+Route::put('/admin/listings/{listing}', [PageController::class, 'updateListing'])->name('admin.listings.update');
+Route::patch('/admin/listings/{listing}/enable', [PageController::class, 'enableListing'])->name('admin.listings.enable');
+Route::delete('/admin/reports/{report}', [PageController::class, 'deleteReport'])->name('admin.reports.delete');
+Route::get('/admin/reports/create', [PageController::class, 'createReport'])->name('admin.reports.create');
+Route::post('/admin/reports', [PageController::class, 'storeReport'])->name('admin.reports.store');
+
 });
 
 

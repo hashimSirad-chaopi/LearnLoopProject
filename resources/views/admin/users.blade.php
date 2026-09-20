@@ -147,6 +147,8 @@
                         aria-label="Search users"
                     >
 
+                    <a href="{{ route('admin.users.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add User</a>
+
                 </div>
 
             </div>
@@ -215,13 +217,8 @@
 
                                         <div class="action-buttons">
 
-                                            <button
-                                                type="button"
-                                                class="table-btn"
-                                            >
-                                                View
-                                            </button>
-
+                                            <a href="{{ route('admin.users.show', $user->id) }}" class="table-btn" style="text-decoration:none; display:inline-block;">View</a>
+                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="table-btn" style="text-decoration:none; display:inline-block;">Edit</a>    
 
                                             <form
                                                 method="POST"

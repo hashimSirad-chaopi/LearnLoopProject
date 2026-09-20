@@ -133,6 +133,8 @@
                     aria-label="Search listings"
                 >
 
+                <a href="{{ route('admin.listings.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add Listing</a>
+
             </div>
 
 
@@ -169,10 +171,18 @@
         <div class="listing-footer">
             <span class="listing-date">Posted {{ $listing->created_at->diffForHumans() }}</span>
             <div class="listing-actions">
-                <form method="POST" action="{{ route('admin.listings.disable', $listing->id) }}">
-                    @csrf @method('PATCH')
-                    <button type="submit" class="disable-btn">Disable</button>
-                </form>
+                <a href="{{ route('admin.listings.edit', $listing->id) }}" class="table-btn" style="text-decoration:none; display:inline-block;">Edit</a>
+                @if($listing->status === 'inactive')
+    <form method="POST" action="{{ route('admin.listings.enable', $listing->id) }}">
+        @csrf @method('PATCH')
+        <button type="submit" class="disable-btn">Enable</button>
+    </form>
+@else
+    <form method="POST" action="{{ route('admin.listings.disable', $listing->id) }}">
+        @csrf @method('PATCH')
+        <button type="submit" class="disable-btn">Disable</button>
+    </form>
+@endif
                 <form method="POST" action="{{ route('admin.listings.delete', $listing->id) }}" onsubmit="return confirm('Delete this listing?');">
                     @csrf @method('DELETE')
                     <button type="submit" class="delete-btn">Delete</button>
