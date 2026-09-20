@@ -210,7 +210,7 @@
         padding:
             130px 18px 25px;
     }
-
+ 
     .cards {
         grid-template-columns: 1fr;
     }
