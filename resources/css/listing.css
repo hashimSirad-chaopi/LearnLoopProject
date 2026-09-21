@@ -1,678 +1,187 @@
 /* =========================================================
    LEARNLOOP — LISTINGS
-   FOREST GRAPHITE + ACID MINT
-   ========================================================= */
-
-
-/* =========================================================
-   LISTINGS PAGE
    ========================================================= */
 
 .listing-page {
     width: 100%;
     height: 100vh;
-
     display: flex;
     flex-direction: column;
-
     overflow: hidden;
-
-    /*
-       Space for the fixed top header
-       so toolbar and content are not covered.
-    */
-    padding: 108px 32px 28px;
-
-    box-sizing: border-box;
-
-    background: #E8EEE6;
+    padding: var(--ll-header-height) 32px 28px;
+    background: var(--ll-bg);
 }
-
-
-/* =========================================================
-   LISTING TOOLBAR
-   ========================================================= */
 
 .listing-toolbar {
     flex-shrink: 0;
-
     width: 100%;
-
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-
-    gap: 30px;
-
-    padding: 0 0 22px;
+    gap: 24px;
+    padding: 22px 0 20px;
+    border-bottom: 1px solid var(--ll-border);
 }
 
-
-/* =========================================================
-   HEADING
-   ========================================================= */
-
-.listing-toolbar .dashboard-heading {
-    margin: 0;
-    padding: 0;
-}
-
-.listing-toolbar .dashboard-heading > div {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
-}
-
-.listing-toolbar .section-label {
-    display: block;
-
-    margin-bottom: 2px;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    letter-spacing: 2px;
-
-    color: #55783B;
-}
-
-.listing-toolbar h2 {
-    margin: 0;
-
-    font-size: 22px;
-    line-height: 1.2;
-
-    font-weight: 800;
-
-    color: #18251D;
-}
-
-.listing-toolbar p {
-    margin: 0;
-
-    font-size: 12px;
-    line-height: 1.5;
-
-    color: #68736C;
-}
-
-
-/* =========================================================
-   SEARCH
-   ========================================================= */
+.listing-toolbar .dashboard-heading { margin: 0; }
+.listing-toolbar .dashboard-heading > div { display: flex; flex-direction: column; gap: 4px; }
+.listing-toolbar .section-label { margin-bottom: 0; }
+.listing-toolbar h2 { color: var(--ll-forest); font-size: 22px; font-weight: 850; }
+.listing-toolbar p { color: var(--ll-muted); font-size: 12px; line-height: 1.5; }
 
 .listing-search {
-    width: 260px;
-    height: 40px;
-
+    width: 280px;
+    height: 42px;
     flex-shrink: 0;
-
     padding: 0 14px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #B7C4BA;
-
-    border-radius: 8px;
-
+    border: 1px solid var(--ll-border-dark);
+    border-radius: 10px;
     outline: none;
-
-    background: #F7FAF5;
-
-    color: #18251D;
-
-    font-family: inherit;
-
+    background: var(--ll-surface);
+    color: var(--ll-text);
     font-size: 12px;
-
-    box-shadow:
-        0 4px 10px rgba(24, 37, 29, .10);
-
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+    box-shadow: var(--ll-shadow-sm);
+    transition: .2s ease;
 }
-
-.listing-search::placeholder {
-    color: #8A958D;
-}
-
-.listing-search:hover {
-    border-color: #9EADA1;
-
-    box-shadow:
-        0 5px 12px rgba(24, 37, 29, .13);
-}
-
+.listing-search::placeholder { color: var(--ll-muted-2); }
+.listing-search:hover { border-color: #93A396; }
 .listing-search:focus {
-    border-color: #91D94E;
-
-    background: #FFFFFF;
-
-    box-shadow:
-        0 0 0 3px rgba(183, 255, 114, .24),
-        0 5px 12px rgba(24, 37, 29, .10);
+    border-color: var(--ll-mint-dark);
+    box-shadow: 0 0 0 4px rgba(183,255,114,.18), var(--ll-shadow-sm);
 }
-
-
-/* =========================================================
-   SCROLL AREA
-   ========================================================= */
 
 .listings-scroll-area {
     flex: 1;
-
     min-height: 0;
-
     width: 100%;
-
     overflow-y: auto;
     overflow-x: hidden;
-
-    /*
-       Keeps the first listing separated from
-       the toolbar and keeps scrollbar visible.
-    */
-    padding: 5px 7px 20px 0;
-
-    box-sizing: border-box;
-
-    scrollbar-width: thin;
-
-    scrollbar-color:
-        #89958C
-        transparent;
+    padding: 22px 7px 22px 0;
 }
 
-
-/* =========================================================
-   SCROLLBAR
-   ========================================================= */
-
-.listings-scroll-area::-webkit-scrollbar {
-    width: 7px;
-}
-
-.listings-scroll-area::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.listings-scroll-area::-webkit-scrollbar-thumb {
-    background: #89958C;
-
-    border-radius: 10px;
-}
-
-.listings-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: #66716A;
-}
-
-
-/* =========================================================
-   LISTINGS FEED
-   ========================================================= */
-
-.listings-feed {
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 14px;
-
-    padding-bottom: 10px;
-}
-
-
-/* =========================================================
-   LISTING POST
-   ========================================================= */
+.listings-feed { width: 100%; display: flex; flex-direction: column; gap: 14px; padding-bottom: 6px; }
 
 .listing-post {
     width: 100%;
-
     flex-shrink: 0;
-
-    padding: 20px 22px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #C9D3CA;
-
-    border-radius: 12px;
-
-    background: #F7FAF5;
-
-    box-shadow:
-        0 7px 18px rgba(24, 37, 29, .13),
-        0 2px 5px rgba(24, 37, 29, .07);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
+    padding: 19px 21px;
+    border: 1px solid var(--ll-border);
+    border-radius: var(--ll-radius);
+    background: var(--ll-surface);
+    box-shadow: var(--ll-shadow);
+    transition: .2s ease;
 }
-
 .listing-post:hover {
     transform: translateY(-2px);
-
-    border-color: #AFC5A9;
-
-    box-shadow:
-        0 11px 24px rgba(24, 37, 29, .17),
-        0 3px 7px rgba(24, 37, 29, .08);
+    border-color: #B4C6B4;
+    box-shadow: var(--ll-shadow-lg);
 }
-
-
-/* =========================================================
-   POST HEADER
-   ========================================================= */
 
 .listing-post-header {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
     gap: 15px;
-
-    padding-bottom: 15px;
-
-    border-bottom: 1px solid #D8E1D9;
+    margin-bottom: 17px;
 }
 
-
-/* =========================================================
-   USER
-   ========================================================= */
-
-.listing-user {
-    display: flex;
-
-    align-items: center;
-
-    gap: 11px;
-
-    min-width: 0;
-}
-
+.listing-user { display: flex; align-items: center; gap: 11px; min-width: 0; }
 .listing-avatar {
-    width: 40px;
-    height: 40px;
-
+    width: 39px;
+    height: 39px;
     flex-shrink: 0;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
-    border-radius: 50%;
-
-    background: #18251D;
-
-    color: #B7FF72;
-
-    font-size: 11px;
-    font-weight: 800;
-
-    letter-spacing: .5px;
+    border-radius: 11px;
+    background: var(--ll-forest);
+    color: var(--ll-mint);
+    font-size: 12px;
+    font-weight: 900;
 }
-
-.listing-user h3 {
-    margin: 0 0 3px;
-
-    color: #18251D;
-
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.listing-user span {
-    display: block;
-
-    color: #7A857D;
-
-    font-size: 10px;
-    font-weight: 500;
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
+.listing-user h3 { color: var(--ll-forest); font-size: 13px; font-weight: 850; }
+.listing-user span { display: block; margin-top: 2px; color: var(--ll-muted); font-size: 10px; }
 
 .listing-status {
     display: inline-flex;
-
     align-items: center;
-    justify-content: center;
-
-    min-width: 65px;
-    height: 25px;
-
+    min-height: 25px;
     padding: 0 10px;
-
     flex-shrink: 0;
-
-    border-radius: 20px;
-
+    border-radius: 999px;
     font-size: 9px;
-    font-weight: 800;
-
-    letter-spacing: .4px;
-
-    text-transform: uppercase;
+    font-weight: 850;
 }
-
-
-/* ACTIVE */
-
-.listing-status.active {
-    background: #E2F7D0;
-
-    color: #42612E;
+.listing-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-right: 6px;
+    border-radius: 50%;
 }
+.listing-status.active { background: var(--ll-success-soft); color: #47713E; }
+.listing-status.active::before { background: #67A856; }
+.listing-status.pending { background: var(--ll-warning-soft); color: #8A672D; }
+.listing-status.pending::before { background: #C08C36; }
+.listing-status.inactive { background: #EDF0ED; color: #6D7771; }
+.listing-status.inactive::before { background: #909A94; }
 
-
-/* PENDING */
-
-.listing-status.pending {
-    background: #EEF5D9;
-
-    color: #647536;
-}
-
-
-/* INACTIVE */
-
-.listing-status.inactive {
-    background: #E1E7E2;
-
-    color: #66716A;
-}
-
-
-/* =========================================================
-   LISTING CONTENT
-   ========================================================= */
-
-.listing-content {
-    padding: 17px 0 16px;
-}
-
+.listing-content { padding: 0 2px; }
 .listing-category {
-    display: inline-block;
-
-    margin-bottom: 7px;
-
-    font-size: 9px;
-    font-weight: 800;
-
-    letter-spacing: 1.2px;
-
-    text-transform: uppercase;
-
+    display: inline-flex;
+    min-height: 23px;
+    align-items: center;
+    padding: 0 9px;
+    margin-bottom: 8px;
+    border-radius: 999px;
+    background: var(--ll-mint-soft);
     color: #55783B;
+    font-size: 9px;
+    font-weight: 850;
 }
-
-.listing-content h2 {
-    margin: 0 0 7px;
-
-    color: #18251D;
-
-    font-size: 16px;
-    line-height: 1.35;
-
-    font-weight: 800;
-}
-
-.listing-content p {
-    max-width: 850px;
-
-    margin: 0;
-
-    color: #68736C;
-
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
+.listing-content h2 { color: var(--ll-forest); font-size: 16px; font-weight: 850; }
+.listing-content p { margin-top: 6px; color: var(--ll-muted); font-size: 12px; line-height: 1.6; }
 
 .listing-footer {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
-    gap: 20px;
-
-    padding-top: 14px;
-
-    border-top: 1px solid #D8E1D9;
+    gap: 14px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #DFE6E0;
 }
-
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
-.listing-date {
-    color: #8A958D;
-
-    font-size: 10px;
-    font-weight: 500;
-}
-
-
-/* =========================================================
-   ACTIONS
-   ========================================================= */
-
-.listing-actions {
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-
-    margin: 0;
-    padding: 0;
-}
-
+.listing-date { color: #7B877F; font-size: 10px; }
+.listing-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .listing-actions button {
-    height: 34px;
-
-    margin: 0;
-
-    padding: 0 14px;
-
-    border-radius: 7px;
-
-    font-family: inherit;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .15s ease,
-        box-shadow .2s ease;
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 850;
+    transition: .18s ease;
 }
+.listing-actions button:hover { transform: translateY(-1px); }
+.view-btn { border: 1px solid var(--ll-forest); background: var(--ll-forest); color: #FFFFFF; }
+.view-btn:hover { border-color: var(--ll-mint-dark); background: var(--ll-mint); color: var(--ll-forest); }
+.approve-btn { border: 1px solid var(--ll-mint-dark); background: var(--ll-mint); color: var(--ll-forest); }
+.approve-btn:hover { background: #A6EE62; }
+.disable-btn { border: 1px solid #C8D1CA; background: #EEF2EE; color: #59655D; }
+.disable-btn:hover { border-color: var(--ll-forest); background: var(--ll-forest); color: #FFFFFF; }
+.delete-btn { border: 1px solid #C8D1CA; background: transparent; color: #69766E; }
+.delete-btn:hover { border-color: var(--ll-danger); background: var(--ll-danger); color: #FFFFFF; }
 
-.listing-actions button:hover {
-    transform: translateY(-1px);
+@media (max-width: 850px) {
+    .listing-page { padding-left: 25px; padding-right: 25px; }
+    .listing-toolbar { align-items: stretch; flex-direction: column; }
+    .listing-search { width: 100%; }
 }
-
-
-/* =========================================================
-   VIEW BUTTON
-   ========================================================= */
-
-.view-btn {
-    border: 1px solid #18251D;
-
-    background: #18251D;
-
-    color: #FFFFFF;
-}
-
-.view-btn:hover {
-    border-color: #B7FF72;
-
-    background: #B7FF72;
-
-    color: #18251D;
-
-    box-shadow:
-        0 4px 10px rgba(24, 37, 29, .16);
-}
-
-
-/* =========================================================
-   APPROVE BUTTON
-   ========================================================= */
-
-.approve-btn {
-    border: 1px solid #91D94E;
-
-    background: #B7FF72;
-
-    color: #18251D;
-}
-
-.approve-btn:hover {
-    border-color: #91D94E;
-
-    background: #91D94E;
-
-    box-shadow:
-        0 4px 10px rgba(24, 37, 29, .13);
-}
-
-
-/* =========================================================
-   DISABLE BUTTON
-   ========================================================= */
-
-.disable-btn {
-    border: 1px solid #C2CCC4;
-
-    background: #E6ECE6;
-
-    color: #536059;
-}
-
-.disable-btn:hover {
-    border-color: #18251D;
-
-    background: #18251D;
-
-    color: #FFFFFF;
-}
-
-
-/* =========================================================
-   DELETE BUTTON
-   ========================================================= */
-
-.delete-btn {
-    border: 1px solid #C2CCC4;
-
-    background: transparent;
-
-    color: #66716A;
-}
-
-.delete-btn:hover {
-    border-color: #A94A45;
-
-    background: #A94A45;
-
-    color: #FFFFFF;
-
-    box-shadow:
-        0 4px 9px rgba(169, 74, 69, .18);
-}
-
-
-/* =========================================================
-   RESPONSIVE — TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .listing-page {
-        padding-left: 22px;
-        padding-right: 22px;
-    }
-
-    .listing-toolbar {
-        align-items: stretch;
-
-        flex-direction: column;
-
-        gap: 15px;
-    }
-
-    .listing-search {
-        width: 100%;
-    }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — MOBILE
-   ========================================================= */
 
 @media (max-width: 600px) {
-
-    .listing-page {
-        height: 100vh;
-
-        padding:
-            100px
-            15px
-            20px;
-
-        box-sizing: border-box;
-    }
-
-    .listing-post {
-        padding: 17px;
-    }
-
-    .listing-post-header {
-        align-items: flex-start;
-    }
-
-    .listing-footer {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-    .listing-actions {
-        width: 100%;
-    }
-
-    .listing-actions button {
-        flex: 1;
-    }
-
+    .listing-page { padding: var(--ll-header-height) 16px 20px; }
+    .listing-post { padding: 17px; }
+    .listing-post-header { align-items: flex-start; }
+    .listing-footer { align-items: flex-start; flex-direction: column; }
+    .listing-actions { width: 100%; }
+    .listing-actions button { flex: 1; }
 }

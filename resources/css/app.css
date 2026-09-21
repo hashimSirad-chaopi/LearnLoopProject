@@ -6,17 +6,21 @@
 @import "./global.css";
 
 @import "./auth.css";
-
 @import "./forgot.css";
 
 @import "./dashboard.css";
-
 @import "./home.css";
 
 @import "./users.css";
+@import "./createuser.css";
+@import "./edituser.css";
+@import "./showuser.css";
 
 @import "./listing.css";
+@import "./createlisting.css";
+@import "./editlisting.css";
 
 @import "./reports.css";
+@import "./createreport.css";
 
 @import "./settings.css";

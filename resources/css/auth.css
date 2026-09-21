@@ -1,332 +1,264 @@
 /* =========================================================
-   LEARNLOOP — AUTH PAGES
-   FOREST GRAPHITE + ACID MINT
+   LEARNLOOP — AUTHENTICATION
    ========================================================= */
 
-:root {
-    --ll-primary: #B7FF72;
-    --ll-primary-dark: #91D94E;
-    --ll-primary-light: #EAFAD7;
-
-    --ll-text: #18251D;
-    --ll-text-muted: #68736C;
-
-    --ll-border: #C9D3CA;
-
-    --ll-error: #A94A45;
-
-    --ll-bg: #E8EEE6;
-    --ll-white: #FBFDF9;
-
-    --ll-radius: 14px;
-
-    --ll-shadow:
-        0 12px 32px rgba(24, 37, 29, 0.14);
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background:
-        linear-gradient(
-            180deg,
-            #F4F8F2 0%,
-            #E8EEE6 100%
-        );
-
-    font-family:
-        'Inter',
-        'Segoe UI',
-        system-ui,
-        -apple-system,
-        sans-serif;
-
-    color: var(--ll-text);
-
-    margin: 0;
-
+body:has(#container),
+body:has(#forgot-container) {
     min-height: 100vh;
+    background:
+        radial-gradient(circle at 12% 15%, rgba(183,255,114,.16), transparent 28%),
+        radial-gradient(circle at 88% 85%, rgba(32,49,40,.10), transparent 30%),
+        linear-gradient(145deg, #F7FAF5 0%, #E8EEE6 52%, #DDE7DC 100%);
+}
 
+#container,
+#forgot-container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 32px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    padding: 24px;
 }
 
-#forgot-container {
+#container > *,
+#forgot-container > * {
     width: 100%;
+}
 
-    display: flex;
-    justify-content: center;
+#container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#container > .auth-card,
+#container > form,
+#container > div {
+    max-width: 440px;
 }
 
 #container,
 .forgot-card {
-    max-width: 420px;
-    width: 100%;
+    color: var(--ll-text);
+}
 
-    background: var(--ll-white);
+#container {
+    position: relative;
+}
 
-    border-radius: var(--ll-radius);
-
-    box-shadow: var(--ll-shadow);
-
-    padding: 40px 36px;
-
-    border: 1px solid var(--ll-border);
+#container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 440px;
+    height: 560px;
+    transform: translate(-50%, -50%);
+    background: var(--ll-surface);
+    border: 1px solid rgba(202,213,203,.9);
+    border-radius: 24px;
+    box-shadow: var(--ll-shadow-lg);
+    z-index: -1;
 }
 
 .auth-brand {
     text-align: center;
+    color: var(--ll-forest);
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 1.8px;
+    margin-bottom: 26px;
+}
 
-    font-size: 22px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-
-    color: var(--ll-primary-dark);
-
-    margin-bottom: 28px;
+.auth-brand::after {
+    content: "";
+    display: block;
+    width: 34px;
+    height: 4px;
+    margin: 10px auto 0;
+    border-radius: 999px;
+    background: var(--ll-mint);
 }
 
 .auth-header {
     text-align: center;
-
-    margin-bottom: 28px;
+    margin-bottom: 26px;
 }
 
 .auth-label {
-    display: inline-block;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.2px;
-
-    color: var(--ll-text);
-
-    background: var(--ll-primary);
-
-    padding: 5px 12px;
-
+    display: inline-flex;
+    align-items: center;
+    min-height: 25px;
+    padding: 0 10px;
+    margin-bottom: 12px;
     border-radius: 999px;
-
-    margin-bottom: 14px;
+    background: var(--ll-mint-soft);
+    color: #52763A;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
 }
 
 .auth-header h1 {
-    font-size: 24px;
-
-    font-weight: 800;
-
-    margin: 0 0 10px;
-
-    letter-spacing: .5px;
+    margin: 0 0 8px;
+    color: var(--ll-forest);
+    font-size: 25px;
+    font-weight: 850;
+    letter-spacing: -.3px;
 }
 
 .auth-header p {
-    font-size: 14px;
-
-    color: var(--ll-text-muted);
-
-    line-height: 1.6;
-
     margin: 0;
+    color: var(--ll-muted);
+    font-size: 13px;
+    line-height: 1.65;
 }
 
 .auth-status {
     display: block;
-
-    background: var(--ll-surface-2);
-
-    color: var(--ll-text);
-
+    margin: 0 0 18px;
+    padding: 11px 13px;
     border: 1px solid var(--ll-border);
-
-    border-left: 3px solid var(--ll-primary-dark);
-
-    font-size: 13px;
-
-    padding: 10px 14px;
-
-    border-radius: 8px;
-
-    margin-bottom: 20px;
-
+    border-left: 3px solid var(--ll-mint-dark);
+    border-radius: 9px;
+    background: var(--ll-surface-2);
+    color: var(--ll-text);
+    font-size: 12px;
     text-align: center;
 }
 
 .auth-form {
     display: flex;
-
     flex-direction: column;
-
-    gap: 18px;
+    gap: 17px;
 }
 
 .auth-field {
     display: flex;
-
     flex-direction: column;
-
-    gap: 6px;
+    gap: 7px;
 }
 
 .auth-field label {
-    font-size: 13px;
-
-    font-weight: 600;
-
-    color: var(--ll-text);
+    color: #34443A;
+    font-size: 12px;
+    font-weight: 750;
 }
 
 .auth-field input {
     width: 100%;
-
-    padding: 12px 14px;
-
-    font-size: 14px;
-
-    border: 1.5px solid var(--ll-border);
-
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid var(--ll-border-dark);
     border-radius: 10px;
-
     outline: none;
+    background: var(--ll-surface-2);
+    color: var(--ll-text);
+    font-size: 13px;
+    transition: .2s ease;
+}
 
-    transition:
-        border-color .15s ease,
-        box-shadow .15s ease;
-
-    background: #F3F8F1;
+.auth-field input:hover {
+    border-color: #93A396;
 }
 
 .auth-field input:focus {
     border-color: var(--ll-mint-dark);
-
-    box-shadow:
-        0 0 0 3px rgba(183, 255, 114, .25);
-
-    background: var(--ll-white);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(183,255,114,.20);
 }
 
 .auth-field input::placeholder {
-    color: #949E97;
+    color: #96A199;
 }
 
 .auth-error {
-    font-size: 12px;
-
-    color: var(--ll-error);
-
-    margin: 2px 0 0;
+    margin: 1px 0 0;
+    color: var(--ll-danger);
+    font-size: 11px;
 }
 
 .password-wrapper {
     position: relative;
-
     display: flex;
-
     align-items: center;
 }
 
 .password-wrapper input {
-    padding-right: 42px;
+    padding-right: 45px;
 }
 
 .password-toggle {
     position: absolute;
-
     right: 10px;
-
-    background: none;
-
-    border: none;
-
-    cursor: pointer;
-
-    color: var(--ll-text-muted);
-
     display: flex;
-
     align-items: center;
-
-    padding: 4px;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--ll-muted);
 }
 
 .password-toggle:hover {
+    background: var(--ll-surface-3);
     color: var(--ll-text);
 }
 
 .auth-submit {
-    margin-top: 6px;
-
     width: 100%;
-
-    padding: 13px 14px;
-
-    font-size: 14px;
-
-    font-weight: 800;
-
-    letter-spacing: .3px;
-
-    color: var(--ll-forest);
-
-    background: var(--ll-primary);
-
-    border: none;
-
+    min-height: 46px;
+    margin-top: 3px;
+    border: 1px solid var(--ll-mint-dark);
     border-radius: 10px;
-
-    cursor: pointer;
-
-    transition:
-        background .15s ease,
-        transform .05s ease,
-        box-shadow .15s ease;
+    background: var(--ll-mint);
+    color: var(--ll-forest);
+    font-size: 13px;
+    font-weight: 850;
+    letter-spacing: .2px;
+    transition: .2s ease;
 }
 
 .auth-submit:hover {
-    background: var(--ll-primary-dark);
-
-    box-shadow:
-        0 6px 16px rgba(24, 37, 29, .16);
+    background: #A6EE62;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(22,35,28,.14);
 }
 
 .auth-submit:active {
-    transform: translateY(1px);
+    transform: translateY(0);
 }
 
 .auth-footer {
+    margin-top: 20px;
     text-align: center;
-
-    margin-top: 22px;
 }
 
 .forgot-link {
-    font-size: 13px;
-
-    font-weight: 700;
-
     color: #55783B;
-
-    text-decoration: none;
+    font-size: 12px;
+    font-weight: 750;
 }
 
 .forgot-link:hover {
+    color: var(--ll-forest);
     text-decoration: underline;
 }
 
-@media (max-width: 480px) {
-
+@media (max-width: 500px) {
     #container,
-    .forgot-card {
-        padding: 30px 22px;
+    #forgot-container {
+        padding: 20px 14px;
     }
 
+    #container::before {
+        width: calc(100% - 28px);
+        height: calc(100% - 40px);
+    }
 }
