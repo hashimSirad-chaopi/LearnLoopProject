@@ -42,10 +42,14 @@
                     Listings
                 </a>
 
+                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
+
                 <a href="{{ route('admin.reports') }}"
                    class="nav-item">
                     Reports
                 </a>
+
+
 
                 <a href="{{ route('admin.settings') }}"
                    class="nav-item">

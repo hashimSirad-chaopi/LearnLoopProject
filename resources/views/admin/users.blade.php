@@ -42,6 +42,8 @@
                     Listings
                 </a>
 
+                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
+
                 <a href="{{ route('admin.reports') }}"
                    class="nav-item">
                     Reports
@@ -138,18 +140,24 @@
 
 
                 <!-- SEARCH -->
-                <div class="user-tools">
+                <!-- SEARCH -->
+<div class="user-tools">
 
-                    <input
-                        type="search"
-                        class="user-search"
-                        placeholder="Search users..."
-                        aria-label="Search users"
-                    >
+    <form method="GET" action="{{ route('admin.users') }}" style="display:flex; gap:10px; flex:1;">
+        <input
+            type="search"
+            name="search"
+            value="{{ $search }}"
+            class="user-search"
+            placeholder="Search users..."
+            aria-label="Search users"
+        >
+        <button type="submit" class="table-btn">Search</button>
+    </form>
 
-                    <a href="{{ route('admin.users.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add User</a>
+    <a href="{{ route('admin.users.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add User</a>
 
-                </div>
+</div>
 
             </div>
 

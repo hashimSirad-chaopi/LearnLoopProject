@@ -42,6 +42,8 @@
                     Listings
                 </a>
 
+                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
+
                 <a href="{{ route('admin.reports') }}"
                    class="nav-item">
                     Reports

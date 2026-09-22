@@ -38,6 +38,9 @@
                     Listings
                 </a>
 
+                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
+
+
                 <a href="{{ route('admin.reports') }}" class="nav-item">
                     Reports
                 </a>
@@ -126,15 +129,21 @@
 
 
                 <!-- SEARCH -->
-                <input
-                    type="search"
-                    class="listing-search"
-                    placeholder="Search listings..."
-                    aria-label="Search listings"
-                >
+                <!-- SEARCH -->
+<form method="GET" action="{{ route('admin.listings') }}" style="display:flex; gap:10px; flex:1;">
+    <input
+        type="search"
+        name="search"
+        value="{{ $search }}"
+        class="listing-search"
+        placeholder="Search listings..."
+        aria-label="Search listings"
+    >
+    <button type="submit" class="table-btn">Search</button>
+</form>
 
-                <a href="{{ route('admin.listings.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add Listing</a>
-
+<a href="{{ route('admin.listings.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add Listing</a>
+                <a href="{{ route('admin.categories') }}" class="table-btn" style="text-decoration:none; display:inline-block;">Manage Categories</a>
             </div>
 
 
