@@ -1,0 +1,70 @@
+/* =========================================================
+   LEARNLOOP — EDIT USER
+   ========================================================= */
+
+/* Same form shell as Add User (createuser.css) — the two pages
+   share markup, so they share the base card/scroll/select fixes.
+   This file adds the bits specific to editing an existing record. */
+
+.users-page:has(.settings-form) {
+    align-items: center;
+    overflow-y: auto;
+}
+
+.users-page .settings-form {
+    width: 100%;
+    max-width: 620px;
+    margin: 6px 0 48px;
+    padding: 28px;
+    background: var(--ll-surface);
+    border: 1px solid var(--ll-border);
+    border-radius: var(--ll-radius);
+    box-shadow: var(--ll-shadow);
+}
+
+.settings-field select,
+.settings-field textarea {
+    width: 100%;
+    padding: 0 13px;
+    border: 1px solid var(--ll-border-dark);
+    border-radius: 9px;
+    outline: none;
+    background: var(--ll-surface-2);
+    color: var(--ll-text);
+    font-size: 12px;
+    font-family: inherit;
+    transition: .2s ease;
+    appearance: none;
+}
+
+.settings-field select {
+    height: 43px;
+    padding-right: 34px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%2369766E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 13px center;
+    cursor: pointer;
+}
+
+.settings-field select:focus {
+    background-color: #FFFFFF;
+    border-color: var(--ll-mint-dark);
+    box-shadow: 0 0 0 4px rgba(183, 255, 114, .18);
+}
+
+.settings-field > p {
+    margin-top: 5px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Small "editing" cue on the record's current role, so the field
+   reads less like a blank prompt and more like an existing value. */
+.settings-field select option:checked {
+    color: var(--ll-forest);
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    .users-page .settings-form { padding: 22px; margin-top: 2px; }
+}

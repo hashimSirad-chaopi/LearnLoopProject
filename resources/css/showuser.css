@@ -1,0 +1,47 @@
+/* =========================================================
+   LEARNLOOP — VIEW USER
+   ========================================================= */
+
+.users-page:has(.settings-form) {
+    align-items: center;
+    overflow-y: auto;
+}
+
+.users-page .settings-form {
+    width: 100%;
+    max-width: 620px;
+    margin: 6px 0 48px;
+    padding: 28px;
+    background: var(--ll-surface);
+    border: 1px solid var(--ll-border);
+    border-radius: var(--ll-radius);
+    box-shadow: var(--ll-shadow);
+}
+
+/* This page is read-only, so its .settings-field values are plain
+   <p> tags instead of inputs — style them to look like filled,
+   locked fields rather than loose text. */
+.users-page .settings-form .settings-field p {
+    display: flex;
+    align-items: center;
+    height: 43px;
+    padding: 0 13px;
+    border: 1px solid var(--ll-border);
+    border-radius: 9px;
+    background: var(--ll-surface-2);
+    color: var(--ll-text);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* The Edit link is rendered with .settings-save-btn but as an <a>
+   with inline display/alignment overrides — this keeps its size
+   and radius consistent with the real submit buttons elsewhere. */
+.users-page .settings-form .settings-actions .settings-save-btn {
+    line-height: 40px;
+    padding: 0 20px;
+}
+
+@media (max-width: 700px) {
+    .users-page .settings-form { padding: 22px; margin-top: 2px; }
+}

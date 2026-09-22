@@ -1,0 +1,74 @@
+/* =========================================================
+   LEARNLOOP — ADD USER
+   ========================================================= */
+
+/* The .users-page shell (users.css) is built for the toolbar +
+   table view: fixed height, overflow hidden. This page only ever
+   holds a form, so let it scroll and center its content instead. */
+.users-page:has(.settings-form) {
+    align-items: center;
+    overflow-y: auto;
+}
+
+.users-page .settings-form {
+    width: 100%;
+    max-width: 620px;
+    margin: 6px 0 48px;
+    padding: 28px;
+    background: var(--ll-surface);
+    border: 1px solid var(--ll-border);
+    border-radius: var(--ll-radius);
+    box-shadow: var(--ll-shadow);
+}
+
+/* settings.css only styles <input>; bring selects and textareas
+   up to the same look so forms don't fall back to browser defaults. */
+.settings-field select,
+.settings-field textarea {
+    width: 100%;
+    padding: 0 13px;
+    border: 1px solid var(--ll-border-dark);
+    border-radius: 9px;
+    outline: none;
+    background: var(--ll-surface-2);
+    color: var(--ll-text);
+    font-size: 12px;
+    font-family: inherit;
+    transition: .2s ease;
+    appearance: none;
+}
+
+.settings-field select {
+    height: 43px;
+    padding-right: 34px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%2369766E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 13px center;
+    cursor: pointer;
+}
+
+.settings-field textarea {
+    min-height: 104px;
+    padding: 11px 13px;
+    line-height: 1.55;
+    resize: vertical;
+}
+
+.settings-field select:focus,
+.settings-field textarea:focus {
+    background-color: #FFFFFF;
+    border-color: var(--ll-mint-dark);
+    box-shadow: 0 0 0 4px rgba(183, 255, 114, .18);
+}
+
+/* Inline @error text keeps its red color; this just gives it
+   consistent spacing/weight instead of raw <p> defaults. */
+.settings-field > p {
+    margin-top: 5px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    .users-page .settings-form { padding: 22px; margin-top: 2px; }
+}

@@ -5,62 +5,40 @@
 body:has(#container),
 body:has(#forgot-container) {
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
     background:
         radial-gradient(circle at 12% 15%, rgba(183,255,114,.16), transparent 28%),
         radial-gradient(circle at 88% 85%, rgba(32,49,40,.10), transparent 30%),
         linear-gradient(145deg, #F7FAF5 0%, #E8EEE6 52%, #DDE7DC 100%);
 }
 
-#container,
-#forgot-container {
-    min-height: 100vh;
-    width: 100%;
-    padding: 32px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#container > *,
-#forgot-container > * {
-    width: 100%;
-}
-
+/* The Login/Register markup drops its fields straight into #container
+   with no inner wrapper, so #container itself has to BE the card. It's
+   sized to its own content (no fixed height), so it never clips or
+   overflows regardless of how many fields a given form has. */
 #container {
-    max-width: 480px;
-    margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-#container > .auth-card,
-#container > form,
-#container > div {
+    width: 100%;
     max-width: 440px;
-}
-
-#container,
-.forgot-card {
-    color: var(--ll-text);
-}
-
-#container {
-    position: relative;
-}
-
-#container::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 440px;
-    height: 560px;
-    transform: translate(-50%, -50%);
+    padding: 38px 36px;
+    display: flex;
+    flex-direction: column;
     background: var(--ll-surface);
     border: 1px solid rgba(202,213,203,.9);
     border-radius: 24px;
     box-shadow: var(--ll-shadow-lg);
-    z-index: -1;
+    color: var(--ll-text);
+}
+
+/* Forgot Password keeps its own inner .forgot-card (styled in
+   forgot.css) — #forgot-container just centers it on the page. */
+#forgot-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .auth-brand {
@@ -252,13 +230,13 @@ body:has(#forgot-container) {
 }
 
 @media (max-width: 500px) {
-    #container,
-    #forgot-container {
+    body:has(#container),
+    body:has(#forgot-container) {
         padding: 20px 14px;
     }
 
-    #container::before {
-        width: calc(100% - 28px);
-        height: calc(100% - 40px);
+    #container {
+        padding: 28px 22px;
+        border-radius: 18px;
     }
 }
