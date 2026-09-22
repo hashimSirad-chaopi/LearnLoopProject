@@ -56,6 +56,12 @@
                 </div>
 
                 <div class="settings-field">
+                    <label for="password">Reset Password (optional)</label>
+                    <input id="password" name="password" type="password" placeholder="Leave blank to keep current password">
+                    @error('password') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
+                </div>
+
+                <div class="settings-field">
                     <label for="role">Role</label>
                     <select id="role" name="role">
                         <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>

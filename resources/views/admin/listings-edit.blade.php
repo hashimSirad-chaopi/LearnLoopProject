@@ -59,10 +59,13 @@
                 </div>
 
                 <div class="settings-field">
-                    <label for="category">Category</label>
-                    <input id="category" name="category" type="text" value="{{ old('category', $listing->category) }}">
-                    @error('category') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
-                </div>
+    <label for="category">Category</label>
+    <select id="category" name="category">
+        @foreach(\App\Models\Category::all() as $cat)
+            <option value="{{ $cat->name }}" {{ (old('category', $listing->category ?? '')) === $cat->name ? 'selected' : '' }}>{{ $cat->name }}</option>
+        @endforeach
+    </select>
+</div>
 
                 <div class="settings-field">
                     <label for="description">Description</label>

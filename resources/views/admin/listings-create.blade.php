@@ -17,6 +17,7 @@
                 <a href="{{ route('admin.home') }}" class="nav-item">Dashboard</a>
                 <a href="{{ route('admin.users') }}" class="nav-item">User Management</a>
                 <a href="{{ route('admin.listings') }}" class="nav-item active">Listings</a>
+                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
                 <a href="{{ route('admin.reports') }}" class="nav-item">Reports</a>
                 <a href="{{ route('admin.settings') }}" class="nav-item">Settings</a>
             </nav>
@@ -58,10 +59,13 @@
                 </div>
 
                 <div class="settings-field">
-                    <label for="category">Category</label>
-                    <input id="category" name="category" type="text" value="{{ old('category') }}">
-                    @error('category') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
-                </div>
+    <label for="category">Category</label>
+    <select id="category" name="category">
+        @foreach(\App\Models\Category::all() as $cat)
+            <option value="{{ $cat->name }}" {{ (old('category', '')) === $cat->name ? 'selected' : '' }}>{{ $cat->name }}</option>
+        @endforeach
+    </select>
+</div>
 
                 <div class="settings-field">
                     <label for="description">Description</label>

@@ -1,4 +1,4 @@
-```blade
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +41,8 @@
                    class="nav-item">
                     Listings
                 </a>
+
+                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
 
                 <a href="{{ route('admin.reports') }}"
                    class="nav-item active">
@@ -139,37 +141,31 @@
 
 
                 <!-- SEARCH + FILTER -->
-                <div class="report-tools">
+<div class="report-tools">
 
-                    <input
-                        type="search"
-                        class="report-search"
-                        placeholder="Search reports..."
-                        aria-label="Search reports"
-                    >
-                    <a href="{{ route('admin.reports.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ File Report</a>
-                    <select
-                        class="report-filter"
-                        aria-label="Filter reports"
-                    >
-                        <option value="all">
-                            All Reports
-                        </option>
+    <form method="GET" action="{{ route('admin.reports') }}" style="display:flex; gap:10px; flex:1; align-items:center;">
+        <input
+            type="search"
+            name="search"
+            value="{{ $search }}"
+            class="report-search"
+            placeholder="Search reports..."
+            aria-label="Search reports"
+        >
 
-                        <option value="pending">
-                            Pending
-                        </option>
+        <select name="status" class="report-filter" aria-label="Filter reports" onchange="this.form.submit()">
+            <option value="all" {{ $statusFilter === 'all' ? 'selected' : '' }}>All Reports</option>
+            <option value="pending" {{ $statusFilter === 'pending' ? 'selected' : '' }}>Pending</option>
+            <option value="resolved" {{ $statusFilter === 'resolved' ? 'selected' : '' }}>Resolved</option>
+            <option value="dismissed" {{ $statusFilter === 'dismissed' ? 'selected' : '' }}>Dismissed</option>
+        </select>
 
-                        <option value="resolved">
-                            Resolved
-                        </option>
+        <button type="submit" class="table-btn">Search</button>
+    </form>
 
-                        <option value="dismissed">
-                            Dismissed
-                        </option>
-                    </select>
+    <a href="{{ route('admin.reports.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ File Report</a>
 
-                </div>
+</div>
 
             </div>
 
@@ -248,4 +244,4 @@
 
 </body>
 </html>
-```
+

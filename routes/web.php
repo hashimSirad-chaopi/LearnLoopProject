@@ -84,6 +84,16 @@ Route::patch('/admin/listings/{listing}/enable', [PageController::class, 'enable
 Route::delete('/admin/reports/{report}', [PageController::class, 'deleteReport'])->name('admin.reports.delete');
 Route::get('/admin/reports/create', [PageController::class, 'createReport'])->name('admin.reports.create');
 Route::post('/admin/reports', [PageController::class, 'storeReport'])->name('admin.reports.store');
+Route::get('/admin/exchanges', [PageController::class, 'adminExchanges'])->name('admin.exchanges');
+Route::get('/admin/exchanges/create', [PageController::class, 'createExchange'])->name('admin.exchanges.create');
+Route::post('/admin/exchanges', [PageController::class, 'storeExchange'])->name('admin.exchanges.store');
+Route::get('/admin/exchanges/{exchange}', [PageController::class, 'showExchange'])->name('admin.exchanges.show');
+Route::patch('/admin/exchanges/{exchange}', [PageController::class, 'updateExchangeStatus'])->name('admin.exchanges.update');
+Route::delete('/admin/exchanges/{exchange}', [PageController::class, 'deleteExchange'])->name('admin.exchanges.delete');
+Route::get('/admin/categories', [PageController::class, 'adminCategories'])->name('admin.categories');
+Route::post('/admin/categories', [PageController::class, 'storeCategory'])->name('admin.categories.store');
+Route::delete('/admin/categories/{category}', [PageController::class, 'deleteCategory'])->name('admin.categories.delete');
+Route::put('/admin/categories/{category}', [PageController::class, 'updateCategory'])->name('admin.categories.update');
 
 });
 

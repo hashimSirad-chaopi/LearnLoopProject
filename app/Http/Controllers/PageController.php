@@ -8,6 +8,7 @@ use App\Models\Report;
 use App\Models\Listing;
 use App\Models\Exchange;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Category;
 class PageController extends Controller
 {
     public function adminHome()
@@ -21,18 +22,28 @@ class PageController extends Controller
     return view('admin.home', compact('totalUsers', 'totalListings', 'activeListings', 'activeSessions', 'pendingReports', 'activeTutors'));
 }
 
-   public function adminUsers()
+   public function adminUsers(Request $request)
 {
-    $users = User::all();
+    $search = $request->query('search');
 
-    return view('admin.users', compact('users'));
+    $users = User::when($search, function ($query, $search) {
+        $query->where('name', 'like', "%{$search}%")
+              ->orWhere('email', 'like', "%{$search}%");
+    })->get();
+
+    return view('admin.users', compact('users', 'search'));
 }
 
-    public function adminListings()
+    public function adminListings(Request $request)
 {
-    $listings = Listing::with('user')->latest()->get();
+    $search = $request->query('search');
 
-    return view('admin.listing', compact('listings'));
+    $listings = Listing::with('user')->when($search, function ($query, $search) {
+        $query->where('title', 'like', "%{$search}%")
+              ->orWhere('category', 'like', "%{$search}%");
+    })->latest()->get();
+
+    return view('admin.listing', compact('listings', 'search'));
 }
     
 
@@ -51,11 +62,22 @@ class PageController extends Controller
 }
 
 
-public function adminReports()
+public function adminReports(Request $request)
 {
-    $reports = Report::with(['reporter', 'reportedUser', 'listing'])->latest()->get();
+    $search = $request->query('search');
+    $statusFilter = $request->query('status', 'all');
 
-    return view('admin.reports', compact('reports'));
+    $reports = Report::with(['reporter', 'reportedUser', 'listing'])
+        ->when($search, function ($query, $search) {
+            $query->where('title', 'like', "%{$search}%")
+                  ->orWhere('reason', 'like', "%{$search}%");
+        })
+        ->when($statusFilter && $statusFilter !== 'all', function ($query) use ($statusFilter) {
+            $query->where('status', $statusFilter);
+        })
+        ->latest()->get();
+
+    return view('admin.reports', compact('reports', 'search', 'statusFilter'));
 }
 
 public function resolveReport(Report $report)
@@ -114,9 +136,18 @@ public function updateUser(Request $request, User $user)
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email,' . $user->id,
         'role' => 'required|in:admin,user',
+        'password' => 'nullable|min:6',
     ]);
 
-    $user->update($validated);
+    $user->name = $validated['name'];
+    $user->email = $validated['email'];
+    $user->role = $validated['role'];
+
+    if (!empty($validated['password'])) {
+        $user->password = Hash::make($validated['password']);
+    }
+
+    $user->save();
 
     return redirect()->route('admin.users')->with('success', 'User updated successfully.');
 }
@@ -217,6 +248,90 @@ public function storeReport(Request $request)
     Report::create($validated);
 
     return redirect()->route('admin.reports')->with('success', 'Report created successfully.');
+}
+
+public function adminExchanges()
+{
+    $exchanges = Exchange::with(['provider', 'learner'])->latest()->get();
+
+    return view('admin.exchanges', compact('exchanges'));
+}
+
+public function showExchange(Exchange $exchange)
+{
+    return view('admin.exchanges-show', compact('exchange'));
+}
+
+public function updateExchangeStatus(Request $request, Exchange $exchange)
+{
+    $validated = $request->validate([
+        'status' => 'required|in:ongoing,completed,pending,disputed',
+    ]);
+
+    $exchange->update($validated);
+
+    return redirect()->route('admin.exchanges')->with('success', 'Exchange status updated.');
+}
+
+public function deleteExchange(Exchange $exchange)
+{
+    $exchange->delete();
+
+    return redirect()->route('admin.exchanges')->with('success', 'Exchange deleted.');
+}
+
+public function adminCategories()
+{
+    $categories = Category::latest()->get();
+
+    return view('admin.categories', compact('categories'));
+}
+
+public function storeCategory(Request $request)
+{
+    $request->validate(['name' => 'required|string|max:255|unique:categories,name']);
+
+    Category::create($request->only('name'));
+
+    return back()->with('success', 'Category added.');
+}
+
+public function deleteCategory(Category $category)
+{
+    $category->delete();
+
+    return back()->with('success', 'Category deleted.');
+}
+
+public function createExchange()
+{
+    $users = User::all();
+
+    return view('admin.exchanges-create', compact('users'));
+}
+
+public function storeExchange(Request $request)
+{
+    $validated = $request->validate([
+        'provider_id' => 'required|exists:users,id',
+        'learner_id' => 'required|exists:users,id',
+        'skill_offered' => 'required|string|max:255',
+        'skill_wanted' => 'required|string|max:255',
+        'status' => 'required|in:ongoing,completed,pending,disputed',
+    ]);
+
+    Exchange::create($validated);
+
+    return redirect()->route('admin.exchanges')->with('success', 'Exchange created successfully.');
+}
+
+public function updateCategory(Request $request, Category $category)
+{
+    $request->validate(['name' => 'required|string|max:255|unique:categories,name,' . $category->id]);
+
+    $category->update($request->only('name'));
+
+    return back()->with('success', 'Category updated.');
 }
 
 }
