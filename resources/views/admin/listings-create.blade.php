@@ -76,7 +76,7 @@
                 <div class="settings-field">
                     <label for="status">Status</label>
                     <select id="status" name="status">
-                        <option value="pending" {{ old('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                       
                         <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>Active</option>
                         <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
                     </select>
