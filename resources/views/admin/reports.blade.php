@@ -163,7 +163,7 @@
         <button type="submit" class="table-btn">Search</button>
     </form>
 
-    <a href="{{ route('admin.reports.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ File Report</a>
+    
 
 </div>
 

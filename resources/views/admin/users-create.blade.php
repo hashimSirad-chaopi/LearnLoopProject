@@ -64,7 +64,7 @@
                     <label for="role">Role</label>
                     <select id="role" name="role">
                         <option value="user" {{ old('role') === 'user' ? 'selected' : '' }}>User</option>
-                        <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin</option>
+                       
                     </select>
                 </div>
 
