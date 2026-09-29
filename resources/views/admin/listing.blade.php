@@ -130,7 +130,7 @@
 
                 <!-- SEARCH -->
                 <!-- SEARCH -->
-<form method="GET" action="{{ route('admin.listings') }}" style="display:flex; gap:10px; flex:1;">
+<form method="GET" action="{{ route('admin.listings') }}" style="display:flex; gap:10px; flex:1; align-items:center;">
     <input
         type="search"
         name="search"
@@ -142,8 +142,8 @@
     <button type="submit" class="table-btn">Search</button>
 </form>
 
-<a href="{{ route('admin.listings.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add Listing</a>
-                <a href="{{ route('admin.categories') }}" class="table-btn" style="text-decoration:none; display:inline-block;">Manage Categories</a>
+<a href="{{ route('admin.listings.create') }}" class="settings-save-btn" style="text-decoration:none;">+ Add Listing</a>
+                <a href="{{ route('admin.categories') }}" class="settings-save-btn" style="text-decoration:none; background:#FFFFFF;">Manage Categories</a>
             </div>
 
 
@@ -180,7 +180,7 @@
         <div class="listing-footer">
             <span class="listing-date">Posted {{ $listing->created_at->diffForHumans() }}</span>
             <div class="listing-actions">
-                <a href="{{ route('admin.listings.edit', $listing->id) }}" class="table-btn" style="text-decoration:none; display:inline-block;">Edit</a>
+                <a href="{{ route('admin.listings.edit', $listing->id) }}" class="table-btn" style="text-decoration:none;">Edit</a>
                 @if($listing->status === 'inactive')
     <form method="POST" action="{{ route('admin.listings.enable', $listing->id) }}">
         @csrf @method('PATCH')

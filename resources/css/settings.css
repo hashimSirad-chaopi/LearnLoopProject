@@ -71,6 +71,10 @@
     color: var(--ll-forest);
     font-size: 11px;
     font-weight: 850;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     transition: .2s ease;
 }
 .settings-save-btn:hover { background: #A6EE62; transform: translateY(-1px); box-shadow: 0 7px 16px rgba(22,35,28,.12); }

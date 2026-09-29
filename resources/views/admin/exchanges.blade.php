@@ -40,39 +40,79 @@
         </header>
 
         <section class="users-page">
-            <a href="{{ route('admin.exchanges.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px; margin-bottom:15px;">+ Add Exchange</a>
-            <div class="table-wrapper">
-                <table class="users-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Provider</th>
-                            <th>Learner</th>
-                            <th>Skill Exchanged</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($exchanges as $exchange)
-                            <tr>
-                                <td>#EX-{{ str_pad($exchange->id, 3, '0', STR_PAD_LEFT) }}</td>
-                                <td>{{ $exchange->provider->name ?? 'N/A' }}</td>
-                                <td>{{ $exchange->learner->name ?? 'N/A' }}</td>
-                                <td>{{ $exchange->skill_offered }} ↔ {{ $exchange->skill_wanted }}</td>
-                                <td><span class="status-badge active-status">{{ ucfirst($exchange->status) }}</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <a href="{{ route('admin.exchanges.show', $exchange->id) }}" class="table-btn" style="text-decoration:none; display:inline-block;">View</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr><td colspan="6">No exchanges found.</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
+
+            <div class="users-toolbar">
+
+                <div class="dashboard-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            EXCHANGES
+                        </span>
+
+                        <h2>
+                            All Exchanges
+                        </h2>
+
+                        <p>
+                            View and manage all recorded skill exchanges.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="user-tools">
+
+                    <a href="{{ route('admin.exchanges.create') }}" class="settings-save-btn" style="text-decoration:none;">+ Add Exchange</a>
+
+                </div>
+
             </div>
+
+            <div class="users-scroll-area">
+
+                <div class="users-table-container">
+
+                    <table class="users-table">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Provider</th>
+                                <th>Learner</th>
+                                <th>Skill Exchanged</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @forelse($exchanges as $exchange)
+                                <tr>
+                                    <td>#EX-{{ str_pad($exchange->id, 3, '0', STR_PAD_LEFT) }}</td>
+                                    <td>{{ $exchange->provider->name ?? 'N/A' }}</td>
+                                    <td>{{ $exchange->learner->name ?? 'N/A' }}</td>
+                                    <td>{{ $exchange->skill_offered }} ↔ {{ $exchange->skill_wanted }}</td>
+                                    <td><span class="status-badge active-status">{{ ucfirst($exchange->status) }}</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <a href="{{ route('admin.exchanges.show', $exchange->id) }}" class="table-btn" style="text-decoration:none;">View</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr><td colspan="6">No exchanges found.</td></tr>
+                            @endforelse
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
         </section>
     </main>
 </div>
