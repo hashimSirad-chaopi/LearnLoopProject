@@ -59,7 +59,7 @@
 
                 <div class="settings-actions">
                     <a href="{{ route('admin.users') }}" class="table-btn">Back</a>
-                    <a href="{{ route('admin.users.edit', $user->id) }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; text-align:center;">Edit</a>
+                    <a href="{{ route('admin.users.edit', $user->id) }}" class="settings-save-btn" style="text-decoration:none;">Edit</a>
                 </div>
             </div>
         </section>

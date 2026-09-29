@@ -359,6 +359,28 @@
 
 
 /* =========================================================
+   ANCHOR BUTTONS AS DIRECT CHILDREN
+   Anchors styled as buttons (+ Add Exchange, Back to Listings)
+   are flex items of the .users-page column and stretch to the
+   full page width. Keep them content-sized and center their
+   label vertically.
+   ========================================================= */
+
+.users-page > a {
+    align-self: flex-start;
+}
+
+.users-page > a.table-btn,
+.users-page > a.settings-save-btn {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* =========================================================
    ACTION BUTTONS
    ========================================================= */
 

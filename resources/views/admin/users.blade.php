@@ -143,7 +143,7 @@
                 <!-- SEARCH -->
 <div class="user-tools">
 
-    <form method="GET" action="{{ route('admin.users') }}" style="display:flex; gap:10px; flex:1;">
+    <form method="GET" action="{{ route('admin.users') }}" style="display:flex; gap:10px; flex:1; align-items:center;">
         <input
             type="search"
             name="search"
@@ -155,7 +155,7 @@
         <button type="submit" class="table-btn">Search</button>
     </form>
 
-    <a href="{{ route('admin.users.create') }}" class="settings-save-btn" style="text-decoration:none; display:inline-block; padding:10px 18px;">+ Add User</a>
+    <a href="{{ route('admin.users.create') }}" class="settings-save-btn" style="text-decoration:none;">+ Add User</a>
 
 </div>
 
@@ -225,8 +225,8 @@
 
                                         <div class="action-buttons">
 
-                                            <a href="{{ route('admin.users.show', $user->id) }}" class="table-btn" style="text-decoration:none; display:inline-block;">View</a>
-                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="table-btn" style="text-decoration:none; display:inline-block;">Edit</a>    
+                                            <a href="{{ route('admin.users.show', $user->id) }}" class="table-btn" style="text-decoration:none;">View</a>
+                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="table-btn" style="text-decoration:none;">Edit</a>    
 
                                             <form
                                                 method="POST"
