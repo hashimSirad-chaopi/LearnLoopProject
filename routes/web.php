@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/home', [PageController::class, 'adminHome'])
         ->name('admin.home');

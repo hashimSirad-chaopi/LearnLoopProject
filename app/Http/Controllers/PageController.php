@@ -52,13 +52,19 @@ class PageController extends Controller
         return view('admin.settings');
 
     }
-    public function deleteUser(User $user)
+   public function deleteUser(User $user)
 {
+    if ($user->id === auth()->id()) {
+        return back()->withErrors(['delete' => "You can't delete your own account."]);
+    }
+
+    if ($user->role === 'admin' && User::where('role', 'admin')->count() <= 1) {
+        return back()->withErrors(['delete' => 'Cannot delete the last admin.']);
+    }
+
     $user->delete();
 
-    return redirect()
-        ->route('admin.users')
-        ->with('success', 'User deleted successfully.');
+    return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
 }
 
 
@@ -139,6 +145,12 @@ public function updateUser(Request $request, User $user)
         'password' => 'nullable|min:6',
     ]);
 
+    $wasAdmin = $user->role === 'admin';
+
+    if ($wasAdmin && $validated['role'] !== 'admin' && User::where('role', 'admin')->count() <= 1) {
+        return back()->withErrors(['role' => 'Cannot demote the last admin.']);
+    }
+
     $user->name = $validated['name'];
     $user->email = $validated['email'];
     $user->role = $validated['role'];
@@ -164,7 +176,7 @@ public function storeListing(Request $request)
     $validated = $request->validate([
         'user_id' => 'required|exists:users,id',
         'title' => 'required|string|max:255',
-        'category' => 'required|string|max:255',
+        'category' => 'required|exists:categories,name',
         'description' => 'required|string',
         'status' => 'required|in:active,pending,inactive',
     ]);
@@ -186,7 +198,7 @@ public function updateListing(Request $request, Listing $listing)
     $validated = $request->validate([
         'user_id' => 'required|exists:users,id',
         'title' => 'required|string|max:255',
-        'category' => 'required|string|max:255',
+        'category' => 'required|exists:categories,name',
         'description' => 'required|string',
         'status' => 'required|in:active,pending,inactive',
     ]);
@@ -239,7 +251,7 @@ public function storeReport(Request $request)
     $validated = $request->validate([
         'title' => 'required|string|max:255',
         'reported_by' => 'required|exists:users,id',
-        'reported_user_id' => 'required|exists:users,id',
+        'reported_user_id' => 'required|exists:users,id|different:reported_by',
         'listing_id' => 'nullable|exists:listings,id',
         'reason' => 'required|string',
         'status' => 'required|in:pending,resolved,dismissed',
@@ -314,7 +326,7 @@ public function storeExchange(Request $request)
 {
     $validated = $request->validate([
         'provider_id' => 'required|exists:users,id',
-        'learner_id' => 'required|exists:users,id',
+        'learner_id' => 'required|exists:users,id|different:provider_id',
         'skill_offered' => 'required|string|max:255',
         'skill_wanted' => 'required|string|max:255',
         'status' => 'required|in:ongoing,completed,pending,disputed',
