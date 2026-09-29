@@ -103,7 +103,9 @@
                 </p>
 
             </div>
-
+            @if($errors->any())
+    <p style="color:red; font-weight:bold;">{{ $errors->first() }}</p>
+@endif
         </header>
 
 

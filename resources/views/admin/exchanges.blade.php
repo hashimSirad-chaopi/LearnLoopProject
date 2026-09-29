@@ -71,47 +71,47 @@
 
             </div>
 
-            <div class="users-scroll-area">
+           <div class="users-scroll-area">
 
-                <div class="users-table-container">
+    <div class="users-table-container">
 
-                    <table class="users-table">
+        <table class="users-table exchanges-table">
 
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Provider</th>
-                                <th>Learner</th>
-                                <th>Skill Exchanged</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Provider</th>
+                    <th>Learner</th>
+                    <th>Skill Exchanged</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-                        <tbody>
-                            @forelse($exchanges as $exchange)
-                                <tr>
-                                    <td>#EX-{{ str_pad($exchange->id, 3, '0', STR_PAD_LEFT) }}</td>
-                                    <td>{{ $exchange->provider->name ?? 'N/A' }}</td>
-                                    <td>{{ $exchange->learner->name ?? 'N/A' }}</td>
-                                    <td>{{ $exchange->skill_offered }} ↔ {{ $exchange->skill_wanted }}</td>
-                                    <td><span class="status-badge active-status">{{ ucfirst($exchange->status) }}</span></td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <a href="{{ route('admin.exchanges.show', $exchange->id) }}" class="table-btn" style="text-decoration:none;">View</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr><td colspan="6">No exchanges found.</td></tr>
-                            @endforelse
-                        </tbody>
+            <tbody>
+                @forelse($exchanges as $exchange)
+                    <tr>
+                        <td>#EX-{{ str_pad($exchange->id, 3, '0', STR_PAD_LEFT) }}</td>
+                        <td>{{ $exchange->provider->name ?? 'N/A' }}</td>
+                        <td>{{ $exchange->learner->name ?? 'N/A' }}</td>
+                        <td>{{ $exchange->skill_offered }} ↔ {{ $exchange->skill_wanted }}</td>
+                        <td><span class="status-badge active-status">{{ ucfirst($exchange->status) }}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{{ route('admin.exchanges.show', $exchange->id) }}" class="table-btn" style="text-decoration:none;">View</a>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr><td colspan="6">No exchanges found.</td></tr>
+                @endforelse
+            </tbody>
 
-                    </table>
+        </table>
 
-                </div>
+    </div>
 
-            </div>
+</div>
 
         </section>
     </main>

@@ -1,0 +1,17 @@
+.exchanges-table th:nth-child(1),
+.exchanges-table td:nth-child(1) { width: 12%; }
+
+.exchanges-table th:nth-child(2),
+.exchanges-table td:nth-child(2) { width: 20%; }
+
+.exchanges-table th:nth-child(3),
+.exchanges-table td:nth-child(3) { width: 20%; }
+
+.exchanges-table th:nth-child(4),
+.exchanges-table td:nth-child(4) { width: 26%; }
+
+.exchanges-table th:nth-child(5),
+.exchanges-table td:nth-child(5) { width: 12%; }
+
+.exchanges-table th:nth-child(6),
+.exchanges-table td:nth-child(6) { width: 10%; }
