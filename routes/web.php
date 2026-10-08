@@ -59,6 +59,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/users/{user}', [PageController::class, 'deleteUser'])
         ->name('admin.users.delete');
 
+    Route::patch('/admin/users/{user}/suspend', [PageController::class, 'suspendUser'])
+        ->name('admin.users.suspend');
+
+    Route::patch('/admin/users/{user}/activate', [PageController::class, 'activateUser'])
+        ->name('admin.users.activate');    
+
     Route::patch('/admin/reports/{report}/resolve', [PageController::class, 'resolveReport'])
         ->name('admin.reports.resolve');
 

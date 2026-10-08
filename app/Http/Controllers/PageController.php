@@ -38,10 +38,15 @@ class PageController extends Controller
 {
     $search = $request->query('search');
 
-    $listings = Listing::with('user')->when($search, function ($query, $search) {
+    $listings = Listing::with(['user', 'category'])
+    ->when($search, function ($query, $search) {
         $query->where('title', 'like', "%{$search}%")
-              ->orWhere('category', 'like', "%{$search}%");
-    })->latest()->get();
+              ->orWhereHas('category', function ($categoryQuery) use ($search) {
+                  $categoryQuery->where('name', 'like', "%{$search}%");
+              });
+    })
+    ->latest()
+    ->get();
 
     return view('admin.listing', compact('listings', 'search'));
 }
@@ -65,6 +70,34 @@ class PageController extends Controller
     $user->delete();
 
     return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
+}
+
+public function suspendUser(User $user)
+{
+    if ($user->id === auth()->id()) {
+        return back()->withErrors([
+            'status' => "You can't suspend your own account."
+        ]);
+    }
+
+    if ($user->role === 'admin' && User::where('role', 'admin')->where('status', 'active')->count() <= 1) {
+        return back()->withErrors([
+            'status' => 'Cannot suspend the last active admin.'
+        ]);
+    }
+
+    $user->status = 'suspended';
+    $user->save();
+
+    return back()->with('success', 'User suspended successfully.');
+}
+
+public function activateUser(User $user)
+{
+    $user->status = 'active';
+    $user->save();
+
+    return back()->with('success', 'User reactivated successfully.');
 }
 
 
@@ -176,7 +209,7 @@ public function storeListing(Request $request)
     $validated = $request->validate([
         'user_id' => 'required|exists:users,id',
         'title' => 'required|string|max:255',
-        'category' => 'required|exists:categories,name',
+        'category_id' => 'required|exists:categories,id',
         'description' => 'required|string',
         'status' => 'required|in:active,pending,inactive',
     ]);
@@ -198,7 +231,7 @@ public function updateListing(Request $request, Listing $listing)
     $validated = $request->validate([
         'user_id' => 'required|exists:users,id',
         'title' => 'required|string|max:255',
-        'category' => 'required|exists:categories,name',
+        'category_id' => 'required|exists:categories,id',
         'description' => 'required|string',
         'status' => 'required|in:active,pending,inactive',
     ]);
