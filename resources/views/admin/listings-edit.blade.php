@@ -60,9 +60,12 @@
 
                 <div class="settings-field">
     <label for="category">Category</label>
-    <select id="category" name="category">
+    <select id="category_id" name="category_id">
         @foreach(\App\Models\Category::all() as $cat)
-            <option value="{{ $cat->name }}" {{ (old('category', $listing->category ?? '')) === $cat->name ? 'selected' : '' }}>{{ $cat->name }}</option>
+            <option value="{{ $cat->id }}"
+    {{ (old('category_id', '')) == $cat->id ? 'selected' : '' }}>
+    {{ $cat->name }}
+</option>
         @endforeach
     </select>
 </div>

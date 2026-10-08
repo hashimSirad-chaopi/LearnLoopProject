@@ -212,14 +212,18 @@
                                     </td>
 
 
-                                    <!-- STATUS -->
-                                    <td>
-
+                                                <!-- STATUS -->
+                                <td>
+                                    @if($user->status === 'suspended')
+                                        <span class="status-badge suspended-status">
+                                            Suspended
+                                        </span>
+                                    @else
                                         <span class="status-badge active-status">
                                             Active
                                         </span>
-
-                                    </td>
+                                    @endif
+                                </td>
 
 
                                     <!-- ACTIONS -->
@@ -230,23 +234,36 @@
                                             <a href="{{ route('admin.users.show', $user->id) }}" class="table-btn" style="text-decoration:none;">View</a>
                                             <a href="{{ route('admin.users.edit', $user->id) }}" class="table-btn" style="text-decoration:none;">Edit</a>    
 
-                                            <form
-                                                method="POST"
-                                                action="{{ route('admin.users.delete', $user->id) }}"
-                                                onsubmit="return confirm('Are you sure you want to delete this user?');"
-                                            >
+                                                            @if($user->status === 'suspended')
 
-                                                @csrf
-                                                @method('DELETE')
+                                                                <form method="POST"
+                                                                    action="{{ route('admin.users.activate', $user->id) }}">
 
-                                                <button
-                                                    type="submit"
-                                                    class="delete-btn"
-                                                >
-                                                    Delete
-                                                </button>
+                                                                    @csrf
+                                                                    @method('PATCH')
 
-                                            </form>
+                                                                    <button type="submit" class="table-btn">
+                                                                        Reactivate
+                                                                    </button>
+
+                                                                </form>
+
+                                                            @else
+
+                                                                <form method="POST"
+                                                                    action="{{ route('admin.users.suspend', $user->id) }}"
+                                                                    onsubmit="return confirm('Suspend this user?');">
+
+                                                                    @csrf
+                                                                    @method('PATCH')
+
+                                                                    <button type="submit" class="table-btn">
+                                                                        Suspend
+                                                                    </button>
+
+                                                                </form>
+
+                                                            @endif
 
                                         </div>
 

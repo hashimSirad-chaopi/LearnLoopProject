@@ -165,14 +165,16 @@
                 <div class="listing-avatar">{{ strtoupper(substr($listing->user->name, 0, 2)) }}</div>
                 <div>
                     <h3>{{ $listing->user->name }}</h3>
-                    <span>{{ $listing->category }}</span>
+                    <span>{{ $listing->category?->name ?? 'Uncategorized' }}</span>
                 </div>
             </div>
             <span class="listing-status {{ $listing->status }}">{{ ucfirst($listing->status) }}</span>
         </div>
 
         <div class="listing-content">
-            <span class="listing-category">{{ $listing->category }}</span>
+            <span class="listing-category">
+    {{ $listing->category?->name ?? 'Uncategorized' }}
+</span>
             <h2>{{ $listing->title }}</h2>
             <p>{{ $listing->description }}</p>
         </div>
