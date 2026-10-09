@@ -227,23 +227,23 @@
                 </div>
 
 
-                <div class="activity-item">
-
-                    <div class="activity-indicator"></div>
-
-                    <div class="activity-text">
-
-                        <strong>
-                            No recent activity
-                        </strong>
-
-                        <p>
-                            There is currently no recent administrative activity to display.
-                        </p>
-
-                    </div>
-
-                </div>
+                @forelse($activities as $activity)
+    <div class="activity-item">
+        <div class="activity-indicator"></div>
+        <div class="activity-text">
+            <strong>{{ $activity['text'] }}</strong>
+            <p>{{ $activity['time']->diffForHumans() }}</p>
+        </div>
+    </div>
+@empty
+    <div class="activity-item">
+        <div class="activity-indicator"></div>
+        <div class="activity-text">
+            <strong>No recent activity</strong>
+            <p>There is currently no recent administrative activity to display.</p>
+        </div>
+    </div>
+@endforelse
 
             </div>
 
