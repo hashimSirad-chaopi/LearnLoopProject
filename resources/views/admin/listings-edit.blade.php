@@ -58,17 +58,16 @@
                     @error('title') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="settings-field">
-    <label for="category">Category</label>
-    <select id="category_id" name="category_id">
-        @foreach(\App\Models\Category::all() as $cat)
-            <option value="{{ $cat->id }}"
-    {{ (old('category_id', '')) == $cat->id ? 'selected' : '' }}>
-    {{ $cat->name }}
-</option>
-        @endforeach
-    </select>
-</div>
+                    <div class="settings-field">
+                        <label for="category_id">Category</label>
+                        <select id="category_id" name="category_id">
+                            @foreach(\App\Models\Category::all() as $cat)
+                                <option value="{{ $cat->id }}" {{ old('category_id', $listing->category_id) == $cat->id ? 'selected' : '' }}>
+                                    {{ $cat->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                 <div class="settings-field">
                     <label for="description">Description</label>

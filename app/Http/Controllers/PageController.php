@@ -19,7 +19,35 @@ class PageController extends Controller
     $activeSessions = Exchange::where('status', 'ongoing')->count();
     $pendingReports = Report::where('status', 'pending')->count();
     $activeTutors = Listing::where('status', 'active')->distinct('user_id')->count('user_id');
-    return view('admin.home', compact('totalUsers', 'totalListings', 'activeListings', 'activeSessions', 'pendingReports', 'activeTutors'));
+
+    $activities = collect();
+
+    User::latest()->take(5)->get()->each(fn ($u) => $activities->push([
+        'text' => "New user added: {$u->name}",
+        'time' => $u->created_at,
+    ]));
+
+    Listing::with('user')->latest()->take(5)->get()->each(fn ($l) => $activities->push([
+        'text' => ($l->user->name ?? 'A user') . " posted a listing: {$l->title}",
+        'time' => $l->created_at,
+    ]));
+
+    Report::latest()->take(5)->get()->each(fn ($r) => $activities->push([
+        'text' => "Report filed: {$r->title}",
+        'time' => $r->created_at,
+    ]));
+
+    Exchange::latest()->take(5)->get()->each(fn ($e) => $activities->push([
+        'text' => "New exchange: {$e->skill_offered} ↔ {$e->skill_wanted}",
+        'time' => $e->created_at,
+    ]));
+
+    $activities = $activities->sortByDesc('time')->take(8)->values();
+
+    return view('admin.home', compact(
+        'totalUsers', 'totalListings', 'activeListings',
+        'activeSessions', 'pendingReports', 'activeTutors', 'activities'
+    ));
 }
 
    public function adminUsers(Request $request)
@@ -63,9 +91,9 @@ class PageController extends Controller
         return back()->withErrors(['delete' => "You can't delete your own account."]);
     }
 
-    if ($user->role === 'admin' && User::where('role', 'admin')->count() <= 1) {
-        return back()->withErrors(['delete' => 'Cannot delete the last admin.']);
-    }
+    if ($user->role === 'admin' && $user->status === 'active' && User::where('role', 'admin')->where('status', 'active')->count() <= 1) {
+    return back()->withErrors(['delete' => 'Cannot delete the last active admin.']);
+}
 
     $user->delete();
 
@@ -180,8 +208,8 @@ public function updateUser(Request $request, User $user)
 
     $wasAdmin = $user->role === 'admin';
 
-    if ($wasAdmin && $validated['role'] !== 'admin' && User::where('role', 'admin')->count() <= 1) {
-        return back()->withErrors(['role' => 'Cannot demote the last admin.']);
+    if ($wasAdmin && $user->status === 'active' && $validated['role'] !== 'admin' && User::where('role', 'admin')->where('status', 'active')->count() <= 1) {
+    return back()->withErrors(['role' => 'Cannot demote the last active admin.']);
     }
 
     $user->name = $validated['name'];
