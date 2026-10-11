@@ -111,3 +111,27 @@ a {
     border: 2px solid transparent;
     background-clip: padding-box;
 }
+
+/* Activity log table */
+.users-table.activity-table th:nth-child(1),
+.users-table.activity-table td:nth-child(1) { width: 16%; }
+.users-table.activity-table th:nth-child(2),
+.users-table.activity-table td:nth-child(2) { width: 20%; }
+.users-table.activity-table th:nth-child(3),
+.users-table.activity-table td:nth-child(3) { width: 20%; }
+.users-table.activity-table th:nth-child(4),
+.users-table.activity-table td:nth-child(4) { width: 44%; }
+
+/* Pagination */
+.pagination { display: flex; gap: 8px; list-style: none; margin-top: 20px; padding: 0; }
+.pagination li a,
+.pagination li span {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: var(--ll-surface-2, #F3F7F1);
+    color: var(--ll-text, #18251D);
+    font-weight: 600;
+    text-decoration: none;
+}
+.pagination .disabled span { opacity: .45; }

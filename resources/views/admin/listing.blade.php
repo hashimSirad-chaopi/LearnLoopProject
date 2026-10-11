@@ -16,60 +16,7 @@
     <!-- =========================================
          SIDEBAR
     ========================================== -->
-    <aside class="sidebar">
-
-        <div class="sidebar-top">
-
-            <div class="logo">
-                LearnLoop
-            </div>
-
-            <nav class="sidebar-nav">
-
-                <a href="{{ route('admin.home') }}" class="nav-item">
-                    Dashboard
-                </a>
-
-                <a href="{{ route('admin.users') }}" class="nav-item">
-                    User Management
-                </a>
-
-                <a href="{{ route('admin.listings') }}" class="nav-item active">
-                    Listings
-                </a>
-
-                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
-
-
-                <a href="{{ route('admin.reports') }}" class="nav-item">
-                    Reports
-                </a>
-
-                <a href="{{ route('admin.settings') }}" class="nav-item">
-                    Settings
-                </a>
-
-            </nav>
-
-        </div>
-
-
-        <!-- LOG OUT -->
-        <div class="sidebar-bottom">
-
-            <form method="POST" action="{{ route('logout') }}">
-
-                @csrf
-
-                <button type="submit" class="logout-btn">
-                    Log Out
-                </button>
-
-            </form>
-
-        </div>
-
-    </aside>
+       @include('partials.admin-sidebar')
 
 
     <!-- =========================================
@@ -143,7 +90,7 @@
 </form>
 
 <a href="{{ route('admin.listings.create') }}" class="settings-save-btn" style="text-decoration:none;">+ Add Listing</a>
-                <a href="{{ route('admin.categories') }}" class="settings-save-btn" style="text-decoration:none; background:#FFFFFF;">Manage Categories</a>
+                
             </div>
 
 

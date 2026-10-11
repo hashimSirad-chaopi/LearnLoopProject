@@ -17,67 +17,7 @@
     <!-- =========================================
          SIDEBAR
          ========================================= -->
-    <aside class="sidebar">
-
-        <div class="sidebar-top">
-
-            <div class="logo">
-                LearnLoop
-            </div>
-
-            <nav class="sidebar-nav">
-
-                <a href="{{ route('admin.home') }}"
-                   class="nav-item active">
-                    Dashboard
-                </a>
-
-                <a href="{{ route('admin.users') }}"
-                   class="nav-item">
-                    User Management
-                </a>
-
-                <a href="{{ route('admin.listings') }}"
-                   class="nav-item">
-                    Listings
-                </a>
-
-                <a href="{{ route('admin.exchanges') }}" class="nav-item">Exchange Monitoring</a>
-
-                <a href="{{ route('admin.reports') }}"
-                   class="nav-item">
-                    Reports
-                </a>
-
-
-
-                <a href="{{ route('admin.settings') }}"
-                   class="nav-item">
-                    Settings
-                </a>
-
-            </nav>
-
-        </div>
-
-
-        <!-- =====================================
-             SIDEBAR LOGOUT
-             SEPARATED FROM NAVIGATION
-             ===================================== -->
-        <div class="sidebar-bottom">
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="logout-btn">
-                    Log Out
-                </button>
-            </form>
-
-        </div>
-
-    </aside>
+       @include('partials.admin-sidebar')
 
 
     <!-- =========================================

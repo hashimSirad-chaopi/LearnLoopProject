@@ -100,6 +100,7 @@ Route::get('/admin/categories', [PageController::class, 'adminCategories'])->nam
 Route::post('/admin/categories', [PageController::class, 'storeCategory'])->name('admin.categories.store');
 Route::delete('/admin/categories/{category}', [PageController::class, 'deleteCategory'])->name('admin.categories.delete');
 Route::put('/admin/categories/{category}', [PageController::class, 'updateCategory'])->name('admin.categories.update');
+Route::get('/admin/activity', [PageController::class, 'adminActivity'])->name('admin.activity');
 
 });
 
