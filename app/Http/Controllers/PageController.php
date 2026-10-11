@@ -9,6 +9,7 @@ use App\Models\Listing;
 use App\Models\Exchange;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Category;
+use App\Models\ActivityLog;
 class PageController extends Controller
 {
     public function adminHome()
@@ -20,29 +21,10 @@ class PageController extends Controller
     $pendingReports = Report::where('status', 'pending')->count();
     $activeTutors = Listing::where('status', 'active')->distinct('user_id')->count('user_id');
 
-    $activities = collect();
-
-    User::latest()->take(5)->get()->each(fn ($u) => $activities->push([
-        'text' => "New user added: {$u->name}",
-        'time' => $u->created_at,
-    ]));
-
-    Listing::with('user')->latest()->take(5)->get()->each(fn ($l) => $activities->push([
-        'text' => ($l->user->name ?? 'A user') . " posted a listing: {$l->title}",
-        'time' => $l->created_at,
-    ]));
-
-    Report::latest()->take(5)->get()->each(fn ($r) => $activities->push([
-        'text' => "Report filed: {$r->title}",
-        'time' => $r->created_at,
-    ]));
-
-    Exchange::latest()->take(5)->get()->each(fn ($e) => $activities->push([
-        'text' => "New exchange: {$e->skill_offered} ↔ {$e->skill_wanted}",
-        'time' => $e->created_at,
-    ]));
-
-    $activities = $activities->sortByDesc('time')->take(8)->values();
+    $activities = ActivityLog::latest()->take(8)->get()->map(fn ($log) => [
+    'text' => $log->description,
+    'time' => $log->created_at,
+]);
 
     return view('admin.home', compact(
         'totalUsers', 'totalListings', 'activeListings',
@@ -93,9 +75,12 @@ class PageController extends Controller
 
     if ($user->role === 'admin' && $user->status === 'active' && User::where('role', 'admin')->where('status', 'active')->count() <= 1) {
     return back()->withErrors(['delete' => 'Cannot delete the last active admin.']);
-}
+    }
 
     $user->delete();
+
+    ActivityLog::record('user.deleted', "Deleted user {$user->name} ({$user->email})");
+
 
     return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
 }
@@ -117,6 +102,8 @@ public function suspendUser(User $user)
     $user->status = 'suspended';
     $user->save();
 
+    ActivityLog::record('user.suspended', "Suspended user {$user->name}");
+
     return back()->with('success', 'User suspended successfully.');
 }
 
@@ -125,10 +112,17 @@ public function activateUser(User $user)
     $user->status = 'active';
     $user->save();
 
+    ActivityLog::record('user.activated', "Reactivated user {$user->name}");
+
     return back()->with('success', 'User reactivated successfully.');
 }
 
+public function adminActivity()
+{
+    $logs = ActivityLog::with('admin')->latest()->paginate(15);
 
+    return view('admin.activity', compact('logs'));
+}
 public function adminReports(Request $request)
 {
     $search = $request->query('search');
@@ -152,6 +146,8 @@ public function resolveReport(Report $report)
     $report->status = 'resolved';
     $report->save();
 
+    ActivityLog::record('report.resolved', "Resolved report \"{$report->title}\"");
+
     return back()->with('success', 'Report resolved.');
 }
 
@@ -159,6 +155,8 @@ public function dismissReport(Report $report)
 {
     $report->status = 'dismissed';
     $report->save();
+
+    ActivityLog::record('report.dismissed', "Dismissed report \"{$report->title}\"");
 
     return back()->with('success', 'Report dismissed.');
 }
@@ -183,6 +181,8 @@ public function storeUser(Request $request)
         'password' => Hash::make($validated['password']),
         'role' => $validated['role'],
     ]);
+
+    ActivityLog::record('user.created', "Created user {$validated['name']} ({$validated['role']})");
 
     return redirect()->route('admin.users')->with('success', 'User created successfully.');
 }
@@ -222,6 +222,8 @@ public function updateUser(Request $request, User $user)
 
     $user->save();
 
+    ActivityLog::record('user.updated', "Updated user {$user->name}");
+
     return redirect()->route('admin.users')->with('success', 'User updated successfully.');
 }
 
@@ -243,6 +245,8 @@ public function storeListing(Request $request)
     ]);
 
     Listing::create($validated);
+
+    ActivityLog::record('listing.created', "Created listing \"{$validated['title']}\"");
 
     return redirect()->route('admin.listings')->with('success', 'Listing created successfully.');
 }
@@ -266,6 +270,8 @@ public function updateListing(Request $request, Listing $listing)
 
     $listing->update($validated);
 
+    ActivityLog::record('listing.updated', "Updated listing \"{$listing->title}\"");
+
     return redirect()->route('admin.listings')->with('success', 'Listing updated successfully.');
 }
 
@@ -274,12 +280,16 @@ public function disableListing(Listing $listing)
     $listing->status = 'inactive';
     $listing->save();
 
+    ActivityLog::record('listing.disabled', "Disabled listing \"{$listing->title}\"");
+
     return back()->with('success', 'Listing disabled.');
 }
 
 public function deleteListing(Listing $listing)
 {
     $listing->delete();
+
+    ActivityLog::record('listing.deleted', "Deleted listing \"{$listing->title}\"");
 
     return back()->with('success', 'Listing deleted.');
 }
@@ -289,12 +299,16 @@ public function enableListing(Listing $listing)
     $listing->status = 'active';
     $listing->save();
 
+    ActivityLog::record('listing.enabled', "Enabled listing \"{$listing->title}\"");
+
     return back()->with('success', 'Listing enabled.');
 }
 
 public function deleteReport(Report $report)
 {
     $report->delete();
+
+    ActivityLog::record('report.deleted', "Deleted report \"{$report->title}\"");
 
     return back()->with('success', 'Report deleted.');
 }
@@ -320,6 +334,8 @@ public function storeReport(Request $request)
 
     Report::create($validated);
 
+    ActivityLog::record('report.created', "Filed report \"{$validated['title']}\"");
+
     return redirect()->route('admin.reports')->with('success', 'Report created successfully.');
 }
 
@@ -343,12 +359,16 @@ public function updateExchangeStatus(Request $request, Exchange $exchange)
 
     $exchange->update($validated);
 
+    ActivityLog::record('exchange.updated', "Set exchange #{$exchange->id} to {$exchange->status}");
+
     return redirect()->route('admin.exchanges')->with('success', 'Exchange status updated.');
 }
 
 public function deleteExchange(Exchange $exchange)
 {
     $exchange->delete();
+
+    ActivityLog::record('exchange.deleted', "Deleted exchange #{$exchange->id}");
 
     return redirect()->route('admin.exchanges')->with('success', 'Exchange deleted.');
 }
@@ -394,6 +414,8 @@ public function storeExchange(Request $request)
     ]);
 
     Exchange::create($validated);
+
+    ActivityLog::record('exchange.created', "Created exchange {$validated['skill_offered']} ↔ {$validated['skill_wanted']}");
 
     return redirect()->route('admin.exchanges')->with('success', 'Exchange created successfully.');
 }
