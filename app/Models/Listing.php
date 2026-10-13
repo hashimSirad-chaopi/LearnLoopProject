@@ -3,17 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
 
 class Listing extends Model
 {
     protected $fillable = [
-    'user_id',
-    'title',
-    'category_id',
-    'description',
-    'status',
-];
+        'user_id',
+        'title',
+        'category_id',
+        'subcategory_id',
+        'level',
+        'description',
+        'status',
+    ];
 
     public function user()
     {
@@ -22,6 +23,11 @@ class Listing extends Model
 
     public function category()
     {
-    return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
     }
 }

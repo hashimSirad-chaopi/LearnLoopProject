@@ -105,6 +105,12 @@
                     <!-- =================================
                          LISTING 1
                     ================================== -->
+                    
+@if ($errors->has('listing'))
+    <div role="alert" style="color: #b91c1c; margin: 12px 0;">
+        {{ $errors->first('listing') }}
+    </div>
+@endif
                    @forelse($listings as $listing)
     <article class="listing-post">
         <div class="listing-post-header">
@@ -118,27 +124,54 @@
             <span class="listing-status {{ $listing->status }}">{{ ucfirst($listing->status) }}</span>
         </div>
 
-        <div class="listing-content">
+        
+<div class="listing-content">
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+        <span class="listing-category">
+            {{ $listing->subcategory?->name ?? ($listing->category?->name ?? 'Uncategorized') }}
+        </span>
+
+        @if ($listing->level)
             <span class="listing-category">
-    {{ $listing->category?->name ?? 'Uncategorized' }}
-</span>
-            <h2>{{ $listing->title }}</h2>
-            <p>{{ $listing->description }}</p>
-        </div>
+                {{ ucfirst($listing->level) }}
+            </span>
+        @endif
+    </div>
+
+    <h2>{{ $listing->title }}</h2>
+    <p>{{ $listing->description }}</p>
+</div>
 
         <div class="listing-footer">
             <span class="listing-date">Posted {{ $listing->created_at->diffForHumans() }}</span>
             <div class="listing-actions">
                 <a href="{{ route('admin.listings.edit', $listing->id) }}" class="table-btn" style="text-decoration:none;">Edit</a>
-                @if($listing->status === 'inactive')
-    <form method="POST" action="{{ route('admin.listings.enable', $listing->id) }}">
-        @csrf @method('PATCH')
-        <button type="submit" class="disable-btn">Enable</button>
+               
+@if ($listing->status === 'pending')
+    <form method="POST" action="{{ route('admin.listings.approve', $listing->id) }}">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="table-btn">Approve</button>
+    </form>
+
+    <form method="POST" action="{{ route('admin.listings.reject', $listing->id) }}"
+          onsubmit="return confirm('Reject this listing?');">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="disable-btn">Reject</button>
+    </form>
+@elseif ($listing->status === 'active')
+    <form method="POST" action="{{ route('admin.listings.disable', $listing->id) }}"
+          onsubmit="return confirm('Disable this listing?');">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="disable-btn">Disable</button>
     </form>
 @else
-    <form method="POST" action="{{ route('admin.listings.disable', $listing->id) }}">
-        @csrf @method('PATCH')
-        <button type="submit" class="disable-btn">Disable</button>
+    <form method="POST" action="{{ route('admin.listings.enable', $listing->id) }}">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="disable-btn">Enable</button>
     </form>
 @endif
                 <form method="POST" action="{{ route('admin.listings.delete', $listing->id) }}" onsubmit="return confirm('Delete this listing?');">

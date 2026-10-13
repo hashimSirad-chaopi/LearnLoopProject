@@ -8,16 +8,54 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+test('active admins can authenticate using the login screen', function () {
+    $admin = User::factory()->create([
+        'role' => 'admin',
+        'status' => 'active',
+    ]);
 
     $response = $this->post('/login', [
+        'email' => $admin->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticatedAs($admin);
+
+    $response->assertRedirect(route('admin.home', absolute: false));
+});
+
+test('regular users cannot log in to the admin panel', function () {
+    $user = User::factory()->create([
+        'role' => 'user',
+        'status' => 'active',
+    ]);
+
+    $response = $this->from('/login')->post('/login', [
         'email' => $user->email,
         'password' => 'password',
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $this->assertGuest();
+
+    $response->assertRedirect('/login');
+    $response->assertSessionHasErrors('email');
+});
+
+test('suspended admins cannot log in', function () {
+    $admin = User::factory()->create([
+        'role' => 'admin',
+        'status' => 'suspended',
+    ]);
+
+    $response = $this->from('/login')->post('/login', [
+        'email' => $admin->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertGuest();
+
+    $response->assertRedirect('/login');
+    $response->assertSessionHasErrors('email');
 });
 
 test('users can not authenticate with invalid password', function () {

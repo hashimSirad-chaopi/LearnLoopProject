@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -47,6 +48,19 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+
+                
+        if (
+            $user->role === 'admin' &&
+            $user->status === 'active' &&
+            User::where('role', 'admin')
+                ->where('status', 'active')
+                ->count() <= 1
+        ) {
+            return back()->withErrors([
+                'admin' => 'You cannot delete the last active administrator account.',
+            ], 'userDeletion');
+        }
 
         Auth::logout();
 

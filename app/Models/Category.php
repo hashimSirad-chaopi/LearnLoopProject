@@ -3,14 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Listing;
 
 class Category extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'description',
+    ];
 
     public function listings()
-{
-    return $this->hasMany(Listing::class);
-}
+    {
+        return $this->hasMany(Listing::class);
+    }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
 }

@@ -83,3 +83,25 @@ test('correct password must be provided to delete account', function () {
 
     $this->assertNotNull($user->fresh());
 });
+
+
+test('last active admin cannot delete their account', function () {
+    $admin = User::factory()->create([
+        'role' => 'admin',
+        'status' => 'active',
+    ]);
+
+    $response = $this
+        ->actingAs($admin)
+        ->from('/profile')
+        ->delete('/profile', [
+            'password' => 'password',
+        ]);
+
+    $response
+        ->assertRedirect('/profile')
+        ->assertSessionHasErrorsIn('userDeletion', 'admin');
+
+    $this->assertAuthenticatedAs($admin);
+    $this->assertNotNull($admin->fresh());
+});

@@ -74,6 +74,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::patch('/admin/listings/{listing}/disable', [PageController::class, 'disableListing'])
         ->name('admin.listings.disable');
 
+    Route::patch('/admin/listings/{listing}/approve', [PageController::class, 'approveListing'])
+        ->name('admin.listings.approve');
+
+    Route::patch('/admin/listings/{listing}/reject', [PageController::class, 'rejectListing'])
+        ->name('admin.listings.reject');  
+    
     Route::delete('/admin/listings/{listing}', [PageController::class, 'deleteListing'])
         ->name('admin.listings.delete');
 
@@ -100,6 +106,18 @@ Route::get('/admin/categories', [PageController::class, 'adminCategories'])->nam
 Route::post('/admin/categories', [PageController::class, 'storeCategory'])->name('admin.categories.store');
 Route::delete('/admin/categories/{category}', [PageController::class, 'deleteCategory'])->name('admin.categories.delete');
 Route::put('/admin/categories/{category}', [PageController::class, 'updateCategory'])->name('admin.categories.update');
+
+Route::get('/admin/subcategories', [PageController::class, 'adminSubcategories'])
+    ->name('admin.subcategories');
+
+Route::post('/admin/subcategories', [PageController::class, 'storeSubcategory'])
+    ->name('admin.subcategories.store');
+
+Route::put('/admin/subcategories/{subcategory}', [PageController::class, 'updateSubcategory'])
+    ->name('admin.subcategories.update');
+
+Route::delete('/admin/subcategories/{subcategory}', [PageController::class, 'deleteSubcategory'])
+    ->name('admin.subcategories.delete');
 Route::get('/admin/activity', [PageController::class, 'adminActivity'])->name('admin.activity');
 
 });
