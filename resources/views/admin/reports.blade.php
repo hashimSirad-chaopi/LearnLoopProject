@@ -113,6 +113,11 @@
             </div>
 
 
+@if ($errors->has('report'))
+    <div role="alert" style="color: #b91c1c; margin: 12px 0;">
+        {{ $errors->first('report') }}
+    </div>
+@endif
             <!-- =================================
                  SCROLLABLE REPORTS AREA
                  ================================= -->

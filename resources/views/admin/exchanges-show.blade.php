@@ -46,11 +46,16 @@
                     <div class="settings-field">
                         <label for="status">Status</label>
                         <select id="status" name="status">
-                            <option value="pending" {{ $exchange->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                            <option value="ongoing" {{ $exchange->status === 'ongoing' ? 'selected' : '' }}>Ongoing</option>
-                            <option value="completed" {{ $exchange->status === 'completed' ? 'selected' : '' }}>Completed</option>
-                            <option value="disputed" {{ $exchange->status === 'disputed' ? 'selected' : '' }}>Disputed</option>
+                            <option value="pending" {{ old('status', $exchange->status) === 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="ongoing" {{ old('status', $exchange->status) === 'ongoing' ? 'selected' : '' }}>Ongoing</option>
+                            <option value="completed" {{ old('status', $exchange->status) === 'completed' ? 'selected' : '' }}>Completed</option>
+                            <option value="disputed" {{ old('status', $exchange->status) === 'disputed' ? 'selected' : '' }}>Disputed</option>
                         </select>
+                            @error('status')
+                                <p role="alert" style="color: #b91c1c; margin-top: 8px;">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                     </div>
                     <div class="settings-actions">
                         <a href="{{ route('admin.exchanges') }}" class="table-btn">Back</a>

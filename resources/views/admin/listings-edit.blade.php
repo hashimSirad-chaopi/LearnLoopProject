@@ -41,16 +41,81 @@
                     @error('title') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 
-                    <div class="settings-field">
-                        <label for="category_id">Category</label>
-                        <select id="category_id" name="category_id">
-                            @foreach(\App\Models\Category::all() as $cat)
-                                <option value="{{ $cat->id }}" {{ old('category_id', $listing->category_id) == $cat->id ? 'selected' : '' }}>
-                                    {{ $cat->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    
+<div class="settings-field">
+    <label for="category_id">Category</label>
+
+    <select id="category_id" name="category_id" required>
+        <option value="">Choose a category</option>
+
+        @foreach ($categories as $cat)
+            <option value="{{ $cat->id }}"
+                {{ old('category_id', $listing->category_id) == $cat->id ? 'selected' : '' }}>
+                {{ $cat->name }}
+            </option>
+        @endforeach
+    </select>
+
+    @error('category_id')
+        <p role="alert" style="color:red;font-size:13px;">
+            {{ $message }}
+        </p>
+    @enderror
+</div>
+
+<div class="settings-field">
+    <label for="subcategory_id">Specific Skill</label>
+
+    <select id="subcategory_id" name="subcategory_id" required>
+        <option value="">Choose a specific skill</option>
+
+        @foreach ($categories as $cat)
+            @foreach ($cat->subcategories as $sub)
+                <option
+                    value="{{ $sub->id }}"
+                    data-category-id="{{ $cat->id }}"
+                    {{ old('subcategory_id', $listing->subcategory_id) == $sub->id ? 'selected' : '' }}>
+                    {{ $sub->name }}
+                </option>
+            @endforeach
+        @endforeach
+    </select>
+
+    @error('subcategory_id')
+        <p role="alert" style="color:red;font-size:13px;">
+            {{ $message }}
+        </p>
+    @enderror
+</div>
+
+<div class="settings-field">
+    <label for="level">Difficulty Level</label>
+
+    <select id="level" name="level" required>
+        <option value="">Choose a difficulty level</option>
+
+        <option value="beginner"
+            {{ old('level', $listing->level) === 'beginner' ? 'selected' : '' }}>
+            Beginner
+        </option>
+
+        <option value="intermediate"
+            {{ old('level', $listing->level) === 'intermediate' ? 'selected' : '' }}>
+            Intermediate
+        </option>
+
+        <option value="advanced"
+            {{ old('level', $listing->level) === 'advanced' ? 'selected' : '' }}>
+            Advanced
+        </option>
+    </select>
+
+    @error('level')
+        <p role="alert" style="color:red;font-size:13px;">
+            {{ $message }}
+        </p>
+    @enderror
+</div>
 
                 <div class="settings-field">
                     <label for="description">Description</label>
@@ -76,5 +141,48 @@
     </main>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const categorySelect = document.getElementById('category_id');
+    const subcategorySelect = document.getElementById('subcategory_id');
+
+    if (!categorySelect || !subcategorySelect) {
+        return;
+    }
+
+    function filterSubcategories(resetSelection = false) {
+        const categoryId = categorySelect.value;
+        const selectedSubcategory = subcategorySelect.value;
+        let selectedIsValid = false;
+
+        Array.from(subcategorySelect.options).forEach(function (option) {
+            if (option.value === '') {
+                option.hidden = false;
+                option.disabled = false;
+                return;
+            }
+
+            const matches = option.dataset.categoryId === categoryId;
+
+            option.hidden = !matches;
+            option.disabled = !matches;
+
+            if (matches && option.value === selectedSubcategory) {
+                selectedIsValid = true;
+            }
+        });
+
+        if (resetSelection || !selectedIsValid) {
+            subcategorySelect.value = '';
+        }
+    }
+
+    categorySelect.addEventListener('change', function () {
+        filterSubcategories(true);
+    });
+
+    filterSubcategories();
+});
+</script>
 </body>
 </html>

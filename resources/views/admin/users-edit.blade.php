@@ -50,6 +50,11 @@
                         <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
                         <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
                     </select>
+                    @error('role')
+                        <p role="alert" style="color: #b91c1c; font-size: 13px; margin-top: 6px;">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 <div class="settings-actions">
