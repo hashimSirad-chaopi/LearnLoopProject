@@ -124,7 +124,20 @@
                 </div>
 
                 <div class="settings-field">
-                    <label for="status">Status</label>
+                 
+<div class="settings-field">
+    <label>Moderation Status</label>
+
+    <p style="margin:0; padding:10px 12px; border-radius:8px;
+              background:#f3f4f6; color:#374151;">
+        {{ ucfirst($listing->status) }}
+    </p>
+
+    <small style="display:block; margin-top:6px; color:#69766e;">
+        To change this status, use the moderation actions on the Listings page.
+    </small>
+</div>
+
                     <select id="status" name="status">
                         
                         <option value="active" {{ $listing->status === 'active' ? 'selected' : '' }}>Active</option>

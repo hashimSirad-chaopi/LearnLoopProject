@@ -329,6 +329,7 @@ public function editListing(Listing $listing)
 }
 
 
+
 public function updateListing(Request $request, Listing $listing)
 {
     $validated = $request->validate([
@@ -348,9 +349,10 @@ public function updateListing(Request $request, Listing $listing)
 
         'level' => 'required|in:beginner,intermediate,advanced',
         'description' => 'required|string',
-        'status' => 'required|in:active,pending,inactive',
     ]);
 
+    // Status changes must use the dedicated moderation actions.
+    // Because status isn't validated, it won't be included in $validated.
     $listing->update($validated);
 
     ActivityLog::record(
@@ -362,6 +364,7 @@ public function updateListing(Request $request, Listing $listing)
         ->route('admin.listings')
         ->with('success', 'Listing updated successfully.');
 }
+
 
 
 public function approveListing(Listing $listing)
@@ -465,6 +468,7 @@ public function createReport()
     return view('admin.reports-create', compact('users', 'listings'));
 }
 
+
 public function storeReport(Request $request)
 {
     $validated = $request->validate([
@@ -473,15 +477,24 @@ public function storeReport(Request $request)
         'reported_user_id' => 'required|exists:users,id|different:reported_by',
         'listing_id' => 'nullable|exists:listings,id',
         'reason' => 'required|string',
-        'status' => 'required|in:pending,resolved,dismissed',
     ]);
 
-    Report::create($validated);
+    // New reports must enter the moderation workflow as pending.
+    // Ignore any submitted status value.
+    $validated['status'] = 'pending';
 
-    ActivityLog::record('report.created', "Filed report \"{$validated['title']}\"");
+    $report = Report::create($validated);
 
-    return redirect()->route('admin.reports')->with('success', 'Report created successfully.');
+    ActivityLog::record(
+        'report.created',
+        "Filed report \"{$report->title}\""
+    );
+
+    return redirect()
+        ->route('admin.reports')
+        ->with('success', 'Report created successfully.');
 }
+
 
 public function adminExchanges()
 {
@@ -579,11 +592,15 @@ public function storeCategory(Request $request)
 }
 
 
+
 public function deleteCategory(Category $category)
 {
-    if ($category->listings()->exists()) {
+    if (
+        $category->listings()->exists()
+        || $category->subcategories()->exists()
+    ) {
         return back()->withErrors([
-            'category' => 'This category cannot be deleted because listings are using it. Reassign those listings to another category first.',
+            'category' => 'This category cannot be deleted while listings or subcategories are using it. Reassign its listings or remove its subcategories first.',
         ]);
     }
 
@@ -598,6 +615,7 @@ public function deleteCategory(Category $category)
 
     return back()->with('success', 'Category deleted.');
 }
+
 
 
 public function adminSubcategories()
@@ -713,30 +731,55 @@ public function deleteSubcategory(Subcategory $subcategory)
         ->with('success', 'Subcategory deleted successfully.');
 }
 
-
 public function createExchange()
 {
-    $users = User::all();
+    $users = User::where('status', 'active')
+        ->orderBy('name')
+        ->get();
 
     return view('admin.exchanges-create', compact('users'));
 }
 
+
+
 public function storeExchange(Request $request)
 {
     $validated = $request->validate([
-        'provider_id' => 'required|exists:users,id',
-        'learner_id' => 'required|exists:users,id|different:provider_id',
+        'provider_id' => [
+            'required',
+            'integer',
+            Rule::exists('users', 'id')
+                ->where(fn ($query) => $query->where('status', 'active')),
+        ],
+
+        'learner_id' => [
+            'required',
+            'integer',
+            'different:provider_id',
+            Rule::exists('users', 'id')
+                ->where(fn ($query) => $query->where('status', 'active')),
+        ],
+
         'skill_offered' => 'required|string|max:255',
         'skill_wanted' => 'required|string|max:255',
-        'status' => 'required|in:ongoing,completed,pending,disputed',
     ]);
 
-    Exchange::create($validated);
+    // New exchanges always begin as pending.
+    $validated['status'] = 'pending';
 
-    ActivityLog::record('exchange.created', "Created exchange {$validated['skill_offered']} ↔ {$validated['skill_wanted']}");
+    $exchange = Exchange::create($validated);
 
-    return redirect()->route('admin.exchanges')->with('success', 'Exchange created successfully.');
+    ActivityLog::record(
+        'exchange.created',
+        "Created exchange #{$exchange->id}: {$validated['skill_offered']} ↔ {$validated['skill_wanted']} (pending)"
+    );
+
+    return redirect()
+        ->route('admin.exchanges')
+        ->with('success', 'Exchange created successfully.');
 }
+
+
 
 public function updateCategory(Request $request, Category $category)
 {

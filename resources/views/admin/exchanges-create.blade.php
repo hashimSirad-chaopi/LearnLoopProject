@@ -55,15 +55,18 @@
                     @error('skill_wanted') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="settings-field">
-                    <label for="status">Status</label>
-                    <select id="status" name="status">
-                        <option value="pending">Pending</option>
-                        <option value="ongoing">Ongoing</option>
-                        <option value="completed">Completed</option>
-                        <option value="disputed">Disputed</option>
-                    </select>
-                </div>
+                
+<div class="settings-field">
+    <label>Initial Status</label>
+    <p style="margin:0; padding:10px 12px; border-radius:8px;
+              background:#f3f4f6; color:#374151;">
+        Pending
+    </p>
+    <small style="display:block; margin-top:6px; color:#69766e;">
+        The exchange must progress through the defined status workflow.
+    </small>
+</div>
+
 
                 <div class="settings-actions">
                     <a href="{{ route('admin.exchanges') }}" class="table-btn">Cancel</a>
