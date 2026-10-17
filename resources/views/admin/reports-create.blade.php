@@ -65,14 +65,20 @@
                     @error('reason') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="settings-field">
-                    <label for="status">Status</label>
-                    <select id="status" name="status">
-                        <option value="pending" {{ old('status') === 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="resolved" {{ old('status') === 'resolved' ? 'selected' : '' }}>Resolved</option>
-                        <option value="dismissed" {{ old('status') === 'dismissed' ? 'selected' : '' }}>Dismissed</option>
-                    </select>
-                </div>
+                
+<div class="settings-field">
+    <label>Initial Status</label>
+
+    <p style="margin:0; padding:10px 12px; border-radius:8px;
+              background:#f3f4f6; color:#374151;">
+        Pending
+    </p>
+
+    <small style="display:block; margin-top:6px; color:#69766e;">
+        Every new report enters the moderation queue for review.
+    </small>
+</div>
+
 
                 <div class="settings-actions">
                     <a href="{{ route('admin.reports') }}" class="table-btn">Cancel</a>
