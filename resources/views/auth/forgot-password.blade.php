@@ -28,8 +28,8 @@
 
                 <p>
                     Forgot your password? No problem. Enter your
-                    email address and we will send you a password
-                    reset link.
+                    email address and we will email you a 6-digit
+                    code to set a new one.
                 </p>
 
             </div>
@@ -90,7 +90,7 @@
                     type="submit"
                     class="auth-submit"
                 >
-                    Send Reset Link
+                    Send Code
                 </button>
 
             </form>

@@ -1,0 +1,530 @@
+{
+ "skills": [
+  {
+   "key": "spanish",
+   "title": "Conversational Spanish",
+   "category": "Language",
+   "icon": "🗣️",
+   "description": "Everyday Spanish for real conversations.",
+   "levels": [
+    {
+     "name": "easy",
+     "lessons": [
+      {
+       "key": "es-1",
+       "title": "Greetings",
+       "content": "Hola means hello. Use Buenos días in the morning, Buenas tardes in the afternoon and Buenas noches in the evening or at night.\n\nTo say goodbye use Adiós or Hasta luego. To ask how someone is, say ¿Cómo estás?",
+       "questions": [
+        {
+         "text": "How do you say 'good morning'?",
+         "options": [
+          "Buenas noches",
+          "Buenos días",
+          "Adiós",
+          "Gracias"
+         ],
+         "correct": 1
+        },
+        {
+         "text": "What does '¿Cómo estás?' mean?",
+         "options": [
+          "Where are you?",
+          "How are you?",
+          "What is your name?",
+          "Who are you?"
+         ],
+         "correct": 1
+        }
+       ]
+      },
+      {
+       "key": "es-2",
+       "title": "Introducing yourself",
+       "content": "Me llamo Ana means 'My name is Ana'. Soy de Filipinas means 'I am from the Philippines'. When you meet someone, say Mucho gusto: nice to meet you.",
+       "questions": [
+        {
+         "text": "How do you say 'My name is Ana'?",
+         "options": [
+          "Me llamo Ana",
+          "Tengo Ana",
+          "Estoy Ana",
+          "Ana gusto"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "What does 'Mucho gusto' mean?",
+         "options": [
+          "Thank you very much",
+          "See you soon",
+          "Nice to meet you",
+          "I am hungry"
+         ],
+         "correct": 2
+        }
+       ]
+      },
+      {
+       "key": "es-3",
+       "title": "Numbers 1 to 10",
+       "content": "uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez.\n\nPractice by counting things around you out loud.",
+       "questions": [
+        {
+         "text": "What number is 'cinco'?",
+         "options": [
+          "4",
+          "5",
+          "6",
+          "9"
+         ],
+         "correct": 1
+        },
+        {
+         "text": "How do you say 8?",
+         "options": [
+          "seis",
+          "siete",
+          "ocho",
+          "nueve"
+         ],
+         "correct": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "moderate",
+     "lessons": [
+      {
+       "key": "es-4",
+       "title": "Ordering food",
+       "content": "Quisiera... means 'I would like...'. Ask for the check with La cuenta, por favor. Ask a price with ¿Cuánto cuesta? Agua means water.",
+       "questions": [
+        {
+         "text": "How do you politely ask for the check?",
+         "options": [
+          "La cuenta, por favor",
+          "Quiero agua ahora",
+          "¿Dónde estás?",
+          "Mucho gusto"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "What does '¿Cuánto cuesta?' mean?",
+         "options": [
+          "Where is it?",
+          "What time is it?",
+          "How much does it cost?",
+          "Who is it for?"
+         ],
+         "correct": 2
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "python",
+   "title": "Intro to Python",
+   "category": "Programming Language",
+   "icon": "🐍",
+   "description": "Write your first programs in Python.",
+   "levels": [
+    {
+     "name": "easy",
+     "lessons": [
+      {
+       "key": "py-1",
+       "title": "Variables and print",
+       "content": "A variable stores a value: name = 'Ana'. You do not declare a type in Python.\n\nprint(name) shows the value on the screen.",
+       "questions": [
+        {
+         "text": "Which line creates a variable?",
+         "options": [
+          "x = 5",
+          "5 = x",
+          "var x := 5",
+          "make x 5"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "What does print('Hi') do?",
+         "options": [
+          "Shows Hi on the screen",
+          "Saves Hi to a file",
+          "Creates a variable called Hi",
+          "Deletes Hi"
+         ],
+         "correct": 0
+        }
+       ]
+      },
+      {
+       "key": "py-2",
+       "title": "Numbers and strings",
+       "content": "Whole numbers are int (7), decimals are float (3.14) and text is str ('hello').\n\n+ adds numbers (2 + 3 is 5) but joins strings ('2' + '3' is '23').",
+       "questions": [
+        {
+         "text": "What does 'Hi' + ' there' produce?",
+         "options": [
+          "Hi there",
+          "Hi + there",
+          "Error",
+          "Hithere5"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "Which of these is a float?",
+         "options": [
+          "7",
+          "'7'",
+          "3.14",
+          "True"
+         ],
+         "correct": 2
+        }
+       ]
+      },
+      {
+       "key": "py-3",
+       "title": "If statements",
+       "content": "if age >= 18:\n    print('Adult')\nelse:\n    print('Minor')\n\nThe condition ends with a colon, and the lines inside are indented.",
+       "questions": [
+        {
+         "text": "What must come at the end of an if line?",
+         "options": [
+          "A semicolon",
+          "A colon",
+          "A period",
+          "A bracket"
+         ],
+         "correct": 1
+        },
+        {
+         "text": "How does Python group the lines under an if?",
+         "options": [
+          "Curly braces",
+          "An end keyword",
+          "Indentation",
+          "Parentheses"
+         ],
+         "correct": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "moderate",
+     "lessons": [
+      {
+       "key": "py-4",
+       "title": "Loops",
+       "content": "for i in range(3): runs three times with i = 0, 1, 2.\n\nwhile keeps repeating as long as its condition is true.",
+       "questions": [
+        {
+         "text": "How many times does 'for i in range(3)' run?",
+         "options": [
+          "2",
+          "3",
+          "4",
+          "Forever"
+         ],
+         "correct": 1
+        },
+        {
+         "text": "Which loop repeats while a condition is true?",
+         "options": [
+          "for",
+          "if",
+          "while",
+          "def"
+         ],
+         "correct": 2
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "photoshop",
+   "title": "Photoshop Basics",
+   "category": "Design",
+   "icon": "🎨",
+   "description": "Layers, selections and your first edits.",
+   "levels": [
+    {
+     "name": "easy",
+     "lessons": [
+      {
+       "key": "ps-1",
+       "title": "Interface and layers",
+       "content": "The Layers panel stacks your content: the top layer covers the ones below it. The eye icon shows or hides a layer.\n\nKeep things on separate layers so you can change one part without touching the rest.",
+       "questions": [
+        {
+         "text": "What does the eye icon on a layer do?",
+         "options": [
+          "Deletes it",
+          "Shows or hides it",
+          "Locks it",
+          "Merges it"
+         ],
+         "correct": 1
+        },
+        {
+         "text": "Why use separate layers?",
+         "options": [
+          "It makes files smaller",
+          "To edit one part without affecting the rest",
+          "To print faster",
+          "Photoshop requires it"
+         ],
+         "correct": 1
+        }
+       ]
+      },
+      {
+       "key": "ps-2",
+       "title": "Selection tools",
+       "content": "Marquee draws rectangles and ellipses. Lasso draws a freehand outline. Magic Wand selects areas of similar colour with one click.",
+       "questions": [
+        {
+         "text": "Which tool selects similar colours with one click?",
+         "options": [
+          "Lasso",
+          "Marquee",
+          "Magic Wand",
+          "Crop"
+         ],
+         "correct": 2
+        },
+        {
+         "text": "Which tool draws a freehand selection?",
+         "options": [
+          "Lasso",
+          "Marquee",
+          "Eraser",
+          "Move"
+         ],
+         "correct": 0
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "flutter",
+   "title": "Flutter Fundamentals",
+   "category": "Programming Language",
+   "icon": "📱",
+   "description": "Build mobile screens with widgets.",
+   "levels": [
+    {
+     "name": "easy",
+     "lessons": [
+      {
+       "key": "fl-1",
+       "title": "Widgets and the widget tree",
+       "content": "In Flutter everything on screen is a widget, and widgets nest inside each other to form a tree.\n\nScaffold gives a screen its basic structure. Column stacks children vertically and Row places them side by side.",
+       "questions": [
+        {
+         "text": "Flutter screens are built from…",
+         "options": [
+          "Widgets",
+          "Templates",
+          "Pages only",
+          "XML files"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "Which widget lays children out vertically?",
+         "options": [
+          "Row",
+          "Stack",
+          "Column",
+          "Text"
+         ],
+         "correct": 2
+        }
+       ]
+      },
+      {
+       "key": "fl-2",
+       "title": "Stateless vs Stateful",
+       "content": "A StatelessWidget never changes after it is built. A StatefulWidget has a State object, and calling setState tells Flutter to rebuild with the new values.",
+       "questions": [
+        {
+         "text": "Which call triggers a rebuild after your data changes?",
+         "options": [
+          "build()",
+          "setState()",
+          "runApp()",
+          "dispose()"
+         ],
+         "correct": 1
+        },
+        {
+         "text": "A title that never changes fits best in a…",
+         "options": [
+          "StatelessWidget",
+          "StatefulWidget",
+          "State",
+          "Navigator"
+         ],
+         "correct": 0
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "guitar",
+   "title": "Guitar Basics",
+   "category": "Music",
+   "icon": "🎸",
+   "description": "Tune up and play your first chords.",
+   "levels": [
+    {
+     "name": "easy",
+     "lessons": [
+      {
+       "key": "gt-1",
+       "title": "Parts and tuning",
+       "content": "Main parts: headstock (with the tuning pegs), neck, body and bridge.\n\nStandard tuning, from the thickest string to the thinnest, is E A D G B E.",
+       "questions": [
+        {
+         "text": "Standard tuning, thickest to thinnest string?",
+         "options": [
+          "E A D G B E",
+          "A B C D E F",
+          "G D A E B G",
+          "E E E E E E"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "Where are the tuning pegs?",
+         "options": [
+          "On the bridge",
+          "On the headstock",
+          "On the body",
+          "On the pickguard"
+         ],
+         "correct": 1
+        }
+       ]
+      },
+      {
+       "key": "gt-2",
+       "title": "Your first chords",
+       "content": "Em (E minor) and Am (A minor) are two of the easiest open chords. Press the strings just behind the fret, not on top of it.\n\nFor Em you strum all six strings. For Am you skip the thickest string.",
+       "questions": [
+        {
+         "text": "Em is short for…",
+         "options": [
+          "E major",
+          "E minor",
+          "A minor",
+          "E seventh"
+         ],
+         "correct": 1
+        },
+        {
+         "text": "Which string do you usually skip when strumming Am?",
+         "options": [
+          "The thinnest",
+          "The thickest (low E)",
+          "The middle one",
+          "None"
+         ],
+         "correct": 1
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "uiux",
+   "title": "UI/UX Design Basics",
+   "category": "Design",
+   "icon": "✏️",
+   "description": "Design screens people can actually use.",
+   "levels": [
+    {
+     "name": "easy",
+     "lessons": [
+      {
+       "key": "ux-1",
+       "title": "What is UX?",
+       "content": "UI is how a product looks: colours, buttons, type. UX is how it feels to use. Good UX is clear, efficient and accessible, so people reach their goal without thinking about the interface.",
+       "questions": [
+        {
+         "text": "UI mostly refers to…",
+         "options": [
+          "The visual look and controls",
+          "Server speed",
+          "Marketing",
+          "Database design"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "Good UX means…",
+         "options": [
+          "Lots of animations",
+          "Users reach their goals easily",
+          "Bright colours",
+          "Many menu levels"
+         ],
+         "correct": 1
+        }
+       ]
+      },
+      {
+       "key": "ux-2",
+       "title": "Wireframes",
+       "content": "A wireframe is a simple sketch of a screen's layout. It shows structure, not colours or final images. Make them before the visual design because they are quick and cheap to change.",
+       "questions": [
+        {
+         "text": "A wireframe mainly shows…",
+         "options": [
+          "Layout and structure",
+          "Final colours",
+          "Source code",
+          "Brand photos"
+         ],
+         "correct": 0
+        },
+        {
+         "text": "When are wireframes usually made?",
+         "options": [
+          "After launch",
+          "Before the visual design",
+          "Never",
+          "Only for print"
+         ],
+         "correct": 1
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

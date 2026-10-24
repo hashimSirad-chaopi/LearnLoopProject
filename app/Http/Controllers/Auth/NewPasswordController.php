@@ -3,61 +3,76 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLog;
 use App\Models\User;
+use App\Support\EmailOtp;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+/** Step 2 of "forgot password": the emailed code plus the new password. */
 class NewPasswordController extends Controller
 {
-    /**
-     * Display the password reset view.
-     */
-    public function create(Request $request): View
+    public function create(Request $request): View|RedirectResponse
     {
-        return view('auth.reset-password', ['request' => $request]);
+        $email = $request->session()->get('otp_email');
+        if (! $email) {
+            return redirect()->route('password.request');
+        }
+
+        return view('auth.reset-password', [
+            'maskedEmail' => EmailOtp::mask($email),
+            'wait' => EmailOtp::cooldown($email, EmailOtp::PASSWORD_RESET),
+        ]);
     }
 
-    /**
-     * Handle an incoming new password request.
-     *
-     * @throws ValidationException
-     */
     public function store(Request $request): RedirectResponse
     {
+        $email = $request->session()->get('otp_email');
+        if (! $email) {
+            return redirect()->route('password.request');
+        }
+
         $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
+            'code' => ['required', 'string', 'max:12'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
+        $key = 'reset-code:'.$email.'|'.$request->ip();
+        if (RateLimiter::tooManyAttempts($key, 10)) {
+            return back()->withErrors(['code' => 'Too many tries. Please wait a few minutes.']);
+        }
 
-                event(new PasswordReset($user));
-            }
-        );
+        $user = User::whereRaw('lower(email) = ?', [$email])->first();
+        $error = $user ? EmailOtp::check($email, EmailOtp::PASSWORD_RESET, $request->code) : 'That code is not correct.';
 
-        // If the password was successfully reset, we will redirect the user back to
-        // the application's home authenticated view. If there is an error we can
-        // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+        if ($error) {
+            RateLimiter::hit($key, 600);
+
+            return back()->withErrors(['code' => $error]);
+        }
+
+        RateLimiter::clear($key);
+
+        $user->forceFill([
+            'password' => $request->password, // hashed by the model cast
+            'remember_token' => Str::random(60),
+        ])->save();
+
+        // Anyone signed in with the old password (phones, trusted admin browsers) must sign in again.
+        $user->tokens()->delete();
+        DB::table('admin_trusted_devices')->where('user_id', $user->id)->delete();
+
+        ActivityLog::create(['user_id' => $user->id, 'action' => 'password.reset', 'description' => 'Password reset with an email code from '.$request->ip()]);
+        event(new PasswordReset($user));
+
+        $request->session()->forget('otp_email');
+
+        return redirect()->route('login')->with('status', 'Your password was changed. You can sign in now.');
     }
 }

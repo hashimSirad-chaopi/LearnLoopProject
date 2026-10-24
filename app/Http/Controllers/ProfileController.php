@@ -34,6 +34,7 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        \App\Models\ActivityLog::record('profile.updated', 'Updated own profile details');
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -49,6 +50,7 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+<<<<<<< HEAD
                 
         if (
             $user->role === 'admin' &&
@@ -62,6 +64,15 @@ class ProfileController extends Controller
             ], 'userDeletion');
         }
 
+=======
+        // This is a one-admin system: deleting the admin account would lock everyone out of the panel.
+        if ($user->role === 'admin' && \App\Models\User::where('role', 'admin')->where('status', 'active')->count() <= 1) {
+            return back()->withErrors(['password' => 'You are the only administrator, so this account cannot be deleted.'], 'userDeletion');
+        }
+
+        \App\Models\ActivityLog::record('profile.deleted', "Deleted own account ({$user->email})");
+
+>>>>>>> 7128c7a35fdb01d62338eda557a779da41476150
         Auth::logout();
 
         $user->delete();

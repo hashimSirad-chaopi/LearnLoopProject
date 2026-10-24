@@ -20,12 +20,19 @@ Route::middleware('guest')->group(function () {
         ->name('password.request');
 
     Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+        ->middleware('throttle:6,10')
         ->name('password.email');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+    Route::post('forgot-password/resend', [PasswordResetLinkController::class, 'resend'])
+        ->middleware('throttle:6,10')
+        ->name('password.resend');
+
+    // Step 2: the emailed 6-digit code + the new password.
+    Route::get('reset-password', [NewPasswordController::class, 'create'])
         ->name('password.reset');
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
+        ->middleware('throttle:15,5')
         ->name('password.store');
 });
 

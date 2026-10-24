@@ -10,19 +10,22 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * Admin-panel login.
+ *
+ * Order of checks matters: credentials are verified FIRST, and only then do we
+ * look at role and status. That way nobody is ever signed in "just to be kicked
+ * out again", and a wrong password never reveals whether an account is an
+ * admin or is suspended.
+ */
 class LoginRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
@@ -34,7 +37,8 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Attempt to authenticate the request's credentials.
+     * Verify the credentials, confirm the account may use the admin panel,
+     * and only then sign the user in.
      *
      * @throws ValidationException
      */
@@ -42,24 +46,44 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-       if (! Auth::attempt([
-    'email' => $this->email,
-    'password' => $this->password,
-    'status' => 'active',
-], $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        $guard = Auth::guard('web');
+        $provider = $guard->getProvider();
 
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
+        $user = $provider->retrieveByCredentials(['email' => $this->input('email')]);
+
+        // 1. Wrong email or wrong password. One shared message, on purpose.
+        if (! $user || ! $provider->validateCredentials($user, ['password' => $this->input('password')])) {
+            $this->failLogin('These credentials do not match our records.');
         }
+
+        // 2. Correct password, but not an admin.
+        if ($user->role !== 'admin') {
+            $this->failLogin('This account does not have admin access.');
+        }
+
+        // 3. Correct password, admin, but suspended.
+        if ($user->status !== 'active') {
+            $this->failLogin('This account is suspended. Ask another administrator to reactivate it.');
+        }
+
+        $guard->login($user, $this->boolean('remember'));
 
         RateLimiter::clear($this->throttleKey());
     }
 
     /**
-     * Ensure the login request is not rate limited.
+     * Count the failed attempt against the rate limit and reject the request.
      *
+     * @throws ValidationException
+     */
+    protected function failLogin(string $message): never
+    {
+        RateLimiter::hit($this->throttleKey());
+
+        throw ValidationException::withMessages(['email' => $message]);
+    }
+
+    /**
      * @throws ValidationException
      */
     public function ensureIsNotRateLimited(): void
@@ -73,16 +97,11 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => 'Too many login attempts. Please try again in '
+                .$seconds.' '.Str::plural('second', $seconds).'.',
         ]);
     }
 
-    /**
-     * Get the rate limiting throttle key for the request.
-     */
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
