@@ -1,0 +1,2812 @@
+{
+  "skills": [
+    {
+      "title": "Basic French Phrases",
+      "category": "Language",
+      "icon": "🥖",
+      "description": "Greetings and polite phrases for travel and chat.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Greetings in French",
+              "content": "Bonjour means hello or good day. Use Bonsoir in the evening. To say goodbye, use Au revoir. To be polite, say S'il vous plaît for please and Merci for thank you.\n\nTo ask how someone is, say Comment allez-vous? A friendly answer is Très bien, merci.",
+              "questions": [
+                {
+                  "text": "What does 'Merci' mean?",
+                  "options": [
+                    "Please",
+                    "Thank you",
+                    "Sorry",
+                    "Goodbye"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which phrase means goodbye?",
+                  "options": [
+                    "Bonjour",
+                    "Bonsoir",
+                    "Au revoir",
+                    "S'il vous plaît"
+                  ],
+                  "correct": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Japanese Hiragana Basics",
+      "category": "Language",
+      "icon": "🈴",
+      "description": "Read and write the first Japanese characters.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "What is Hiragana?",
+              "content": "Hiragana is one of the Japanese writing systems. Each character stands for a sound, such as あ (a), い (i), う (u), え (e) and お (o).\n\nThese five are the vowels. Almost every other hiragana sound is a consonant plus one of these vowels, for example か is ka and き is ki.",
+              "questions": [
+                {
+                  "text": "Which of these is a Japanese vowel sound?",
+                  "options": [
+                    "ka",
+                    "a",
+                    "shi",
+                    "tsu"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What does each hiragana character represent?",
+                  "options": [
+                    "A whole word",
+                    "A sound",
+                    "A color",
+                    "A number"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "English Grammar Basics",
+      "category": "Language",
+      "icon": "📘",
+      "description": "Sentences, nouns, verbs and simple tenses.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Nouns and Verbs",
+              "content": "A noun names a person, place or thing, like teacher, city or book. A verb shows an action or a state, like run, write or is.\n\nEvery complete sentence needs at least a subject (the noun doing something) and a verb. In 'Ana reads', Ana is the subject and reads is the verb.",
+              "questions": [
+                {
+                  "text": "Which word is a verb?",
+                  "options": [
+                    "Table",
+                    "Quickly",
+                    "Jump",
+                    "Green"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "In 'Ana reads', which word is the subject?",
+                  "options": [
+                    "Ana",
+                    "reads",
+                    "Both",
+                    "Neither"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "JavaScript Basics",
+      "category": "Programming Language",
+      "icon": "🟨",
+      "description": "The language of the web, from variables to functions.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Variables and Data Types",
+              "content": "A variable is a named box that stores a value, such as age = 21 or name = \"Ana\". The value can change while the program runs.\n\nCommon data types are numbers, strings (text) and booleans (true or false). Choosing the right type matters, because you cannot do math on text.",
+              "questions": [
+                {
+                  "text": "Which data type stores the text \"Ana\"?",
+                  "options": [
+                    "Number",
+                    "Boolean",
+                    "String",
+                    "Null"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does a variable do?",
+                  "options": [
+                    "Runs a loop",
+                    "Stores a value under a name",
+                    "Deletes a file",
+                    "Draws a button"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "HTML & CSS Basics",
+      "category": "Programming Language",
+      "icon": "🌐",
+      "description": "Build and style your first web page.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Your First Web Page",
+              "content": "HTML describes the content of a page using tags, such as <h1> for a heading and <p> for a paragraph. Tags usually come in pairs: an opening tag and a closing tag.\n\nCSS controls how the page looks, such as colors, spacing and fonts. For example, color: blue; makes text blue.",
+              "questions": [
+                {
+                  "text": "Which language controls how a page looks?",
+                  "options": [
+                    "HTML",
+                    "CSS",
+                    "SQL",
+                    "Python"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which tag makes a heading?",
+                  "options": [
+                    "<p>",
+                    "<h1>",
+                    "<img>",
+                    "<a>"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SQL Basics",
+      "category": "Programming Language",
+      "icon": "🗄️",
+      "description": "Ask questions of a database.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Selecting Data",
+              "content": "SQL is the language used to talk to databases. A database stores data in tables made of rows and columns.\n\nTo read data you use SELECT. For example, SELECT name FROM users; returns the name column for every row in the users table. Add WHERE to filter rows.",
+              "questions": [
+                {
+                  "text": "Which command reads data from a table?",
+                  "options": [
+                    "INSERT",
+                    "SELECT",
+                    "DELETE",
+                    "DROP"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which word filters the rows you get back?",
+                  "options": [
+                    "WHERE",
+                    "FROM",
+                    "ORDER",
+                    "TABLE"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Color Theory",
+      "category": "Design",
+      "icon": "🎨",
+      "description": "Choose colors that look good together.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "The Basics of Color",
+              "content": "Color has three parts: hue (the color itself), saturation (how strong it is) and brightness (how light or dark).\n\nColors opposite each other on the color wheel, like blue and orange, are complementary and make each other stand out. Colors next to each other, like blue and green, are analogous and feel calm together.",
+              "questions": [
+                {
+                  "text": "Which pair is complementary?",
+                  "options": [
+                    "Blue and green",
+                    "Blue and orange",
+                    "Red and pink",
+                    "Yellow and lime"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What does saturation describe?",
+                  "options": [
+                    "How light the color is",
+                    "How strong or vivid the color is",
+                    "The name of the color",
+                    "The shape of the color"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Typography Basics",
+      "category": "Design",
+      "icon": "🔤",
+      "description": "Pick and pair fonts for readable designs.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Serif and Sans-serif",
+              "content": "Serif fonts have small strokes at the ends of letters, like Times New Roman. Sans-serif fonts do not, like Arial.\n\nFor good design, use no more than two or three fonts. Make headings larger and bolder than body text, and leave enough space between lines so text is easy to read.",
+              "questions": [
+                {
+                  "text": "Which kind of font has small strokes at the ends of letters?",
+                  "options": [
+                    "Sans-serif",
+                    "Serif",
+                    "Script",
+                    "Mono"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "About how many fonts should one design use?",
+                  "options": [
+                    "Two or three",
+                    "Ten",
+                    "One for each word",
+                    "As many as possible"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Logo Design Basics",
+      "category": "Design",
+      "icon": "✏️",
+      "description": "Make simple, memorable logos.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "What Makes a Good Logo",
+              "content": "A good logo is simple, memorable and works at any size, from a tiny app icon to a large sign.\n\nIt should also work in one color, so it still looks good in black and white. Avoid too many details, because they disappear when the logo is small.",
+              "questions": [
+                {
+                  "text": "A good logo should be...",
+                  "options": [
+                    "Very detailed",
+                    "Simple and memorable",
+                    "Always rainbow colored",
+                    "Hard to read"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Why should a logo work in one color?",
+                  "options": [
+                    "It is cheaper to print everywhere and stays clear",
+                    "Color is not allowed",
+                    "It makes the logo larger",
+                    "It hides the name"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Music Theory Basics",
+      "category": "Music",
+      "icon": "🎼",
+      "description": "Beats, notes and how music is written.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Reading Beats and Rhythm",
+              "content": "Rhythm is the pattern of long and short sounds in music. A beat is the steady pulse you tap your foot to.\n\nMost songs group beats into bars of four (4/4 time): count 1-2-3-4, 1-2-3-4. A quarter note lasts one beat, a half note lasts two beats and a whole note lasts four beats.",
+              "questions": [
+                {
+                  "text": "How many beats does a half note last?",
+                  "options": [
+                    "One",
+                    "Two",
+                    "Three",
+                    "Four"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "In 4/4 time, how many beats are in one bar?",
+                  "options": [
+                    "Two",
+                    "Three",
+                    "Four",
+                    "Eight"
+                  ],
+                  "correct": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ukulele Basics",
+      "category": "Music",
+      "icon": "🪕",
+      "description": "Play your first songs on four strings.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Holding and Tuning",
+              "content": "The ukulele has four strings. From the string closest to your face down, the standard tuning is G, C, E, A.\n\nHold the ukulele close to your body with your picking arm over the body. Press the strings with your fingertips, just behind the metal fret, for a clear sound.",
+              "questions": [
+                {
+                  "text": "How many strings does a ukulele have?",
+                  "options": [
+                    "Four",
+                    "Six",
+                    "Five",
+                    "Eight"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Where should you press the string?",
+                  "options": [
+                    "Just behind the fret",
+                    "In the middle of the fret",
+                    "On the body",
+                    "Over the strap"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Singing Basics",
+      "category": "Music",
+      "icon": "🎤",
+      "description": "Breathing and posture for a stronger voice.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Breathing and Posture",
+              "content": "Good singing starts with good breathing. Stand with your feet apart and shoulders relaxed. Breathe in low, so your belly expands, instead of lifting your shoulders.\n\nBreathe out slowly while you sing. Drink water and warm up with gentle humming before singing loudly.",
+              "questions": [
+                {
+                  "text": "Where should you breathe from when singing?",
+                  "options": [
+                    "Low, so your belly expands",
+                    "High, by lifting your shoulders",
+                    "Only your nose, holding it",
+                    "Not at all"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is a good warm-up?",
+                  "options": [
+                    "Gentle humming",
+                    "Shouting",
+                    "Whispering",
+                    "Holding your breath"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Smartphone Photography",
+      "category": "Photography & Video",
+      "icon": "📱",
+      "description": "Better photos with the phone you already have.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "The Rule of Thirds",
+              "content": "Imagine your photo split into a 3 x 3 grid with two lines across and two lines down. Place your subject where the lines cross, instead of in the exact center.\n\nThis makes the picture feel balanced and more interesting. Also leave a little space in the direction your subject is looking or moving.",
+              "questions": [
+                {
+                  "text": "Where should you place the main subject in the rule of thirds?",
+                  "options": [
+                    "Exactly in the center",
+                    "Where the grid lines cross",
+                    "In a corner, cropped",
+                    "Anywhere"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "How many lines does the grid use?",
+                  "options": [
+                    "Two",
+                    "Four",
+                    "Six",
+                    "Nine"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Video Editing Basics",
+      "category": "Photography & Video",
+      "icon": "🎞️",
+      "description": "Cut clips into a clear, watchable video.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Cuts and Timeline",
+              "content": "Video editing happens on a timeline, where clips are placed in order. A cut is where one clip ends and the next begins.\n\nKeep cuts purposeful: remove pauses and mistakes, and let each clip show something new. Add music quietly so it does not cover people speaking.",
+              "questions": [
+                {
+                  "text": "What is a cut?",
+                  "options": [
+                    "Where one clip ends and the next begins",
+                    "A type of microphone",
+                    "A color filter",
+                    "A camera lens"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "How should music sound under speech?",
+                  "options": [
+                    "Louder than the voice",
+                    "Quiet enough to hear the voice",
+                    "Silent always",
+                    "Distorted"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Lighting Basics",
+      "category": "Photography & Video",
+      "icon": "💡",
+      "description": "Use natural and simple light well.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Natural Light",
+              "content": "Soft light makes people look natural. The best natural light is near a window, or outdoors in the early morning or late afternoon.\n\nAvoid harsh midday sun directly overhead, which makes strong shadows under the eyes. Face your subject toward the light, not away from it.",
+              "questions": [
+                {
+                  "text": "When is natural light usually softest outdoors?",
+                  "options": [
+                    "Noon",
+                    "Early morning or late afternoon",
+                    "Midnight",
+                    "Never"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which way should the subject face?",
+                  "options": [
+                    "Toward the light",
+                    "Away from the light",
+                    "Into a dark corner",
+                    "Up at the sun"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Knitting Basics",
+      "category": "Arts & Crafts",
+      "icon": "🧶",
+      "description": "Cast on, knit and finish your first scarf.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Casting On",
+              "content": "Casting on puts your first row of stitches on the needle. Make a slip knot, place it on the needle, then pull a loop of yarn through it to add each new stitch.\n\nKeep the stitches snug but not tight. If they are too tight you will not be able to slide the needle into them on the next row.",
+              "questions": [
+                {
+                  "text": "What does casting on do?",
+                  "options": [
+                    "Finishes the project",
+                    "Makes the first row of stitches",
+                    "Changes the yarn color",
+                    "Adds a button"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Why shouldn't cast-on stitches be too tight?",
+                  "options": [
+                    "They look bad",
+                    "The yarn breaks",
+                    "You cannot slide the needle in next row",
+                    "They grow in the wash"
+                  ],
+                  "correct": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Drawing Basics",
+      "category": "Arts & Crafts",
+      "icon": "✍️",
+      "description": "Lines, shapes and shading for beginners.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Shapes and Shading",
+              "content": "Everything can be drawn from simple shapes: circles, squares and triangles. Start with light lines, then add details.\n\nTo add shading, decide where the light comes from. Areas facing away from the light are darker. Press harder with the pencil for dark areas and lighter for bright areas.",
+              "questions": [
+                {
+                  "text": "How should you start a drawing?",
+                  "options": [
+                    "With heavy dark lines",
+                    "With simple shapes and light lines",
+                    "With the smallest details",
+                    "With an eraser"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which areas are darker when shading?",
+                  "options": [
+                    "Facing the light",
+                    "Facing away from the light",
+                    "The whole picture",
+                    "None"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Watercolor Painting Basics",
+      "category": "Arts & Crafts",
+      "icon": "🖌️",
+      "description": "Washes, blending and color control.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Wet-on-Wet",
+              "content": "Watercolor uses water to spread pigment. In the wet-on-wet technique you wet the paper first, then add paint, so colors blend softly.\n\nUse more water for light colors and less water for strong ones. Let a layer dry before adding sharp details on top.",
+              "questions": [
+                {
+                  "text": "What do you do first in wet-on-wet?",
+                  "options": [
+                    "Wet the paper",
+                    "Draw details",
+                    "Let it dry",
+                    "Use black paint"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "How do you get a lighter color?",
+                  "options": [
+                    "Use more water",
+                    "Use less water",
+                    "Press harder",
+                    "Use a smaller brush"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Hip-Hop Dance Basics",
+      "category": "Dance",
+      "icon": "🕺",
+      "description": "Groove, bounce and rhythm for beginners.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Finding the Rhythm: The Basic Step",
+              "content": "Start by standing tall with your knees soft. Listen for the beat and step on every beat: right, left, right, left.\n\nOnce you can step in time, add a small sway of the hips and let your arms move naturally. Keeping the beat matters more than fancy moves.",
+              "questions": [
+                {
+                  "text": "What should you do first when learning a basic step?",
+                  "options": [
+                    "Learn a hard spin",
+                    "Step in time with the beat",
+                    "Close your eyes",
+                    "Jump"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which matters more for a beginner?",
+                  "options": [
+                    "Fancy moves",
+                    "Keeping the beat",
+                    "Costume",
+                    "Speed"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ballroom Dance Basics",
+      "category": "Dance",
+      "icon": "💃",
+      "description": "Posture and the basic box step.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Posture and the Box Step",
+              "content": "Ballroom dancing starts with good posture: stand tall, shoulders relaxed and chest lifted. Hold your partner in a gentle frame, not stiff.\n\nThe basic box step moves in a square: step forward, step to the side, close your feet together, then repeat backward. Count the steps out loud to stay in time.",
+              "questions": [
+                {
+                  "text": "What shape does the basic box step follow?",
+                  "options": [
+                    "A square",
+                    "A circle",
+                    "A triangle",
+                    "A star"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "How should you hold your posture?",
+                  "options": [
+                    "Slouched",
+                    "Tall with relaxed shoulders",
+                    "Leaning back",
+                    "Looking at your feet"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Folk Dance Basics",
+      "category": "Dance",
+      "icon": "🪗",
+      "description": "Group steps and traditional rhythms.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Dancing in a Group",
+              "content": "Many folk dances are done in lines, circles or pairs. The pattern repeats, so learn one short section first.\n\nWatch the leader, listen to the music and keep a steady step. Smiling and staying in time with the group matters more than doing every step perfectly.",
+              "questions": [
+                {
+                  "text": "How should you learn a folk dance?",
+                  "options": [
+                    "One short section at a time",
+                    "The whole dance at once",
+                    "Only by reading",
+                    "Without music"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What matters in group dances?",
+                  "options": [
+                    "Staying in time with the group",
+                    "Being the fastest",
+                    "Being the loudest",
+                    "Skipping steps"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Creative Writing Basics",
+      "category": "Writing & Storytelling",
+      "icon": "📝",
+      "description": "Characters, plot and voice.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "The Shape of a Story",
+              "content": "Most stories have a beginning, a middle and an end. The beginning introduces a character and a problem. The middle shows the character trying to solve it and facing obstacles.\n\nThe end shows how the problem is resolved and how the character has changed. Even a very short story works better when something is at stake.",
+              "questions": [
+                {
+                  "text": "What does the beginning of a story usually introduce?",
+                  "options": [
+                    "The ending",
+                    "A character and a problem",
+                    "The credits",
+                    "A summary"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What happens in the middle?",
+                  "options": [
+                    "The character faces obstacles",
+                    "Nothing",
+                    "The story is explained",
+                    "The ending repeats"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Essay Writing Basics",
+      "category": "Writing & Storytelling",
+      "icon": "📄",
+      "description": "Plan and write clear essays.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Introduction, Body, Conclusion",
+              "content": "An essay has three parts. The introduction presents your main idea, called the thesis. The body paragraphs each cover one point with examples. The conclusion sums up your ideas.\n\nBefore writing, make a short outline so each paragraph has a clear job.",
+              "questions": [
+                {
+                  "text": "Where does the thesis usually go?",
+                  "options": [
+                    "In the introduction",
+                    "Only in the title",
+                    "After the conclusion",
+                    "Nowhere"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What does each body paragraph cover?",
+                  "options": [
+                    "One main point",
+                    "Every idea at once",
+                    "Only the title",
+                    "Random facts"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Journaling Basics",
+      "category": "Writing & Storytelling",
+      "icon": "📓",
+      "description": "Build a simple writing habit.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Starting a Journal",
+              "content": "Journaling means writing regularly about your thoughts, goals or day. It does not need to be perfect or long.\n\nPick a time that fits your routine, like before bed, and write for five minutes. If you do not know what to write, try 'Today I felt...' or 'One good thing today was...'",
+              "questions": [
+                {
+                  "text": "How long can a journaling session be?",
+                  "options": [
+                    "Five minutes is enough",
+                    "It must be an hour",
+                    "At least ten pages",
+                    "Only on holidays"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Does journaling need to be perfect?",
+                  "options": [
+                    "No",
+                    "Yes, always",
+                    "Only the first line",
+                    "Only with a pen"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Outfit Styling Basics",
+      "category": "Fashion & Beauty",
+      "icon": "👗",
+      "description": "Mix and match clothes with confidence.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Matching Colors in an Outfit",
+              "content": "Start with one or two neutral colors such as black, white, grey, beige or navy. They go with almost everything.\n\nAdd one color as an accent, like a red scarf or green shoes. A simple rule: wear no more than three main colors in one outfit so the look stays clean.",
+              "questions": [
+                {
+                  "text": "Which of these is a neutral color?",
+                  "options": [
+                    "Bright red",
+                    "Navy",
+                    "Neon green",
+                    "Hot pink"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "About how many main colors keep an outfit clean?",
+                  "options": [
+                    "One to three",
+                    "Five to six",
+                    "Ten",
+                    "As many as possible"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Skincare Basics",
+      "category": "Fashion & Beauty",
+      "icon": "🧴",
+      "description": "A simple daily routine for healthy skin.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "The Simple Routine",
+              "content": "A basic skincare routine has three steps: cleanse, moisturize and protect. Wash your face gently in the morning and evening.\n\nUse a moisturizer suited to your skin, and apply sunscreen every morning, even on cloudy days, to protect against sun damage.",
+              "questions": [
+                {
+                  "text": "What are the three basic steps?",
+                  "options": [
+                    "Cleanse, moisturize, protect",
+                    "Scrub, peel, bleach",
+                    "Mask, mask, mask",
+                    "Rinse, skip, repeat"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "When should you use sunscreen?",
+                  "options": [
+                    "Every morning",
+                    "Only at the beach",
+                    "Only in winter",
+                    "Never"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Basic Sewing",
+      "category": "Fashion & Beauty",
+      "icon": "🧵",
+      "description": "Hand stitches and simple repairs.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Threading and the Running Stitch",
+              "content": "To sew by hand, cut a piece of thread about as long as your arm, thread the needle and tie a knot at the end.\n\nThe running stitch is the simplest: push the needle up and down through the fabric in a straight line, keeping the stitches an equal length. It is great for simple repairs.",
+              "questions": [
+                {
+                  "text": "What is the simplest hand stitch?",
+                  "options": [
+                    "Running stitch",
+                    "Embroidery",
+                    "Zigzag machine stitch",
+                    "Crochet"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What should you do at the end of the thread?",
+                  "options": [
+                    "Tie a knot",
+                    "Leave it loose",
+                    "Cut it off",
+                    "Wet it"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Kitchen Basics",
+      "category": "Cooking & Baking",
+      "icon": "🔪",
+      "description": "Safety, knife skills and basic techniques.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Kitchen Safety and Knife Basics",
+              "content": "Always wash your hands before cooking and keep raw meat away from vegetables to avoid cross-contamination.\n\nWhen cutting, curl your fingertips under, like a claw, and let the flat side of the knife guide against your knuckles. Use a damp towel under the cutting board so it does not slip. A sharp knife is safer than a dull one.",
+              "questions": [
+                {
+                  "text": "Why curl your fingertips when cutting?",
+                  "options": [
+                    "It looks nicer",
+                    "To protect your fingertips from the blade",
+                    "To hold the knife loosely",
+                    "To cut faster"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which is safer?",
+                  "options": [
+                    "A dull knife",
+                    "A sharp knife",
+                    "A wet knife",
+                    "A knife held by the blade"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Baking Bread Basics",
+      "category": "Cooking & Baking",
+      "icon": "🍞",
+      "description": "Simple dough, rising and baking.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Why Dough Rises",
+              "content": "Bread dough rises because yeast eats sugar and releases gas, which makes bubbles in the dough. Kneading builds gluten, which traps the gas.\n\nLet the dough rest in a warm place until it doubles in size. Bake in a hot oven until the crust is golden and the loaf sounds hollow when tapped.",
+              "questions": [
+                {
+                  "text": "What makes dough rise?",
+                  "options": [
+                    "Yeast releasing gas",
+                    "Cold water",
+                    "Salt",
+                    "Stirring only"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "How do you know the dough is ready to bake?",
+                  "options": [
+                    "It doubles in size",
+                    "It turns green",
+                    "It dries out",
+                    "It is cold"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Healthy Meal Prep",
+      "category": "Cooking & Baking",
+      "icon": "🥗",
+      "description": "Plan and cook meals for the week.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Planning Your Week",
+              "content": "Meal prep means cooking parts of your meals ahead of time. Choose a protein, a grain and a vegetable, and cook enough for several days.\n\nStore food in clean, covered containers in the fridge. Most cooked meals keep well for three to four days, so freeze extra portions.",
+              "questions": [
+                {
+                  "text": "What does a balanced prepped meal include?",
+                  "options": [
+                    "Protein, grain and vegetable",
+                    "Only dessert",
+                    "Only drinks",
+                    "Only bread"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "About how long do cooked meals keep in the fridge?",
+                  "options": [
+                    "Three to four days",
+                    "One month",
+                    "One year",
+                    "One hour"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "DIY Basics",
+      "category": "Home & DIY",
+      "icon": "🔧",
+      "description": "Measuring and basic tools for home projects.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Using a Tape Measure and Level",
+              "content": "Measure twice, cut once. Hook the end of the tape measure on the edge of the material and read the number at the line you want.\n\nA level shows if something is straight. When the bubble sits between the two lines in the middle, the surface is level. Use it before drilling holes for shelves or hanging frames.",
+              "questions": [
+                {
+                  "text": "What does it mean when the bubble sits between the middle lines?",
+                  "options": [
+                    "The surface is level",
+                    "The tool is broken",
+                    "The wall is wet",
+                    "The shelf is heavy"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What does 'measure twice, cut once' teach?",
+                  "options": [
+                    "Cut quickly",
+                    "Double-check before you cut",
+                    "Use two saws",
+                    "Measure after cutting"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Basic Plumbing Fixes",
+      "category": "Home & DIY",
+      "icon": "🚰",
+      "description": "Fix leaks and clogs safely.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Fixing a Dripping Faucet",
+              "content": "Before any repair, turn off the water supply under the sink. A dripping faucet is often caused by a worn washer or cartridge inside.\n\nUnscrew the handle, replace the worn part with a matching one and reassemble. Turn the water back on slowly and check for leaks.",
+              "questions": [
+                {
+                  "text": "What should you do first before a plumbing repair?",
+                  "options": [
+                    "Turn off the water supply",
+                    "Turn the water up",
+                    "Remove the sink",
+                    "Call a neighbor"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What commonly causes a dripping faucet?",
+                  "options": [
+                    "A worn washer or cartridge",
+                    "Too much soap",
+                    "A loud pipe",
+                    "A dirty mirror"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Painting a Room",
+      "category": "Home & DIY",
+      "icon": "🎨",
+      "description": "Prepare, paint and clean up.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Preparing to Paint",
+              "content": "Good painting starts with preparation. Move or cover furniture, and cover the floor with a drop cloth. Fill small holes and sand rough spots.\n\nUse painter's tape along edges. Paint the edges first with a small brush, then use a roller for large areas, working in sections.",
+              "questions": [
+                {
+                  "text": "What do you cover the floor with?",
+                  "options": [
+                    "A drop cloth",
+                    "Water",
+                    "Wallpaper",
+                    "Nothing"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What do you paint first?",
+                  "options": [
+                    "The edges with a brush",
+                    "The middle with a roller",
+                    "The floor",
+                    "The furniture"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Home Gardening Basics",
+      "category": "Gardening",
+      "icon": "🌱",
+      "description": "Light, water and soil for healthy plants.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Watering and Sunlight",
+              "content": "Most plants need light, water and good soil. Check the label to see if a plant likes full sun, partial shade or shade.\n\nWater when the top inch of soil feels dry, and water slowly at the base, not the leaves. Too much water is a common beginner mistake because roots need air too.",
+              "questions": [
+                {
+                  "text": "When should you water most plants?",
+                  "options": [
+                    "Every hour",
+                    "When the top inch of soil feels dry",
+                    "Only when leaves fall",
+                    "Never in summer"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Where should you pour the water?",
+                  "options": [
+                    "On the leaves",
+                    "At the base of the plant",
+                    "On the flowers",
+                    "Into the sky"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Growing Herbs",
+      "category": "Gardening",
+      "icon": "🌿",
+      "description": "Basil, mint and herbs for the kitchen.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Starting Herbs at Home",
+              "content": "Herbs like basil, mint and parsley grow well in small pots on a sunny windowsill. They need about six hours of light a day.\n\nUse pots with drainage holes. Pick leaves often, because trimming makes the plant grow bushier. Mint spreads fast, so grow it in its own pot.",
+              "questions": [
+                {
+                  "text": "Why use pots with drainage holes?",
+                  "options": [
+                    "Extra water can escape",
+                    "They look nicer",
+                    "They are lighter",
+                    "They hold more soil"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Why grow mint in its own pot?",
+                  "options": [
+                    "It spreads fast",
+                    "It is poisonous",
+                    "It needs no water",
+                    "It is small"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Composting Basics",
+      "category": "Gardening",
+      "icon": "♻️",
+      "description": "Turn kitchen scraps into rich soil.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "What to Compost",
+              "content": "Compost is made from rotting plant material. Add 'greens' like vegetable scraps and coffee grounds, and 'browns' like dry leaves and paper.\n\nDo not add meat, dairy or oily food, because they attract pests and smell. Turn the pile now and then so air reaches it, and it will become dark, crumbly soil in a few months.",
+              "questions": [
+                {
+                  "text": "Which is a 'green' compost item?",
+                  "options": [
+                    "Vegetable scraps",
+                    "Plastic bags",
+                    "Glass",
+                    "Metal cans"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What should NOT go in compost?",
+                  "options": [
+                    "Meat and oily food",
+                    "Dry leaves",
+                    "Coffee grounds",
+                    "Banana peels"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Car Maintenance Basics",
+      "category": "Automotive",
+      "icon": "🚗",
+      "description": "Simple checks that keep a car running well.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Checking Tire Pressure",
+              "content": "Correct tire pressure keeps the car safe, saves fuel and makes tires last longer. Find the recommended pressure on the sticker inside the driver's door.\n\nCheck pressure when the tires are cold, before driving. Unscrew the valve cap, press the gauge on the valve, read the number, then add or release air as needed.",
+              "questions": [
+                {
+                  "text": "Where do you find the recommended pressure?",
+                  "options": [
+                    "On the radio",
+                    "On a sticker inside the driver's door",
+                    "On the roof",
+                    "In the trunk lid"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "When should you check pressure?",
+                  "options": [
+                    "When tires are cold",
+                    "After a long drive",
+                    "While driving",
+                    "Only in the rain"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Motorcycle Safety Basics",
+      "category": "Automotive",
+      "icon": "🏍️",
+      "description": "Gear and habits for safer riding.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Gear Up",
+              "content": "Always wear a helmet that fits well and is fastened. Add gloves, a jacket with protection, long pants and closed shoes or boots.\n\nBefore every ride, check tires, brakes, lights and mirrors. Ride at a safe speed, keep your distance and assume other drivers may not see you.",
+              "questions": [
+                {
+                  "text": "What is the most important piece of gear?",
+                  "options": [
+                    "A helmet",
+                    "Sunglasses",
+                    "A backpack",
+                    "A radio"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What should you check before every ride?",
+                  "options": [
+                    "Tires, brakes and lights",
+                    "Only the paint",
+                    "Only the seat",
+                    "Nothing"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Changing a Flat Tire",
+      "category": "Automotive",
+      "icon": "🛞",
+      "description": "Step-by-step spare tire change.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Before You Lift the Car",
+              "content": "Park on flat, firm ground, turn on your hazard lights and apply the parking brake. Find the spare tire, jack and wrench in the trunk.\n\nLoosen the wheel nuts slightly while the tire is still on the ground. Then lift the car with the jack, remove the nuts and swap the tire. Tighten the nuts in a star pattern.",
+              "questions": [
+                {
+                  "text": "Where should you park to change a tire?",
+                  "options": [
+                    "On flat, firm ground",
+                    "On a steep hill",
+                    "In the middle of the road",
+                    "On soft sand"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "When should you loosen the wheel nuts?",
+                  "options": [
+                    "Before lifting the car",
+                    "After the car is fully in the air",
+                    "Never",
+                    "After driving away"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Study Skills",
+      "category": "Academic Tutoring",
+      "icon": "📚",
+      "description": "Habits that make studying work.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Study Habits That Work",
+              "content": "Short, regular study sessions beat one long late-night session. Study for 25 minutes, then rest for 5 minutes. This is called the Pomodoro technique.\n\nTest yourself instead of only rereading. Closing the book and trying to recall what you learned helps memory more than highlighting.",
+              "questions": [
+                {
+                  "text": "What does the Pomodoro technique suggest?",
+                  "options": [
+                    "Study 25 minutes, rest 5",
+                    "Study 8 hours straight",
+                    "Study only at night",
+                    "Never take breaks"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Which helps memory more?",
+                  "options": [
+                    "Only rereading",
+                    "Testing yourself",
+                    "Highlighting everything",
+                    "Skipping sleep"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Algebra Basics",
+      "category": "Academic Tutoring",
+      "icon": "➗",
+      "description": "Solve simple equations step by step.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Solving for x",
+              "content": "An equation says two things are equal. To solve for x, do the same thing to both sides so the equation stays balanced.\n\nFor example, in x + 3 = 10, subtract 3 from both sides to get x = 7. Always check your answer by putting it back in the equation.",
+              "questions": [
+                {
+                  "text": "In x + 3 = 10, what is x?",
+                  "options": [
+                    "6",
+                    "7",
+                    "13",
+                    "10"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What must you do to keep an equation balanced?",
+                  "options": [
+                    "Do the same to both sides",
+                    "Change only one side",
+                    "Ignore the equals sign",
+                    "Add random numbers"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Reading Comprehension",
+      "category": "Academic Tutoring",
+      "icon": "📖",
+      "description": "Understand and remember what you read.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Finding the Main Idea",
+              "content": "The main idea is what a text is mostly about. Often it appears in the first or last sentence of a paragraph.\n\nWhile reading, ask yourself: Who or what is this about, and what is the author saying about it? Then try to say it in one sentence of your own words.",
+              "questions": [
+                {
+                  "text": "What is the main idea?",
+                  "options": [
+                    "What the text is mostly about",
+                    "The longest word",
+                    "The title only",
+                    "The last page number"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "A good way to check you understood is to...",
+                  "options": [
+                    "Say it in your own words",
+                    "Copy the first line",
+                    "Skip it",
+                    "Read faster"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Fractions & Percentages",
+      "category": "Mathematics & Science",
+      "icon": "🔢",
+      "description": "Parts of a whole, in everyday numbers.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Fractions and Percentages",
+              "content": "A fraction shows part of a whole: 1/2 means one of two equal parts. To turn a fraction into a percentage, divide the top by the bottom and multiply by 100, so 1/2 = 0.5 = 50%.\n\nTo find a percentage of a number, multiply. For example, 10% of 200 is 0.10 x 200 = 20.",
+              "questions": [
+                {
+                  "text": "What is 1/2 as a percentage?",
+                  "options": [
+                    "25%",
+                    "50%",
+                    "75%",
+                    "100%"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What is 10% of 200?",
+                  "options": [
+                    "2",
+                    "10",
+                    "20",
+                    "200"
+                  ],
+                  "correct": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Physics: Motion Basics",
+      "category": "Mathematics & Science",
+      "icon": "🚀",
+      "description": "Speed, distance and time.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Speed, Distance and Time",
+              "content": "Speed tells how fast something moves. The formula is speed = distance divided by time.\n\nIf a car travels 120 kilometers in 2 hours, its speed is 120 / 2 = 60 kilometers per hour. You can also find distance by multiplying speed by time.",
+              "questions": [
+                {
+                  "text": "If a car travels 120 km in 2 hours, what is its speed?",
+                  "options": [
+                    "30 km/h",
+                    "60 km/h",
+                    "120 km/h",
+                    "240 km/h"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What is the speed formula?",
+                  "options": [
+                    "Distance divided by time",
+                    "Time divided by distance",
+                    "Distance plus time",
+                    "Speed times speed"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chemistry Basics",
+      "category": "Mathematics & Science",
+      "icon": "⚗️",
+      "description": "Atoms, elements and the periodic table.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Atoms and Elements",
+              "content": "Everything is made of tiny particles called atoms. An element is a type of atom, such as hydrogen, oxygen or carbon.\n\nThe periodic table organizes all known elements. Atoms join together to form molecules, for example two hydrogen atoms and one oxygen atom make a water molecule, H2O.",
+              "questions": [
+                {
+                  "text": "What is H2O?",
+                  "options": [
+                    "Water",
+                    "Salt",
+                    "Air",
+                    "Gold"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What are things made of?",
+                  "options": [
+                    "Atoms",
+                    "Only liquids",
+                    "Only light",
+                    "Magnets"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Personal Budgeting",
+      "category": "Business & Finance",
+      "icon": "💰",
+      "description": "Plan your money with simple rules.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Needs, Wants and Savings",
+              "content": "A budget is a plan for your money. Write down your income, then split spending into needs (rent, food, transport), wants (eating out, games) and savings.\n\nA simple starting rule is 50% needs, 30% wants and 20% savings. Adjust the numbers to fit your life, but always pay yourself first by saving before you spend.",
+              "questions": [
+                {
+                  "text": "Which is a need?",
+                  "options": [
+                    "Rent",
+                    "A new game",
+                    "Concert tickets",
+                    "Eating out"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "In the 50/30/20 rule, what does 20% cover?",
+                  "options": [
+                    "Wants",
+                    "Needs",
+                    "Savings",
+                    "Taxes only"
+                  ],
+                  "correct": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Starting a Small Business",
+      "category": "Business & Finance",
+      "icon": "🏪",
+      "description": "From idea to first customer.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Validating Your Idea",
+              "content": "Before investing a lot, check that people actually want your product. Talk to possible customers and ask what problems they have.\n\nStart small, such as selling to a few people, and learn from their feedback. This is cheaper than building everything first and hoping it sells.",
+              "questions": [
+                {
+                  "text": "What should you do before investing a lot?",
+                  "options": [
+                    "Check that people want it",
+                    "Buy expensive equipment",
+                    "Hide the idea",
+                    "Avoid customers"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Why start small?",
+                  "options": [
+                    "It is cheaper and you learn from feedback",
+                    "It is required by law",
+                    "It makes more profit instantly",
+                    "Nobody notices"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Basic Investing",
+      "category": "Business & Finance",
+      "icon": "📈",
+      "description": "Risk, return and starting early.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Risk and Return",
+              "content": "Investing means putting money into something that may grow over time. Higher possible returns usually come with higher risk, meaning you could lose money.\n\nSpread your money across different investments, called diversification, so one bad result does not hurt everything. Only invest money you will not need soon.",
+              "questions": [
+                {
+                  "text": "What is diversification?",
+                  "options": [
+                    "Spreading money across different investments",
+                    "Putting everything in one place",
+                    "Never investing",
+                    "Spending it all"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What usually comes with higher returns?",
+                  "options": [
+                    "Higher risk",
+                    "No risk",
+                    "Guaranteed profit",
+                    "Lower fees"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Marketing Basics",
+      "category": "Digital Marketing",
+      "icon": "📣",
+      "description": "Reach the right people with the right message.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Know Your Audience",
+              "content": "Marketing works best when you know who you are talking to. Describe your ideal customer: their age, interests, problems and where they spend time online.\n\nThen choose the platform that fits them, and write content that solves a problem they have. A clear message to the right people beats a loud message to everyone.",
+              "questions": [
+                {
+                  "text": "What should you do first in marketing?",
+                  "options": [
+                    "Buy ads",
+                    "Know your audience",
+                    "Make a logo",
+                    "Post randomly"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which is better?",
+                  "options": [
+                    "A loud message to everyone",
+                    "A clear message to the right people",
+                    "No message",
+                    "A long confusing message"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Social Media Content Basics",
+      "category": "Digital Marketing",
+      "icon": "📱",
+      "description": "Plan posts people want to see.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Planning Content",
+              "content": "Plan your posts ahead with a content calendar. Mix helpful posts, entertaining posts and posts about your product.\n\nUse a clear first line and a strong picture. After posting, check which posts got the most likes, comments and shares, and make more of those.",
+              "questions": [
+                {
+                  "text": "What is a content calendar?",
+                  "options": [
+                    "A plan of posts ahead of time",
+                    "A paper diary of birthdays",
+                    "A camera",
+                    "A password list"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What should you do after posting?",
+                  "options": [
+                    "Check which posts did well",
+                    "Delete everything",
+                    "Ignore the results",
+                    "Post the same thing forever"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Email Marketing Basics",
+      "category": "Digital Marketing",
+      "icon": "✉️",
+      "description": "Write emails people open and read.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Writing a Good Subject Line",
+              "content": "The subject line decides whether people open your email. Keep it short, clear and honest, and say what is inside.\n\nIn the email, use one main message and one clear button or link. Always let people unsubscribe, because it is respectful and often required by law.",
+              "questions": [
+                {
+                  "text": "What does the subject line decide?",
+                  "options": [
+                    "Whether people open the email",
+                    "The color of the text",
+                    "The font size",
+                    "The sender's name"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Should people be able to unsubscribe?",
+                  "options": [
+                    "Yes, always",
+                    "No, never",
+                    "Only on Mondays",
+                    "Only if they ask twice"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Confident Speaking",
+      "category": "Public Speaking",
+      "icon": "🎙️",
+      "description": "Calm nerves and speak clearly.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Beating Stage Fright",
+              "content": "Nervousness before speaking is normal, and even experienced speakers feel it. Practice your talk out loud several times so the words feel familiar.\n\nTake slow breaths before you start, speak a little slower than normal, and pause between ideas. Look at friendly faces in the audience instead of the whole crowd.",
+              "questions": [
+                {
+                  "text": "What helps calm nerves before speaking?",
+                  "options": [
+                    "Slow breaths",
+                    "Skipping practice",
+                    "Talking faster",
+                    "Avoiding eye contact"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "How should you pace your speech?",
+                  "options": [
+                    "Slower than normal, with pauses",
+                    "As fast as possible",
+                    "Without stopping",
+                    "In a whisper"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Presentation Slides Basics",
+      "category": "Public Speaking",
+      "icon": "🖥️",
+      "description": "Make slides that help, not distract.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Less Text, More Clarity",
+              "content": "Slides should support what you say, not replace it. Use short phrases instead of full paragraphs, and a large, easy-to-read font.\n\nOne main idea per slide is a good rule. Use pictures or simple charts to explain, and avoid reading the slide word for word.",
+              "questions": [
+                {
+                  "text": "How many main ideas should a slide have?",
+                  "options": [
+                    "One",
+                    "Ten",
+                    "As many as fit",
+                    "None"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Should you read the slide word for word?",
+                  "options": [
+                    "No",
+                    "Yes, always",
+                    "Only the title",
+                    "Only in the dark"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Interview Skills",
+      "category": "Public Speaking",
+      "icon": "💼",
+      "description": "Prepare for common interview questions.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Preparing Your Answers",
+              "content": "Before an interview, learn about the company and read the job description. Prepare short answers to common questions, such as 'Tell me about yourself' and 'Why do you want this job?'\n\nUse real examples from school, work or projects. Arrive early, listen carefully and ask one or two questions at the end.",
+              "questions": [
+                {
+                  "text": "What should you learn before an interview?",
+                  "options": [
+                    "About the company",
+                    "Nothing",
+                    "Only the address",
+                    "The CEO's birthday"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is good to do at the end?",
+                  "options": [
+                    "Ask one or two questions",
+                    "Leave silently",
+                    "Ask for double the salary",
+                    "Argue"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Online Safety",
+      "category": "Technology & Gadgets",
+      "icon": "🔒",
+      "description": "Keep your accounts and data safe.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Keeping Accounts Safe",
+              "content": "Use a different strong password for each account. A strong password is long and mixes words, numbers and symbols. A password manager can remember them for you.\n\nTurn on two-step verification where you can, and never share your codes with anyone. Be careful with links in unexpected messages, because they may be scams.",
+              "questions": [
+                {
+                  "text": "What makes a password strong?",
+                  "options": [
+                    "Short and simple",
+                    "Long with words, numbers and symbols",
+                    "Your birthday",
+                    "The word 'password'"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What should you do with verification codes?",
+                  "options": [
+                    "Share them with friends",
+                    "Never share them",
+                    "Post them online",
+                    "Email them"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Smartphone Tips",
+      "category": "Technology & Gadgets",
+      "icon": "📲",
+      "description": "Get more from the phone in your pocket.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Battery and Storage",
+              "content": "To save battery, lower the screen brightness, close apps you do not use and turn on battery saver when low.\n\nIf storage is full, delete unused apps, clear old downloads and back up photos to the cloud or a computer before deleting them from the phone.",
+              "questions": [
+                {
+                  "text": "Which helps save battery?",
+                  "options": [
+                    "Lower screen brightness",
+                    "Max brightness always",
+                    "Opening more apps",
+                    "Turning off the phone charger"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What should you do before deleting photos?",
+                  "options": [
+                    "Back them up",
+                    "Nothing",
+                    "Take new photos",
+                    "Restart"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Spreadsheet Basics",
+      "category": "Technology & Gadgets",
+      "icon": "📊",
+      "description": "Cells, formulas and simple charts.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Cells and Formulas",
+              "content": "A spreadsheet is a grid of cells. Each cell has an address, like A1 (column A, row 1).\n\nFormulas start with an equals sign. For example, =A1+B1 adds the values in A1 and B1, and =SUM(A1:A5) adds the five cells from A1 to A5.",
+              "questions": [
+                {
+                  "text": "What does a formula start with?",
+                  "options": [
+                    "An equals sign",
+                    "A dollar sign",
+                    "A hashtag",
+                    "A question mark"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What does =SUM(A1:A5) do?",
+                  "options": [
+                    "Adds cells A1 to A5",
+                    "Multiplies them",
+                    "Deletes them",
+                    "Counts letters"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Workout Warm-Ups",
+      "category": "Fitness & Sports",
+      "icon": "🏃",
+      "description": "Prepare your body safely.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Warm Up Before Exercise",
+              "content": "A warm-up raises your heart rate and loosens your muscles so you are less likely to get hurt. Spend 5 to 10 minutes on light movement such as marching in place, arm circles and leg swings.\n\nSave long static stretches, where you hold a position, for after your workout. Drink water and wear shoes that fit you well.",
+              "questions": [
+                {
+                  "text": "How long should a warm-up take?",
+                  "options": [
+                    "5 to 10 minutes",
+                    "1 second",
+                    "1 hour",
+                    "No warm-up is needed"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "When are long static stretches best?",
+                  "options": [
+                    "After the workout",
+                    "Never",
+                    "Before sleeping only",
+                    "During the warm-up only"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Running for Beginners",
+      "category": "Fitness & Sports",
+      "icon": "👟",
+      "description": "Build up distance without burning out.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Start with Walk-Run Intervals",
+              "content": "If you are new to running, mix walking and running. For example, run for one minute, walk for two minutes and repeat for 20 minutes.\n\nGradually increase the running time each week. Run at a pace where you can still talk, and rest at least one or two days a week to let your body recover.",
+              "questions": [
+                {
+                  "text": "What is a good beginner approach?",
+                  "options": [
+                    "Walk-run intervals",
+                    "Sprint for an hour",
+                    "Never rest",
+                    "Run as fast as possible"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What pace is good?",
+                  "options": [
+                    "One where you can still talk",
+                    "As fast as you can",
+                    "Slower than walking",
+                    "No pace at all"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Basketball Basics",
+      "category": "Fitness & Sports",
+      "icon": "🏀",
+      "description": "Dribbling, passing and shooting.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Dribbling and Shooting",
+              "content": "To dribble, use your fingertips, not your palm, and keep the ball low and close. Look up so you can see the court, not just the ball.\n\nTo shoot, bend your knees, keep your elbow under the ball, and follow through with your wrist, as if reaching into the basket.",
+              "questions": [
+                {
+                  "text": "What part of the hand do you use to dribble?",
+                  "options": [
+                    "Fingertips",
+                    "Flat palm",
+                    "Fist",
+                    "Wrist only"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What should you do while dribbling?",
+                  "options": [
+                    "Look up at the court",
+                    "Stare at the floor",
+                    "Close your eyes",
+                    "Look away"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Healthy Sleep",
+      "category": "Health & Wellness",
+      "icon": "😴",
+      "description": "Habits for deeper, better sleep.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Healthy Sleep Habits",
+              "content": "Most adults need around 7 to 9 hours of sleep. Go to bed and wake up at about the same time every day, even on weekends.\n\nKeep your room dark and cool, and put screens away at least 30 minutes before bed. Avoid caffeine late in the afternoon.",
+              "questions": [
+                {
+                  "text": "About how much sleep do most adults need?",
+                  "options": [
+                    "2 to 3 hours",
+                    "4 hours",
+                    "7 to 9 hours",
+                    "12 hours"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What helps you sleep better?",
+                  "options": [
+                    "Screens until midnight",
+                    "A regular bedtime",
+                    "Coffee at night",
+                    "A bright room"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Stress Management",
+      "category": "Health & Wellness",
+      "icon": "🧘",
+      "description": "Simple ways to feel calmer.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Breathing to Calm Down",
+              "content": "When you feel stressed, slow breathing can help. Try box breathing: breathe in for four counts, hold for four, breathe out for four and hold for four.\n\nRepeat this several times. Regular movement, enough sleep and talking to someone you trust also help you handle stress.",
+              "questions": [
+                {
+                  "text": "What is box breathing?",
+                  "options": [
+                    "Breathe in, hold, out, hold, each for four counts",
+                    "Holding your breath for a minute",
+                    "Breathing very fast",
+                    "Breathing through a box"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What else helps with stress?",
+                  "options": [
+                    "Movement and sleep",
+                    "Skipping meals",
+                    "Staying up all night",
+                    "Avoiding people always"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Basic First Aid",
+      "category": "Health & Wellness",
+      "icon": "🩹",
+      "description": "Respond calmly to small injuries.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Cuts and Scrapes",
+              "content": "For a small cut, first wash your hands. Press a clean cloth on the cut to stop the bleeding, then rinse the cut with clean water.\n\nCover it with a clean bandage and change it daily. See a doctor if the bleeding does not stop, the cut is deep, or it becomes red, swollen or very painful.",
+              "questions": [
+                {
+                  "text": "What should you do first for a small cut?",
+                  "options": [
+                    "Wash your hands",
+                    "Ignore it",
+                    "Put dirt on it",
+                    "Run away"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "When should you see a doctor?",
+                  "options": [
+                    "If bleeding does not stop or the cut is deep",
+                    "Only for tiny scratches",
+                    "Never",
+                    "Only on weekends"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Goal Setting",
+      "category": "Personal Development",
+      "icon": "🎯",
+      "description": "Turn wishes into clear plans.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Setting SMART Goals",
+              "content": "A goal works better when it is clear. SMART means Specific, Measurable, Achievable, Relevant and Time-bound.\n\nInstead of saying 'I want to read more', say 'I will read 10 pages every night for the next 30 days'. Then track your progress and celebrate small wins.",
+              "questions": [
+                {
+                  "text": "What does the M in SMART stand for?",
+                  "options": [
+                    "Money",
+                    "Measurable",
+                    "Magic",
+                    "Mostly"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which is the better goal?",
+                  "options": [
+                    "Read more",
+                    "Read 10 pages every night for 30 days",
+                    "Maybe read someday",
+                    "Be better"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Time Management",
+      "category": "Personal Development",
+      "icon": "⏰",
+      "description": "Spend your time on what matters.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Prioritizing Tasks",
+              "content": "Write your tasks down, then sort them by importance and deadline. Do the most important tasks first, when your energy is highest.\n\nBreak big tasks into small steps, and avoid doing many things at once, because switching tasks wastes time.",
+              "questions": [
+                {
+                  "text": "What should you do first?",
+                  "options": [
+                    "The most important tasks",
+                    "The easiest only",
+                    "Nothing",
+                    "Whatever is newest"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Why break big tasks into steps?",
+                  "options": [
+                    "They are easier to start and finish",
+                    "To make them longer",
+                    "To hide them",
+                    "To avoid deadlines"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Building Good Habits",
+      "category": "Personal Development",
+      "icon": "🔁",
+      "description": "Make small habits that last.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Start Small",
+              "content": "Habits form through repetition. Start with a very small action, like two minutes of reading or one glass of water each morning.\n\nAttach the new habit to something you already do, such as after brushing your teeth. Track your streak, and if you miss a day, restart the next day instead of quitting.",
+              "questions": [
+                {
+                  "text": "How should you start a new habit?",
+                  "options": [
+                    "Very small",
+                    "Huge and difficult",
+                    "Without a plan",
+                    "Only on Mondays"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What if you miss a day?",
+                  "options": [
+                    "Restart the next day",
+                    "Quit forever",
+                    "Double it tomorrow",
+                    "Pretend it never existed"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Travel Etiquette",
+      "category": "Travel & Culture",
+      "icon": "🌏",
+      "description": "Respect local customs and people.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Respecting Local Customs",
+              "content": "Before you travel, learn a few basics about the place: common greetings, how to dress at religious sites, tipping habits and table manners.\n\nSmile, say hello and thank you in the local language, and ask before taking photos of people. Being curious and polite goes a long way.",
+              "questions": [
+                {
+                  "text": "What should you do before photographing a person?",
+                  "options": [
+                    "Ask first",
+                    "Take it quickly",
+                    "Use flash",
+                    "Follow them"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Why learn local customs before traveling?",
+                  "options": [
+                    "To show respect",
+                    "To avoid all people",
+                    "To skip tipping",
+                    "To change the rules"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Budget Travel Planning",
+      "category": "Travel & Culture",
+      "icon": "🧳",
+      "description": "See more for less.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Planning a Trip Budget",
+              "content": "List your main costs: transport, places to stay, food, activities and a little extra for emergencies. Estimate each one before you book.\n\nTravel outside peak season for lower prices, book transport early and keep track of what you spend each day.",
+              "questions": [
+                {
+                  "text": "What should a trip budget include?",
+                  "options": [
+                    "Transport, stay, food, activities and extra",
+                    "Only souvenirs",
+                    "Only the flight",
+                    "Nothing"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "When are prices often lower?",
+                  "options": [
+                    "Outside peak season",
+                    "During holidays",
+                    "On the day of travel",
+                    "Never"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Packing Smart",
+      "category": "Travel & Culture",
+      "icon": "🎒",
+      "description": "Pack light and still have what you need.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Pack Light",
+              "content": "Make a list before you pack. Choose clothes that can be mixed and matched, and wear your bulkiest items while traveling.\n\nPut important items like documents, money and medicine in your carry-on bag, and leave some space for things you buy.",
+              "questions": [
+                {
+                  "text": "Where should documents and money go?",
+                  "options": [
+                    "In your carry-on",
+                    "In checked bags",
+                    "In a pocket you forget",
+                    "Left at home"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is a good packing idea?",
+                  "options": [
+                    "Mix-and-match clothes",
+                    "Pack your entire closet",
+                    "Bring five coats",
+                    "Nothing planned"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Chess Basics",
+      "category": "Games & Hobbies",
+      "icon": "♟️",
+      "description": "Rules, pieces and first strategies.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Learning the Rules of Chess",
+              "content": "Chess is played on an 8 x 8 board by two players. Each side starts with 16 pieces: one king, one queen, two rooks, two bishops, two knights and eight pawns.\n\nThe goal is checkmate, which means the opponent's king is attacked and cannot escape. Bishops move diagonally, rooks move in straight lines and knights jump in an L shape.",
+              "questions": [
+                {
+                  "text": "How do bishops move?",
+                  "options": [
+                    "Diagonally",
+                    "In an L shape",
+                    "Only forward",
+                    "Sideways only"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is the goal of chess?",
+                  "options": [
+                    "Capture all pawns",
+                    "Checkmate the king",
+                    "Take the queen",
+                    "Reach the other side"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Sudoku Basics",
+      "category": "Games & Hobbies",
+      "icon": "🔢",
+      "description": "Solve number puzzles with logic.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "How Sudoku Works",
+              "content": "Sudoku is played on a 9 x 9 grid split into nine 3 x 3 boxes. Fill every row, column and box with the numbers 1 to 9, using each number once.\n\nStart with rows, columns or boxes that already have many numbers, and find which number is missing. Use logic, not guessing.",
+              "questions": [
+                {
+                  "text": "What numbers go in a Sudoku grid?",
+                  "options": [
+                    "1 to 9",
+                    "1 to 10",
+                    "0 to 9",
+                    "1 to 100"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Can a number repeat in a row?",
+                  "options": [
+                    "No",
+                    "Yes",
+                    "Only odd ones",
+                    "Only twice"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Origami Basics",
+      "category": "Games & Hobbies",
+      "icon": "🦢",
+      "description": "Fold paper into simple shapes.",
+      "levels": [
+        {
+          "name": "easy",
+          "lessons": [
+            {
+              "title": "Basic Folds",
+              "content": "Origami is the art of folding paper. Two basic folds are the valley fold, where the paper folds toward you like a valley, and the mountain fold, where it folds away like a mountain.\n\nUse a flat surface, make sharp creases with your fingernail and follow the steps in order.",
+              "questions": [
+                {
+                  "text": "What is origami?",
+                  "options": [
+                    "Folding paper",
+                    "Cutting cloth",
+                    "Painting walls",
+                    "Cooking rice"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Which fold goes toward you like a valley?",
+                  "options": [
+                    "Valley fold",
+                    "Mountain fold",
+                    "Square fold",
+                    "Wave fold"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

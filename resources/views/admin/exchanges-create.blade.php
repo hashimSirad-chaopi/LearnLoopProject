@@ -44,14 +44,15 @@
                 </div>
 
                 <div class="settings-field">
-                    <label for="skill_offered">Skill Offered</label>
+                    <label for="skill_offered">Skill the provider teaches</label>
                     <input id="skill_offered" name="skill_offered" type="text" value="{{ old('skill_offered') }}">
                     @error('skill_offered') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="settings-field">
-                    <label for="skill_wanted">Skill Wanted</label>
+                    <label for="skill_wanted">Skill the learner teaches back (optional)</label>
                     <input id="skill_wanted" name="skill_wanted" type="text" value="{{ old('skill_wanted') }}">
+                    <p class="ll-muted">Leave empty for a learner-only exchange, where the provider helps and nothing is swapped back.</p>
                     @error('skill_wanted') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 
@@ -62,6 +63,7 @@
                         <option value="ongoing">Ongoing</option>
                         <option value="completed">Completed</option>
                         <option value="disputed">Disputed</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
                 </div>
 

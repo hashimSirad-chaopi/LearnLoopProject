@@ -40,7 +40,7 @@
 
                 <div class="settings-field">
                     <label for="password">Reset Password (optional)</label>
-                    <input id="password" name="password" type="password" placeholder="Leave blank to keep current password">
+                    <input id="password" name="password" type="password" minlength="8" placeholder="Leave blank to keep current password (min 8 characters)">
                     @error('password') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 

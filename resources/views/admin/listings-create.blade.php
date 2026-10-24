@@ -22,6 +22,7 @@
         </header>
 
         <section class="listing-page">
+            @include('partials.flash')
             <form class="settings-form" method="POST" action="{{ route('admin.listings.store') }}">
                 @csrf
 
@@ -41,16 +42,27 @@
                 </div>
 
                 <div class="settings-field">
-    <label for="category">Category</label>
-    <select id="category_id" name="category_id">
-        @foreach(\App\Models\Category::all() as $cat)
-            <option value="{{ $cat->id }}"
-    {{ (old('category_id', '')) == $cat->id ? 'selected' : '' }}>
-    {{ $cat->name }}
-</option>
-        @endforeach
-    </select>
-</div>
+                    <label for="wants_skill_id">Wants to learn</label>
+                    <select id="wants_skill_id" name="wants_skill_id" required>
+                        <option value="">Choose a skill</option>
+                        @foreach($skills as $skill)
+                            <option value="{{ $skill->id }}" {{ (string) old('wants_skill_id') === (string) $skill->id ? 'selected' : '' }}>{{ $skill->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('wants_skill_id') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
+                </div>
+
+                <div class="settings-field">
+                    <label for="offers_skill_id">Can teach</label>
+                    <select id="offers_skill_id" name="offers_skill_id">
+                        <option value="">Nothing yet (learner-only listing)</option>
+                        @foreach($skills as $skill)
+                            <option value="{{ $skill->id }}" {{ (string) old('offers_skill_id') === (string) $skill->id ? 'selected' : '' }}>{{ $skill->title }}</option>
+                        @endforeach
+                    </select>
+                    <p class="ll-muted">Leave empty when the member has no skill to teach yet. They can still post what they want to learn, and a member who has passed every lesson of that skill can offer to teach it. The category follows the skill.</p>
+                    @error('offers_skill_id') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
+                </div>
 
                 <div class="settings-field">
                     <label for="description">Description</label>
@@ -61,7 +73,7 @@
                 <div class="settings-field">
                     <label for="status">Status</label>
                     <select id="status" name="status">
-                       
+                        <option value="pending" {{ old('status') === 'pending' ? 'selected' : '' }}>Pending (needs approval)</option>
                         <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>Active</option>
                         <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
                     </select>

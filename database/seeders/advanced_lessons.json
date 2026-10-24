@@ -1,0 +1,1326 @@
+{
+  "skills": [
+    {
+      "title": "Conversational Spanish",
+      "aliases": [
+        "Spanish"
+      ],
+      "category": "Language",
+      "icon": "🗣️",
+      "description": "Everyday Spanish for real conversations.",
+      "levels": [
+        {
+          "name": "moderate",
+          "lessons": [
+            {
+              "title": "Asking for directions",
+              "content": "To ask where something is, say ¿Dónde está el baño? (Where is the bathroom?) or ¿Cómo llego a la estación? (How do I get to the station?). Start politely with Perdón or Disculpe.\n\nUseful answers: Gira a la derecha (turn right), Gira a la izquierda (turn left), Sigue todo recto (keep going straight). Está cerca means it is close and Está lejos means it is far.",
+              "questions": [
+                {
+                  "text": "How do you say 'turn left'?",
+                  "options": [
+                    "Gira a la derecha",
+                    "Sigue todo recto",
+                    "Está lejos",
+                    "Gira a la izquierda"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "What does 'Está cerca' mean?",
+                  "options": [
+                    "It is far",
+                    "It is close",
+                    "It is closed",
+                    "It is expensive"
+                  ],
+                  "correct": 1
+                }
+              ]
+            },
+            {
+              "title": "Present tense of -ar verbs",
+              "content": "Regular verbs that end in -ar, like hablar (to speak), drop the -ar and take these endings: -o, -as, -a, -amos, -áis, -an.\n\nhablar: yo hablo, tú hablas, él/ella habla, nosotros hablamos, vosotros habláis, ellos hablan. The same pattern works for trabajar, estudiar and caminar.",
+              "questions": [
+                {
+                  "text": "Complete: 'Yo ___ español' (hablar).",
+                  "options": [
+                    "hablo",
+                    "hablas",
+                    "habla",
+                    "hablan"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Complete: 'Nosotros ___' (trabajar).",
+                  "options": [
+                    "trabajo",
+                    "trabajan",
+                    "trabajamos",
+                    "trabajas"
+                  ],
+                  "correct": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hard",
+          "lessons": [
+            {
+              "title": "Ser vs estar",
+              "content": "Spanish has two verbs for 'to be'. Use ser for identity, origin, profession, characteristics and the time or place of an event: Soy estudiante. Ella es de México. La fiesta es en mi casa.\n\nUse estar for location and for temporary states or feelings: Los libros están en la mesa. Estoy cansado (I am tired). Changing the verb can change the meaning: Soy aburrido means 'I am boring', but Estoy aburrido means 'I am bored'.",
+              "questions": [
+                {
+                  "text": "Complete: 'Ella ___ de México.'",
+                  "options": [
+                    "está",
+                    "es",
+                    "son",
+                    "estás"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Complete: 'Los libros ___ en la mesa.'",
+                  "options": [
+                    "son",
+                    "es",
+                    "están",
+                    "soy"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Which sentence means 'I am tired'?",
+                  "options": [
+                    "Soy cansado",
+                    "Tengo cansado",
+                    "Hago cansado",
+                    "Estoy cansado"
+                  ],
+                  "correct": 3
+                }
+              ]
+            },
+            {
+              "title": "The preterite (finished past)",
+              "content": "The preterite describes an action that is finished. For -ar verbs: hablé, hablaste, habló, hablamos, hablaron. For -er and -ir verbs: comí, comiste, comió, comimos, comieron.\n\nNotice the accents on yo and él/ella forms: hablé, habló, comí, comió. They change the meaning, because hablo (present) and habló (past) are different words.",
+              "questions": [
+                {
+                  "text": "Complete: 'Yo ___ pizza ayer' (comer).",
+                  "options": [
+                    "comí",
+                    "como",
+                    "comió",
+                    "comeré"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Complete: 'Ellos ___ con el profesor' (hablar).",
+                  "options": [
+                    "hablan",
+                    "hablaron",
+                    "hablamos",
+                    "habló"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What does 'Ella vivió en Madrid' mean?",
+                  "options": [
+                    "She lived in Madrid",
+                    "She lives in Madrid",
+                    "She is living in Madrid",
+                    "She will live in Madrid"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "expert",
+          "lessons": [
+            {
+              "title": "The present subjunctive",
+              "content": "The subjunctive is used after expressions of wishes, doubt and emotion, when the subject changes: Quiero que hables más despacio. Espero que estés bien. Dudo que ella venga.\n\nTo form it, take the yo form of the present tense, drop the -o, and switch the vowel: hablar becomes hable, comer becomes coma. Some verbs are irregular: estar becomes esté, ir becomes vaya, venir becomes venga. Expressions of certainty such as Sé que or Creo que use the normal indicative.",
+              "questions": [
+                {
+                  "text": "Complete: 'Espero que tú ___ bien.'",
+                  "options": [
+                    "estás",
+                    "estar",
+                    "estabas",
+                    "estés"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "Complete: 'Quiero que ella ___ a la fiesta' (venir).",
+                  "options": [
+                    "viene",
+                    "vendrá",
+                    "venga",
+                    "vino"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Which phrase usually triggers the subjunctive?",
+                  "options": [
+                    "Sé que",
+                    "Creo que",
+                    "Es verdad que",
+                    "Dudo que"
+                  ],
+                  "correct": 3
+                }
+              ]
+            },
+            {
+              "title": "Por vs para",
+              "content": "Para points to a purpose, a destination, a deadline or a recipient: Este regalo es para ti. Estudio para aprender. Salgo para Madrid mañana. Necesito el informe para el lunes.\n\nPor points to a cause, a duration, an exchange or movement through a place: Gracias por tu ayuda. Estudié por dos horas. Pagué diez pesos por el libro. Camino por el parque.",
+              "questions": [
+                {
+                  "text": "Complete: 'Este regalo es ___ ti.'",
+                  "options": [
+                    "por",
+                    "de",
+                    "para",
+                    "en"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Complete: 'Gracias ___ tu ayuda.'",
+                  "options": [
+                    "por",
+                    "para",
+                    "con",
+                    "a"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Which sentence uses the destination meaning?",
+                  "options": [
+                    "Camino por el parque",
+                    "Salgo para Madrid mañana",
+                    "Pagué diez pesos por el libro",
+                    "Gracias por venir"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Intro to Python",
+      "aliases": [],
+      "category": "Programming Language",
+      "icon": "🐍",
+      "description": "Learn to write simple Python programs.",
+      "levels": [
+        {
+          "name": "moderate",
+          "lessons": [
+            {
+              "title": "Lists",
+              "content": "A list holds several values in order and can be changed. Write it with square brackets: fruits = ['apple', 'banana', 'mango'].\n\nIndexes start at 0, so fruits[0] is 'apple'. Use fruits[-1] for the last item, len(fruits) for the size, and fruits.append('grape') to add an item at the end.",
+              "questions": [
+                {
+                  "text": "What is the index of the first item in a list?",
+                  "options": [
+                    "1",
+                    "-1",
+                    "0",
+                    "first"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Which method adds an item to the end of a list?",
+                  "options": [
+                    "append()",
+                    "add()",
+                    "insert_end()",
+                    "push()"
+                  ],
+                  "correct": 0
+                }
+              ]
+            },
+            {
+              "title": "Functions",
+              "content": "A function is a named block of code you can reuse. Define it with def, give it parameters, and use return to send back a result:\n\ndef greet(name):\n    return 'Hello ' + name\n\nCall it with greet('Ana'). The function runs, returns 'Hello Ana', and ends.",
+              "questions": [
+                {
+                  "text": "Which keyword defines a function?",
+                  "options": [
+                    "func",
+                    "def",
+                    "function",
+                    "define"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What does return do?",
+                  "options": [
+                    "Prints text on the screen",
+                    "Repeats the function",
+                    "Deletes the function",
+                    "Sends a value back and ends the function"
+                  ],
+                  "correct": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hard",
+          "lessons": [
+            {
+              "title": "Dictionaries",
+              "content": "A dictionary stores key-value pairs in curly braces: ages = {'Ana': 20, 'Ben': 25}. Read a value with ages['Ana'], or use ages.get('Cy', 0) to get a default instead of an error when the key is missing.\n\nKeys are unique. Assigning to an existing key replaces its value: ages['Ana'] = 21. Loop over pairs with for name, age in ages.items().",
+              "questions": [
+                {
+                  "text": "How do you read the value stored for the key 'Ana'?",
+                  "options": [
+                    "ages.Ana",
+                    "ages('Ana')",
+                    "ages['Ana']",
+                    "ages[0]"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does ages.get('Cy', 0) return if 'Cy' is not a key?",
+                  "options": [
+                    "An error",
+                    "None",
+                    "'Cy'",
+                    "0"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "What happens if you assign a value to a key that already exists?",
+                  "options": [
+                    "The old value is replaced",
+                    "An error is raised",
+                    "A second copy is added",
+                    "Nothing happens"
+                  ],
+                  "correct": 0
+                }
+              ]
+            },
+            {
+              "title": "Files and exceptions",
+              "content": "Open a file with a with statement so it closes automatically, even if something fails:\n\nwith open('notes.txt', 'r') as f:\n    text = f.read()\n\nModes: 'r' reads, 'w' erases and writes, 'a' appends to the end. To handle errors, put risky code in try and handle the problem in except, for example except FileNotFoundError.",
+              "questions": [
+                {
+                  "text": "Which file mode adds text to the end without erasing the file?",
+                  "options": [
+                    "'r'",
+                    "'a'",
+                    "'w'",
+                    "'x'"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Why use a with statement to open a file?",
+                  "options": [
+                    "It makes the file read-only",
+                    "It closes the file automatically",
+                    "It makes reading faster",
+                    "It creates the file if missing"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Which block runs when an error happens inside try?",
+                  "options": [
+                    "finally only",
+                    "else",
+                    "catch",
+                    "except"
+                  ],
+                  "correct": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "expert",
+          "lessons": [
+            {
+              "title": "List comprehensions and generators",
+              "content": "A list comprehension builds a list in one line: squares = [n * n for n in range(5)] gives [0, 1, 4, 9, 16]. Add a condition at the end to filter: evens = [n for n in range(6) if n % 2 == 0] gives [0, 2, 4].\n\nA generator expression uses round brackets: (n * n for n in range(5)). It makes values one at a time instead of building the whole list, so it saves memory with big data.",
+              "questions": [
+                {
+                  "text": "What does [n * 2 for n in range(3)] produce?",
+                  "options": [
+                    "[2, 4, 6]",
+                    "[0, 1, 2]",
+                    "[0, 2, 4]",
+                    "[1, 2, 3]"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does [n for n in range(6) if n % 2 == 0] produce?",
+                  "options": [
+                    "[0, 2, 4]",
+                    "[1, 3, 5]",
+                    "[0, 1, 2]",
+                    "[2, 4, 6]"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is the main advantage of a generator expression?",
+                  "options": [
+                    "It is always faster than a list",
+                    "It can be indexed like a list",
+                    "It can be changed after creation",
+                    "It produces values one at a time and saves memory"
+                  ],
+                  "correct": 3
+                }
+              ]
+            },
+            {
+              "title": "Classes and objects",
+              "content": "A class is a blueprint and an object is one thing built from it:\n\nclass Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        return self.name + ' says woof'\n\nrex = Dog('Rex') creates an object. __init__ runs automatically when an object is created, and self means the object itself. A class can inherit from another: class Puppy(Dog) gets everything Dog has.",
+              "questions": [
+                {
+                  "text": "When does __init__ run?",
+                  "options": [
+                    "Automatically when a new object is created",
+                    "Only when you call it by name",
+                    "When the program ends",
+                    "When a method is deleted"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What does self refer to inside a method?",
+                  "options": [
+                    "The class name",
+                    "The Python module",
+                    "The current object",
+                    "The parent class"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does 'class Puppy(Dog)' mean?",
+                  "options": [
+                    "Dog inherits from Puppy",
+                    "Puppy inherits from Dog",
+                    "Puppy is a list of Dogs",
+                    "Puppy and Dog are deleted"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Photoshop Basics",
+      "aliases": [],
+      "category": "Design",
+      "icon": "🎨",
+      "description": "Edit and compose images with layers and tools.",
+      "levels": [
+        {
+          "name": "moderate",
+          "lessons": [
+            {
+              "title": "Layer masks",
+              "content": "A layer mask hides or shows parts of a layer without deleting any pixels. Select the layer, click the Add Layer Mask button, then paint on the mask with a brush.\n\nOn a mask, white shows the layer, black hides it, and shades of gray make it partly transparent. Because nothing is erased, you can paint white again to bring the hidden part back.",
+              "questions": [
+                {
+                  "text": "On a layer mask, what does painting with black do?",
+                  "options": [
+                    "Shows that part of the layer",
+                    "Hides that part of the layer",
+                    "Deletes the layer",
+                    "Makes the layer brighter"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Why is a mask better than the Eraser tool?",
+                  "options": [
+                    "It runs faster",
+                    "It makes the file smaller",
+                    "It is non-destructive, so you can restore pixels",
+                    "It only works on text"
+                  ],
+                  "correct": 2
+                }
+              ]
+            },
+            {
+              "title": "Adjustment layers",
+              "content": "Adjustment layers such as Curves, Hue/Saturation and Brightness/Contrast sit above your image and change how it looks without altering the original pixels. You can reopen, change or delete them at any time.\n\nBy default an adjustment affects every layer below it. To limit it to the layer directly under it, create a clipping mask by Alt-clicking (Option-clicking on Mac) the line between the two layers.",
+              "questions": [
+                {
+                  "text": "What is the main benefit of an adjustment layer?",
+                  "options": [
+                    "It can be edited or removed without changing the pixels",
+                    "It compresses the image",
+                    "It adds a border",
+                    "It merges all layers"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "How do you limit an adjustment layer to one layer?",
+                  "options": [
+                    "Lower its opacity",
+                    "Rasterize it",
+                    "Flatten the image",
+                    "Use a clipping mask"
+                  ],
+                  "correct": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hard",
+          "lessons": [
+            {
+              "title": "Smart Objects",
+              "content": "Right-click a layer and choose Convert to Smart Object. Photoshop then keeps the original image data inside the layer. You can shrink it and enlarge it again without losing quality, which is not true for a normal pixel layer.\n\nFilters applied to a Smart Object become Smart Filters. They stay editable and can be turned off or changed later. Double-click the Smart Object to open and edit its contents.",
+              "questions": [
+                {
+                  "text": "What happens when you scale a normal pixel layer down and then back up?",
+                  "options": [
+                    "Nothing, it stays sharp",
+                    "It loses detail and looks blurry",
+                    "It becomes a Smart Object",
+                    "It turns black and white"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What is special about a filter applied to a Smart Object?",
+                  "options": [
+                    "It is permanent",
+                    "It only works on text",
+                    "It deletes the layer below",
+                    "It stays editable as a Smart Filter"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "Which layer type keeps the original image data when resized?",
+                  "options": [
+                    "Rasterized layer",
+                    "Flattened image",
+                    "Smart Object",
+                    "Shape layer"
+                  ],
+                  "correct": 2
+                }
+              ]
+            },
+            {
+              "title": "Blend modes",
+              "content": "Blend modes decide how a layer mixes with the layers below. Multiply darkens: white disappears and darker colors remain, which is great for shadows. Screen lightens: black disappears, which is great for glows and light effects.\n\nOverlay increases contrast by combining Multiply and Screen, and Soft Light does the same more gently. Color applies only the hue and saturation of the top layer.",
+              "questions": [
+                {
+                  "text": "In Multiply mode, which color effectively disappears?",
+                  "options": [
+                    "White",
+                    "Black",
+                    "Red",
+                    "Gray"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "In Screen mode, which color effectively disappears?",
+                  "options": [
+                    "White",
+                    "Blue",
+                    "Gray",
+                    "Black"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "Which blend mode is commonly used to add contrast to a texture?",
+                  "options": [
+                    "Overlay",
+                    "Dissolve",
+                    "Difference",
+                    "Multiply only"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "expert",
+          "lessons": [
+            {
+              "title": "Color modes and output",
+              "content": "Use RGB for anything shown on a screen, because screens mix red, green and blue light. Use CMYK for print, because printers mix cyan, magenta, yellow and black ink. Converting RGB to CMYK can dull very bright colors.\n\nFor print, work at about 300 pixels per inch at the final size. For export, use JPEG for photos, PNG when you need transparency, PSD to keep layers, and TIFF for high-quality print files.",
+              "questions": [
+                {
+                  "text": "Which color mode is correct for a social media image?",
+                  "options": [
+                    "CMYK",
+                    "RGB",
+                    "Grayscale only",
+                    "Lab only"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What resolution is typical for a print file at its final size?",
+                  "options": [
+                    "72 ppi",
+                    "150 ppi",
+                    "300 ppi",
+                    "1000 ppi"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Which format keeps a logo's transparent background for the web?",
+                  "options": [
+                    "JPEG",
+                    "BMP",
+                    "PDF",
+                    "PNG"
+                  ],
+                  "correct": 3
+                }
+              ]
+            },
+            {
+              "title": "Frequency separation",
+              "content": "Frequency separation splits a portrait into two layers. The low frequency layer holds color and tone. The high frequency layer holds fine texture such as pores and hair.\n\nWith this split you can smooth blotchy skin color on the low layer and repair small blemishes on the high layer, while the natural texture stays intact. Over-smoothing the low layer or removing too much from the high layer makes skin look plastic.",
+              "questions": [
+                {
+                  "text": "What does the low frequency layer contain?",
+                  "options": [
+                    "Fine texture",
+                    "Color and tone",
+                    "Text",
+                    "Only edges"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "Why do retouchers use frequency separation?",
+                  "options": [
+                    "To make the file smaller",
+                    "To convert to CMYK",
+                    "To fix color and blemishes without destroying skin texture",
+                    "To add a drop shadow"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Which layer do you use to smooth blotchy skin color?",
+                  "options": [
+                    "Low frequency",
+                    "High frequency",
+                    "Background copy",
+                    "Smart Filter mask"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Flutter Fundamentals",
+      "aliases": [],
+      "category": "Programming Language",
+      "icon": "📱",
+      "description": "Build mobile apps with Flutter and Dart.",
+      "levels": [
+        {
+          "name": "moderate",
+          "lessons": [
+            {
+              "title": "Row, Column and Expanded",
+              "content": "Row places its children horizontally and Column places them vertically. Use mainAxisAlignment to space children along the main direction and crossAxisAlignment for the other direction.\n\nWrap a child in Expanded to make it take the remaining space along the main axis. Two Expanded children share the space equally, or you can give them a flex value to split it in a ratio such as 2 to 1.",
+              "questions": [
+                {
+                  "text": "In which direction does a Column place its children?",
+                  "options": [
+                    "Horizontally",
+                    "Diagonally",
+                    "In a stack",
+                    "Vertically"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "What does Expanded do inside a Row?",
+                  "options": [
+                    "Makes text bigger",
+                    "Adds a scrollbar",
+                    "Fills the remaining space along the row",
+                    "Hides the child"
+                  ],
+                  "correct": 2
+                }
+              ]
+            },
+            {
+              "title": "Basic navigation",
+              "content": "Navigator manages a stack of screens. To open a new screen: Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage())). The new screen sits on top of the stack.\n\nTo go back, call Navigator.pop(context). You can also send data back by passing a value to pop and awaiting the result of push.",
+              "questions": [
+                {
+                  "text": "Which call returns to the previous screen?",
+                  "options": [
+                    "Navigator.pop(context)",
+                    "Navigator.back()",
+                    "Navigator.remove()",
+                    "Navigator.close()"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What does Navigator.push do?",
+                  "options": [
+                    "Deletes the current screen",
+                    "Puts a new screen on top of the stack",
+                    "Restarts the app",
+                    "Hides the app bar"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hard",
+          "lessons": [
+            {
+              "title": "setState and build",
+              "content": "In a StatefulWidget, the screen only updates when you call setState(() { ... }) after changing a variable. setState marks the widget as needing a rebuild and Flutter then runs build again.\n\nChanging a variable without setState does not refresh the UI. Keep build fast and free of side effects such as network calls, because Flutter may call build many times.",
+              "questions": [
+                {
+                  "text": "What happens if you change a state variable without calling setState?",
+                  "options": [
+                    "The UI updates automatically",
+                    "The UI does not refresh",
+                    "The app crashes",
+                    "The variable resets to null"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What does setState do?",
+                  "options": [
+                    "Saves data to disk",
+                    "Navigates to a new screen",
+                    "Closes the app",
+                    "Marks the widget to rebuild"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "Why should you avoid network calls directly inside build?",
+                  "options": [
+                    "build can run many times",
+                    "Network calls are not allowed in Dart",
+                    "build runs only once",
+                    "It changes the theme"
+                  ],
+                  "correct": 0
+                }
+              ]
+            },
+            {
+              "title": "Future, async and await",
+              "content": "A Future is a value that will be available later, such as data from a server. Mark a function async and use await to wait for a Future without freezing the screen:\n\nFuture<String> load() async {\n  final text = await fetchText();\n  return text;\n}\n\nawait only works inside an async function. FutureBuilder is a widget that builds different UI for loading, error and done states of a Future.",
+              "questions": [
+                {
+                  "text": "Where can the await keyword be used?",
+                  "options": [
+                    "Anywhere",
+                    "Only in build",
+                    "Only inside an async function",
+                    "Only in main"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does Future<String> mean?",
+                  "options": [
+                    "A String that is already available",
+                    "A String that will be available later",
+                    "A list of Strings",
+                    "A String that cannot be empty"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What does FutureBuilder do?",
+                  "options": [
+                    "Creates a new Future from a widget",
+                    "Cancels a Future",
+                    "Converts a Future to a List",
+                    "Builds UI based on the state of a Future"
+                  ],
+                  "correct": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "expert",
+          "lessons": [
+            {
+              "title": "State management with ChangeNotifier and Provider",
+              "content": "When several screens need the same data, keep it in one place instead of inside a single widget. A class that extends ChangeNotifier holds the data and calls notifyListeners() after it changes.\n\nProvider makes that object available to the widgets below it. context.watch<T>() listens and rebuilds the widget when data changes. context.read<T>() reads the object once without listening, and is the right choice inside button handlers.",
+              "questions": [
+                {
+                  "text": "What does notifyListeners() do?",
+                  "options": [
+                    "Saves the data to disk",
+                    "Navigates to another screen",
+                    "Tells listening widgets that the data changed",
+                    "Disposes the widget"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Which call should you use inside an onPressed handler?",
+                  "options": [
+                    "context.read",
+                    "context.watch",
+                    "setState only",
+                    "Navigator.of"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Why move shared data out of a single widget?",
+                  "options": [
+                    "So several screens can use the same data",
+                    "Dart requires it",
+                    "To make the app smaller",
+                    "To avoid using build"
+                  ],
+                  "correct": 0
+                }
+              ]
+            },
+            {
+              "title": "Performance: builders, const and keys",
+              "content": "ListView.builder creates items only when they are about to appear on screen, so long lists stay fast. A plain ListView with thousands of children builds them all at once.\n\nUse const constructors for widgets that never change, so Flutter can reuse them. Use Keys when items in a list can be reordered or removed and each item holds its own state; the key lets Flutter match each state to the right item.",
+              "questions": [
+                {
+                  "text": "What is the benefit of ListView.builder?",
+                  "options": [
+                    "It sorts the list",
+                    "It builds only the items that are visible or about to be",
+                    "It makes items clickable",
+                    "It disables scrolling"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "When do Keys matter most?",
+                  "options": [
+                    "For static text",
+                    "For app icons",
+                    "When items in a list reorder or are removed and hold state",
+                    "For colors"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What is a const widget?",
+                  "options": [
+                    "A widget that cannot be shown",
+                    "A widget that always rebuilds",
+                    "A widget for constants in math",
+                    "A widget that can be reused and is not rebuilt unnecessarily"
+                  ],
+                  "correct": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Guitar Basics",
+      "aliases": [],
+      "category": "Music",
+      "icon": "🎸",
+      "description": "Learn to play guitar from the first chords.",
+      "levels": [
+        {
+          "name": "moderate",
+          "lessons": [
+            {
+              "title": "Open chords: Em, Am, D and A",
+              "content": "Four chords unlock hundreds of songs. Em (E minor) needs only two fingers, on the second fret of the A and D strings. Am (A minor) uses three fingers. D and A are bright major chords.\n\nWatch which strings to strum: for D, start on the fourth (D) string and avoid the two lowest strings. For A, start from the fifth (A) string. Let every string ring clearly before you change chords.",
+              "questions": [
+                {
+                  "text": "How many fingers does an Em chord need?",
+                  "options": [
+                    "Two",
+                    "One",
+                    "Four",
+                    "Five"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Which string do you start strumming from for the D chord?",
+                  "options": [
+                    "Low E string",
+                    "A string",
+                    "Any string",
+                    "D string"
+                  ],
+                  "correct": 3
+                }
+              ]
+            },
+            {
+              "title": "Strumming patterns",
+              "content": "Count eighth notes as '1 & 2 & 3 & 4 &'. A popular beginner pattern is down, down-up, up-down-up: strum down on 1, 2 and the 'and' of 2, then up on the 'and' of 3, and so on.\n\nKeep your strumming hand moving in a steady down-up motion even when you do not hit the strings. This keeps the rhythm even. Practice slowly with a metronome and speed up only when it is clean.",
+              "questions": [
+                {
+                  "text": "How do you count eighth notes?",
+                  "options": [
+                    "1 2 3 4",
+                    "1 & 2 & 3 & 4 &",
+                    "A B C D",
+                    "1 3 2 4"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What is a good habit for strumming?",
+                  "options": [
+                    "Stop the hand when you miss a string",
+                    "Strum as hard as possible",
+                    "Keep the hand moving in a steady down-up motion",
+                    "Only strum downward"
+                  ],
+                  "correct": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hard",
+          "lessons": [
+            {
+              "title": "Barre chords",
+              "content": "In a barre chord your index finger presses across all six strings at the same fret, acting like a movable nut. The other fingers then form a shape, such as the E shape, in front of it.\n\nThe E-shape barre chord moves up the neck: the barre at the 1st fret is F, at the 3rd fret is G, and at the 5th fret is A. Use the bony side of your index finger, keep your thumb behind the neck, and press evenly. Buzzing usually comes from uneven pressure or finger placement.",
+              "questions": [
+                {
+                  "text": "What does the index finger do in a barre chord?",
+                  "options": [
+                    "Mutes the top string only",
+                    "Stays off the neck",
+                    "Plays one string",
+                    "Presses all six strings on the same fret"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "An E-shape barre chord with the barre at the 3rd fret is which chord?",
+                  "options": [
+                    "G",
+                    "F",
+                    "A",
+                    "D"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What usually causes buzzing in a barre chord?",
+                  "options": [
+                    "Too many strings",
+                    "Uneven pressure or finger placement",
+                    "A new pick",
+                    "Playing too quietly"
+                  ],
+                  "correct": 1
+                }
+              ]
+            },
+            {
+              "title": "The minor pentatonic scale",
+              "content": "The minor pentatonic scale has five notes and is the basis of countless rock and blues solos. In A minor the notes are A, C, D, E and G.\n\nThe first pattern, called box 1, sits around the 5th fret. Because the scale leaves out the notes that clash most with typical chords, it is hard to hit a bad note, which makes it ideal for improvising over a backing track.",
+              "questions": [
+                {
+                  "text": "How many notes are in a pentatonic scale?",
+                  "options": [
+                    "Three",
+                    "Seven",
+                    "Five",
+                    "Twelve"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Which are the notes of the A minor pentatonic scale?",
+                  "options": [
+                    "A B C D E",
+                    "A C# E F# G",
+                    "A B D E G",
+                    "A C D E G"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "Why is the pentatonic scale good for improvising?",
+                  "options": [
+                    "It fits many chords and is hard to play wrong",
+                    "It has no notes",
+                    "It only works on one string",
+                    "It needs a capo"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "expert",
+          "lessons": [
+            {
+              "title": "Fingerstyle and Travis picking",
+              "content": "In fingerstyle you pluck with your fingers instead of a pick. Notation uses p for the thumb, i for the index, m for the middle and a for the ring finger.\n\nIn Travis picking the thumb plays a steady alternating bass on the lower strings while the fingers pick the melody on the higher strings. Start slowly with just the thumb pattern until it runs on its own, then add the fingers.",
+              "questions": [
+                {
+                  "text": "In fingerstyle notation, what does 'p' stand for?",
+                  "options": [
+                    "Pick",
+                    "Pinky",
+                    "Thumb",
+                    "Pull-off"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does the thumb do in Travis picking?",
+                  "options": [
+                    "Plays the melody on high strings",
+                    "Plays a steady alternating bass",
+                    "Mutes all strings",
+                    "Rests"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "What do the fingers usually play in Travis picking?",
+                  "options": [
+                    "The lowest string only",
+                    "Nothing",
+                    "Harmonics only",
+                    "The melody on higher strings"
+                  ],
+                  "correct": 3
+                }
+              ]
+            },
+            {
+              "title": "Using a capo and transposing",
+              "content": "A capo clamps across the neck and shortens the strings, raising the pitch of all strings by one semitone per fret. It lets you play easy open shapes in higher keys.\n\nFor example, a G shape with the capo at fret 2 sounds as A, and an E shape with the capo at fret 5 sounds as A. To find the sounding chord, count the capo fret in semitones up from the shape's name.",
+              "questions": [
+                {
+                  "text": "You play an E shape with a capo at fret 5. Which chord sounds?",
+                  "options": [
+                    "B",
+                    "A",
+                    "D",
+                    "G"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "You play a G shape with a capo at fret 2. Which chord sounds?",
+                  "options": [
+                    "F",
+                    "G#",
+                    "A",
+                    "B"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does a capo do?",
+                  "options": [
+                    "Raises the pitch of all strings equally",
+                    "Lowers the pitch",
+                    "Mutes the strings",
+                    "Tunes each string separately"
+                  ],
+                  "correct": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "UI/UX Design Basics",
+      "aliases": [],
+      "category": "Design",
+      "icon": "✏️",
+      "description": "Design products that are clear and pleasant to use.",
+      "levels": [
+        {
+          "name": "moderate",
+          "lessons": [
+            {
+              "title": "User research: interviews and personas",
+              "content": "User interviews help you learn what people really do and need. Ask open-ended questions such as 'Tell me about the last time you booked a trip' instead of leading questions such as 'Do you like our booking page?'.\n\nA persona is a fictional profile built from the patterns you find in real research. It gives the team a shared picture of who they are designing for, including goals and frustrations.",
+              "questions": [
+                {
+                  "text": "Which is a good interview question?",
+                  "options": [
+                    "Tell me about the last time you booked a trip.",
+                    "Don't you think our app is easy?",
+                    "Would you pay for this feature?",
+                    "Is the button blue?"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is a persona?",
+                  "options": [
+                    "A real customer's private data",
+                    "A color palette",
+                    "A fictional profile built from real research",
+                    "A type of wireframe"
+                  ],
+                  "correct": 2
+                }
+              ]
+            },
+            {
+              "title": "Usability heuristics",
+              "content": "Jakob Nielsen's 10 usability heuristics are rules of thumb for good interfaces. Examples: visibility of system status (show progress), match between the system and the real world (use familiar words), consistency and standards, and error prevention.\n\nA progress bar during upload follows 'visibility of system status'. A confirmation step before deleting an account follows 'error prevention'.",
+              "questions": [
+                {
+                  "text": "A progress bar during a file upload follows which heuristic?",
+                  "options": [
+                    "Error prevention",
+                    "Visibility of system status",
+                    "Consistency",
+                    "Aesthetic design"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "A confirmation dialog before deleting an account follows which heuristic?",
+                  "options": [
+                    "Flexibility",
+                    "Recognition over recall",
+                    "Help and documentation",
+                    "Error prevention"
+                  ],
+                  "correct": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hard",
+          "lessons": [
+            {
+              "title": "Information architecture and card sorting",
+              "content": "Information architecture (IA) is how content is organized and labeled so people can find it. Card sorting is a research method where participants group topic cards in a way that makes sense to them. In an open card sort they create and name their own groups; in a closed card sort they use groups you provide.\n\nUse the words your users use for labels, not internal jargon. Keep important items within a few clicks of the home screen.",
+              "questions": [
+                {
+                  "text": "What is card sorting used for?",
+                  "options": [
+                    "Testing color contrast",
+                    "Learning how users group and name content",
+                    "Measuring page speed",
+                    "Writing code"
+                  ],
+                  "correct": 1
+                },
+                {
+                  "text": "In an open card sort, what do participants do?",
+                  "options": [
+                    "Create and name their own groups",
+                    "Choose from groups you made",
+                    "Only rate the cards",
+                    "Delete cards"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "Why should labels avoid internal jargon?",
+                  "options": [
+                    "It is longer",
+                    "It changes the font",
+                    "Search engines forbid it",
+                    "Users may not understand it"
+                  ],
+                  "correct": 3
+                }
+              ]
+            },
+            {
+              "title": "Accessibility basics",
+              "content": "Accessible design works for people with different abilities. Text should have enough contrast with its background: WCAG asks for at least 4.5 to 1 for normal text. Do not use color alone to carry meaning, for example add an icon or label to an error besides making it red.\n\nGive images alt text so screen reader users know what they show. Make touch targets large enough, and make sure everything can be reached with a keyboard or screen reader.",
+              "questions": [
+                {
+                  "text": "What is the minimum contrast ratio WCAG asks for normal text?",
+                  "options": [
+                    "2 to 1",
+                    "3 to 1",
+                    "4.5 to 1",
+                    "10 to 1"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "Why not rely on color alone to show an error?",
+                  "options": [
+                    "Color is expensive",
+                    "Red is not allowed",
+                    "It slows the app",
+                    "Some users cannot distinguish the colors"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "Who is alt text mainly for?",
+                  "options": [
+                    "Search ads",
+                    "Screen reader users",
+                    "Printers",
+                    "Color-blind users only"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "expert",
+          "lessons": [
+            {
+              "title": "Usability testing and metrics",
+              "content": "In a usability test, real users try tasks on your design while you observe. In the think-aloud method, participants say what they are thinking as they work. Testing with about five users per round usually reveals most major problems.\n\nCommon measures: task success rate (the percentage who complete a task), time on task, and the System Usability Scale (SUS), a standard 10-question survey of perceived usability.",
+              "questions": [
+                {
+                  "text": "What is the think-aloud method?",
+                  "options": [
+                    "Designers explain their design",
+                    "Users write code",
+                    "Users say their thoughts while doing tasks",
+                    "A survey after launch"
+                  ],
+                  "correct": 2
+                },
+                {
+                  "text": "What does the System Usability Scale measure?",
+                  "options": [
+                    "Perceived usability from a standard questionnaire",
+                    "Page load speed",
+                    "Server uptime",
+                    "Color accuracy"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is task success rate?",
+                  "options": [
+                    "Time spent on a task",
+                    "Number of clicks",
+                    "Percentage of participants who complete the task",
+                    "Number of pages"
+                  ],
+                  "correct": 2
+                }
+              ]
+            },
+            {
+              "title": "Design systems and design tokens",
+              "content": "A design system is a shared set of reusable components, rules and guidelines that keeps a product consistent and speeds up work. Design tokens are named values for design decisions such as colors, spacing and type sizes.\n\nName tokens by purpose, such as color-danger, rather than by value, such as red. Then a theme change only updates the token's value, and every screen that uses it stays consistent.",
+              "questions": [
+                {
+                  "text": "What is a design token?",
+                  "options": [
+                    "A named value for a design decision, like a color or spacing",
+                    "A login credential",
+                    "A type of wireframe",
+                    "A payment method"
+                  ],
+                  "correct": 0
+                },
+                {
+                  "text": "What is a main benefit of a design system?",
+                  "options": [
+                    "More animations",
+                    "Fewer users",
+                    "Smaller images",
+                    "Consistency and faster work"
+                  ],
+                  "correct": 3
+                },
+                {
+                  "text": "Why name a token 'color-danger' instead of 'red'?",
+                  "options": [
+                    "It is shorter",
+                    "The meaning stays the same if the color changes",
+                    "Red is not allowed",
+                    "It is required by CSS"
+                  ],
+                  "correct": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

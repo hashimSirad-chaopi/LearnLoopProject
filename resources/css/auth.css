@@ -240,3 +240,69 @@ body:has(#forgot-container) {
         border-radius: 18px;
     }
 }
+
+/* =========================================================
+   ADMIN LOGIN ADDITIONS
+   ========================================================= */
+
+.auth-field input.is-invalid {
+    border-color: var(--ll-danger);
+    background: var(--ll-danger-soft);
+}
+
+.auth-field input.is-invalid:focus {
+    border-color: var(--ll-danger);
+    box-shadow: 0 0 0 4px rgba(177,77,72,.14);
+}
+
+.auth-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: -4px;
+}
+
+.auth-remember {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #34443A;
+    font-size: 12px;
+    font-weight: 650;
+    cursor: pointer;
+    user-select: none;
+}
+
+.auth-remember input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--ll-mint-dark);
+    cursor: pointer;
+}
+
+/* eye / eye-off swap for the show-password button */
+.password-toggle .icon-eye-off { display: none; }
+.password-toggle.is-visible .icon-eye { display: none; }
+.password-toggle.is-visible .icon-eye-off { display: block; }
+
+.password-toggle,
+.auth-submit {
+    cursor: pointer;
+}
+
+.password-toggle:focus-visible,
+.auth-submit:focus-visible,
+.auth-remember input:focus-visible,
+.forgot-link:focus-visible {
+    outline: 3px solid rgba(143,214,76,.55);
+    outline-offset: 2px;
+}
+
+.auth-submit:disabled {
+    opacity: .7;
+    cursor: wait;
+    transform: none;
+    box-shadow: none;
+}

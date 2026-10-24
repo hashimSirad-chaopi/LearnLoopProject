@@ -39,7 +39,7 @@
 
                 <div class="settings-field">
                     <label for="password">Password</label>
-                    <input id="password" name="password" type="password">
+                    <input id="password" name="password" type="password" minlength="8" placeholder="At least 8 characters" required>
                     @error('password') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 

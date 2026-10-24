@@ -157,3 +157,360 @@
     .dashboard-content { padding: calc(var(--ll-header-height) + 20px) 18px 25px; }
     .cards { grid-template-columns: 1fr; }
 }
+
+
+/* =========================================================
+   DASHBOARD UPGRADE: attention strip, linked cards, charts
+   ========================================================= */
+
+a.card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.dash-up {
+    color: #3F7A22;
+    font-weight: 800;
+}
+
+/* ---- Needs your attention ---- */
+
+.dash-attention {
+    margin-bottom: 26px;
+    padding: 20px 22px;
+    background: var(--ll-forest);
+    border-radius: var(--ll-radius);
+    color: #fff;
+    box-shadow: var(--ll-shadow);
+}
+
+.dash-attention .section-label { color: var(--ll-mint); }
+
+.dash-attention h2 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 850;
+}
+
+.dash-attention.clear {
+    background: var(--ll-surface);
+    border: 1px solid var(--ll-border);
+    color: var(--ll-forest);
+}
+
+.dash-attention.clear .section-label { color: #55783B; }
+.dash-attention.clear h2 { color: var(--ll-forest); }
+
+.dash-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.dash-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.dash-chip:hover {
+    background: rgba(255,255,255,.16);
+    transform: translateY(-2px);
+}
+
+.dash-chip strong {
+    min-width: 26px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--ll-mint);
+    color: var(--ll-forest);
+    font-size: 12px;
+    font-weight: 900;
+    text-align: center;
+}
+
+/* ---- Panels in a two-column grid ---- */
+
+.dash-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.dash-panel {
+    padding: 22px;
+    background: var(--ll-surface);
+    border: 1px solid var(--ll-border);
+    border-radius: var(--ll-radius);
+    box-shadow: var(--ll-shadow);
+    min-width: 0;
+}
+
+.dash-panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.dash-panel-head h3 {
+    color: var(--ll-forest);
+    font-size: 15px;
+    font-weight: 850;
+}
+
+.dash-panel-head span,
+.dash-panel-head a {
+    color: var(--ll-muted);
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.dash-panel-head a:hover,
+.dash-link:hover { text-decoration: underline; }
+
+.dash-empty {
+    padding: 18px 0;
+    color: var(--ll-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ---- Bar chart: new members ---- */
+
+.dash-bars {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    height: 170px;
+}
+
+.dash-bar {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.dash-bar-fill {
+    width: 100%;
+    max-width: 26px;
+    border-radius: 6px 6px 3px 3px;
+    background: var(--ll-forest);
+    transition: opacity .2s ease;
+}
+
+.dash-bar-fill.empty { background: var(--ll-border); }
+.dash-bar:hover .dash-bar-fill { opacity: .8; }
+
+.dash-bar-count {
+    margin-bottom: 4px;
+    color: var(--ll-forest);
+    font-size: 10px;
+    font-weight: 800;
+    height: 12px;
+}
+
+.dash-bar-day {
+    position: absolute;
+    bottom: 0;
+    color: var(--ll-muted);
+    font-size: 10px;
+}
+
+/* ---- Stacked bar: exchanges by status ---- */
+
+.dash-stack {
+    display: flex;
+    gap: 3px;
+    height: 16px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    border-radius: 999px;
+}
+
+.dash-seg { min-width: 6px; }
+
+.dash-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dash-legend li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--ll-border);
+    font-size: 12px;
+}
+
+.dash-legend li:last-child { border-bottom: 0; }
+.dash-legend-name { flex: 1; color: #5F6B63; }
+.dash-legend strong { color: var(--ll-forest); }
+
+.dash-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.st-pending   { background: #E0B341; }
+.st-ongoing   { background: #4C9AFF; }
+.st-completed { background: #55A630; }
+.st-disputed  { background: #D64545; }
+.st-cancelled { background: #A8B1AB; }
+
+/* ---- Ranked bars: skills and categories ---- */
+
+.dash-rank { margin-bottom: 14px; }
+.dash-rank:last-child { margin-bottom: 0; }
+
+.dash-rank-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #5F6B63;
+}
+
+.dash-rank-top strong { color: var(--ll-forest); }
+
+.dash-rank-track {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #EEF2EE;
+}
+
+.dash-rank-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--ll-forest);
+}
+
+.dash-rank-fill.alt { background: #55A630; }
+
+/* ---- Newest members ---- */
+
+.dash-member {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 8px;
+    margin: 0 -8px;
+    border-radius: 10px;
+    color: inherit;
+    text-decoration: none;
+    transition: background .2s ease;
+}
+
+.dash-member:hover { background: #F3F6F3; }
+
+.dash-avatar {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--ll-forest);
+    color: var(--ll-mint);
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.dash-member-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-member-text strong {
+    color: var(--ll-forest);
+    font-size: 12px;
+}
+
+.dash-member-text small {
+    overflow: hidden;
+    color: var(--ll-muted);
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dash-member-time {
+    color: var(--ll-muted);
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.activity-header { justify-content: space-between; }
+
+.dash-link {
+    color: var(--ll-muted);
+    font-size: 11px;
+    text-decoration: none;
+}
+
+/* ---- Smaller screens ---- */
+
+@media (max-width: 1100px) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+    .dashboard-content { padding-left: 20px; padding-right: 20px; }
+    .dash-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 520px) {
+    .cards { grid-template-columns: minmax(0, 1fr); }
+    .dash-bars { gap: 3px; }
+}
+
+/* ---- Recent activity rows (these had no styling before) ---- */
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 0;
+    border-top: 1px solid var(--ll-border);
+}
+
+.activity-item .activity-indicator { margin-top: 5px; }
+
+.activity-text strong {
+    display: block;
+    color: var(--ll-forest);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.activity-text p {
+    margin-top: 3px;
+    color: var(--ll-muted);
+    font-size: 11px;
+}

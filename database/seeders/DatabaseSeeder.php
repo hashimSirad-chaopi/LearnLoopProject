@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // Sample skill categories for the admin's Categories page.
+        $this->call(CategorySeeder::class);
+
+        // The skills, levels, lessons and quizzes the Flutter app ships with.
+        $this->call(LearnLoopCatalogSeeder::class);
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
