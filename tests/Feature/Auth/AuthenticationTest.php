@@ -8,17 +8,22 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+
+test('non-admin users cannot authenticate using the admin login screen', function () {
+    $user = User::factory()->create([
+        'role' => 'user',
+        'status' => 'active',
+    ]);
 
     $response = $this->post('/login', [
         'email' => $user->email,
         'password' => 'password',
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $this->assertGuest();
+    $response->assertSessionHasErrors('email');
 });
+
 
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
@@ -37,5 +42,5 @@ test('users can logout', function () {
     $response = $this->actingAs($user)->post('/logout');
 
     $this->assertGuest();
-    $response->assertRedirect('/');
+    $response->assertRedirect(route('login'));
 });
