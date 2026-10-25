@@ -175,34 +175,82 @@ class SkillController extends Controller
     {
         $data = $this->validateLesson($request);
 
-        DB::transaction(function () use ($request, $skill, $data, &$lesson) {
-            $level = SkillLevel::firstOrCreate(
-                ['skill_id' => $skill->id, 'name' => $data['level']],
-                ['order' => self::LEVELS[$data['level']]]
-            );
+        $lesson = null;
+        $newFiles = [];
+        $obsoleteFiles = [];
 
-            $lesson = Lesson::create([
-                'skill_level_id' => $level->id,
-                'title' => $data['title'],
-                'content' => (string) ($data['content'] ?? ''),
-                'content_type' => $data['content_type'],
-                'order' => (int) Lesson::where('skill_level_id', $level->id)->max('order') + 1,
-                'status' => 'published',
-            ]);
+        try {
+            DB::transaction(function () use (
+                $request,
+                $skill,
+                $data,
+                &$lesson,
+                &$newFiles,
+                &$obsoleteFiles
+            ) {
+                $level = SkillLevel::firstOrCreate(
+                    [
+                        'skill_id' => $skill->id,
+                        'name' => $data['level'],
+                    ],
+                    ['order' => self::LEVELS[$data['level']]]
+                );
 
-            $this->saveAttachment($request, $lesson, $data['content_type']);
+                $lesson = Lesson::create([
+                    'skill_level_id' => $level->id,
+                    'title' => $data['title'],
+                    'content' => (string) ($data['content'] ?? ''),
+                    'content_type' => $data['content_type'],
+                    'order' => (int) Lesson::where(
+                        'skill_level_id',
+                        $level->id
+                    )->max('order') + 1,
+                    'status' => 'published',
+                ]);
 
-            $this->saveQuestions($lesson, $data['questions']);
-        });
+                $this->saveAttachment(
+                    $request,
+                    $lesson,
+                    $data['content_type'],
+                    $newFiles,
+                    $obsoleteFiles
+                );
 
-        ActivityLog::record('lesson.created', "Added lesson \"{$lesson->title}\" to {$skill->title}");
+                $this->saveQuestions(
+                    $lesson,
+                    $data['questions'],
+                    [],
+                    $newFiles,
+                    $obsoleteFiles
+                );
+            });
+        } catch (\Throwable $e) {
+            // The database rolled back. Remove files uploaded by this attempt.
+            StorageCleanup::delete($newFiles);
 
-        return redirect()->route('admin.skills.show', $skill)->with('success', 'Lesson added.');
+            throw $e;
+        }
+
+        // The database committed. Now remove any obsolete files.
+        StorageCleanup::delete($obsoleteFiles);
+
+        ActivityLog::record(
+            'lesson.created',
+            "Added lesson \"{$lesson->title}\" to {$skill->title}"
+        );
+
+        return redirect()
+            ->route('admin.skills.show', $skill)
+            ->with('success', 'Lesson added.');
     }
 
     public function editLesson(Skill $skill, Lesson $lesson)
     {
-        abort_unless($lesson->skillLevel?->skill_id === $skill->id, 404);
+        abort_unless(
+            (int) ($lesson->skillLevel?->skill_id) === (int) $skill->id
+                && ! $lesson->isMemberWritten(),
+            404
+        );
 
         $lesson->load('questions.options');
 
@@ -226,39 +274,97 @@ class SkillController extends Controller
 
     public function updateLesson(Request $request, Skill $skill, Lesson $lesson)
     {
-        abort_unless($lesson->skillLevel?->skill_id === $skill->id, 404);
+        abort_unless(
+            (int) ($lesson->skillLevel?->skill_id) === (int) $skill->id
+                && ! $lesson->isMemberWritten(),
+            404
+        );
 
         $data = $this->validateLesson($request);
 
-        DB::transaction(function () use ($request, $skill, $lesson, $data) {
-            $level = SkillLevel::firstOrCreate(
-                ['skill_id' => $skill->id, 'name' => $data['level']],
-                ['order' => self::LEVELS[$data['level']]]
-            );
+        $newFiles = [];
+        $obsoleteFiles = [];
 
-            $lesson->update([
-                'skill_level_id' => $level->id,
-                'title' => $data['title'],
-                'content' => (string) ($data['content'] ?? ''),
-                'content_type' => $data['content_type'],
-            ]);
+        try {
+            DB::transaction(function () use (
+                $request,
+                $skill,
+                $lesson,
+                $data,
+                &$newFiles,
+                &$obsoleteFiles
+            ) {
+                $level = SkillLevel::firstOrCreate(
+                    [
+                        'skill_id' => $skill->id,
+                        'name' => $data['level'],
+                    ],
+                    ['order' => self::LEVELS[$data['level']]]
+                );
 
-            $this->saveAttachment($request, $lesson, $data['content_type']);
+                $lesson->update([
+                    'skill_level_id' => $level->id,
+                    'title' => $data['title'],
+                    'content' => (string) ($data['content'] ?? ''),
+                    'content_type' => $data['content_type'],
+                ]);
 
-            $old = $lesson->questions()->get(['media_type', 'media_path'])->filter(fn ($q) => $q->media_path)
-                ->mapWithKeys(fn ($q) => [$q->media_path => $q->media_type])->all();
-            $lesson->questions()->each(fn (Question $q) => $q->delete()); // options cascade
-            $this->saveQuestions($lesson, $data['questions'], $old);
-        });
+                $this->saveAttachment(
+                    $request,
+                    $lesson,
+                    $data['content_type'],
+                    $newFiles,
+                    $obsoleteFiles
+                );
 
-        ActivityLog::record('lesson.updated', "Updated lesson \"{$lesson->title}\" in {$skill->title}");
+                // Collect old question media before replacing the questions.
+                $old = $lesson->questions()
+                    ->get(['media_type', 'media_path'])
+                    ->filter(fn (Question $q) => $q->media_path)
+                    ->mapWithKeys(fn (Question $q) => [
+                        $q->media_path => $q->media_type,
+                    ])
+                    ->all();
 
-        return redirect()->route('admin.skills.show', $skill)->with('success', 'Lesson updated.');
+                $lesson->questions()->each(
+                    fn (Question $q) => $q->delete()
+                );
+
+                $this->saveQuestions(
+                    $lesson,
+                    $data['questions'],
+                    $old,
+                    $newFiles,
+                    $obsoleteFiles
+                );
+            });
+        } catch (\Throwable $e) {
+            // Preserve the old files and remove any uploads from the failed update.
+            StorageCleanup::delete($newFiles);
+
+            throw $e;
+        }
+
+        // Only delete replaced files once the database changes are committed.
+        StorageCleanup::delete($obsoleteFiles);
+
+        ActivityLog::record(
+            'lesson.updated',
+            "Updated lesson \"{$lesson->title}\" in {$skill->title}"
+        );
+
+        return redirect()
+            ->route('admin.skills.show', $skill)
+            ->with('success', 'Lesson updated.');
     }
 
     public function destroyLesson(Skill $skill, Lesson $lesson)
     {
-        abort_unless($lesson->skillLevel?->skill_id === $skill->id, 404);
+        abort_unless(
+            (int) ($lesson->skillLevel?->skill_id) === (int) $skill->id
+                && ! $lesson->isMemberWritten(),
+            404
+        );
 
         $title = $lesson->title;
         $paths = StorageCleanup::forLesson($lesson); // its own file and the media above its quiz questions
@@ -322,28 +428,50 @@ class SkillController extends Controller
     }
 
     /** Store an uploaded file for a non-text lesson; a text lesson drops any old file. */
-    private function saveAttachment(Request $request, Lesson $lesson, string $type): void
-    {
+
+    private function saveAttachment(
+        Request $request,
+        Lesson $lesson,
+        string $type,
+        array &$newFiles,
+        array &$obsoleteFiles
+    ): void {
         if ($type === 'text') {
             if ($lesson->attachment_path) {
-                Storage::disk('public')->delete($lesson->attachment_path);
-                $lesson->update(['attachment_path' => null, 'attachment_name' => null]);
+                $obsoleteFiles[] = $lesson->attachment_path;
+
+                $lesson->update([
+                    'attachment_path' => null,
+                    'attachment_name' => null,
+                ]);
             }
 
             return;
         }
 
         if (! $request->hasFile('attachment')) {
-            return; // keep the file the lesson already has
+            return;
         }
 
         if ($lesson->attachment_path) {
-            Storage::disk('public')->delete($lesson->attachment_path);
+            $obsoleteFiles[] = $lesson->attachment_path;
         }
-        $file = $request->file('attachment');
+
+        $path = $request->file('attachment')->store('lessons', 'public');
+
+        if (! is_string($path) || $path === '') {
+            throw new \RuntimeException('Failed to store lesson attachment.');
+        }
+
+        $newFiles[] = $path;
+
         $lesson->update([
-            'attachment_path' => $file->store('lessons', 'public'),
-            'attachment_name' => mb_substr($file->getClientOriginalName(), 0, 255),
+            'attachment_path' => $path,
+            'attachment_name' => mb_substr(
+                $request->file('attachment')->getClientOriginalName(),
+                0,
+                255
+            ),
         ]);
     }
 
@@ -351,12 +479,22 @@ class SkillController extends Controller
      * @param  array<string,string>  $old  media files (path => type) the lesson's previous questions had.
      *                                     A question keeps one of them when its form row says so.
      */
-    private function saveQuestions(Lesson $lesson, array $questions, array $old = []): void
-    {
+    private function saveQuestions(
+        Lesson $lesson,
+        array $questions,
+        array $old,
+        array &$newFiles,
+        array &$obsoleteFiles
+    ): void {
         $kept = [];
 
         foreach (array_values($questions) as $qi => $q) {
-            [$mediaType, $mediaPath] = $this->questionMedia($q, $old, $qi);
+           [$mediaType, $mediaPath] = $this->questionMedia(
+                $q,
+                $old,
+                $qi,
+                $newFiles
+            );
             if ($mediaPath && isset($old[$mediaPath])) {
                 $kept[] = $mediaPath;
             }
@@ -379,15 +517,20 @@ class SkillController extends Controller
             }
         }
 
-        // Files no question uses any more.
+        // Delete these only after the surrounding transaction commits.
         foreach (array_diff(array_keys($old), $kept) as $path) {
-            Storage::disk('public')->delete($path);
+            $obsoleteFiles[] = $path;
         }
     }
 
     /** [type, path] of the photo / video / audio above one question: a new upload, the old file, or none. */
-    private function questionMedia(array $q, array $old, int $index): array
-    {
+    private function questionMedia(
+        array $q,
+        array $old,
+        int $index,
+        array &$newFiles
+    ): array {
+
         $file = $q['media'] ?? null;
         if ($file instanceof \Illuminate\Http\UploadedFile) {
             $ext = strtolower($file->getClientOriginalExtension());
@@ -409,7 +552,15 @@ class SkillController extends Controller
                 ]);
             }
 
-            return [$type, $file->store('question-media', 'public')];
+            $path = $file->store('question-media', 'public');
+
+            if (! is_string($path) || $path === '') {
+                throw new \RuntimeException('Failed to store question media.');
+            }
+
+            $newFiles[] = $path;
+
+            return [$type, $path];
         }
 
         $keep = $q['keep_media'] ?? null;

@@ -52,7 +52,11 @@ class AdminVerifyController extends Controller
     public function verify(Request $request)
     {
         $user = $request->user();
-        $request->validate(['code' => 'required|string|max:12']);
+        $request->validate([
+            'code' => ['required', 'string', 'regex:/^[0-9]{6}$/'],
+        ], [
+            'code.regex' => 'Enter the six-digit code exactly as shown.',
+        ]);
 
         $key = 'admin-code:'.$user->id.'|'.$request->ip();
         if (RateLimiter::tooManyAttempts($key, 10)) {
