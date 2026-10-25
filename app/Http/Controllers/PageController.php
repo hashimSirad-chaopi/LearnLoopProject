@@ -611,6 +611,12 @@ public function updateUser(Request $request, User $user)
         'password' => ['nullable', 'string', Password::min(8)->letters()->numbers()],
     ]);
 
+    if ($user->id === auth()->id() && $validated['role'] !== 'admin') {
+        return back()->withErrors([
+            'role' => "You can't remove your own admin access.",
+        ]);
+    }
+
     $wasAdmin = $user->role === 'admin';
 
     if ($wasAdmin && $user->status === 'active' && $validated['role'] !== 'admin' && User::where('role', 'admin')->where('status', 'active')->count() <= 1) {

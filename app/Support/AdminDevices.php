@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 class AdminDevices
 {
     public const COOKIE = 'll_trusted_device';
+
     public const DAYS = 30;
 
     private static function hash(string $token): string
@@ -70,7 +71,10 @@ class AdminDevices
         }
 
         return DB::table('admin_trusted_devices')
-            ->where('user_id', $user->id)->where('token_hash', self::hash($token))->value('id');
+            ->where('user_id', $user->id)
+            ->where('token_hash', self::hash($token))
+            ->where('expires_at', '>', now())
+            ->value('id');
     }
 
     public static function label(string $ua): string
