@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Validator;
 class ListingController extends Controller
 {
     /**
-     * Matches the Flutter Feed screen. Only 'active' (admin-approved)
-     * listings are shown, except a user always sees their own regardless
-     * of status so they can track pending/rejected ones too.
+     * Matches the Flutter Feed screen. Only 'active' listings are shown
+     * (they go live as soon as they are posted; an admin only monitors them),
+     * except a member always sees their own, so they can reopen a closed one
+     * or read why an admin disabled one.
      * Supports ?q= for the Feed's search bar.
      */
     public function index(Request $request)
@@ -82,7 +83,7 @@ class ListingController extends Controller
             'budget' => $request->wants_level === 'professional' ? $request->budget : null,
             'category_id' => $request->category_id,
             'description' => $request->description,
-            'status' => 'pending', // awaits admin approval, matching the admin panel's workflow
+            'status' => 'active', // live straight away; an admin monitors and can disable it with a reason
         ]);
 
         return response()->json(['listing' => $listing->load('user', 'category', 'offersSkill', 'wantsSkill')], 201);
@@ -138,10 +139,8 @@ class ListingController extends Controller
             $listing->budget = null;
         }
 
-        // Reopening a closed listing, or changing a live one, sends it back to an admin (the app tells the member so).
-        if ($listing->status === 'inactive' || $listing->isDirty(['title', 'description', 'wants_skill_id', 'offers_skill_id', 'offers_level', 'wants_level', 'budget'])) {
-            $listing->status = 'pending';
-        }
+        // Editing never changes whether it is live: a disabled listing stays disabled until an admin
+        // restores it, and a closed one stays closed until its owner reopens it.
         $listing->save();
 
         return response()->json(['listing' => $listing->fresh(['user', 'category', 'offersSkill', 'wantsSkill'])]);
@@ -154,23 +153,30 @@ class ListingController extends Controller
             return response()->json(['message' => 'You can only close your own listings'], 403);
         }
 
+        if ($listing->isDisabledByAdmin()) {
+            return response()->json(['message' => 'An admin disabled this listing. You can edit or delete it.'], 422);
+        }
+
         $listing->update(['status' => 'inactive']);
 
         return response()->json(['listing' => $listing->fresh(['user', 'category', 'offersSkill', 'wantsSkill'])]);
     }
 
-    /** "Reopen": a closed listing goes back to pending, so an admin stays in control of what is live. */
+    /** "Reopen": a listing the member closed goes live again. One an admin disabled cannot be reopened here. */
     public function reopen(Request $request, Listing $listing)
     {
         if ($listing->user_id !== $request->user()->id) {
             return response()->json(['message' => 'You can only reopen your own listings'], 403);
         }
 
+        if ($listing->isDisabledByAdmin()) {
+            return response()->json(['message' => 'An admin disabled this listing, so it cannot be reopened. See the reason in My Listings.'], 422);
+        }
         if ($listing->status !== 'inactive') {
             return response()->json(['message' => 'Only a closed listing can be reopened'], 422);
         }
 
-        $listing->update(['status' => 'pending']);
+        $listing->update(['status' => 'active']);
 
         return response()->json(['listing' => $listing->fresh(['user', 'category', 'offersSkill', 'wantsSkill'])]);
     }

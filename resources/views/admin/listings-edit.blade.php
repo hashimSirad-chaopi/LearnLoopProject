@@ -74,7 +74,6 @@
                 <div class="settings-field">
                     <label for="status">Status</label>
                     <select id="status" name="status">
-                        <option value="pending" {{ old('status', $listing->status) === 'pending' ? 'selected' : '' }}>Pending (needs approval)</option>
                         <option value="active" {{ $listing->status === 'active' ? 'selected' : '' }}>Active</option>
                         <option value="inactive" {{ $listing->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
                     </select>

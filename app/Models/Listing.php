@@ -20,6 +20,14 @@ class Listing extends Model
     'budget',
 ];
 
+    /** Shown to the owner in the app: was it taken down by an admin, and why. */
+    protected $appends = ['disabled_by_admin', 'disabled_reason'];
+
+    protected function casts(): array
+    {
+        return ['moderated_at' => 'datetime'];
+    }
+
     /**
      * The category is never picked separately in the app: it is the category
      * of the skill being taught, or of the skill wanted for a learner-only
@@ -28,11 +36,36 @@ class Listing extends Model
     protected static function booted(): void
     {
         static::saving(function (Listing $listing) {
+            // "Disabled by an admin" only exists while the listing is inactive.
+            if ($listing->status !== 'inactive') {
+                $listing->moderation_reason = null;
+                $listing->moderation_note = null;
+                $listing->moderated_at = null;
+            }
+
             $skillId = $listing->offers_skill_id ?? $listing->wants_skill_id;
             if ($skillId && ($categoryId = Skill::whereKey($skillId)->value('category_id'))) {
                 $listing->category_id = $categoryId;
             }
         });
+    }
+
+    /** Taken down by an admin (as opposed to closed by its owner). */
+    public function isDisabledByAdmin(): bool
+    {
+        return $this->status === 'inactive' && $this->moderated_at !== null;
+    }
+
+    public function getDisabledByAdminAttribute(): bool
+    {
+        return $this->isDisabledByAdmin();
+    }
+
+    public function getDisabledReasonAttribute(): ?string
+    {
+        return $this->isDisabledByAdmin()
+            ? \App\Support\ListingModeration::describe($this->moderation_reason, $this->moderation_note)
+            : null;
     }
 
     public function offersSkill()

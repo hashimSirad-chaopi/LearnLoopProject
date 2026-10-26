@@ -22,6 +22,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Running behind ngrok (or any HTTPS proxy)
+    |--------------------------------------------------------------------------
+    */
+
+    // Set LEARNLOOP_TRUST_PROXIES=true in .env while the site is reached through ngrok, so Laravel
+    // sees the real https address and visitor IP. Leave it off when nothing sits in front of the server.
+    'trust_proxies' => (bool) env('LEARNLOOP_TRUST_PROXIES', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Report Moderation
     |--------------------------------------------------------------------------
     */

@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // ngrok terminates https and forwards plain http to this server. Without this, pictures,
+        // CSS and form links would be built as http:// and the browser would block them.
+        if (config('learnloop.trust_proxies')) {
+            if (method_exists(\Illuminate\Http\Middleware\TrustProxies::class, 'at')) {
+                \Illuminate\Http\Middleware\TrustProxies::at('*');
+            }
+            if (str_starts_with((string) config('app.url'), 'https://')) {
+                URL::forceScheme('https');
+            }
+        }
+
         // Security trail: every admin sign-in, sign-out and failed sign-in goes
         // into the Activity Log (Admin > Activity). Members are not logged here.
         Event::listen(Login::class, function (Login $event) {

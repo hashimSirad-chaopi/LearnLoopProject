@@ -38,7 +38,7 @@
                 </h1>
 
                 <p>
-                    Review and manage listings posted by LearnLoop users.
+                    Listings go live as soon as members post them. Watch the feed and take down anything that breaks the rules.
                 </p>
 
             </div>
@@ -67,7 +67,7 @@
                         </h2>
 
                         <p>
-                            Review, disable, or remove user-created listings.
+                            Disable or delete a listing and tell the member why.
                         </p>
 
                     </div>
@@ -88,15 +88,15 @@
     >
     <select name="status" class="sort-select" aria-label="Filter by status" onchange="this.form.submit()">
         <option value="all" @selected($status === 'all')>All statuses</option>
-        <option value="pending" @selected($status === 'pending')>Pending approval</option>
-        <option value="active" @selected($status === 'active')>Active</option>
-        <option value="inactive" @selected($status === 'inactive')>Inactive</option>
+        <option value="active" @selected($status === 'active')>Live</option>
+        <option value="disabled" @selected($status === 'disabled')>Disabled by admin</option>
+        <option value="closed" @selected($status === 'closed')>Closed by member</option>
     </select>
     <select name="sort" class="sort-select" aria-label="Sort listings" onchange="this.form.submit()">
         <option value="newest" @selected($sort === 'newest')>Newest first</option>
         <option value="oldest" @selected($sort === 'oldest')>Oldest first</option>
         <option value="title" @selected($sort === 'title')>Title A to Z</option>
-        <option value="status" @selected($sort === 'status')>Pending first</option>
+        <option value="status" @selected($sort === 'status')>Disabled first</option>
     </select>
     <button type="submit" class="table-btn">Search</button>
 </form>
@@ -121,8 +121,9 @@
                             <label class="bulk-all"><input type="checkbox" data-select-all="bulk-listings"> Select all on this page ({{ $listings->count() }})</label>
                             <span class="bulk-count"></span>
                             <span class="bulk-actions">
-                                <button type="submit" name="bulk" value="enable" class="table-btn" onclick="return confirm('Approve / enable the selected listings?');">Approve / enable selected</button>
-                                <button type="submit" name="bulk" value="disable" class="table-btn" onclick="return confirm('Disable the selected listings?');">Disable selected</button>
+                                <button type="submit" name="bulk" value="restore" class="table-btn" onclick="return confirm('Put the selected disabled listings back in the feed?');">Restore selected</button>
+                                <button type="button" class="table-btn" data-lm-open data-lm-bulk="disable" data-lm-title="the selected listings">Disable selected</button>
+                                <button type="button" class="delete-btn" data-lm-open data-lm-bulk="delete" data-lm-title="the selected listings">Delete selected</button>
                             </span>
                         </form>
                     @endif
@@ -142,7 +143,8 @@
                     <span>{{ $listing->category?->name ?? 'Uncategorized' }}</span>
                 </div>
             </div>
-            <span class="listing-status {{ $listing->status }}">{{ ucfirst($listing->status) }}</span>
+            @php($disabled = $listing->isDisabledByAdmin())
+            <span class="listing-status {{ $disabled ? 'disabled' : $listing->status }}">{{ $disabled ? 'Disabled by admin' : ($listing->status === 'active' ? 'Live' : 'Closed by member') }}</span>
         </div>
 
         <div class="listing-content">
@@ -159,28 +161,24 @@
                 </p>
             @endif
             <p>{{ $listing->description }}</p>
+            @if($disabled)
+                <p class="listing-reason"><strong>Reason:</strong> {{ $listing->disabled_reason }} <span class="ll-muted">&middot; {{ $listing->moderated_at->diffForHumans() }}</span></p>
+            @endif
         </div>
 
         <div class="listing-footer">
             <span class="listing-date">Posted {{ $listing->created_at->diffForHumans() }}</span>
             <div class="listing-actions">
                 <a href="{{ route('admin.listings.edit', $listing->id) }}" class="table-btn" style="text-decoration:none;">Edit</a>
-                @if($listing->status !== 'active')
-    <form method="POST" action="{{ route('admin.listings.enable', $listing->id) }}">
-        @csrf @method('PATCH')
-        <button type="submit" class="disable-btn">{{ $listing->status === 'pending' ? 'Approve' : 'Enable' }}</button>
-    </form>
-@endif
-@if($listing->status !== 'inactive')
-    <form method="POST" action="{{ route('admin.listings.disable', $listing->id) }}">
-        @csrf @method('PATCH')
-        <button type="submit" class="disable-btn">Disable</button>
-    </form>
-@endif
-                <form method="POST" action="{{ route('admin.listings.delete', $listing->id) }}" onsubmit="return confirm('Delete this listing?');">
-                    @csrf @method('DELETE')
-                    <button type="submit" class="delete-btn">Delete</button>
-                </form>
+                @if($disabled)
+                    <form method="POST" action="{{ route('admin.listings.enable', $listing->id) }}">
+                        @csrf @method('PATCH')
+                        <button type="submit" class="disable-btn">Restore</button>
+                    </form>
+                @else
+                    <button type="button" class="disable-btn" data-lm-open data-lm-url="{{ route('admin.listings.disable', $listing->id) }}" data-lm-method="PATCH" data-lm-mode="disable" data-lm-title="{{ $listing->title }}">Disable</button>
+                @endif
+                <button type="button" class="delete-btn" data-lm-open data-lm-url="{{ route('admin.listings.delete', $listing->id) }}" data-lm-method="DELETE" data-lm-mode="delete" data-lm-title="{{ $listing->title }}">Delete</button>
             </div>
         </div>
     </article>
@@ -199,6 +197,8 @@
     </main>
 
 </div>
+
+@include('partials.listing-moderation-dialog')
 
 </body>
 </html>

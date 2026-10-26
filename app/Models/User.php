@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 #[Fillable(['name', 'email', 'password', 'role', 'status', 'bio', 'availability', 'avatar_path', 'banner_path'])]
-#[Hidden(['password', 'remember_token', 'last_seen_at', 'offline_since', 'suspended_until', 'suspension_reason', 'suspension_note'])]
+#[Hidden(['password', 'remember_token', 'last_seen_at', 'offline_since', 'suspended_until', 'suspension_reason', 'suspension_note', 'admin_preferences'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -31,8 +31,17 @@ class User extends Authenticatable
             'suspended_until' => 'datetime',
             'last_seen_at' => 'datetime',
             'offline_since' => 'datetime',
+            'admin_preferences' => 'array',
             'password' => 'hashed',
         ];
+    }
+
+    /** One of this admin's panel preferences (Settings > Notifications), or $default when never set. */
+    public function adminPref(string $key, mixed $default = null): mixed
+    {
+        $prefs = $this->getAttribute('admin_preferences');
+
+        return is_array($prefs) && array_key_exists($key, $prefs) ? $prefs[$key] : $default;
     }
 
     /** Added to every API/JSON user so the app can draw the pictures (Flutter avatarUrl / bannerUrl). */

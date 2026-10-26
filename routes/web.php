@@ -66,11 +66,18 @@ Route::middleware(['auth', 'admin', 'two-factor', \App\Http\Middleware\TrackLast
 
     Route::get('/home', [PageController::class, 'adminHome'])->name('home');
 
-    // ---- Security: email sign-in code + trusted browsers ----
+    // ---- Settings: account, password, security (email code + trusted browsers) and alerts ----
+    Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'show'])->name('settings');
+    Route::patch('/settings/account', [\App\Http\Controllers\SettingsController::class, 'updateAccount'])->name('settings.account');
+    Route::post('/settings/picture/{kind}', [\App\Http\Controllers\SettingsController::class, 'savePicture'])->whereIn('kind', ['avatar', 'banner'])->name('settings.picture');
+    Route::delete('/settings/picture/{kind}', [\App\Http\Controllers\SettingsController::class, 'removePicture'])->whereIn('kind', ['avatar', 'banner'])->name('settings.picture.remove');
+    Route::put('/settings/password', [\App\Http\Controllers\SettingsController::class, 'updatePassword'])->name('settings.password');
+    Route::patch('/settings/notifications', [\App\Http\Controllers\SettingsController::class, 'updateNotifications'])->name('settings.notifications');
+
+    // Security used to be its own page: old links and bookmarks land on the Security tab.
     Route::get('/security', [\App\Http\Controllers\SecurityController::class, 'show'])->name('security');
     Route::post('/security/devices/clear', [\App\Http\Controllers\SecurityController::class, 'removeAllDevices'])->name('security.devices.clear');
     Route::post('/security/devices/{device}/remove', [\App\Http\Controllers\SecurityController::class, 'removeDevice'])->whereNumber('device')->name('security.devices.remove');
-    Route::get('/settings', [PageController::class, 'adminSettings'])->name('settings');
     Route::get('/activity', [PageController::class, 'adminActivity'])->name('activity');
 
     // ---- Users (static routes first so /users/create isn't captured by /users/{user}) ----
@@ -94,18 +101,18 @@ Route::middleware(['auth', 'admin', 'two-factor', \App\Http\Middleware\TrackLast
     Route::delete('/notifications/{notification}', [\App\Http\Controllers\NotificationLogController::class, 'destroy'])->name('notifications.delete');
 
     // ---- Listings ----
-    Route::post('/listings/bulk', [PageController::class, 'bulkListings'])->name('listings.bulk');
+    Route::post('/listings/bulk', [\App\Http\Controllers\ListingModerationController::class, 'bulk'])->name('listings.bulk');
     Route::get('/comments', [\App\Http\Controllers\CommentModerationController::class, 'index'])->name('comments');
     Route::post('/comments/bulk', [\App\Http\Controllers\CommentModerationController::class, 'bulk'])->name('comments.bulk');
     Route::delete('/comments/{comment}', [\App\Http\Controllers\CommentModerationController::class, 'destroy'])->name('comments.delete');
-    Route::get('/listings', [PageController::class, 'adminListings'])->name('listings');
+    Route::get('/listings', [\App\Http\Controllers\ListingModerationController::class, 'index'])->name('listings');
     Route::get('/listings/create', [PageController::class, 'createListing'])->name('listings.create');
     Route::post('/listings', [PageController::class, 'storeListing'])->name('listings.store');
     Route::get('/listings/{listing}/edit', [PageController::class, 'editListing'])->name('listings.edit');
     Route::put('/listings/{listing}', [PageController::class, 'updateListing'])->name('listings.update');
-    Route::patch('/listings/{listing}/enable', [PageController::class, 'enableListing'])->name('listings.enable');
-    Route::patch('/listings/{listing}/disable', [PageController::class, 'disableListing'])->name('listings.disable');
-    Route::delete('/listings/{listing}', [PageController::class, 'deleteListing'])->name('listings.delete');
+    Route::patch('/listings/{listing}/enable', [\App\Http\Controllers\ListingModerationController::class, 'restore'])->name('listings.enable');
+    Route::patch('/listings/{listing}/disable', [\App\Http\Controllers\ListingModerationController::class, 'disable'])->name('listings.disable');
+    Route::delete('/listings/{listing}', [\App\Http\Controllers\ListingModerationController::class, 'destroy'])->name('listings.delete');
 
     // ---- Reports ----
     Route::get('/reports', [PageController::class, 'adminReports'])->name('reports');

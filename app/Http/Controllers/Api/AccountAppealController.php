@@ -70,6 +70,8 @@ class AccountAppealController extends Controller
             'status' => AccountAppeal::PENDING,
         ]);
 
+        \App\Support\AdminMail::newAppeal($appeal);
+
         return response()->json([
             'message' => 'Your request was sent. An admin will review it.',
             'appeal' => ['status' => $appeal->status],

@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\AccountAppeal;
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
@@ -12,11 +13,7 @@ class AdminMail
 {
     public static function newReport(Report $report): void
     {
-        if (! config('learnloop.admin_email_alerts')) {
-            return;
-        }
-
-        $emails = User::where('role', 'admin')->where('status', 'active')->pluck('email')->all();
+        $emails = self::recipients('email_report_alerts');
         if ($emails === []) {
             return;
         }
@@ -39,5 +36,44 @@ class AdminMail
                 Log::warning('Report alert email failed: '.$e->getMessage());
             }
         });
+    }
+
+    public static function newAppeal(AccountAppeal $appeal): void
+    {
+        $emails = self::recipients('email_appeal_alerts');
+        if ($emails === []) {
+            return;
+        }
+
+        $appeal->loadMissing('user');
+        $url = url('/admin/appeals');
+
+        $body = "A suspended member asked for their account to be reactivated.\n\n"
+            .'Member: '.($appeal->user->name ?? 'Unknown')."\n\n"
+            ."Message:\n{$appeal->message}\n\n"
+            ."Review it here: {$url}\n";
+
+        app()->terminating(function () use ($emails, $body, $appeal) {
+            try {
+                Mail::raw($body, fn ($m) => $m->to($emails)->subject('Account recovery request from '.($appeal->user->name ?? 'a member')));
+            } catch (\Throwable $e) {
+                Log::warning('Recovery request alert email failed: '.$e->getMessage());
+            }
+        });
+    }
+
+    /**
+     * Active admins who want this alert by email. An admin who never touched the switch
+     * follows the server default (LEARNLOOP_ADMIN_EMAIL_ALERTS).
+     *
+     * @return array<int, string>
+     */
+    private static function recipients(string $pref): array
+    {
+        $default = (bool) config('learnloop.admin_email_alerts');
+
+        return User::where('role', 'admin')->where('status', 'active')->get()
+            ->filter(fn (User $admin) => (bool) $admin->adminPref($pref, $default))
+            ->pluck('email')->all();
     }
 }

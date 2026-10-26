@@ -31,12 +31,6 @@ class AdminAlerts
                 'url' => route('admin.lessons', ['status' => 'pending']),
             ],
             [
-                'label' => 'Listings waiting for approval',
-                'hint' => 'New listings stay hidden from the feed until you enable them.',
-                'count' => Listing::where('status', 'pending')->count(),
-                'url' => route('admin.listings'),
-            ],
-            [
                 'label' => 'Reports to review',
                 'hint' => 'Members reported a listing or another member.',
                 'count' => Report::where('status', 'pending')->count(),

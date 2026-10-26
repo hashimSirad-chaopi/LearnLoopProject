@@ -30,7 +30,6 @@
             </a>
             <a href="{{ route('admin.activity') }}" class="nav-item {{ request()->routeIs('admin.activity*') ? 'active' : '' }}">Activity Log</a>
             <a href="{{ route('admin.settings') }}" class="nav-item {{ request()->routeIs('admin.settings*') ? 'active' : '' }}">Settings</a>
-            <a href="{{ route('admin.security') }}" class="nav-item {{ request()->routeIs('admin.security*') ? 'active' : '' }}">Security</a>
         </nav>
     </div>
     <div class="sidebar-bottom">
