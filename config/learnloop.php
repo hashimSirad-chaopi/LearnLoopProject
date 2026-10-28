@@ -39,4 +39,14 @@ return [
     // Suspend a member after this many upheld reports. Zero disables auto-suspension.
     'auto_suspend_after' => (int) env('LEARNLOOP_AUTO_SUSPEND_AFTER', 3),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Quiz attempts per day
+    |--------------------------------------------------------------------------
+    */
+
+    // A "day" for the daily quiz attempt limit runs midnight to midnight in this timezone.
+    // The on/off switch and the number of attempts are edited in Admin > Settings > Quizzes.
+    'quiz_day_timezone' => env('LEARNLOOP_QUIZ_DAY_TIMEZONE', 'Asia/Manila'),
+
 ];

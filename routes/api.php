@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\AccountAppealController;
 use App\Http\Controllers\Api\AccountController;
+use App\Http\Controllers\Api\AccountDeletionController;
+use App\Http\Controllers\Api\ActivityHistoryController;
+use App\Http\Controllers\Api\SuggestionController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlockController;
 use App\Http\Controllers\Api\DeviceTokenController;
@@ -32,7 +35,9 @@ use Illuminate\Support\Facades\Route;
 
 // ---- Auth (public) ----
 // Throttled so passwords cannot be guessed and fake accounts cannot be mass-created.
-Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:5,10');
+Route::post('/register/send-code', [AuthController::class, 'sendRegisterCode'])->middleware('throttle:5,10');
+// Creating the account needs the emailed code, so wrong codes are also limited inside the controller.
+Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:15,10');
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:8,1');
 // Forgot password: a 6-digit code by email, then a new password.
 Route::post('/forgot-password', [\App\Http\Controllers\Api\PasswordResetController::class, 'send'])->middleware('throttle:5,10');
@@ -58,9 +63,13 @@ Route::middleware(['auth:sanctum', 'active', \App\Http\Middleware\TrackLastSeen:
     Route::put('/account/email', [AccountController::class, 'changeEmail'])->middleware('throttle:6,10');
     Route::post('/account/logout-others', [AccountController::class, 'logoutOthers']);
     Route::get('/blocked-users', [AccountController::class, 'blocked']);
+    Route::post('/account/delete', [AccountDeletionController::class, 'destroy'])->middleware('throttle:5,10');
+    Route::get('/activity', [ActivityHistoryController::class, 'index']);
+    Route::get('/suggestions', [SuggestionController::class, 'index']);
 
     // ---- Another member's public profile ----
     Route::get('/users/{user}', [UserController::class, 'show']);
+    Route::get('/users/{user}/ratings', [RatingController::class, 'forUser']);
 
     // ---- Skill categories (for the Create Post dropdown) ----
     Route::get('/categories', [SkillCategoryController::class, 'index']);
@@ -94,6 +103,11 @@ Route::middleware(['auth:sanctum', 'active', \App\Http\Middleware\TrackLastSeen:
     Route::patch('/exchanges/{exchange}/cancel-accept', [ExchangeController::class, 'acceptCancel']);
     Route::patch('/exchanges/{exchange}/cancel-decline', [ExchangeController::class, 'declineCancel']);
     Route::patch('/exchanges/{exchange}/cancel-withdraw', [ExchangeController::class, 'withdrawCancel']);
+    // Finish agreement: one member asks, the other agrees (member <-> member exchanges).
+    Route::post('/exchanges/{exchange}/finish-request', [ExchangeController::class, 'requestFinish']);
+    Route::patch('/exchanges/{exchange}/finish-approve', [ExchangeController::class, 'approveFinish']);
+    Route::patch('/exchanges/{exchange}/finish-decline', [ExchangeController::class, 'declineFinish']);
+    Route::patch('/exchanges/{exchange}/finish-withdraw', [ExchangeController::class, 'withdrawFinish']);
 
     // ---- Skill catalog (Learn tab): skills -> levels -> published lessons -> quiz ----
     Route::get('/skills', [SkillController::class, 'index']);

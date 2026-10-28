@@ -130,9 +130,17 @@ class TeachingLevels
             }
         }
 
+        // Experience skills (dancing, singing...) have no ladder: Professional is the only level,
+        // and only an approved certification grants it.
+        if ($skill->experience_based) {
+            $earned = null;
+            $next = null;
+        }
+
         return [
             'skill_id' => $skill->id,
             'title' => $skill->title,
+            'experience_based' => (bool) $skill->experience_based,
             'earned_level' => $proStatus === 'approved' ? 'professional' : $earned,
             'grinded_level' => $earned,
             'professional' => $proStatus,

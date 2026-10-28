@@ -156,7 +156,7 @@ class MessageController extends Controller
         $sender = $request->user();
 
         if (UserBlock::between($sender->id, (int) $request->recipient_id)) {
-            return response()->json(['message' => "You can't message this member."], 403);
+            return response()->json(['message' => "You can't message this user."], 403);
         }
 
         $attachmentType = collect(['image', 'video', 'audio'])->first(fn ($field) => $request->hasFile($field));

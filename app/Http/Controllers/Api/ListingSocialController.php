@@ -47,7 +47,7 @@ class ListingSocialController extends Controller
                 'parent_id' => $c->parent_id,
                 'body' => $c->body,
                 'created_at' => $c->created_at,
-                'user' => ['id' => $c->user?->id, 'name' => $c->user?->name ?? 'Member', 'avatar_url' => $c->user?->avatar_url, 'presence' => $c->user?->presence],
+                'user' => ['id' => $c->user?->id, 'name' => $c->user?->name ?? 'User', 'avatar_url' => $c->user?->avatar_url, 'presence' => $c->user?->presence],
             ])->values();
 
         return response()->json(['comments' => $comments]);

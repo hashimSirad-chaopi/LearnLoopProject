@@ -30,6 +30,7 @@ class CommentModerationController extends Controller
 
         $comments = ListingComment::with(['user', 'listing', 'parent.user'])
             ->withCount('replies')
+            ->when($request->query('user'), fn ($q, $id) => $q->where('user_id', (int) $id))
             ->when($search !== '', fn ($q) => $q->where(function ($w) use ($search) {
                 $w->where('body', 'like', "%{$search}%")
                     ->orWhereHas('user', fn ($u) => $u->where('name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%"))
@@ -63,7 +64,7 @@ class CommentModerationController extends Controller
 
         $replies = $this->remove($comment, $this->reasonText($data));
 
-        return back()->with('success', 'Comment removed and the member was notified.'
+        return back()->with('success', 'Comment removed and the user was notified.'
             .($replies > 0 ? " {$replies} ".Str::plural('reply', $replies).' under it were removed too.' : ''));
     }
 
@@ -136,7 +137,7 @@ class CommentModerationController extends Controller
             $parts[] = $removed.' '.Str::plural('comment', $removed).' removed';
         }
         if ($suspends) {
-            $parts[] = $suspended.' '.Str::plural('member', $suspended).' suspended'
+            $parts[] = $suspended.' '.Str::plural('user', $suspended).' suspended'
                 .($skippedMembers > 0 ? " ({$skippedMembers} skipped: admins, yourself, or already suspended)" : '');
         }
 
@@ -173,7 +174,7 @@ class CommentModerationController extends Controller
         $excerpt = Str::limit($comment->body, 60);
         $listingId = $comment->listing_id;
         $listingTitle = $comment->listing?->title ?? 'a listing';
-        $authorName = $comment->user?->name ?? 'a deleted member';
+        $authorName = $comment->user?->name ?? 'a deleted user';
 
         $replies = $comment->allReplies();
         $replyCount = $replies->count();

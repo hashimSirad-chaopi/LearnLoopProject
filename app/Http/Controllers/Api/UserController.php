@@ -18,7 +18,7 @@ class UserController extends Controller
     public function show(Request $request, User $user)
     {
         if ($user->status !== 'active') {
-            return response()->json(['message' => 'Member not found'], 404);
+            return response()->json(['message' => 'User not found'], 404);
         }
 
         // "Active now" / "Active 5 min ago" on the profile: only for a member you are (or were)

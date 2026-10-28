@@ -19,7 +19,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>Reports</h1>
-                <p>Complaints members filed about other members or their listings. Decide what happens: close it, warn the member, or suspend the account.</p>
+                <p>Complaints users filed about other users or their listings. Decide what happens: close it, warn the user, or suspend the account.</p>
             </div>
         </header>
 
@@ -27,12 +27,13 @@
             <div class="ll-scroll">
                 <div class="ll-page">
                     @include('partials.flash')
+@include('partials.user-filter', ['what' => 'reports'])
 
                     {{-- ===== Status cards (they filter the list) ===== --}}
                     <div class="um-stats rp-stats">
                         @foreach(['pending' => 'Pending', 'resolved' => 'Resolved', 'dismissed' => 'Dismissed', 'all' => 'All reports'] as $key => $label)
                             <a class="um-stat rp-stat-{{ $key }} {{ $statusFilter === $key ? 'active' : '' }}"
-                               href="{{ route('admin.reports', array_filter(['search' => $search, 'status' => $key === 'all' ? null : $key])) }}">
+                               href="{{ route('admin.reports', array_filter(['user' => request('user'), 'search' => $search, 'status' => $key === 'all' ? null : $key])) }}">
                                 <span class="um-stat-label">{{ $label }}</span>
                                 <strong>{{ number_format($counts[$key]) }}</strong>
                                 @if($key === 'pending' && $counts['pending'] > 0)<small class="rp-stat-hint">need your review</small>@endif
@@ -43,6 +44,7 @@
                     {{-- ===== Search ===== --}}
                     <div class="ll-toolbar">
                         <form method="GET" action="{{ route('admin.reports') }}" class="ll-search">
+                            @if(request('user'))<input type="hidden" name="user" value="{{ request('user') }}">@endif
                             @if($statusFilter !== 'all')<input type="hidden" name="status" value="{{ $statusFilter }}">@endif
                             <input type="text" inputmode="search" name="search" value="{{ $search }}" placeholder="Search by title or reason" aria-label="Search reports">
                             <button type="submit" class="table-btn">Search</button>
@@ -97,7 +99,7 @@
                                     @if($reported)
                                         <a href="{{ route('admin.users.show', $reported) }}"><strong>{{ $reported->name }}</strong></a>
                                     @else
-                                        <strong>a deleted member</strong>
+                                        <strong>a deleted user</strong>
                                     @endif
                                 </span>
                                 @if($report->listing)
@@ -113,9 +115,21 @@
 
                             <blockquote class="lr-quote">{{ $details }}</blockquote>
 
+                            @if($report->attachments->isNotEmpty())
+                                <div class="rp-proof" style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;">
+                                    @foreach($report->attachments as $proof)
+                                        @if($proof->isVideo())
+                                            <video src="{{ $proof->url }}" controls preload="metadata" style="max-width:220px;max-height:160px;border-radius:8px;"></video>
+                                        @else
+                                            <a href="{{ $proof->url }}" target="_blank" rel="noopener"><img src="{{ $proof->url }}" alt="Report proof" loading="lazy" style="max-width:160px;max-height:120px;border-radius:8px;object-fit:cover;"></a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
+
                             @if($reported)
-                                <div class="rp-history" title="Reports an admin upheld against this member. At {{ $autoSuspendAfter }} the account is suspended automatically.">
-                                    <span class="rp-history-label">Member history</span>
+                                <div class="rp-history" title="Reports an admin upheld against this user. At {{ $autoSuspendAfter }} the account is suspended automatically.">
+                                    <span class="rp-history-label">User history</span>
                                     @if($autoSuspendAfter > 0)
                                         <span class="rp-pips" aria-hidden="true">
                                             @for($i = 1; $i <= $autoSuspendAfter; $i++)<i class="rp-pip {{ $i <= $up ? 'on' : '' }}"></i>@endfor
@@ -128,7 +142,7 @@
 
                             @if($report->status === 'resolved')
                                 <p class="rp-outcome">
-                                    <strong>{{ ['none' => 'Closed, no action on the member', 'warn' => 'Member was warned', 'suspend' => 'Member was suspended'][$report->action_taken] ?? 'Resolved' }}</strong>
+                                    <strong>{{ ['none' => 'Closed, no action on the user', 'warn' => 'User was warned', 'suspend' => 'User was suspended'][$report->action_taken] ?? 'Resolved' }}</strong>
                                     @if($report->admin_note) &middot; &ldquo;{{ $report->admin_note }}&rdquo; @endif
                                     @if($report->resolved_at)<span class="ll-muted"> &middot; {{ $report->resolved_at->diffForHumans() }}</span>@endif
                                 </p>
@@ -157,11 +171,11 @@
                                             @csrf @method('PATCH')
 
                                             <fieldset class="rp-choices">
-                                                <legend>What should happen to {{ $reported->name ?? 'the member' }}?</legend>
+                                                <legend>What should happen to {{ $reported->name ?? 'the user' }}?</legend>
                                                 <label class="rp-choice"><input type="radio" name="action" value="none" checked>
-                                                    <span><strong>No action</strong><small>The complaint is valid, but nothing happens to the member.</small></span></label>
+                                                    <span><strong>No action</strong><small>The complaint is valid, but nothing happens to the user.</small></span></label>
                                                 <label class="rp-choice"><input type="radio" name="action" value="warn">
-                                                    <span><strong>Send a warning</strong><small>The member is warned and told why.</small></span></label>
+                                                    <span><strong>Send a warning</strong><small>The user is warned and told why.</small></span></label>
                                                 <label class="rp-choice"><input type="radio" name="action" value="suspend">
                                                     <span><strong>Suspend the account</strong><small>Choose a reason and how long below.</small></span></label>
                                             </fieldset>
@@ -202,7 +216,7 @@
                                 <span class="ll-muted">No reports are waiting for review.</span>
                             @else
                                 <strong>No reports here yet.</strong>
-                                <span class="ll-muted">When a member reports someone in the app, it shows up here.</span>
+                                <span class="ll-muted">When a user reports someone in the app, it shows up here.</span>
                             @endif
                         </div>
                     @endforelse
@@ -241,7 +255,7 @@
         note.required = other;
         form.querySelector('[data-note-hint]').textContent = other
             ? '(required: explain the reason)'
-            : (action === 'none' ? '(kept on the report, optional)' : '(shown to the member, optional)');
+            : (action === 'none' ? '(kept on the report, optional)' : '(shown to the user, optional)');
     });
 </script>
 

@@ -38,7 +38,7 @@
                 </h1>
 
                 <p>
-                    Listings go live as soon as members post them. Watch the feed and take down anything that breaks the rules.
+                    Listings go live as soon as users post them. Watch the feed and take down anything that breaks the rules.
                 </p>
 
             </div>
@@ -67,7 +67,7 @@
                         </h2>
 
                         <p>
-                            Disable or delete a listing and tell the member why.
+                            Disable or delete a listing and tell the user why.
                         </p>
 
                     </div>
@@ -78,6 +78,7 @@
                 <!-- SEARCH -->
                 <!-- SEARCH -->
 <form method="GET" action="{{ route('admin.listings') }}" style="display:flex; gap:10px; flex:1; align-items:center;">
+    @if(request('user'))<input type="hidden" name="user" value="{{ request('user') }}">@endif
     <input
         type="search"
         name="search"
@@ -90,7 +91,7 @@
         <option value="all" @selected($status === 'all')>All statuses</option>
         <option value="active" @selected($status === 'active')>Live</option>
         <option value="disabled" @selected($status === 'disabled')>Disabled by admin</option>
-        <option value="closed" @selected($status === 'closed')>Closed by member</option>
+        <option value="closed" @selected($status === 'closed')>Closed by user</option>
     </select>
     <select name="sort" class="sort-select" aria-label="Sort listings" onchange="this.form.submit()">
         <option value="newest" @selected($sort === 'newest')>Newest first</option>
@@ -101,7 +102,6 @@
     <button type="submit" class="table-btn">Search</button>
 </form>
 
-<a href="{{ route('admin.listings.create') }}" class="settings-save-btn" style="text-decoration:none;">+ Add Listing</a>
                 
             </div>
 
@@ -114,6 +114,7 @@
                 <div class="listings-feed">
 
                     @include('partials.flash')
+@include('partials.user-filter', ['what' => 'listing'])
 
                     @if($listings->isNotEmpty())
                         <form id="bulk-listings" method="POST" action="{{ route('admin.listings.bulk') }}" class="bulk-bar">
@@ -144,7 +145,7 @@
                 </div>
             </div>
             @php($disabled = $listing->isDisabledByAdmin())
-            <span class="listing-status {{ $disabled ? 'disabled' : $listing->status }}">{{ $disabled ? 'Disabled by admin' : ($listing->status === 'active' ? 'Live' : 'Closed by member') }}</span>
+            <span class="listing-status {{ $disabled ? 'disabled' : $listing->status }}">{{ $disabled ? 'Disabled by admin' : ($listing->status === 'active' ? 'Live' : 'Closed by user') }}</span>
         </div>
 
         <div class="listing-content">
@@ -155,9 +156,10 @@
             @if($listing->wantsSkill || $listing->offersSkill)
                 <p style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
                     <span class="ll-badge">Offers: {{ $listing->offersSkill?->title ?? 'Nothing yet' }}</span>
-                    <span class="ll-badge">Wants: {{ $listing->wantsSkill?->title ?? '—' }}</span>
+                    @if($listing->wantsSkill)<span class="ll-badge">Wants: {{ $listing->wantsSkill->title }}</span>@endif
                     @if($listing->wants_level)<span class="ll-badge">Level: {{ ucfirst($listing->wants_level) }}@if($listing->wants_level === 'professional') · paid{{ $listing->budget ? ' · ₱'.number_format($listing->budget).' per lesson' : ' · budget negotiable' }}@endif</span>@endif
                     @if($listing->isLearnerOnly())<span class="ll-badge learner-only">Learner only</span>@endif
+                    @if($listing->isTeachOnly())<span class="ll-badge learner-only">Teach only</span>@endif
                 </p>
             @endif
             <p>{{ $listing->description }}</p>

@@ -4,7 +4,7 @@
 <dialog class="sd-dialog" id="suspend-dialog" aria-labelledby="sd-title">
     <form method="POST" action="#" class="sd-card" id="suspend-form">
         @csrf @method('PATCH')
-        <h2 id="sd-title">Suspend <span id="sd-name">this member</span>?</h2>
+        <h2 id="sd-title">Suspend <span id="sd-name">this user</span>?</h2>
         <p class="sd-help">They are signed out of the app straight away and told by notification. You can reactivate the account at any time, even before the time is up.</p>
 
         <span class="sd-label">How long</span>
@@ -26,7 +26,7 @@
         </select>
 
         <label for="sd-note" class="sd-label" id="sd-note-label">Add details (optional)</label>
-        <textarea name="note" id="sd-note" class="sd-field" rows="3" maxlength="500" placeholder="The member will see this reason."></textarea>
+        <textarea name="note" id="sd-note" class="sd-field" rows="3" maxlength="500" placeholder="The user will see this reason."></textarea>
 
         <div class="sd-actions">
             <button type="button" class="sd-btn sd-cancel" data-sd-cancel>Cancel</button>
@@ -86,7 +86,7 @@
             var isOther = reason.value === 'other';
             note.required = isOther;
             noteLabel.textContent = isOther ? 'Type the reason (required)' : 'Add details (optional)';
-            note.placeholder = isOther ? 'Explain why this account is being suspended.' : 'The member will see this reason.';
+            note.placeholder = isOther ? 'Explain why this account is being suspended.' : 'The user will see this reason.';
         }
         reason.addEventListener('change', syncNote);
 
@@ -98,7 +98,7 @@
             form.reset();
             syncNote();
             form.action = button.getAttribute('data-suspend-url');
-            name.textContent = button.getAttribute('data-suspend-name') || 'this member';
+            name.textContent = button.getAttribute('data-suspend-name') || 'this user';
             if (typeof dialog.showModal === 'function') {
                 dialog.showModal();
             } else if (confirm('Suspend ' + name.textContent + ' (totally)?')) {

@@ -61,7 +61,7 @@
                     {{-- ===== Search: category, skill or lesson title ===== --}}
                     <div class="ll-toolbar">
                         <form method="GET" action="{{ route('admin.lessons.member', $user) }}" class="ll-search">
-                            <input type="text" inputmode="search" name="search" value="{{ $search }}" placeholder="Search category, skill or lesson" aria-label="Search this member's lessons">
+                            <input type="text" inputmode="search" name="search" value="{{ $search }}" placeholder="Search category, skill or lesson" aria-label="Search this user's lessons">
                             <button type="submit" class="table-btn">Search</button>
                             @if($search !== '')
                                 <a href="{{ route('admin.lessons.member', $user) }}" class="table-btn ll-link">Clear</a>

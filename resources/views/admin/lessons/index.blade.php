@@ -22,7 +22,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>Lesson Review</h1>
-                <p>Lessons members wrote in the app (Profile → My Lessons). Nothing goes live until you approve it, unless the author is trusted in that skill.</p>
+                <p>Lessons users wrote in the app (Profile → My Lessons). Nothing goes live until you approve it, unless the author is trusted in that skill.</p>
             </div>
         </header>
 
@@ -44,7 +44,7 @@
                         {{-- ===== Users: pick a member, then "View lessons" ===== --}}
                         <div class="ll-toolbar">
                             <form method="GET" action="{{ route('admin.lessons') }}" class="ll-search">
-                                <input type="text" inputmode="search" name="search" value="{{ $search }}" placeholder="Search members by name or email" aria-label="Search members">
+                                <input type="text" inputmode="search" name="search" value="{{ $search }}" placeholder="Search users by name or email" aria-label="Search users">
                                 <button type="submit" class="table-btn">Search</button>
                                 @if($search !== '')
                                     <a href="{{ route('admin.lessons') }}" class="table-btn ll-link">Clear</a>
@@ -53,16 +53,16 @@
                         </div>
 
                         <span class="ll-muted">
-                            {{ $members->count() }} {{ \Illuminate\Support\Str::plural('member', $members->count()) }} with lessons
+                            {{ $members->count() }} {{ \Illuminate\Support\Str::plural('user', $members->count()) }} with lessons
                             @if($search !== '') &middot; matching &ldquo;{{ $search }}&rdquo; @endif
-                            &middot; members with lessons waiting for review are listed first
+                            &middot; users with lessons waiting for review are listed first
                         </span>
 
                         <div class="ll-card">
                             <table class="ll-table">
                                 <thead>
                                     <tr>
-                                        <th>Member</th>
+                                        <th>User</th>
                                         <th>Lessons</th>
                                         <th>Pending</th>
                                         <th>Published</th>
@@ -92,7 +92,7 @@
                                         <td class="lr-right"><a href="{{ route('admin.lessons.member', $member) }}" class="table-btn ll-link">View lessons &rsaquo;</a></td>
                                     </tr>
                                 @empty
-                                    <tr><td colspan="7">{{ $search !== '' ? 'No members match your search.' : 'No member has written a lesson yet.' }}</td></tr>
+                                    <tr><td colspan="7">{{ $search !== '' ? 'No users match your search.' : 'No user has written a lesson yet.' }}</td></tr>
                                 @endforelse
                                 </tbody>
                             </table>

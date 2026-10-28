@@ -25,6 +25,7 @@
 
             <div class="users-toolbar">
                 @include('partials.flash')
+@include('partials.user-filter', ['what' => 'exchanges'])
 
 
                 <div class="dashboard-heading">
@@ -48,12 +49,12 @@
                 </div>
 
                 <div class="ll-tabs" style="margin-bottom:12px;">
-                    <a class="ll-tab {{ $statusFilter === 'all' ? 'active' : '' }}" href="{{ route('admin.exchanges') }}">All ({{ $counts->sum() }})</a>
-                    <a class="ll-tab {{ $statusFilter === 'disputed' ? 'active' : '' }}" href="{{ route('admin.exchanges', ['status' => 'disputed']) }}">Disputed ({{ $counts['disputed'] ?? 0 }})</a>
-                    <a class="ll-tab {{ $statusFilter === 'pending' ? 'active' : '' }}" href="{{ route('admin.exchanges', ['status' => 'pending']) }}">Pending ({{ $counts['pending'] ?? 0 }})</a>
-                    <a class="ll-tab {{ $statusFilter === 'ongoing' ? 'active' : '' }}" href="{{ route('admin.exchanges', ['status' => 'ongoing']) }}">Ongoing ({{ $counts['ongoing'] ?? 0 }})</a>
-                    <a class="ll-tab {{ $statusFilter === 'completed' ? 'active' : '' }}" href="{{ route('admin.exchanges', ['status' => 'completed']) }}">Completed ({{ $counts['completed'] ?? 0 }})</a>
-                    <a class="ll-tab {{ $statusFilter === 'cancelled' ? 'active' : '' }}" href="{{ route('admin.exchanges', ['status' => 'cancelled']) }}">Cancelled ({{ $counts['cancelled'] ?? 0 }})</a>
+                    <a class="ll-tab {{ $statusFilter === 'all' ? 'active' : '' }}" href="{{ route('admin.exchanges', array_filter(['user' => request('user')])) }}">All ({{ $counts->sum() }})</a>
+                    <a class="ll-tab {{ $statusFilter === 'disputed' ? 'active' : '' }}" href="{{ route('admin.exchanges', array_filter(['user' => request('user'), 'status' => 'disputed'])) }}">Disputed ({{ $counts['disputed'] ?? 0 }})</a>
+                    <a class="ll-tab {{ $statusFilter === 'pending' ? 'active' : '' }}" href="{{ route('admin.exchanges', array_filter(['user' => request('user'), 'status' => 'pending'])) }}">Pending ({{ $counts['pending'] ?? 0 }})</a>
+                    <a class="ll-tab {{ $statusFilter === 'ongoing' ? 'active' : '' }}" href="{{ route('admin.exchanges', array_filter(['user' => request('user'), 'status' => 'ongoing'])) }}">Ongoing ({{ $counts['ongoing'] ?? 0 }})</a>
+                    <a class="ll-tab {{ $statusFilter === 'completed' ? 'active' : '' }}" href="{{ route('admin.exchanges', array_filter(['user' => request('user'), 'status' => 'completed'])) }}">Completed ({{ $counts['completed'] ?? 0 }})</a>
+                    <a class="ll-tab {{ $statusFilter === 'cancelled' ? 'active' : '' }}" href="{{ route('admin.exchanges', array_filter(['user' => request('user'), 'status' => 'cancelled'])) }}">Cancelled ({{ $counts['cancelled'] ?? 0 }})</a>
                 </div>
 
                 <div class="user-tools">

@@ -13,6 +13,7 @@ use App\Models\Notification;
 use App\Models\Skill;
 use App\Models\UserLessonAttempt;
 use App\Support\QuestionMedia;
+use App\Support\QuizAttempts;
 use App\Support\TeachingLevels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -67,7 +68,12 @@ class ProgressController extends Controller
      *
      * The SERVER grades the quiz (the answers are never sent to the app), so a teaching level can
      * only be earned by really passing. Lessons are taken in order: pass the ones before it first.
-     * Answers: { attempt, passed, score, total, correct: [right option index per question] }.
+     * Answers: { attempt, passed, score, total, correct: [right option index per question],
+     *            attempt_limit, attempts_left }  (both null when there is no daily limit).
+     *
+     * Daily limit (admin: Settings > Quizzes): only the admin's own lessons, only outside an
+     * exchange. Send `exchange_id` when the quiz is taken inside an exchange: those attempts are
+     * never limited and do not use up the allowance. Member-written lessons are never limited.
      */
     public function attempt(Request $request, Lesson $lesson)
     {
@@ -84,6 +90,7 @@ class ProgressController extends Controller
         $validator = Validator::make($request->all(), [
             'answers' => ['required', 'array', 'size:'.$total],
             'answers.*' => ['required', 'integer', 'min:0', 'max:9'],
+            'exchange_id' => ['nullable', 'integer'],
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => 'Answer every question before you finish', 'errors' => $validator->errors()], 422);
@@ -94,6 +101,33 @@ class ProgressController extends Controller
             return response()->json(['message' => 'Pass the lessons before this one first. Levels are earned in order.'], 403);
         }
 
+        // Inside an exchange the quiz is exempt from the daily limit. Only believe it when the
+        // member really is a party of that exchange and the lesson belongs to one of its tracks.
+        $exchangeId = null;
+        if ($request->filled('exchange_id')) {
+            $exchange = Exchange::find($request->integer('exchange_id'));
+            if (! $exchange || ! in_array($me, [$exchange->provider_id, $exchange->learner_id], true)
+                || $this->trackForLesson($exchange, $lesson) === null) {
+                return response()->json(['message' => 'This lesson is not part of that exchange'], 422);
+            }
+            $exchangeId = $exchange->id;
+        }
+
+        $limit = ($exchangeId === null && QuizAttempts::appliesTo($lesson)) ? QuizAttempts::activeLimit($lesson->skillLevel?->name) : null;
+        $used = 0;
+        if ($limit !== null) {
+            $used = QuizAttempts::usedToday($me, $lesson->id);
+            if ($used >= $limit) {
+                return response()->json([
+                    'message' => "You used all {$limit} quiz ".($limit === 1 ? 'attempt' : 'attempts').' for this lesson today. Read the lesson again and come back tomorrow.',
+                    'code' => 'attempt_limit',
+                    'attempt_limit' => $limit,
+                    'attempts_left' => 0,
+                    'resets_at' => QuizAttempts::resetsAt()->toIso8601String(),
+                ], 429);
+            }
+        }
+
         $skillId = $lesson->skillLevel?->skill_id;
         $before = $skillId ? TeachingLevels::earned($me, $skillId) : null;
 
@@ -102,6 +136,7 @@ class ProgressController extends Controller
         $attempt = UserLessonAttempt::create([
             'user_id' => $me,
             'lesson_id' => $lesson->id,
+        ] + (QuizAttempts::ready() ? ['exchange_id' => $exchangeId] : []) + [
             'score' => $score,
             'total_questions' => $total,
             'passed' => $score >= TeachingLevels::passMark($total),
@@ -130,6 +165,9 @@ class ProgressController extends Controller
             'correct' => $correct,
             'earned_level' => $earned,
             'level_up' => $attempt->passed && $earned !== $before,
+            'attempt_limit' => $limit,
+            'attempts_left' => $limit === null ? null : QuizAttempts::left($limit, $used + 1),
+            'resets_at' => $limit === null ? null : QuizAttempts::resetsAt()->toIso8601String(),
         ], 201);
     }
 
@@ -230,6 +268,8 @@ class ProgressController extends Controller
                     return $q + QuestionMedia::payload($q['media_type'] ?? null, $path);
                 })->values(),
                 'attempts' => $list->count(),
+                'max_attempts' => $lesson->max_attempts,
+                'attempts_left' => $lesson->max_attempts === null ? null : max(0, $lesson->max_attempts - $list->count()),
                 'best_score' => (int) $list->max('score'),
                 'total' => (int) ($list->last()->total_questions ?? 0),
                 'passed' => $list->contains('passed', true),
@@ -300,6 +340,8 @@ class ProgressController extends Controller
             'content_type' => 'required|in:photo,video,audio,file',
             'content' => 'nullable|string',
             'due_at' => 'nullable|date|after:now',
+            // How many times the learner may take the quiz. Leave out for no limit.
+            'max_attempts' => 'nullable|integer|min:1|max:50',
             'questions' => 'required|array|min:1|max:10',
             'questions.*.text' => 'required|string|max:500',
             'questions.*.options' => 'required|array|size:4',
@@ -316,6 +358,7 @@ class ProgressController extends Controller
             'title' => $request->title,
             'content' => (string) $request->content,
             'content_type' => $type,
+            'max_attempts' => $request->filled('max_attempts') ? (int) $request->max_attempts : null,
             'questions' => array_values(array_map(fn ($q) => [
                 'text' => $q['text'],
                 'options' => array_values($q['options']),
@@ -374,6 +417,13 @@ class ProgressController extends Controller
             return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
         }
 
+        $used = $exchangeLesson->attempts()->where('user_id', $request->user()->id)->count();
+        if ($exchangeLesson->max_attempts !== null && $used >= $exchangeLesson->max_attempts) {
+            return response()->json([
+                'message' => 'You used all '.$exchangeLesson->max_attempts.' quiz attempts your partner allowed for this lesson.',
+            ], 422);
+        }
+
         $total = count($exchangeLesson->questions ?? []);
         $score = min((int) $request->score, $total);
 
@@ -385,7 +435,11 @@ class ProgressController extends Controller
             'passed' => $total > 0 && $score >= self::passMark($total),
         ]);
 
-        return response()->json(['attempt' => $attempt], 201);
+        return response()->json([
+            'attempt' => $attempt,
+            'attempts' => $used + 1,
+            'max_attempts' => $exchangeLesson->max_attempts,
+        ], 201);
     }
 
     /** POST .../extra-lessons/{id}/confirm — the author confirms the learner passed it. */
@@ -489,11 +543,20 @@ class ProgressController extends Controller
     /** Upload rules per lesson type (shared with the admin's lesson form). */
     public static function attachmentRules(?string $type): array
     {
+        // Audio and documents are checked by file extension: PHP often guesses the wrong type for
+        // m4a / aac / ogg (and for csv / txt), which made valid uploads fail the "mimes" rule.
+        $byExtension = fn (array $allowed, string $label) => function (string $attribute, $file, \Closure $fail) use ($allowed, $label) {
+            $ext = strtolower($file instanceof \Illuminate\Http\UploadedFile ? $file->getClientOriginalExtension() : '');
+            if (! in_array($ext, $allowed, true)) {
+                $fail("Choose {$label}: ".implode(', ', $allowed).'.');
+            }
+        };
+
         return match ($type) {
             'photo' => ['required', 'file', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2097152'],
-            'audio' => ['required', 'file', 'mimes:mp3,m4a,aac,wav,ogg,oga', 'max:2097152'],
+            'audio' => ['required', 'file', $byExtension(['mp3', 'm4a', 'aac', 'wav', 'ogg', 'oga'], 'an audio file'), 'max:2097152'],
             'video' => ['required', 'file', 'mimes:mp4,mov,webm,m4v', 'max:2097152'],
-            default => ['required', 'file', 'mimes:pdf,doc,docx,ppt,pptx,xls,xlsx,txt,zip,csv', 'max:2097152'],
+            default => ['required', 'file', $byExtension(['pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'txt', 'zip', 'csv'], 'a document'), 'max:2097152'],
         };
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 /**
  * 6-digit codes sent by email. Used for "forgot password" (members and admins)
- * and for the admin's sign-in check.
+ * for the admin's sign-in check, and to verify a new member's email at sign-up.
  *
  * - The code is stored only as an HMAC, expires after 10 minutes and dies after
  *   5 wrong tries.
@@ -20,6 +20,7 @@ class EmailOtp
 {
     public const PASSWORD_RESET = 'password_reset';
     public const ADMIN_LOGIN = 'admin_login';
+    public const REGISTER = 'register';
 
     public const TTL_MINUTES = 10;
     public const MAX_ATTEMPTS = 5;
@@ -80,9 +81,11 @@ class EmailOtp
             ]
         );
 
-        $subject = $purpose === self::ADMIN_LOGIN
-            ? "Your LearnLoop admin sign-in code: {$code}"
-            : "Your LearnLoop password reset code: {$code}";
+        $subject = match ($purpose) {
+            self::ADMIN_LOGIN => "Your LearnLoop admin sign-in code: {$code}",
+            self::REGISTER => "Your LearnLoop verification code: {$code}",
+            default => "Your LearnLoop password reset code: {$code}",
+        };
 
         try {
             $html = view('emails.otp', [

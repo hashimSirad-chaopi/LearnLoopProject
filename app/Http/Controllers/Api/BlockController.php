@@ -16,13 +16,13 @@ class BlockController extends Controller
 
         UserBlock::firstOrCreate(['blocker_id' => $request->user()->id, 'blocked_id' => $user->id]);
 
-        return response()->json(['message' => 'Member blocked']);
+        return response()->json(['message' => 'User blocked']);
     }
 
     public function destroy(Request $request, User $user)
     {
         UserBlock::where('blocker_id', $request->user()->id)->where('blocked_id', $user->id)->delete();
 
-        return response()->json(['message' => 'Member unblocked']);
+        return response()->json(['message' => 'User unblocked']);
     }
 }

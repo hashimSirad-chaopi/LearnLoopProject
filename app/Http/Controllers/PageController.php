@@ -55,8 +55,8 @@ public function exportDashboard(Request $request)
 
         fputcsv($out, ['SUMMARY', 'Value']);
         foreach ([
-            ['Members', $stats['totalMembers']],
-            ["New members (last {$days} days)", $stats['newMembersRange']],
+            ['Users', $stats['totalMembers']],
+            ["New users (last {$days} days)", $stats['newMembersRange']],
             ['Active listings', $stats['activeListings']],
             ['Total listings', $stats['totalListings']],
             ['Total exchanges', $stats['totalExchanges']],
@@ -66,12 +66,12 @@ public function exportDashboard(Request $request)
             ['Categories', $stats['categoryCount']],
             ['Published lessons', $stats['publishedLessons']],
             ['Open reports', $stats['pendingReports']],
-            ['Members online now', $stats['onlineNow']],
-            ['Suspended members', $stats['suspendedMembers']],
+            ['Users online now', $stats['onlineNow']],
+            ['Suspended users', $stats['suspendedMembers']],
             ["Comments (last {$days} days)", $stats['commentsRange']],
             ['Comments (all time)', $stats['commentsTotal']],
             ["New listings (last {$days} days)", $stats['newListingsRange']],
-            ["New members in the {$days} days before", $stats['newMembersPrevious']],
+            ["New users in the {$days} days before", $stats['newMembersPrevious']],
         ] as $row) {
             fputcsv($out, $row);
         }
@@ -83,7 +83,7 @@ public function exportDashboard(Request $request)
         }
 
         fputcsv($out, []);
-        fputcsv($out, ['NEW MEMBERS', 'Count']);
+        fputcsv($out, ['NEW USERS', 'Count']);
         foreach ($stats['signups'] as $row) {
             fputcsv($out, [$row['label'], $row['count']]);
         }
@@ -235,7 +235,7 @@ public function bulkUsers(Request $request)
 
     $skipped = count($data['ids']) - $changed;
 
-    return back()->with('success', $changed.' '.\Illuminate\Support\Str::plural('member', $changed).' '.($data['bulk'] === 'suspend' ? 'suspended' : 'reactivated').'.'
+    return back()->with('success', $changed.' '.\Illuminate\Support\Str::plural('user', $changed).' '.($data['bulk'] === 'suspend' ? 'suspended' : 'reactivated').'.'
         .($skipped > 0 ? " {$skipped} skipped (admins, yourself, or already in that state)." : ''));
 }
 
@@ -378,7 +378,7 @@ public function adminActivity(Request $request)
 {
     // Filter groups: the label shown in the menu => the action prefixes it covers.
     $types = [
-        'user' => ['Members', ['user.', 'users.']],
+        'user' => ['Users', ['user.', 'users.']],
         'listing' => ['Listings', ['listing.']],
         'report' => ['Reports', ['report.']],
         'exchange' => ['Exchanges', ['exchange.']],
@@ -424,7 +424,8 @@ public function adminReports(Request $request)
         'dismissed' => (int) ($byStatus['dismissed'] ?? 0),
     ];
 
-    $reports = Report::with(['reporter', 'reportedUser', 'listing'])
+    $reports = Report::with(['reporter', 'reportedUser', 'listing', 'attachments'])
+        ->when($request->query('user'), fn ($q, $id) => $q->where('reported_user_id', (int) $id))
         ->when($search, function ($query, $search) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
@@ -575,7 +576,15 @@ public function showUser(User $user)
         ->limit(8)
         ->get();
 
+    $exchangeFilter = fn ($q) => $q->where('provider_id', $user->id)->orWhere('learner_id', $user->id);
+    $exchangeStatuses = Exchange::where($exchangeFilter)->selectRaw('status, COUNT(*) as total')->groupBy('status')->pluck('total', 'status');
+    $recentExchanges = Exchange::with(['provider:id,name', 'learner:id,name'])->where($exchangeFilter)->latest()->limit(5)->get();
+    $ratings = \App\Models\Rating::valid()->with(['rater:id,name', 'attachments'])->where('rated_user_id', $user->id)->latest()->limit(50)->get();
+
     return view('admin.users-show', [
+        'exchangeStatuses' => $exchangeStatuses,
+        'recentExchanges' => $recentExchanges,
+        'ratings' => $ratings,
         'stats' => $stats,
         'recentListings' => $recentListings,
         'recentComments' => $recentComments,
@@ -595,6 +604,16 @@ public function showUser(User $user)
     ]);
 }
 
+public function deleteRating(\App\Models\Rating $rating)
+{
+    $rated = $rating->ratedUser;
+    $rating->delete();
+
+    ActivityLog::record('rating.deleted', 'Deleted a rating for '.($rated?->name ?? 'a member'));
+
+    return back()->with('success', 'Rating deleted.');
+}
+
 public function editUser(User $user)
 {
     return view('admin.users-edit', compact('user'));
@@ -602,36 +621,33 @@ public function editUser(User $user)
 
 public function updateUser(Request $request, User $user)
 {
-    $request->merge(['email' => Str::lower(trim((string) $request->input('email')))]);
+    $request->merge([
+        'name' => trim((string) $request->input('name')),
+        'email' => Str::lower(trim((string) $request->input('email'))),
+    ]);
 
+    // Role is deliberately not editable here: nobody is promoted or demoted from this form.
     $validated = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'role' => 'required|in:admin,user',
-        'password' => ['nullable', 'string', Password::min(8)->letters()->numbers()],
+        'password' => ['nullable', 'string', 'confirmed', Password::min(8)->letters()->numbers()],
     ]);
 
-    if ($user->id === auth()->id() && $validated['role'] !== 'admin') {
-        return back()->withErrors([
-            'role' => "You can't remove your own admin access.",
-        ]);
+    $changes = [];
+    if ($user->name !== $validated['name']) {
+        $changes[] = 'name';
     }
-
-    $wasAdmin = $user->role === 'admin';
-
-    if ($wasAdmin && $user->status === 'active' && $validated['role'] !== 'admin' && User::where('role', 'admin')->where('status', 'active')->count() <= 1) {
-    return back()->withErrors(['role' => 'Cannot demote the last active admin.']);
+    if ($user->email !== $validated['email']) {
+        $changes[] = 'email';
     }
-
-    $oldRole = $user->role;
 
     $user->name = $validated['name'];
     $user->email = $validated['email'];
-    $user->role = $validated['role'];
 
     $passwordChanged = !empty($validated['password']);
     if ($passwordChanged) {
         $user->password = Hash::make($validated['password']);
+        $changes[] = 'password';
     }
 
     $user->save();
@@ -642,40 +658,10 @@ public function updateUser(Request $request, User $user)
     }
 
     ActivityLog::record('user.updated', "Updated user {$user->name}"
-        .($oldRole !== $user->role ? " (role: {$oldRole} to {$user->role})" : '')
-        .($passwordChanged ? ' (password reset)' : ''));
+        .($changes ? ' ('.implode(', ', $changes).' changed)' : ' (no changes)'));
 
-    return redirect()->route('admin.users')->with('success', 'User updated successfully.');
-}
-
-public function createListing()
-{
-    return view('admin.listings-create', [
-        'users' => User::where('role', 'user')->where('status', 'active')->orderBy('name')->get(),
-        'skills' => Skill::where('status', 'active')->orderBy('title')->get(),
-    ]);
-}
-
-public function storeListing(Request $request)
-{
-    $validated = $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'title' => 'required|string|max:255',
-        // Same shape as the app: the member picks the skill they WANT (always) and the skill
-        // they OFFER. Offers left empty = a learner-only listing. The category is taken from
-        // the skill (see Listing::booted), so it is only needed for old listings without skills.
-        'wants_skill_id' => 'required|exists:skills,id',
-        'offers_skill_id' => 'nullable|exists:skills,id|different:wants_skill_id',
-        'category_id' => 'nullable|exists:categories,id',
-        'description' => 'required|string',
-        'status' => 'required|in:active,pending,inactive',
-    ]);
-
-    Listing::create($validated);
-
-    ActivityLog::record('listing.created', "Created listing \"{$validated['title']}\"");
-
-    return redirect()->route('admin.listings')->with('success', 'Listing created successfully.');
+    return redirect()->route('admin.users.show', $user->id)->with('success',
+        $changes ? 'User updated successfully.'.($passwordChanged ? ' They were signed out of their devices.' : '') : 'No changes were made.');
 }
 
 public function editListing(Listing $listing)
@@ -696,8 +682,8 @@ public function updateListing(Request $request, Listing $listing)
         // Same shape as the app: the member picks the skill they WANT (always) and the skill
         // they OFFER. Offers left empty = a learner-only listing. The category is taken from
         // the skill (see Listing::booted), so it is only needed for old listings without skills.
-        'wants_skill_id' => 'required|exists:skills,id',
-        'offers_skill_id' => 'nullable|exists:skills,id|different:wants_skill_id',
+        'wants_skill_id' => 'nullable|required_without:offers_skill_id|exists:skills,id',
+        'offers_skill_id' => 'nullable|required_without:wants_skill_id|exists:skills,id|different:wants_skill_id',
         'category_id' => 'nullable|exists:categories,id',
         'description' => 'required|string',
         'status' => 'required|in:active,pending,inactive',
@@ -747,7 +733,9 @@ public function enableListing(Listing $listing)
 
 public function deleteReport(Report $report)
 {
+    $paths = $report->attachments()->pluck('path')->all();
     $report->delete();
+    StorageCleanup::delete($paths);
 
     ActivityLog::record('report.deleted', "Deleted report \"{$report->title}\"");
 
@@ -786,6 +774,7 @@ public function adminExchanges(Request $request)
     $statusFilter = $request->query('status', 'all');
 
     $exchanges = Exchange::with(['provider', 'learner'])
+        ->when($request->query('user'), fn ($q, $id) => $q->where(fn ($w) => $w->where('provider_id', (int) $id)->orWhere('learner_id', (int) $id)))
         ->when($statusFilter !== 'all', fn ($q) => $q->where('status', $statusFilter))
         // Disputes first: they are the ones waiting for an admin.
         ->orderByRaw("case status when 'disputed' then 0 else 1 end")

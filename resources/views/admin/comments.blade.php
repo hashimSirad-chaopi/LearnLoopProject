@@ -46,7 +46,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>Comments</h1>
-                <p>What members write under listings in the app. Remove anything that breaks the rules; the member is told why.</p>
+                <p>What users write under listings in the app. Remove anything that breaks the rules; the user is told why.</p>
             </div>
         </header>
 
@@ -54,18 +54,19 @@
             <div class="ll-scroll">
                 <div class="ll-page">
                     @include('partials.flash')
+@include('partials.user-filter', ['what' => 'comments'])
 
                     {{-- ===== Filter tabs ===== --}}
                     <div class="um-stats">
-                        <a class="um-stat {{ $type === 'all' ? 'active' : '' }}" href="{{ route('admin.comments', array_filter(['search' => $search])) }}">
+                        <a class="um-stat {{ $type === 'all' ? 'active' : '' }}" href="{{ route('admin.comments', array_filter(['user' => request('user'), 'search' => $search])) }}">
                             <span class="um-stat-label">All</span>
                             <strong>{{ number_format($counts['all']) }}</strong>
                         </a>
-                        <a class="um-stat {{ $type === 'comments' ? 'active' : '' }}" href="{{ route('admin.comments', array_filter(['search' => $search, 'type' => 'comments'])) }}">
+                        <a class="um-stat {{ $type === 'comments' ? 'active' : '' }}" href="{{ route('admin.comments', array_filter(['user' => request('user'), 'search' => $search, 'type' => 'comments'])) }}">
                             <span class="um-stat-label">Comments</span>
                             <strong>{{ number_format($counts['comments']) }}</strong>
                         </a>
-                        <a class="um-stat {{ $type === 'replies' ? 'active' : '' }}" href="{{ route('admin.comments', array_filter(['search' => $search, 'type' => 'replies'])) }}">
+                        <a class="um-stat {{ $type === 'replies' ? 'active' : '' }}" href="{{ route('admin.comments', array_filter(['user' => request('user'), 'search' => $search, 'type' => 'replies'])) }}">
                             <span class="um-stat-label">Replies</span>
                             <strong>{{ number_format($counts['replies']) }}</strong>
                         </a>
@@ -76,8 +77,9 @@
                     </div>
 
                     <form method="GET" action="{{ route('admin.comments') }}" class="ll-search grow">
+                        @if(request('user'))<input type="hidden" name="user" value="{{ request('user') }}">@endif
                         @if($type !== 'all')<input type="hidden" name="type" value="{{ $type }}">@endif
-                        <input type="search" name="search" value="{{ $search }}" placeholder="Search comment text, member or listing" aria-label="Search comments">
+                        <input type="search" name="search" value="{{ $search }}" placeholder="Search comment text, user or listing" aria-label="Search comments">
                         <button type="submit" class="table-btn">Search</button>
                         @if($search !== '')
                             <a href="{{ route('admin.comments', array_filter(['type' => $type !== 'all' ? $type : null])) }}" class="table-btn ll-link">Clear</a>
@@ -110,7 +112,7 @@
                                         <option value="{{ $key }}">{{ $label }}</option>
                                     @endforeach
                                 </select>
-                                <button type="submit" name="action" value="remove" class="table-btn" onclick="return confirm('Remove the selected comments, and any replies under them? Each member is told why.');">Remove selected</button>
+                                <button type="submit" name="action" value="remove" class="table-btn" onclick="return confirm('Remove the selected comments, and any replies under them? Each user is told why.');">Remove selected</button>
                             </span>
 
                             <span class="bulk-actions">
@@ -126,8 +128,8 @@
                                     @endforeach
                                 </select>
                                 <input type="text" name="note" maxlength="500" placeholder='Details (required for "Other")' aria-label="Details">
-                                <button type="submit" name="action" value="suspend" class="table-btn" onclick="return confirm('Suspend the authors of the selected comments? Their comments stay. Admins, yourself and members already suspended are skipped.');">Suspend authors</button>
-                                <button type="submit" name="action" value="both" class="table-btn" onclick="return confirm('Suspend the authors AND remove the selected comments (and replies under them)? Each member is told why.');">Remove &amp; suspend</button>
+                                <button type="submit" name="action" value="suspend" class="table-btn" onclick="return confirm('Suspend the authors of the selected comments? Their comments stay. Admins, yourself and users already suspended are skipped.');">Suspend authors</button>
+                                <button type="submit" name="action" value="both" class="table-btn" onclick="return confirm('Suspend the authors AND remove the selected comments (and replies under them)? Each user is told why.');">Remove &amp; suspend</button>
                             </span>
                         </form>
                     @endif
@@ -138,7 +140,7 @@
                             <thead>
                                 <tr>
                                     <th class="um-check"></th>
-                                    <th>Member</th>
+                                    <th>User</th>
                                     <th>Comment</th>
                                     <th class="um-hide-sm">On listing</th>
                                     <th class="um-hide-sm">When</th>
@@ -150,7 +152,7 @@
                                 @forelse($comments as $comment)
                                     <tr id="comment-{{ $comment->id }}">
                                         <td class="um-check">
-                                            <input type="checkbox" name="ids[]" value="{{ $comment->id }}" form="bulk-comments" class="bulk-check" aria-label="Select comment by {{ $comment->user?->name ?? 'a deleted member' }}">
+                                            <input type="checkbox" name="ids[]" value="{{ $comment->id }}" form="bulk-comments" class="bulk-check" aria-label="Select comment by {{ $comment->user?->name ?? 'a deleted user' }}">
                                         </td>
 
                                         <td>
@@ -158,7 +160,7 @@
                                                 <a href="{{ route('admin.users.show', $comment->user) }}" class="cell-link"><strong>{{ $comment->user->name }}</strong></a>
                                                 @if($comment->user->status === 'suspended')<br><span class="status-badge suspended-status">Suspended</span>@endif
                                             @else
-                                                <strong>Deleted member</strong>
+                                                <strong>Deleted user</strong>
                                             @endif
                                         </td>
 
@@ -166,7 +168,7 @@
                                             @if($comment->parent_id)<span class="ll-badge">Reply</span>@endif
                                             @if($comment->parent)
                                                 <small class="ll-muted" style="display:block;border-left:3px solid #d8dee4;padding-left:8px;margin:4px 0;">
-                                                    Replying to {{ $comment->parent->user?->name ?? 'a member' }}: &ldquo;{{ \Illuminate\Support\Str::limit($comment->parent->body, 70) }}&rdquo;
+                                                    Replying to {{ $comment->parent->user?->name ?? 'a user' }}: &ldquo;{{ \Illuminate\Support\Str::limit($comment->parent->body, 70) }}&rdquo;
                                                 </small>
                                             @endif
                                 @if(mb_strlen($comment->body) > 300)

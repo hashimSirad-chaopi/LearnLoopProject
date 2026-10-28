@@ -25,11 +25,15 @@
         .ud-bio { margin-top: 14px; white-space: pre-line; overflow-wrap: anywhere; }
         .ud-alert { margin-top: 14px; padding: 10px 14px; border-radius: 10px; background: #F9E9E7; border: 1px solid #E3B8B4; color: #7A2F2A; font-size: 13px; line-height: 1.5; }
         .ud-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-        .ud-stats > div { background: var(--ll-surface, #FBFDF9); border: 1px solid var(--ll-border, #CAD5CB); border-radius: 12px; padding: 12px 14px; }
+        .ud-stats > div, .ud-tile { background: var(--ll-surface, #FBFDF9); border: 1px solid var(--ll-border, #CAD5CB); border-radius: 12px; padding: 12px 14px; }
+        .ud-tile { display: block; text-decoration: none; color: inherit; position: relative; }
+        a.ud-tile:hover { border-color: #55783B; box-shadow: 0 2px 10px rgba(22,35,28,.10); }
+        .ud-tile em { display: block; margin-top: 6px; font-style: normal; font-size: 12px; font-weight: 800; color: #55783B; }
+        .ud-tile.off { opacity: .6; }
         .ud-stats span { display: block; color: var(--ll-muted, #69766E); font-size: 11px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; }
         .ud-stats strong { display: block; font-size: 22px; color: var(--ll-forest, #16231C); }
         .ud-stats small { color: var(--ll-muted, #69766E); font-size: 12px; }
-        .ud-stats .ud-warn { background: #FFF4DD; border-color: #E4C77A; }
+        .ud-stats .ud-warn, .ud-tile.ud-warn { background: #FFF4DD; border-color: #E4C77A; }
         .ud-cols { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
         .ud-main, .ud-side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
         .lp-skill { padding: 14px 0; border-top: 1px solid var(--ll-border, #CAD5CB); }
@@ -50,6 +54,11 @@
         .ud-item { padding: 10px 0; border-top: 1px solid var(--ll-border, #CAD5CB); }
         .ud-item:first-of-type { border-top: 0; padding-top: 4px; }
         .ud-item p { margin: 4px 0 0; }
+        .ud-facts { margin: 8px 0 0; display: grid; gap: 8px; }
+        .ud-facts div { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+        .ud-facts dt { color: var(--ll-muted, #69766E); flex-shrink: 0; }
+        .ud-facts dd { margin: 0; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
+        .ud-pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 6px; }
         @media (max-width: 1000px) { .ud-cols { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -60,6 +69,13 @@
       @include('partials.admin-sidebar')
 
     <main class="main-content" data-live>
+        @php
+            // Go back to the exact users list the admin came from (keeps search, filters and page).
+            $prev = url()->previous();
+            $backUrl = preg_match('#/admin/users(\?|$)#', (string) parse_url($prev, PHP_URL_PATH).'?'.(string) parse_url($prev, PHP_URL_QUERY))
+                && str_starts_with($prev, url('/'))
+                ? $prev : route('admin.users');
+        @endphp
         <header class="top-header">
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
@@ -71,6 +87,7 @@
         <section class="users-page">
             <div class="ll-scroll">
                 <div class="ll-page">
+                    <div><a href="{{ $backUrl }}" class="table-btn" style="text-decoration:none;">&larr; Back to Manage Users</a></div>
                     @include('partials.flash')
 
                     @php
@@ -127,23 +144,25 @@
 
                         @if($user->bio)<p class="ud-bio">{{ $user->bio }}</p>@endif
                         <p class="ll-muted">
-                            Member since {{ $user->created_at->format('F j, Y') }} ({{ $user->created_at->diffForHumans() }})
+                            User since {{ $user->created_at->format('F j, Y') }} ({{ $user->created_at->diffForHumans() }})
                             @if($user->availability) &middot; Availability: {{ $user->availability }} @endif
                         </p>
                     </div>
 
                     {{-- ===== Numbers ===== --}}
                     <div class="ud-stats">
-                        <div><span>Rating</span><strong>{{ $ratingCount ? $ratingAverage . '★' : '—' }}</strong><small>{{ $ratingCount }} {{ \Illuminate\Support\Str::plural('rating', $ratingCount) }}</small></div>
-                        <div><span>Exchanges</span><strong>{{ $stats['exchanges'] }}</strong><small>{{ $completedExchanges }} completed</small></div>
-                        <div><span>Listings</span><strong>{{ $stats['listings'] }}</strong></div>
-                        <div><span>Comments</span><strong>{{ $stats['comments'] }}</strong>
-                            @if($stats['comments'] > 0)<small><a class="cell-link" href="{{ route('admin.comments', ['search' => $user->email]) }}">view all</a></small>@endif
-                        </div>
-                        <div><span>Lessons written</span><strong>{{ $lessonsWritten }}</strong></div>
-                        <div class="{{ $stats['reports_upheld'] > 0 ? 'ud-warn' : '' }}"><span>Reports against</span><strong>{{ $stats['reports_against'] }}</strong>
-                            <small>{{ $stats['reports_upheld'] }} upheld &middot; {{ $stats['warnings'] }} {{ \Illuminate\Support\Str::plural('warning', $stats['warnings']) }}</small>
-                        </div>
+                        <a class="ud-tile" href="#ratings"><span>Rating</span><strong>{{ $ratingCount ? $ratingAverage . '★' : '—' }}</strong><small>{{ $ratingCount }} {{ \Illuminate\Support\Str::plural('rating', $ratingCount) }}</small><em>Manage &rarr;</em></a>
+                        <a class="ud-tile" href="{{ route('admin.exchanges', ['user' => $user->id]) }}"><span>Exchanges</span><strong>{{ $stats['exchanges'] }}</strong><small>{{ $completedExchanges }} completed</small><em>Manage &rarr;</em></a>
+                        <a class="ud-tile" href="{{ route('admin.listings', ['user' => $user->id]) }}"><span>Listings</span><strong>{{ $stats['listings'] }}</strong><em>Manage &rarr;</em></a>
+                        <a class="ud-tile" href="{{ route('admin.comments', ['user' => $user->id]) }}"><span>Comments</span><strong>{{ $stats['comments'] }}</strong><em>Manage &rarr;</em></a>
+                        @if($lessonsWritten > 0)
+                            <a class="ud-tile" href="{{ route('admin.lessons.member', $user->id) }}"><span>Lessons written</span><strong>{{ $lessonsWritten }}</strong><em>Review &rarr;</em></a>
+                        @else
+                            <div class="ud-tile off"><span>Lessons written</span><strong>0</strong></div>
+                        @endif
+                        <a class="ud-tile {{ $stats['reports_upheld'] > 0 ? 'ud-warn' : '' }}" href="{{ route('admin.reports', ['user' => $user->id]) }}"><span>Reports against</span><strong>{{ $stats['reports_against'] }}</strong>
+                            <small>{{ $stats['reports_upheld'] }} upheld &middot; {{ $stats['warnings'] }} {{ \Illuminate\Support\Str::plural('warning', $stats['warnings']) }}</small><em>Manage &rarr;</em>
+                        </a>
                     </div>
 
                     <div class="ud-cols">
@@ -151,7 +170,7 @@
 
                     <div class="ll-card">
                         <h3>Skills they can teach</h3>
-                        <p class="ll-muted">Levels are earned, not typed in: a member can teach a skill up to the level whose lessons they passed (Professional needs approved proof + the hard quiz).</p>
+                        <p class="ll-muted">Levels are earned, not typed in: a user can teach a skill up to the level whose lessons they passed (Professional needs approved proof + the hard quiz).</p>
                         @forelse($skillsOffered as $row)
                             <div class="ll-lesson">
                                 <strong>{{ $row->skill?->icon }} {{ $row->skill?->title ?? 'Removed skill' }}</strong>
@@ -243,9 +262,66 @@
                         </div>
                     @endif
 
+                    <div class="ll-card" id="ratings">
+                        <h3>Ratings received</h3>
+                        <p class="ll-muted">Newest first, up to 50. Delete a rating if it is abusive or was left by mistake.</p>
+                        @forelse($ratings as $rating)
+                            <div class="ud-item">
+                                <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
+                                    <strong>{{ str_repeat('★', (int) $rating->rating) }}<span class="ll-muted">{{ str_repeat('★', max(0, 5 - (int) $rating->rating)) }}</span></strong>
+                                    <form method="POST" action="{{ route('admin.ratings.delete', $rating->id) }}" onsubmit="return confirm('Delete this rating? This cannot be undone.');">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="delete-btn">Delete</button>
+                                    </form>
+                                </div>
+                                @if($rating->comment)<p style="white-space:pre-line;overflow-wrap:anywhere;">{{ $rating->comment }}</p>@endif
+                                @include('admin.partials.rating-proof', ['rating' => $rating])
+                                <p class="ll-muted">From {{ $rating->rater?->name ?? 'a deleted user' }} &middot; {{ $rating->created_at->diffForHumans() }}
+                                    @if($rating->exchange_id) &middot; <a class="cell-link" href="{{ route('admin.exchanges.show', $rating->exchange_id) }}">Exchange #{{ $rating->exchange_id }}</a>@endif</p>
+                            </div>
+                        @empty
+                            <p class="ll-muted">No ratings yet.</p>
+                        @endforelse
+                    </div>
+
                     </div>{{-- /ud-main --}}
 
                     <div class="ud-side">
+
+                        <div class="ll-card">
+                            <h3>Account</h3>
+                            <dl class="ud-facts">
+                                <div><dt>Email</dt><dd>{{ $user->email }}</dd></div>
+                                <div><dt>Role</dt><dd>{{ ucfirst($user->role) }}</dd></div>
+                                <div><dt>Status</dt><dd>{{ ucfirst($user->presence) }}</dd></div>
+                                <div><dt>Member since</dt><dd>{{ $user->created_at->format('M j, Y') }}</dd></div>
+                                <div><dt>Last seen</dt><dd>{{ $user->presence === 'active' ? 'Online now' : ($user->last_seen_at ? $user->last_seen_at->diffForHumans() : 'Never') }}</dd></div>
+                                <div><dt>Availability</dt><dd>{{ $user->availability ?: 'Not set' }}</dd></div>
+                            </dl>
+                        </div>
+
+                        <div class="ll-card">
+                            <h3>Exchanges</h3>
+                            @if($stats['exchanges'] > 0)
+                                <div class="ud-pills">
+                                    @foreach(['pending' => 'Pending', 'ongoing' => 'Ongoing', 'completed' => 'Completed', 'disputed' => 'Disputed', 'cancelled' => 'Cancelled'] as $key => $label)
+                                        @if(($exchangeStatuses[$key] ?? 0) > 0)
+                                            <span class="ll-badge {{ ['pending' => 'pending', 'ongoing' => '', 'completed' => 'active', 'disputed' => 'rejected', 'cancelled' => 'inactive'][$key] }}">{{ $label }} {{ $exchangeStatuses[$key] }}</span>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                @foreach($recentExchanges as $ex)
+                                    @php($partner = $ex->provider_id == $user->id ? $ex->learner : $ex->provider)
+                                    <div class="ud-item">
+                                        <a class="cell-link" href="{{ route('admin.exchanges.show', $ex->id) }}"><strong>{{ $partner?->name ?? 'Deleted user' }}</strong></a>
+                                        <span class="ll-badge">{{ ucfirst($ex->status) }}</span>
+                                        <p class="ll-muted">{{ $ex->skillPair() }} &middot; {{ $ex->created_at->diffForHumans() }}</p>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p class="ll-muted">No exchanges yet.</p>
+                            @endif
+                        </div>
 
                         <div class="ll-card">
                             <h3>Reports against them</h3>
@@ -253,10 +329,10 @@
                                 <div class="ud-item">
                                     <strong>{{ \Illuminate\Support\Str::limit($report->title, 60) }}</strong>
                                     <span class="ll-badge {{ ['pending' => 'pending', 'resolved' => 'rejected', 'dismissed' => 'inactive'][$report->status] ?? '' }}">{{ ucfirst($report->status) }}</span>
-                                    <p class="ll-muted">By {{ $report->reporter?->name ?? 'a deleted member' }} &middot; {{ $report->created_at->diffForHumans() }}</p>
+                                    <p class="ll-muted">By {{ $report->reporter?->name ?? 'a deleted user' }} &middot; {{ $report->created_at->diffForHumans() }}</p>
                                 </div>
                             @empty
-                                <p class="ll-muted">No one has reported this member.</p>
+                                <p class="ll-muted">No one has reported this user.</p>
                             @endforelse
                             @if($stats['reports_against'] > 0)
                                 <a class="cell-link" href="{{ route('admin.reports', ['search' => $user->name]) }}">Open in Reports &rarr;</a>
@@ -308,7 +384,7 @@
                     </div>{{-- /ud-cols --}}
 
                     <div class="settings-actions">
-                        <a href="{{ route('admin.users') }}" class="table-btn">Back</a>
+                        <a href="{{ $backUrl }}" class="table-btn">&larr; Back to Manage Users</a>
                     </div>
                 </div>
             </div>

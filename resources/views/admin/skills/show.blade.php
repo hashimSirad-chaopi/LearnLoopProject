@@ -36,13 +36,22 @@
                     @php($catalogLessonCount = $skill->levels->sum(fn ($l) => $l->lessons->whereNull('author_id')->count()))
                     @php($questionCount = $skill->levels->sum(fn ($l) => $l->lessons->whereNull('author_id')->sum(fn ($x) => $x->questions->count())))
 
+                    @if($skill->experience_based)
+                        <div class="ll-card ll-row between">
+                            <p class="ll-muted" style="margin:0">
+                                <strong>Experience skill.</strong> It has no lessons or levels. Users unlock Professional by sending a certification, which you approve under Professional requests.
+                            </p>
+                            <a href="{{ route('admin.professional') }}" class="table-btn ll-link">Professional requests</a>
+                        </div>
+                    @endif
+
                     <div class="ll-card">
                         <div class="ll-row between">
                             <div class="ll-counts">
                                 <span><strong>{{ $catalogLessonCount }}</strong> {{ \Illuminate\Support\Str::plural('lesson', $catalogLessonCount) }}</span>
                                 <span><strong>{{ $questionCount }}</strong> quiz {{ \Illuminate\Support\Str::plural('question', $questionCount) }}</span>
                                 <span><strong>{{ $skill->levels->count() }}</strong> of {{ count($levelNames) }} levels used</span>
-                                <span><strong>{{ $memberLessons->count() }}</strong> by members</span>
+                                
                             </div>
                             <div class="ll-actions">
                                 <a href="{{ route('admin.skills.edit', $skill) }}" class="table-btn ll-link">Edit skill</a>
@@ -91,22 +100,12 @@
                     @endforeach
 
                     @if($memberLessons->isNotEmpty())
-                        <div class="ll-card">
-                            <h3>Written by members</h3>
-                            <p class="ll-muted">Reviewed in the Member lessons tab. Only published ones are shown to learners.</p>
-                            <table class="ll-table">
-                                <thead><tr><th>Lesson</th><th>Author</th><th>Status</th><th></th></tr></thead>
-                                <tbody>
-                                @foreach($memberLessons as $lesson)
-                                    <tr>
-                                        <td>{{ $lesson->title }}</td>
-                                        <td>{{ $lesson->author?->name ?? 'Deleted user' }}</td>
-                                        <td><span class="ll-badge {{ $lesson->status }}">{{ $lesson->status === 'rejected' ? 'Needs changes' : ucfirst($lesson->status) }}</span></td>
-                                        <td><a href="{{ route('admin.lessons.show', $lesson) }}" class="table-btn ll-link">Open</a></td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                        {{-- Members' own lessons are NOT part of the catalog: they stay in their own tab. --}}
+                        <div class="ll-card ll-row between">
+                            <p class="ll-muted" style="margin:0">
+                                {{ $memberLessons->count() }} {{ \Illuminate\Support\Str::plural('lesson', $memberLessons->count()) }} written by users for this skill are kept separate from this catalog.
+                            </p>
+                            <a href="{{ route('admin.lessons') }}" class="table-btn ll-link">Open User lessons</a>
                         </div>
                     @endif
                 </div>

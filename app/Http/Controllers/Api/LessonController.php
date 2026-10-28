@@ -199,7 +199,7 @@ class LessonController extends Controller
     public function rate(Request $request, Lesson $lesson)
     {
         if ($lesson->status !== 'published' || ! $lesson->author_id) {
-            return response()->json(['message' => 'Only published member lessons can be rated'], 422);
+            return response()->json(['message' => 'Only published user lessons can be rated'], 422);
         }
         if ($lesson->author_id === $request->user()->id) {
             return response()->json(['message' => 'You cannot rate your own lesson'], 422);

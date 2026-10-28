@@ -18,7 +18,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>Skills &amp; Lessons</h1>
-                <p>The courses members learn from in the app. Open a skill to manage its levels, lessons and quizzes.</p>
+                <p>The courses users learn from in the app. Open a skill to manage its levels, lessons and quizzes.</p>
             </div>
         </header>
 

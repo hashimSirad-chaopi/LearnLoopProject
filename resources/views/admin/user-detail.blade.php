@@ -2,7 +2,7 @@
 
 @section('title', $user->name)
 @section('page-title', $user->name)
-@section('page-subtitle', 'Full account overview for this member.')
+@section('page-subtitle', 'Full account overview for this user.')
 
 @section('content')
 

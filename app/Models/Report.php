@@ -16,6 +16,7 @@ class Report extends Model
     public function reporter() { return $this->belongsTo(User::class, 'reported_by'); }
     public function reportedUser() { return $this->belongsTo(User::class, 'reported_user_id'); }
     public function listing() { return $this->belongsTo(Listing::class); }
+    public function attachments() { return $this->hasMany(ReportAttachment::class); }
 
     /** Reports against this member that an admin upheld (resolved, not dismissed). */
     public static function upheldAgainst(int $userId): int

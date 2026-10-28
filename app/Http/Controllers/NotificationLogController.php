@@ -59,7 +59,7 @@ class NotificationLogController extends Controller
         Notification::notifyMember($validated['user_id'], $validated['title'], $validated['message'], 'user', $validated['user_id']);
         ActivityLog::record('notification.sent', "Sent a notice: \"{$validated['title']}\"");
 
-        return redirect()->route('admin.notifications', ['tab' => 'sent'])->with('success', 'Notice sent. The member sees it under Admin in the app.');
+        return redirect()->route('admin.notifications', ['tab' => 'sent'])->with('success', 'Notice sent. The user sees it under Admin in the app.');
     }
 
     public function destroy(Notification $notification)

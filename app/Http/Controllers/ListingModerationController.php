@@ -28,6 +28,7 @@ class ListingModerationController extends Controller
         $sort = in_array($request->query('sort'), ['oldest', 'title', 'status'], true) ? $request->query('sort') : 'newest';
 
         $listings = Listing::with(['user', 'category', 'offersSkill', 'wantsSkill'])
+            ->when($request->query('user'), fn ($q, $id) => $q->where('user_id', (int) $id))
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
@@ -60,7 +61,7 @@ class ListingModerationController extends Controller
 
         ListingModeration::disable($listing, $data['reason'], $data['note'] ?? null);
 
-        return back()->with('success', 'Listing disabled. The member was told why.');
+        return back()->with('success', 'Listing disabled. The user was told why.');
     }
 
     public function destroy(Request $request, Listing $listing)
@@ -69,7 +70,7 @@ class ListingModerationController extends Controller
 
         ListingModeration::delete($listing, $data['reason'], $data['note'] ?? null);
 
-        return back()->with('success', 'Listing deleted. The member was told why.');
+        return back()->with('success', 'Listing deleted. The user was told why.');
     }
 
     public function restore(Listing $listing)

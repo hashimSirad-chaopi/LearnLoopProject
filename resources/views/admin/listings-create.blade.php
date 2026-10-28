@@ -43,8 +43,8 @@
 
                 <div class="settings-field">
                     <label for="wants_skill_id">Wants to learn</label>
-                    <select id="wants_skill_id" name="wants_skill_id" required>
-                        <option value="">Choose a skill</option>
+                    <select id="wants_skill_id" name="wants_skill_id">
+                        <option value="">Nothing (teach-only listing)</option>
                         @foreach($skills as $skill)
                             <option value="{{ $skill->id }}" {{ (string) old('wants_skill_id') === (string) $skill->id ? 'selected' : '' }}>{{ $skill->title }}</option>
                         @endforeach
@@ -60,7 +60,7 @@
                             <option value="{{ $skill->id }}" {{ (string) old('offers_skill_id') === (string) $skill->id ? 'selected' : '' }}>{{ $skill->title }}</option>
                         @endforeach
                     </select>
-                    <p class="ll-muted">Leave empty when the member has no skill to teach yet. They can still post what they want to learn, and a member who has passed every lesson of that skill can offer to teach it. The category follows the skill.</p>
+                    <p class="ll-muted">Leave empty when the user has no skill to teach yet. They can still post what they want to learn, and a user who has passed every lesson of that skill can offer to teach it. The category follows the skill.</p>
                     @error('offers_skill_id') <p style="color:red;font-size:13px;">{{ $message }}</p> @enderror
                 </div>
 

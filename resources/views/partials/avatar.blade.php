@@ -1,5 +1,5 @@
 {{--
-    A member's picture, with their initials as the fallback.
+    A user's picture, with their initials as the fallback.
     Usage: @include('partials.avatar', ['user' => $member, 'class' => 'dash-avatar', 'letters' => 1])
     The initials are always drawn underneath, so a missing or broken image
     (not uploaded yet, storage link missing) still shows something sensible.

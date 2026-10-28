@@ -17,7 +17,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>Notifications</h1>
-                <p>Your own alerts are kept apart from what members receive in the app.</p>
+                <p>Your own alerts are kept apart from what users receive in the app.</p>
             </div>
         </header>
 
@@ -28,8 +28,8 @@
 
                     <div class="ll-tabs">
                         <a class="ll-tab {{ $tab === 'attention' ? 'active' : '' }}" href="{{ route('admin.notifications', ['tab' => 'attention']) }}">For you ({{ $attentionTotal }})</a>
-                        <a class="ll-tab {{ $tab === 'sent' ? 'active' : '' }}" href="{{ route('admin.notifications', ['tab' => 'sent']) }}">Sent to members ({{ $sentCount }})</a>
-                        <a class="ll-tab {{ $tab === 'activity' ? 'active' : '' }}" href="{{ route('admin.notifications', ['tab' => 'activity']) }}">Member activity ({{ $activityCount }})</a>
+                        <a class="ll-tab {{ $tab === 'sent' ? 'active' : '' }}" href="{{ route('admin.notifications', ['tab' => 'sent']) }}">Sent to users ({{ $sentCount }})</a>
+                        <a class="ll-tab {{ $tab === 'activity' ? 'active' : '' }}" href="{{ route('admin.notifications', ['tab' => 'activity']) }}">User activity ({{ $activityCount }})</a>
                     </div>
 
                     @if($tab === 'attention')
@@ -52,13 +52,13 @@
                         @if($tab === 'sent')
                             <div class="ll-card">
                                 <h3>Send a notice</h3>
-                                <p class="ll-muted">Shows up in the member's app under the Admin tab.</p>
+                                <p class="ll-muted">Shows up in the user's app under the Admin tab.</p>
                                 <form method="POST" action="{{ route('admin.notifications.store') }}" class="ll-form">
                                     @csrf
                                     <div>
                                         <label for="user_id">Recipient</label>
                                         <select name="user_id" id="user_id" required>
-                                            <option value="">Choose a member</option>
+                                            <option value="">Choose a user</option>
                                             @foreach($users as $user)
                                                 <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{ $user->name }} ({{ $user->email }})</option>
                                             @endforeach
@@ -76,7 +76,7 @@
                                 </form>
                             </div>
                         @else
-                            <p class="ll-muted">Alerts members got from each other or the app (a coach adding a lesson, a lesson confirmed). They appear under Activity in the app, not Admin.</p>
+                            <p class="ll-muted">Alerts users got from each other or the app (a coach adding a lesson, a lesson confirmed). They appear under Activity in the app, not Admin.</p>
                         @endif
 
                         <div class="ll-tabs">
@@ -89,7 +89,7 @@
                             <table class="ll-table">
                                 <thead>
                                     <tr>
-                                        <th>Member</th>
+                                        <th>User</th>
                                         <th>Title</th>
                                         <th>Message</th>
                                         <th>Sent</th>

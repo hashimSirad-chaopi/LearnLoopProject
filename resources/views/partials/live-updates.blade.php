@@ -1,6 +1,6 @@
 {{-- Live updates for the admin panel.
      Pages that opt in (<main class="main-content" data-live>) re-fetch themselves every few seconds and
-     swap in whatever changed: member Active / Offline badges, stat cards, tables, notifications and the
+     swap in whatever changed: user Active / Offline badges, stat cards, tables, notifications and the
      sidebar counts. It never swaps while you are busy (typing, a field focused, boxes ticked, a dialog
      open): a small "New updates" button appears instead. Included once, from the sidebar. --}}
 <style>

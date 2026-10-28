@@ -59,7 +59,7 @@ class ExchangeController extends Controller
     public function accept(Request $request, Exchange $exchange)
     {
         if ($exchange->responderId() !== $request->user()->id) {
-            return response()->json(['message' => 'Only the member who received this request can accept it'], 403);
+            return response()->json(['message' => 'Only the user who received this request can accept it'], 403);
         }
 
         if ($exchange->status !== 'pending') {
@@ -74,7 +74,7 @@ class ExchangeController extends Controller
     public function decline(Request $request, Exchange $exchange)
     {
         if ($exchange->responderId() !== $request->user()->id) {
-            return response()->json(['message' => 'Only the member who received this request can decline it'], 403);
+            return response()->json(['message' => 'Only the user who received this request can decline it'], 403);
         }
 
         if ($exchange->status !== 'pending') {
@@ -117,7 +117,7 @@ class ExchangeController extends Controller
             if ($request->filled($field) && $request->input($field) !== $exchange->{$field}) {
                 $skill = Skill::whereRaw('lower(title) = ?', [mb_strtolower(trim($request->input($field)))])->first();
                 if (! $skill || ! TeachingLevels::canTeach($teacherId, $skill, 'easy')) {
-                    return response()->json(['message' => 'The member who teaches '.$request->input($field).' has not earned a level in it yet.'], 422);
+                    return response()->json(['message' => 'The user who teaches '.$request->input($field).' has not earned a level in it yet.'], 422);
                 }
             }
         }
@@ -131,7 +131,14 @@ class ExchangeController extends Controller
         return response()->json(['exchange' => $exchange->fresh(['provider', 'learner'])]);
     }
 
-    /** "Exchange Completion & Status Tracking" — either party can close it out. */
+    /**
+     * "Exchange Completion & Status Tracking".
+     *
+     *  - Paid exchange with a professional: ONLY the professional (the provider) can confirm it is
+     *    finished. The learner can rate once it is completed.
+     *  - Member <-> member: nobody can finish alone. Use finish-request + finish-approve, which
+     *    completes it once BOTH sides agree.
+     */
     public function complete(Request $request, Exchange $exchange)
     {
         $this->authorizeParty($request, $exchange);
@@ -140,9 +147,162 @@ class ExchangeController extends Controller
             return response()->json(['message' => 'Only ongoing exchanges can be completed'], 422);
         }
 
-        $exchange->update(['status' => 'completed']);
+        if (! $exchange->is_professional) {
+            return response()->json(['message' => 'Both members have to agree to finish. Tap "Ask to finish" and wait for your partner to agree.'], 422);
+        }
+
+        if ($exchange->provider_id !== $request->user()->id) {
+            return response()->json(['message' => 'Only the professional can confirm this exchange is finished.'], 403);
+        }
+
+        $exchange->update(['status' => 'completed'] + $exchange->clearFinishRequest());
+
+        Notification::notifyFromMember(
+            $exchange->learner_id,
+            'finish_approved',
+            'Exchange finished',
+            "{$request->user()->name} confirmed your {$exchange->skillPair()} exchange is finished. You can rate them now.",
+            'exchange',
+            $exchange->id
+        );
 
         return response()->json(['exchange' => $exchange->fresh(['provider', 'learner'])]);
+    }
+
+    /**
+     * "Finish exchange" step 1 (member <-> member): a member asks to finish. Nothing is finished
+     * yet; the other member is notified and has to agree or say "not yet".
+     */
+    public function requestFinish(Request $request, Exchange $exchange)
+    {
+        $this->authorizeParty($request, $exchange);
+
+        if ($exchange->status !== 'ongoing') {
+            return response()->json(['message' => 'Only an ongoing exchange can be finished'], 422);
+        }
+
+        if ($exchange->is_professional) {
+            return response()->json(['message' => 'In a paid exchange the professional confirms when it is finished.'], 422);
+        }
+
+        $me = $request->user();
+
+        if ($exchange->hasOpenFinishRequest()) {
+            return response()->json([
+                'message' => $exchange->finish_requested_by === $me->id
+                    ? 'You already asked to finish. Waiting for your partner to agree.'
+                    : 'Your partner already asked to finish. Open the exchange and agree.',
+            ], 422);
+        }
+
+        $exchange->update([
+            'finish_requested_by' => $me->id,
+            'finish_requested_at' => now(),
+            'finish_declined_at' => null,
+            'finish_decline_note' => null,
+        ]);
+
+        Notification::notifyFromMember(
+            $this->partnerId($exchange, $me->id),
+            'finish_requested',
+            'Finish exchange request',
+            "{$me->name} wants to finish your {$exchange->skillPair()} exchange. Open the exchange to agree or say not yet.",
+            'exchange',
+            $exchange->id
+        );
+
+        return response()->json(['exchange' => $exchange->fresh(['provider', 'learner'])]);
+    }
+
+    /** Step 2a: the OTHER member agrees. The exchange is completed for both. */
+    public function approveFinish(Request $request, Exchange $exchange)
+    {
+        $me = $this->openFinishFor($request, $exchange);
+        if ($me instanceof \Illuminate\Http\JsonResponse) {
+            return $me;
+        }
+
+        $askedBy = $exchange->finish_requested_by;
+        $exchange->update(['status' => 'completed'] + $exchange->clearFinishRequest());
+
+        Notification::notifyFromMember(
+            $askedBy,
+            'finish_approved',
+            'Exchange finished',
+            "{$me->name} agreed. Your {$exchange->skillPair()} exchange is finished. You can rate each other now.",
+            'exchange',
+            $exchange->id
+        );
+
+        return response()->json(['exchange' => $exchange->fresh(['provider', 'learner'])]);
+    }
+
+    /** Step 2b: the OTHER member says "not yet". The exchange keeps going. */
+    public function declineFinish(Request $request, Exchange $exchange)
+    {
+        $me = $this->openFinishFor($request, $exchange);
+        if ($me instanceof \Illuminate\Http\JsonResponse) {
+            return $me;
+        }
+
+        $note = trim((string) $request->input('note', ''));
+        $exchange->update([
+            'finish_declined_at' => now(),
+            'finish_decline_note' => $note !== '' ? mb_substr($note, 0, 2000) : null,
+        ]);
+
+        Notification::notifyFromMember(
+            $exchange->finish_requested_by,
+            'finish_declined',
+            'Not ready to finish yet',
+            "{$me->name} is not ready to finish your {$exchange->skillPair()} exchange yet.".($note !== '' ? ' They said: '.Str::limit($note, 140) : ''),
+            'exchange',
+            $exchange->id
+        );
+
+        return response()->json(['exchange' => $exchange->fresh(['provider', 'learner'])]);
+    }
+
+    /** The member who asked takes the request back (also clears a "not yet" answer). */
+    public function withdrawFinish(Request $request, Exchange $exchange)
+    {
+        $this->authorizeParty($request, $exchange);
+
+        if ($exchange->finish_requested_by !== $request->user()->id || $exchange->status !== 'ongoing') {
+            return response()->json(['message' => 'There is no finish request of yours to withdraw'], 422);
+        }
+
+        $open = $exchange->hasOpenFinishRequest();
+        $exchange->update($exchange->clearFinishRequest());
+
+        if ($open) {
+            Notification::notifyFromMember(
+                $this->partnerId($exchange, $request->user()->id),
+                'finish_withdrawn',
+                'Finish request withdrawn',
+                "{$request->user()->name} withdrew the request to finish your {$exchange->skillPair()} exchange. It continues.",
+                'exchange',
+                $exchange->id
+            );
+        }
+
+        return response()->json(['exchange' => $exchange->fresh(['provider', 'learner'])]);
+    }
+
+    /** The member who must answer an open finish request, or the error to send back. */
+    private function openFinishFor(Request $request, Exchange $exchange)
+    {
+        $this->authorizeParty($request, $exchange);
+
+        if ($exchange->status !== 'ongoing' || ! $exchange->hasOpenFinishRequest()) {
+            return response()->json(['message' => 'There is no finish request waiting for your answer'], 422);
+        }
+
+        if ($exchange->finish_requested_by === $request->user()->id) {
+            return response()->json(['message' => 'Your partner has to answer your finish request'], 403);
+        }
+
+        return $request->user();
     }
 
     /**
@@ -307,7 +467,7 @@ class ExchangeController extends Controller
         }
 
         if ($exchange->cancel_requested_by === $request->user()->id) {
-            return response()->json(['message' => 'The other member has to answer your cancel request'], 403);
+            return response()->json(['message' => 'The other user has to answer your cancel request'], 403);
         }
 
         return $request->user();

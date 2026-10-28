@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserSkill;
+use App\Support\EmailOtp;
 use App\Support\TeachingLevels;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -13,21 +16,74 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    /**
-     * Matches the Flutter "Create Account" screen: username, email,
-     * password, confirm password. `username` is stored as `name`.
-     */
-    public function register(Request $request)
+    /** The sign-up rules, shared by "send me a code" and "create my account". */
+    private function registerRules(): array
     {
-        $validator = Validator::make($request->all(), [
+        return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-        ]);
+        ];
+    }
+
+    private function cleanEmail(Request $request): void
+    {
+        // "A@x.com" and "a@x.com" must not become two accounts.
+        $request->merge(['email' => Str::lower(trim((string) $request->input('email')))]);
+    }
+
+    /**
+     * Step 1 of sign-up. POST /api/register/send-code
+     * Checks the form, then emails a 6-digit code to that address. Nothing is created yet,
+     * so someone typing another person's email cannot reserve it.
+     */
+    public function sendRegisterCode(Request $request)
+    {
+        $this->cleanEmail($request);
+        $validator = Validator::make($request->all(), $this->registerRules());
 
         if ($validator->fails()) {
             return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
         }
+
+        $wait = EmailOtp::cooldown($request->email, EmailOtp::REGISTER);
+        if ($wait === 0 && ! EmailOtp::send($request->email, $request->name, EmailOtp::REGISTER)) {
+            return response()->json(['message' => 'We could not send the email right now. Try again in a moment.'], 503);
+        }
+
+        return response()->json([
+            'message' => 'A 6-digit code was sent to '.EmailOtp::mask($request->email).'.',
+            'resend_in' => $wait > 0 ? $wait : EmailOtp::COOLDOWN_SECONDS,
+            'expires_in_minutes' => EmailOtp::TTL_MINUTES,
+        ]);
+    }
+
+    /**
+     * Step 2 of sign-up. POST /api/register  {name, email, password, password_confirmation, code}
+     * The account is only created when the emailed code is right, so every member's email is
+     * proven to be theirs. `name` is the Create Account screen's "username".
+     */
+    public function register(Request $request)
+    {
+        $this->cleanEmail($request);
+        $validator = Validator::make($request->all(), $this->registerRules() + ['code' => 'required|string|max:12']);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
+        }
+
+        $key = 'api-register-code:'.$request->email.'|'.$request->ip();
+        if (RateLimiter::tooManyAttempts($key, 10)) {
+            return response()->json(['message' => 'Too many tries. Please wait a few minutes.'], 429);
+        }
+
+        $error = EmailOtp::check($request->email, EmailOtp::REGISTER, $request->code);
+        if ($error) {
+            RateLimiter::hit($key, 600);
+
+            return response()->json(['message' => $error, 'errors' => ['code' => [$error]]], 422);
+        }
+        RateLimiter::clear($key);
 
         $user = User::create([
             'name' => $request->name,
@@ -36,6 +92,7 @@ class AuthController extends Controller
             'role' => 'user',
             'status' => 'active',
         ]);
+        $user->forceFill(['email_verified_at' => now()])->save();
 
         $token = $user->createToken('flutter-app')->plainTextToken;
 
@@ -53,7 +110,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::whereRaw('lower(email) = ?', [Str::lower(trim($request->email))])->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Invalid email or password'], 401);

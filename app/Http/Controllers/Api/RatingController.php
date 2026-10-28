@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Exchange;
 use App\Models\Rating;
 use App\Models\RatingAttachment;
+use App\Models\User;
+use App\Models\UserBlock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -18,15 +20,33 @@ class RatingController extends Controller
      */
     public function mine(Request $request)
     {
-        $me = $request->user();
+        return response()->json($this->ratingsPayload($request->user()));
+    }
 
+    /**
+     * GET /api/users/{user}/ratings — what other members said about THIS member, so you can
+     * judge whether they are trusted before you swap. Same shape as mine(). Only real, valid
+     * ratings count (the same rule as the profile average), never across a block, and only for
+     * active members.
+     */
+    public function forUser(Request $request, User $user)
+    {
+        if ($user->status !== 'active' || UserBlock::between($request->user()->id, $user->id)) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        return response()->json($this->ratingsPayload($user));
+    }
+
+    private function ratingsPayload(User $member): array
+    {
         $rows = Rating::with(['rater', 'exchange', 'attachments'])
             ->valid()
-            ->where('rated_user_id', $me->id)
+            ->where('rated_user_id', $member->id)
             ->latest()
             ->get();
 
-        return response()->json([
+        return [
             'average' => round((float) $rows->avg('rating'), 1),
             'count' => $rows->count(),
             'ratings' => $rows->map(fn (Rating $r) => [
@@ -36,13 +56,13 @@ class RatingController extends Controller
                 'created_at' => $r->created_at?->toIso8601String(),
                 'rater' => [
                     'id' => $r->rater?->id,
-                    'name' => $r->rater?->name ?? 'Member',
+                    'name' => $r->rater?->name ?? 'User',
                     'avatar_url' => $r->rater?->avatar_url,
                 ],
                 'skill' => $r->exchange?->skillPair(),
                 'attachments' => $this->attachmentsJson($r),
             ])->values(),
-        ]);
+        ];
     }
 
     /** "Feedback & Rating" — leave a rating after an exchange completes. */
@@ -58,7 +78,16 @@ class RatingController extends Controller
         }
 
         if ($exchange->status !== 'completed') {
-            return response()->json(['message' => 'You can only rate a completed exchange'], 422);
+            return response()->json([
+                'message' => $exchange->is_professional
+                    ? 'You can rate once the professional confirms the exchange is finished.'
+                    : 'You can only rate a completed exchange',
+            ], 422);
+        }
+
+        // Paid exchange: the professional teaches and confirms; only the learner rates.
+        if ($exchange->is_professional && $exchange->provider_id === $userId) {
+            return response()->json(['message' => 'Only the learner can rate a paid professional exchange.'], 403);
         }
 
         $validator = Validator::make($request->all(), [

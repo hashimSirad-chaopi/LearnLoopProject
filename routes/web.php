@@ -73,6 +73,7 @@ Route::middleware(['auth', 'admin', 'two-factor', \App\Http\Middleware\TrackLast
     Route::delete('/settings/picture/{kind}', [\App\Http\Controllers\SettingsController::class, 'removePicture'])->whereIn('kind', ['avatar', 'banner'])->name('settings.picture.remove');
     Route::put('/settings/password', [\App\Http\Controllers\SettingsController::class, 'updatePassword'])->name('settings.password');
     Route::patch('/settings/notifications', [\App\Http\Controllers\SettingsController::class, 'updateNotifications'])->name('settings.notifications');
+    Route::patch('/settings/quizzes', [\App\Http\Controllers\SettingsController::class, 'updateQuizzes'])->name('settings.quizzes');
 
     // Security used to be its own page: old links and bookmarks land on the Security tab.
     Route::get('/security', [\App\Http\Controllers\SecurityController::class, 'show'])->name('security');
@@ -106,13 +107,14 @@ Route::middleware(['auth', 'admin', 'two-factor', \App\Http\Middleware\TrackLast
     Route::post('/comments/bulk', [\App\Http\Controllers\CommentModerationController::class, 'bulk'])->name('comments.bulk');
     Route::delete('/comments/{comment}', [\App\Http\Controllers\CommentModerationController::class, 'destroy'])->name('comments.delete');
     Route::get('/listings', [\App\Http\Controllers\ListingModerationController::class, 'index'])->name('listings');
-    Route::get('/listings/create', [PageController::class, 'createListing'])->name('listings.create');
-    Route::post('/listings', [PageController::class, 'storeListing'])->name('listings.store');
     Route::get('/listings/{listing}/edit', [PageController::class, 'editListing'])->name('listings.edit');
     Route::put('/listings/{listing}', [PageController::class, 'updateListing'])->name('listings.update');
     Route::patch('/listings/{listing}/enable', [\App\Http\Controllers\ListingModerationController::class, 'restore'])->name('listings.enable');
     Route::patch('/listings/{listing}/disable', [\App\Http\Controllers\ListingModerationController::class, 'disable'])->name('listings.disable');
     Route::delete('/listings/{listing}', [\App\Http\Controllers\ListingModerationController::class, 'destroy'])->name('listings.delete');
+
+    // ---- Ratings (managed from the member's details page) ----
+    Route::delete('/ratings/{rating}', [PageController::class, 'deleteRating'])->name('ratings.delete');
 
     // ---- Reports ----
     Route::get('/reports', [PageController::class, 'adminReports'])->name('reports');

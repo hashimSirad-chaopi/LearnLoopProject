@@ -19,7 +19,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>User Management</h1>
-                <p>Find members, review their accounts, and suspend or reactivate them.</p>
+                <p>Find users, review their accounts, and suspend or reactivate them.</p>
             </div>
         </header>
 
@@ -89,7 +89,7 @@
                             <label class="bulk-all"><input type="checkbox" data-select-all="bulk-users"> Select all on this page</label>
                             <span class="bulk-count"></span>
                             <span class="bulk-actions">
-                                <select name="duration" class="lr-select" aria-label="Suspend selected members for">
+                                <select name="duration" class="lr-select" aria-label="Suspend selected users for">
                                     @foreach(\App\Support\Suspension::OPTIONS as $key => $label)
                                         <option value="{{ $key }}" {{ $key === '1w' ? 'selected' : '' }}>{{ $label }}</option>
                                     @endforeach
@@ -100,8 +100,8 @@
                                     @endforeach
                                 </select>
                                 <input type="text" name="note" class="lr-select" maxlength="500" placeholder='Details (required for "Other")' aria-label="Suspension details">
-                                <button type="submit" name="bulk" value="suspend" class="table-btn" onclick="return confirm('Suspend the selected members for the chosen time? They will be signed out of the app and told by notification.');">Suspend selected</button>
-                                <button type="submit" name="bulk" value="activate" class="table-btn" onclick="return confirm('Reactivate the selected members?');">Reactivate selected</button>
+                                <button type="submit" name="bulk" value="suspend" class="table-btn" onclick="return confirm('Suspend the selected users for the chosen time? They will be signed out of the app and told by notification.');">Suspend selected</button>
+                                <button type="submit" name="bulk" value="activate" class="table-btn" onclick="return confirm('Reactivate the selected users?');">Reactivate selected</button>
                             </span>
                         </form>
                     @endif
@@ -112,7 +112,7 @@
                             <thead>
                                 <tr>
                                     <th class="um-check"></th>
-                                    @foreach(['name' => 'Member', 'role' => 'Role', 'status' => 'Status'] as $col => $label)
+                                    @foreach(['name' => 'User', 'role' => 'Role', 'status' => 'Status'] as $col => $label)
                                         <th>
                                             <a class="th-sort {{ $sort === $col ? 'active' : '' }}"
                                                href="{{ route('admin.users', array_filter(['search' => $search, 'status' => $status !== 'all' ? $status : null, 'sort' => $col, 'dir' => ($sort === $col && $dir === 'asc') ? 'desc' : 'asc'])) }}">
@@ -174,7 +174,7 @@
 
                                         <td class="um-hide-sm">{{ (int) ($listingCounts[$user->id] ?? 0) }}</td>
                                         <td class="um-hide-sm">
-                                            @if($reports > 0)<span class="um-flag" title="Reports against this member that an admin upheld">{{ $reports }}</span>@else<span class="ll-muted">0</span>@endif
+                                            @if($reports > 0)<span class="um-flag" title="Reports against this user that an admin upheld">{{ $reports }}</span>@else<span class="ll-muted">0</span>@endif
                                         </td>
                                         <td class="um-hide-sm">{{ $user->created_at?->format('M j, Y') }}</td>
 

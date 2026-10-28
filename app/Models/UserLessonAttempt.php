@@ -10,7 +10,7 @@ class UserLessonAttempt extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'lesson_id', 'score', 'total_questions', 'passed', 'attempted_at'];
+    protected $fillable = ['user_id', 'lesson_id', 'exchange_id', 'score', 'total_questions', 'passed', 'attempted_at'];
 
     protected $casts = [
         'passed' => 'boolean',

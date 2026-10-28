@@ -26,7 +26,7 @@ class DashboardStats
     public static function build(int $days = 30): array
     {
         $days = in_array($days, [7, 30, 90], true) ? $days : 30;
-        $members = fn () => User::where('role', '!=', 'admin');
+        $members = fn () => User::where('role', '!=', 'admin')->where('status', '!=', 'deleted');
 
         $byStatus = Exchange::selectRaw('status, COUNT(*) as total')->groupBy('status')->pluck('total', 'status');
         $exchangeStatuses = [];
@@ -49,7 +49,7 @@ class DashboardStats
             'ratingsCount' => Rating::valid()->count(),
             'skillCount' => Skill::count(),
             'categoryCount' => Category::count(),
-            'publishedLessons' => Lesson::where('status', 'published')->count(),
+            'publishedLessons' => Lesson::where('status', 'published')->whereNull('author_id')->count(), // catalog only
             'pendingReports' => Report::where('status', 'pending')->count(),
             'onlineNow' => $members()->online()->count(),
             'suspendedMembers' => $members()->where('status', 'suspended')->count(),
@@ -79,7 +79,7 @@ class DashboardStats
     private static function signups(int $days): array
     {
         $from = now()->subDays($days - 1)->startOfDay();
-        $created = User::where('role', '!=', 'admin')->where('created_at', '>=', $from)->pluck('created_at');
+        $created = User::where('role', '!=', 'admin')->where('status', '!=', 'deleted')->where('created_at', '>=', $from)->pluck('created_at');
 
         $step = $days > 31 ? 7 : 1;
         $buckets = [];

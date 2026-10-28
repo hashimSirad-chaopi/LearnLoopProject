@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Models\DeviceToken;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +13,10 @@ use Illuminate\Support\Facades\Log;
  *
  * It does nothing until FCM_CREDENTIALS in .env points at your Firebase
  * service-account JSON file (see PUSH_SETUP.md), so it is safe to leave in.
- * Sending happens after the API response, so it never slows the app down.
+ * Sending happens after the API response. On the single-threaded dev server (php artisan
+ * serve / ngrok) "after the response" still occupies the only worker, so every call here uses
+ * short timeouts and a circuit breaker: if Google can't be reached, pushes are skipped for
+ * two minutes instead of freezing the server on every message.
  */
 class PushNotifier
 {
@@ -26,7 +30,7 @@ class PushNotifier
     /** Push [$title]/[$body] to every phone [$userId] has signed in on. */
     public static function toUser(int $userId, string $title, string $body, array $data = []): void
     {
-        if (! self::configured()) {
+        if (! self::configured() || Cache::has('fcm_down')) {
             return;
         }
 
@@ -40,6 +44,10 @@ class PushNotifier
                 foreach ($tokens as $token) {
                     self::sendTo($token, $title, $body, $data);
                 }
+            } catch (ConnectionException $e) {
+                // Google is unreachable or slow: stop trying for a while so requests stay fast.
+                Cache::put('fcm_down', true, 120);
+                Log::warning('Push paused for 2 minutes (FCM unreachable): '.$e->getMessage());
             } catch (\Throwable $e) {
                 Log::warning('Push failed: '.$e->getMessage());
             }
@@ -55,7 +63,8 @@ class PushNotifier
         }
 
         $response = Http::withToken($accessToken)
-            ->timeout(8)
+            ->connectTimeout(2)
+            ->timeout(4)
             ->post("https://fcm.googleapis.com/v1/projects/{$credentials['project_id']}/messages:send", [
                 'message' => [
                     'token' => $token,
@@ -109,7 +118,7 @@ class PushNotifier
 
             openssl_sign($unsigned, $signature, $credentials['private_key'], OPENSSL_ALGO_SHA256);
 
-            $response = Http::asForm()->timeout(8)->post('https://oauth2.googleapis.com/token', [
+            $response = Http::asForm()->connectTimeout(2)->timeout(4)->post('https://oauth2.googleapis.com/token', [
                 'grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer',
                 'assertion' => $unsigned.'.'.$b64($signature),
             ]);

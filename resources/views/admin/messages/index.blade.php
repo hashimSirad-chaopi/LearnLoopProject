@@ -2,7 +2,7 @@
 
 @section('title', 'Messages')
 @section('page-title', 'Message Moderation')
-@section('page-subtitle', 'Review conversations between LearnLoop members.')
+@section('page-subtitle', 'Review conversations between LearnLoop users.')
 
 @section('content')
 

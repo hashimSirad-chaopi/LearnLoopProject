@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ExchangeLesson extends Model
 {
-    protected $fillable = ['exchange_id', 'author_id', 'title', 'content', 'questions', 'content_type', 'attachment_path', 'attachment_name'];
+    protected $fillable = ['exchange_id', 'author_id', 'title', 'content', 'questions', 'content_type', 'attachment_path', 'attachment_name', 'max_attempts'];
 
-    protected $casts = ['questions' => 'array'];
+    protected $casts = ['questions' => 'array', 'max_attempts' => 'integer'];
 
     public function getAttachmentUrlAttribute(): ?string
     {

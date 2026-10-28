@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\AppSetting;
 use App\Models\User;
 use App\Support\AdminDevices;
 use App\Support\EmailOtp;
+use App\Support\QuizAttempts;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,15 +18,16 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 /**
- * Admin > Settings. One page, four tabs:
+ * Admin > Settings. One page, five tabs:
  *   account       name and email
  *   password      change the password
  *   security      the emailed sign-in code, trusted browsers, recent sign-in events
  *   notifications which alerts also arrive by email
+ *   quizzes       daily quiz attempt limit for the admin's lessons (on/off and how many)
  */
 class SettingsController extends Controller
 {
-    public const TABS = ['account', 'password', 'security', 'notifications'];
+    public const TABS = ['account', 'password', 'security', 'notifications', 'quizzes'];
 
     /** Actions shown under "Recent sign-in activity". */
     private const SECURITY_EVENTS = [
@@ -67,6 +70,12 @@ class SettingsController extends Controller
             'prefs' => [
                 'email_report_alerts' => (bool) $user->adminPref('email_report_alerts', $default),
                 'email_appeal_alerts' => (bool) $user->adminPref('email_appeal_alerts', $default),
+            ],
+            'quiz' => [
+                'enabled' => QuizAttempts::enabled(),
+                'limits' => QuizAttempts::limits(),
+                'timezone' => (string) config('learnloop.quiz_day_timezone', 'Asia/Manila'),
+                'ready' => QuizAttempts::ready(),
             ],
             // With the "log" mailer, emails are written to storage/logs instead of being sent.
             'mailSends' => ! in_array(config('mail.default'), ['log', 'array'], true),
@@ -214,12 +223,52 @@ class SettingsController extends Controller
         return $this->back('notifications', 'Alert preferences saved.');
     }
 
+    /** Daily quiz attempts on the admin's lessons (Continue Learning). Exchanges and My Lessons are never limited. */
+    public function updateQuizzes(Request $request): RedirectResponse
+    {
+        if (! QuizAttempts::ready()) {
+            return $this->back('quizzes', null, 'Run "php artisan migrate" once, then try again.');
+        }
+
+        $rules = [];
+        $messages = [];
+        foreach (QuizAttempts::LABELS as $level => $label) {
+            $rules["attempts.$level"] = ['required', 'integer', 'min:1', 'max:'.QuizAttempts::MAX_LIMIT];
+            $messages["attempts.$level.required"] = "Enter the attempts per day for $label.";
+            $messages["attempts.$level.integer"] = "$label: attempts per day must be a whole number.";
+            $messages["attempts.$level.min"] = "$label: allow at least 1 attempt per day, or switch the limit off.";
+            $messages["attempts.$level.max"] = "$label: the most you can allow is ".QuizAttempts::MAX_LIMIT.' attempts per day.';
+        }
+        $data = $request->validate($rules, $messages);
+
+        $enabled = $request->boolean('enabled');
+        $before = [QuizAttempts::enabled(), QuizAttempts::limits()];
+
+        AppSetting::put('quiz_attempt_limit_enabled', $enabled ? '1' : '0');
+        $after = [];
+        foreach (array_keys(QuizAttempts::DEFAULTS) as $level) {
+            $after[$level] = (int) $data['attempts'][$level];
+            AppSetting::put('quiz_attempts_'.$level, (string) $after[$level]);
+        }
+
+        $summary = collect($after)->map(fn ($n, $level) => ucfirst($level).' '.$n)->implode(', ');
+        if ($before !== [$enabled, $after]) {
+            ActivityLog::record('settings.quizzes', $enabled
+                ? "Set quiz attempts per lesson per day: {$summary}"
+                : 'Switched the daily quiz attempt limit off');
+        }
+
+        return $this->back('quizzes', $enabled
+            ? "Saved. Attempts per lesson each day: {$summary}."
+            : 'Saved. The daily quiz attempt limit is off: users can retake quizzes any time.');
+    }
+
     private function back(string $tab, ?string $success = null, ?string $error = null): RedirectResponse
     {
         $redirect = redirect()->route('admin.settings', ['tab' => $tab]);
 
         if ($error !== null) {
-            return $redirect->withErrors(['notifications' => $error])->withInput(['tab' => $tab]);
+            return $redirect->withErrors([$tab === 'quizzes' ? 'quizzes' : 'notifications' => $error])->withInput(['tab' => $tab]);
         }
 
         return $redirect->with('success', $success);

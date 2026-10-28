@@ -48,7 +48,7 @@
                                     <option value="{{ $category->id }}" {{ (string) old('category_id', $skill->category_id) === (string) $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <p class="ll-muted">Listings use the category of their skill, so members never pick it separately.</p>
+                            <p class="ll-muted">Listings use the category of their skill, so users never pick it separately.</p>
                         </div>
 
                         <div>
@@ -67,6 +67,15 @@
                                 <option value="active" {{ old('status', $skill->status) === 'active' ? 'selected' : '' }}>Active</option>
                                 <option value="inactive" {{ old('status', $skill->status) === 'inactive' ? 'selected' : '' }}>Inactive</option>
                             </select>
+                        </div>
+
+                        <div>
+                            <label style="display:flex;gap:10px;align-items:flex-start;font-weight:600">
+                                <input type="checkbox" name="experience_based" value="1" style="margin-top:4px"
+                                       {{ old('experience_based', $skill->experience_based) ? 'checked' : '' }}>
+                                <span>Experience skill (dancing, singing, ...)</span>
+                            </label>
+                            <p class="ll-muted">No lessons and no Easy-to-Expert levels. Users can only teach it as <strong>Professional</strong>, and only after an admin approves their certification (Professional requests).</p>
                         </div>
 
                         <div class="settings-actions">

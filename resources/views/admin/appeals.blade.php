@@ -21,7 +21,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>Recovery Requests</h1>
-                <p>Suspended members cannot log in, so they ask you from the app's login screen. Reactivate the account, or decline and tell them why.</p>
+                <p>Suspended users cannot log in, so they ask you from the app's login screen. Reactivate the account, or decline and tell them why.</p>
             </div>
         </header>
 
@@ -64,13 +64,13 @@
                             @if($appeal->status === 'pending')
                                 <form method="POST" class="lr-decision">
                                     @csrf @method('PATCH')
-                                    <label for="note-{{ $appeal->id }}" class="ll-muted">Note to the member (required to decline, optional to reactivate)</label>
+                                    <label for="note-{{ $appeal->id }}" class="ll-muted">Note to the user (required to decline, optional to reactivate)</label>
                                     <textarea id="note-{{ $appeal->id }}" name="note" rows="2" maxlength="500" class="lr-note" placeholder="For example: Thanks for explaining, please follow the community rules."></textarea>
                                     <div class="ll-row">
                                         <button type="submit" formaction="{{ route('admin.appeals.approve', $appeal) }}" class="table-btn"
                                                 onclick="return confirm('Reactivate {{ addslashes($member->name) }}\'s account?');">Reactivate account</button>
                                         <button type="submit" formaction="{{ route('admin.appeals.decline', $appeal) }}" class="table-btn ll-link"
-                                                onclick="var n = this.form.note; if (!n.value.trim()) { n.focus(); alert('Write a short reason so the member knows why.'); return false; } return confirm('Decline this request?');">Decline</button>
+                                                onclick="var n = this.form.note; if (!n.value.trim()) { n.focus(); alert('Write a short reason so the user knows why.'); return false; } return confirm('Decline this request?');">Decline</button>
                                     </div>
                                 </form>
                             @else

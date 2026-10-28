@@ -44,10 +44,11 @@ class SkillController extends Controller
             ->orderBy('title')
             ->get();
 
-        // Published lessons per skill in ONE query (not one query per skill).
+        // Published CATALOG lessons per skill in ONE query (not one query per skill).
         $lessonCounts = DB::table('lessons')
             ->join('skill_levels', 'skill_levels.id', '=', 'lessons.skill_level_id')
             ->where('lessons.status', 'published')
+            ->whereNull('lessons.author_id') // the admin's own lessons only; users' posts live in User lessons
             ->selectRaw('skill_levels.skill_id as sid, COUNT(*) as total')
             ->groupBy('skill_levels.skill_id')
             ->pluck('total', 'sid');
@@ -175,82 +176,34 @@ class SkillController extends Controller
     {
         $data = $this->validateLesson($request);
 
-        $lesson = null;
-        $newFiles = [];
-        $obsoleteFiles = [];
+        DB::transaction(function () use ($request, $skill, $data, &$lesson) {
+            $level = SkillLevel::firstOrCreate(
+                ['skill_id' => $skill->id, 'name' => $data['level']],
+                ['order' => self::LEVELS[$data['level']]]
+            );
 
-        try {
-            DB::transaction(function () use (
-                $request,
-                $skill,
-                $data,
-                &$lesson,
-                &$newFiles,
-                &$obsoleteFiles
-            ) {
-                $level = SkillLevel::firstOrCreate(
-                    [
-                        'skill_id' => $skill->id,
-                        'name' => $data['level'],
-                    ],
-                    ['order' => self::LEVELS[$data['level']]]
-                );
+            $lesson = Lesson::create([
+                'skill_level_id' => $level->id,
+                'title' => $data['title'],
+                'content' => (string) ($data['content'] ?? ''),
+                'content_type' => $data['content_type'],
+                'order' => (int) Lesson::where('skill_level_id', $level->id)->max('order') + 1,
+                'status' => 'published',
+            ]);
 
-                $lesson = Lesson::create([
-                    'skill_level_id' => $level->id,
-                    'title' => $data['title'],
-                    'content' => (string) ($data['content'] ?? ''),
-                    'content_type' => $data['content_type'],
-                    'order' => (int) Lesson::where(
-                        'skill_level_id',
-                        $level->id
-                    )->max('order') + 1,
-                    'status' => 'published',
-                ]);
+            $this->saveAttachment($request, $lesson, $data['content_type']);
 
-                $this->saveAttachment(
-                    $request,
-                    $lesson,
-                    $data['content_type'],
-                    $newFiles,
-                    $obsoleteFiles
-                );
+            $this->saveQuestions($lesson, $data['questions']);
+        });
 
-                $this->saveQuestions(
-                    $lesson,
-                    $data['questions'],
-                    [],
-                    $newFiles,
-                    $obsoleteFiles
-                );
-            });
-        } catch (\Throwable $e) {
-            // The database rolled back. Remove files uploaded by this attempt.
-            StorageCleanup::delete($newFiles);
+        ActivityLog::record('lesson.created', "Added lesson \"{$lesson->title}\" to {$skill->title}");
 
-            throw $e;
-        }
-
-        // The database committed. Now remove any obsolete files.
-        StorageCleanup::delete($obsoleteFiles);
-
-        ActivityLog::record(
-            'lesson.created',
-            "Added lesson \"{$lesson->title}\" to {$skill->title}"
-        );
-
-        return redirect()
-            ->route('admin.skills.show', $skill)
-            ->with('success', 'Lesson added.');
+        return redirect()->route('admin.skills.show', $skill)->with('success', 'Lesson added.');
     }
 
     public function editLesson(Skill $skill, Lesson $lesson)
     {
-        abort_unless(
-            (int) ($lesson->skillLevel?->skill_id) === (int) $skill->id
-                && ! $lesson->isMemberWritten(),
-            404
-        );
+        abort_unless($lesson->skillLevel?->skill_id === $skill->id, 404);
 
         $lesson->load('questions.options');
 
@@ -274,97 +227,39 @@ class SkillController extends Controller
 
     public function updateLesson(Request $request, Skill $skill, Lesson $lesson)
     {
-        abort_unless(
-            (int) ($lesson->skillLevel?->skill_id) === (int) $skill->id
-                && ! $lesson->isMemberWritten(),
-            404
-        );
+        abort_unless($lesson->skillLevel?->skill_id === $skill->id, 404);
 
         $data = $this->validateLesson($request);
 
-        $newFiles = [];
-        $obsoleteFiles = [];
+        DB::transaction(function () use ($request, $skill, $lesson, $data) {
+            $level = SkillLevel::firstOrCreate(
+                ['skill_id' => $skill->id, 'name' => $data['level']],
+                ['order' => self::LEVELS[$data['level']]]
+            );
 
-        try {
-            DB::transaction(function () use (
-                $request,
-                $skill,
-                $lesson,
-                $data,
-                &$newFiles,
-                &$obsoleteFiles
-            ) {
-                $level = SkillLevel::firstOrCreate(
-                    [
-                        'skill_id' => $skill->id,
-                        'name' => $data['level'],
-                    ],
-                    ['order' => self::LEVELS[$data['level']]]
-                );
+            $lesson->update([
+                'skill_level_id' => $level->id,
+                'title' => $data['title'],
+                'content' => (string) ($data['content'] ?? ''),
+                'content_type' => $data['content_type'],
+            ]);
 
-                $lesson->update([
-                    'skill_level_id' => $level->id,
-                    'title' => $data['title'],
-                    'content' => (string) ($data['content'] ?? ''),
-                    'content_type' => $data['content_type'],
-                ]);
+            $this->saveAttachment($request, $lesson, $data['content_type']);
 
-                $this->saveAttachment(
-                    $request,
-                    $lesson,
-                    $data['content_type'],
-                    $newFiles,
-                    $obsoleteFiles
-                );
+            $old = $lesson->questions()->get(['media_type', 'media_path'])->filter(fn ($q) => $q->media_path)
+                ->mapWithKeys(fn ($q) => [$q->media_path => $q->media_type])->all();
+            $lesson->questions()->each(fn (Question $q) => $q->delete()); // options cascade
+            $this->saveQuestions($lesson, $data['questions'], $old);
+        });
 
-                // Collect old question media before replacing the questions.
-                $old = $lesson->questions()
-                    ->get(['media_type', 'media_path'])
-                    ->filter(fn (Question $q) => $q->media_path)
-                    ->mapWithKeys(fn (Question $q) => [
-                        $q->media_path => $q->media_type,
-                    ])
-                    ->all();
+        ActivityLog::record('lesson.updated', "Updated lesson \"{$lesson->title}\" in {$skill->title}");
 
-                $lesson->questions()->each(
-                    fn (Question $q) => $q->delete()
-                );
-
-                $this->saveQuestions(
-                    $lesson,
-                    $data['questions'],
-                    $old,
-                    $newFiles,
-                    $obsoleteFiles
-                );
-            });
-        } catch (\Throwable $e) {
-            // Preserve the old files and remove any uploads from the failed update.
-            StorageCleanup::delete($newFiles);
-
-            throw $e;
-        }
-
-        // Only delete replaced files once the database changes are committed.
-        StorageCleanup::delete($obsoleteFiles);
-
-        ActivityLog::record(
-            'lesson.updated',
-            "Updated lesson \"{$lesson->title}\" in {$skill->title}"
-        );
-
-        return redirect()
-            ->route('admin.skills.show', $skill)
-            ->with('success', 'Lesson updated.');
+        return redirect()->route('admin.skills.show', $skill)->with('success', 'Lesson updated.');
     }
 
     public function destroyLesson(Skill $skill, Lesson $lesson)
     {
-        abort_unless(
-            (int) ($lesson->skillLevel?->skill_id) === (int) $skill->id
-                && ! $lesson->isMemberWritten(),
-            404
-        );
+        abort_unless($lesson->skillLevel?->skill_id === $skill->id, 404);
 
         $title = $lesson->title;
         $paths = StorageCleanup::forLesson($lesson); // its own file and the media above its quiz questions
@@ -380,13 +275,19 @@ class SkillController extends Controller
 
     private function validateSkill(Request $request): array
     {
-        return $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'string', 'max:255', Rule::unique('skills', 'title')->ignore($request->route('skill'))],
             'category_id' => 'required|exists:categories,id',
             'icon' => 'nullable|string|max:16',
             'description' => 'nullable|string|max:500',
             'status' => 'required|in:active,inactive',
+            'experience_based' => 'nullable|boolean',
         ]);
+
+        // An unticked checkbox sends nothing: that means "a normal skill with lessons".
+        $data['experience_based'] = $request->boolean('experience_based');
+
+        return $data;
     }
 
     /**
@@ -403,7 +304,7 @@ class SkillController extends Controller
         // (required unless this lesson already has one of the same type), `content` is a short note.
         $fileRules = $type === 'text'
             ? ['nullable']
-            : ($hasFile ? array_values(array_diff(ProgressController::attachmentRules($type), ['required'])) : ProgressController::attachmentRules($type));
+            : ($hasFile ? array_values(array_filter(ProgressController::attachmentRules($type), fn ($rule) => $rule !== 'required')) : ProgressController::attachmentRules($type));
 
         return $request->validate([
             'title' => 'required|string|max:255',
@@ -428,50 +329,28 @@ class SkillController extends Controller
     }
 
     /** Store an uploaded file for a non-text lesson; a text lesson drops any old file. */
-
-    private function saveAttachment(
-        Request $request,
-        Lesson $lesson,
-        string $type,
-        array &$newFiles,
-        array &$obsoleteFiles
-    ): void {
+    private function saveAttachment(Request $request, Lesson $lesson, string $type): void
+    {
         if ($type === 'text') {
             if ($lesson->attachment_path) {
-                $obsoleteFiles[] = $lesson->attachment_path;
-
-                $lesson->update([
-                    'attachment_path' => null,
-                    'attachment_name' => null,
-                ]);
+                Storage::disk('public')->delete($lesson->attachment_path);
+                $lesson->update(['attachment_path' => null, 'attachment_name' => null]);
             }
 
             return;
         }
 
         if (! $request->hasFile('attachment')) {
-            return;
+            return; // keep the file the lesson already has
         }
 
         if ($lesson->attachment_path) {
-            $obsoleteFiles[] = $lesson->attachment_path;
+            Storage::disk('public')->delete($lesson->attachment_path);
         }
-
-        $path = $request->file('attachment')->store('lessons', 'public');
-
-        if (! is_string($path) || $path === '') {
-            throw new \RuntimeException('Failed to store lesson attachment.');
-        }
-
-        $newFiles[] = $path;
-
+        $file = $request->file('attachment');
         $lesson->update([
-            'attachment_path' => $path,
-            'attachment_name' => mb_substr(
-                $request->file('attachment')->getClientOriginalName(),
-                0,
-                255
-            ),
+            'attachment_path' => $file->store('lessons', 'public'),
+            'attachment_name' => mb_substr($file->getClientOriginalName(), 0, 255),
         ]);
     }
 
@@ -479,22 +358,12 @@ class SkillController extends Controller
      * @param  array<string,string>  $old  media files (path => type) the lesson's previous questions had.
      *                                     A question keeps one of them when its form row says so.
      */
-    private function saveQuestions(
-        Lesson $lesson,
-        array $questions,
-        array $old,
-        array &$newFiles,
-        array &$obsoleteFiles
-    ): void {
+    private function saveQuestions(Lesson $lesson, array $questions, array $old = []): void
+    {
         $kept = [];
 
         foreach (array_values($questions) as $qi => $q) {
-           [$mediaType, $mediaPath] = $this->questionMedia(
-                $q,
-                $old,
-                $qi,
-                $newFiles
-            );
+            [$mediaType, $mediaPath] = $this->questionMedia($q, $old, $qi);
             if ($mediaPath && isset($old[$mediaPath])) {
                 $kept[] = $mediaPath;
             }
@@ -517,20 +386,15 @@ class SkillController extends Controller
             }
         }
 
-        // Delete these only after the surrounding transaction commits.
+        // Files no question uses any more.
         foreach (array_diff(array_keys($old), $kept) as $path) {
-            $obsoleteFiles[] = $path;
+            Storage::disk('public')->delete($path);
         }
     }
 
     /** [type, path] of the photo / video / audio above one question: a new upload, the old file, or none. */
-    private function questionMedia(
-        array $q,
-        array $old,
-        int $index,
-        array &$newFiles
-    ): array {
-
+    private function questionMedia(array $q, array $old, int $index): array
+    {
         $file = $q['media'] ?? null;
         if ($file instanceof \Illuminate\Http\UploadedFile) {
             $ext = strtolower($file->getClientOriginalExtension());
@@ -552,15 +416,7 @@ class SkillController extends Controller
                 ]);
             }
 
-            $path = $file->store('question-media', 'public');
-
-            if (! is_string($path) || $path === '') {
-                throw new \RuntimeException('Failed to store question media.');
-            }
-
-            $newFiles[] = $path;
-
-            return [$type, $path];
+            return [$type, $file->store('question-media', 'public')];
         }
 
         $keep = $q['keep_media'] ?? null;

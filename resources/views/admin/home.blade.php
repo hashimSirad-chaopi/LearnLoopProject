@@ -76,13 +76,13 @@
 
             <div class="cards">
                 <a class="card" href="{{ route('admin.users') }}">
-                    <div class="card-top"><span class="card-label">MEMBERS</span></div>
+                    <div class="card-top"><span class="card-label">USERS</span></div>
                     <div class="card-value">{{ number_format($stats['totalMembers']) }}</div>
                     <p class="card-description">
                         @if($stats['newMembersWeek'] > 0)
                             <span class="dash-up">+{{ $stats['newMembersWeek'] }}</span> in the last 7 days
                         @else
-                            No new members this week
+                            No new users this week
                         @endif
                     </p>
                 </a>
@@ -128,19 +128,19 @@
                 <a class="card" href="{{ route('admin.exchanges', ['status' => 'disputed']) }}">
                     <div class="card-top"><span class="card-label">DISPUTES</span></div>
                     <div class="card-value">{{ number_format($stats['exchangeStatuses']['disputed']) }}</div>
-                    <p class="card-description">{{ $stats['exchangeStatuses']['disputed'] > 0 ? 'exchanges a member reported' : 'no disputes' }}</p>
+                    <p class="card-description">{{ $stats['exchangeStatuses']['disputed'] > 0 ? 'exchanges a user reported' : 'no disputes' }}</p>
                 </a>
 
                 <a class="card" href="{{ route('admin.users', ['status' => 'active']) }}">
                     <div class="card-top"><span class="card-label">ONLINE NOW</span></div>
                     <div class="card-value">{{ number_format($stats['onlineNow']) }}</div>
-                    <p class="card-description">members using the app right now</p>
+                    <p class="card-description">users using the app right now</p>
                 </a>
 
                 <a class="card" href="{{ route('admin.users', ['status' => 'suspended']) }}">
                     <div class="card-top"><span class="card-label">SUSPENDED</span></div>
                     <div class="card-value">{{ number_format($stats['suspendedMembers']) }}</div>
-                    <p class="card-description">{{ $stats['suspendedMembers'] > 0 ? 'members who cannot sign in' : 'nobody is suspended' }}</p>
+                    <p class="card-description">{{ $stats['suspendedMembers'] > 0 ? 'users who cannot sign in' : 'nobody is suspended' }}</p>
                 </a>
 
                 <a class="card" href="{{ route('admin.comments') }}">
@@ -161,7 +161,7 @@
 
                 <div class="dash-panel">
                     <div class="dash-panel-head">
-                        <h3>New members</h3>
+                        <h3>New users</h3>
                         <span>{{ $stats['newMembersRange'] }} in the last {{ $stats['days'] }} days</span>
                     </div>
                     <?php
@@ -171,7 +171,7 @@
                     ?>
                     <p class="dash-trend">
                         @if($change === null)
-                            {{ $now > 0 ? 'No new members in the '.$stats['days'].' days before.' : 'No new members in either period.' }}
+                            {{ $now > 0 ? 'No new users in the '.$stats['days'].' days before.' : 'No new users in either period.' }}
                         @elseif($change > 0)
                             <span class="dash-up">&#9650; {{ $change }}%</span> more than the {{ $stats['days'] }} days before ({{ $before }})
                         @elseif($change < 0)
@@ -215,7 +215,7 @@
                             @endforeach
                         </ul>
                     @else
-                        <p class="dash-empty">No exchanges yet. They will show up here once members start trading skills.</p>
+                        <p class="dash-empty">No exchanges yet. They will show up here once users start trading skills.</p>
                     @endif
                 </div>
 
@@ -251,8 +251,8 @@
             <div class="dash-grid">
 
                 @foreach([
-                    ['title' => 'Most wanted skills', 'sub' => 'what members want to learn', 'rows' => $stats['topWanted']],
-                    ['title' => 'Most offered skills', 'sub' => 'what members can teach', 'rows' => $stats['topOffered']],
+                    ['title' => 'Most wanted skills', 'sub' => 'what users want to learn', 'rows' => $stats['topWanted']],
+                    ['title' => 'Most offered skills', 'sub' => 'what users can teach', 'rows' => $stats['topOffered']],
                 ] as $block)
                     <div class="dash-panel">
                         <div class="dash-panel-head">
@@ -266,7 +266,7 @@
                                 <div class="dash-rank-track"><div class="dash-rank-fill" style="width: {{ round($row['count'] / $max * 100) }}%"></div></div>
                             </div>
                         @empty
-                            <p class="dash-empty">Nothing yet. Members add skills on their profile.</p>
+                            <p class="dash-empty">Nothing yet. Users add skills on their profile.</p>
                         @endforelse
                     </div>
                 @endforeach
@@ -294,7 +294,7 @@
 
                 <div class="dash-panel">
                     <div class="dash-panel-head">
-                        <h3>Newest members</h3>
+                        <h3>Newest users</h3>
                         <a href="{{ route('admin.users') }}">View all</a>
                     </div>
                     @forelse($stats['recentMembers'] as $member)
@@ -307,7 +307,7 @@
                             <span class="dash-member-time">{{ $member->created_at->diffForHumans(['short' => true]) }}</span>
                         </a>
                     @empty
-                        <p class="dash-empty">No members yet.</p>
+                        <p class="dash-empty">No users yet.</p>
                     @endforelse
                 </div>
 

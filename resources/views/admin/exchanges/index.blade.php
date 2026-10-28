@@ -2,7 +2,7 @@
 
 @section('title', 'Exchanges')
 @section('page-title', 'Exchange Management')
-@section('page-subtitle', 'Monitor skill exchanges between LearnLoop members.')
+@section('page-subtitle', 'Monitor skill exchanges between LearnLoop users.')
 
 @section('content')
 

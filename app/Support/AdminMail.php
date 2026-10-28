@@ -48,14 +48,14 @@ class AdminMail
         $appeal->loadMissing('user');
         $url = url('/admin/appeals');
 
-        $body = "A suspended member asked for their account to be reactivated.\n\n"
-            .'Member: '.($appeal->user->name ?? 'Unknown')."\n\n"
+        $body = "A suspended user asked for their account to be reactivated.\n\n"
+            .'User: '.($appeal->user->name ?? 'Unknown')."\n\n"
             ."Message:\n{$appeal->message}\n\n"
             ."Review it here: {$url}\n";
 
         app()->terminating(function () use ($emails, $body, $appeal) {
             try {
-                Mail::raw($body, fn ($m) => $m->to($emails)->subject('Account recovery request from '.($appeal->user->name ?? 'a member')));
+                Mail::raw($body, fn ($m) => $m->to($emails)->subject('Account recovery request from '.($appeal->user->name ?? 'a user')));
             } catch (\Throwable $e) {
                 Log::warning('Recovery request alert email failed: '.$e->getMessage());
             }

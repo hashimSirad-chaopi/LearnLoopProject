@@ -17,7 +17,7 @@
         </select>
 
         <label for="lm-note" class="lm-label" id="lm-note-label">Add details (optional)</label>
-        <textarea name="note" id="lm-note" class="lm-field" rows="3" maxlength="500" placeholder="The member will see this reason."></textarea>
+        <textarea name="note" id="lm-note" class="lm-field" rows="3" maxlength="500" placeholder="The user will see this reason."></textarea>
 
         <div class="lm-actions">
             <button type="button" class="lm-btn lm-cancel" data-lm-cancel>Cancel</button>
@@ -70,7 +70,7 @@
             var isOther = reason.value === 'other';
             note.required = isOther;
             noteLabel.textContent = isOther ? 'Type the reason (required)' : 'Add details (optional)';
-            note.placeholder = isOther ? 'Explain why this is being taken down.' : 'The member will see this reason.';
+            note.placeholder = isOther ? 'Explain why this is being taken down.' : 'The user will see this reason.';
         }
         reason.addEventListener('change', syncNote);
 
@@ -98,8 +98,8 @@
             var verb = mode === 'delete' ? 'Delete' : 'Disable';
             title.textContent = verb + ' ' + (bulkMode ? name : '“' + name + '”') + '?';
             help.textContent = mode === 'delete'
-                ? 'It is removed for good, along with its comments and likes. The member gets a notification with your reason.'
-                : 'It disappears from the feed but stays in the member’s My Listings with your reason. You can restore it any time.';
+                ? 'It is removed for good, along with its comments and likes. The user gets a notification with your reason.'
+                : 'It disappears from the feed but stays in the user’s My Listings with your reason. You can restore it any time.';
             confirmBtn.textContent = verb;
             form.reset();
             syncNote();

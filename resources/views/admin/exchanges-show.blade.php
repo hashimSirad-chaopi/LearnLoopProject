@@ -38,7 +38,7 @@
                         <div class="ll-note danger">
                             <strong>Dispute{{ $exchange->disputedBy ? ' filed by ' . $exchange->disputedBy->name : '' }}{{ $exchange->disputed_at ? ' ' . $exchange->disputed_at->diffForHumans() : '' }}:</strong>
                             {{ $exchange->dispute_reason ?: 'No reason was recorded.' }}
-                            <br>Read the evidence below, then set the outcome under “Decision”. Both members are notified in the app.
+                            <br>Read the evidence below, then set the outcome under “Decision”. Both users are notified in the app.
                         </div>
                     @elseif($exchange->resolved_at)
                         <div class="ll-note">Dispute resolved {{ $exchange->resolved_at->diffForHumans() }}.</div>
@@ -46,15 +46,15 @@
 
                     @if($exchange->cancel_reason)
                         <div class="ll-note">
-                            <strong>Cancel request by {{ $exchange->cancelRequestedBy->name ?? 'a member' }}{{ $exchange->cancel_requested_at ? ' ' . $exchange->cancel_requested_at->diffForHumans() : '' }}:</strong>
+                            <strong>Cancel request by {{ $exchange->cancelRequestedBy->name ?? 'a user' }}{{ $exchange->cancel_requested_at ? ' ' . $exchange->cancel_requested_at->diffForHumans() : '' }}:</strong>
                             {{ $exchange->cancel_reason }}
                             <br>
                             @if($exchange->status === 'cancelled')
-                                The other member accepted, so the exchange was cancelled by agreement.
+                                The other user accepted, so the exchange was cancelled by agreement.
                             @elseif($exchange->cancel_declined_at)
-                                The other member declined{{ $exchange->cancel_decline_note ? ': ' . $exchange->cancel_decline_note : '.' }}
+                                The other user declined{{ $exchange->cancel_decline_note ? ': ' . $exchange->cancel_decline_note : '.' }}
                             @else
-                                Waiting for the other member to accept or decline.
+                                Waiting for the other user to accept or decline.
                             @endif
                         </div>
                     @endif
@@ -141,7 +141,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="admin_notes">Admin note (members see this when you resolve a dispute)</label>
+                                <label for="admin_notes">Admin note (users see this when you resolve a dispute)</label>
                                 <textarea id="admin_notes" name="admin_notes" rows="3">{{ old('admin_notes', $exchange->admin_notes) }}</textarea>
                             </div>
                             <div class="settings-actions">

@@ -14,6 +14,7 @@
         'password' => 'Password',
         'security' => 'Security',
         'notifications' => 'Notifications',
+        'quizzes' => 'Quizzes',
     ];
     $emailChangeOpen = $errors->has('email_confirmation') || $errors->has('current_password') && $tab === 'account';
 @endphp
@@ -28,7 +29,7 @@
             <div class="header-left">
                 <span class="header-label">ADMIN PANEL</span>
                 <h1>Settings</h1>
-                <p>Your account, password, sign-in security and email alerts.</p>
+                <p>Your account, password, sign-in security, email alerts and quiz limits.</p>
             </div>
         </header>
 
@@ -43,6 +44,12 @@
                 @endif
                 @if($errors->has('notifications'))
                     <div class="ll-flash error st-flash">{{ $errors->first('notifications') }}</div>
+                @endif
+                @if($errors->has('quizzes'))
+                    <div class="ll-flash error st-flash">{{ $errors->first('quizzes') }}</div>
+                @endif
+                @if(collect($errors->keys())->contains(fn ($k) => str_starts_with($k, 'attempts.')))
+                    <div class="ll-flash error st-flash">{{ $errors->first() }}</div>
                 @endif
 
                 <div class="st-layout">
@@ -95,7 +102,7 @@
                                         <p>{{ $me->email }}</p>
                                         <div class="st-me-meta">
                                             <span class="ll-badge completed">Administrator</span>
-                                            <span>Member since {{ $me->created_at?->format('M j, Y') }}</span>
+                                            <span>User since {{ $me->created_at?->format('M j, Y') }}</span>
                                         </div>
                                     </div>
                                     <div class="st-avatar-actions">
@@ -357,7 +364,7 @@
                                     <div class="settings-option">
                                         <div>
                                             <h3>New reports</h3>
-                                            <p>Email me when a member reports a listing or another member.</p>
+                                            <p>Email me when a user reports a listing or another user.</p>
                                         </div>
                                         <label class="toggle">
                                             <input type="hidden" name="email_report_alerts" value="0">
@@ -369,7 +376,7 @@
                                     <div class="settings-option">
                                         <div>
                                             <h3>Account recovery requests</h3>
-                                            <p>Email me when a suspended member asks to be reactivated.</p>
+                                            <p>Email me when a suspended user asks to be reactivated.</p>
                                         </div>
                                         <label class="toggle">
                                             <input type="hidden" name="email_appeal_alerts" value="0">
@@ -382,6 +389,70 @@
                                         <button type="submit" class="settings-save-btn">Save preferences</button>
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+
+
+                        {{-- ============ QUIZZES ============ --}}
+                        <div class="st-panel" data-panel="quizzes" @if($tab !== 'quizzes') hidden @endif>
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <span class="section-label">QUIZZES</span>
+                                    <h2>Daily quiz attempts</h2>
+                                    <p>Limits how many times a user can take the quiz of one of <strong>your</strong> lessons (Continue Learning) in a day, set separately for each level. It does not apply to exchanges, or to the lessons users write themselves (Profile &rarr; My Lessons).</p>
+                                </div>
+
+                                @unless($quiz['ready'])
+                                    <div class="sec-warn" style="margin-bottom:6px;">
+                                        The database needs one update before this works. Run <code>php artisan migrate</code>, then reload this page.
+                                    </div>
+                                @endunless
+
+                                <form method="POST" action="{{ route('admin.settings.quizzes') }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="tab" value="quizzes">
+
+                                    <div class="settings-option">
+                                        <div>
+                                            <h3>Limit quiz attempts</h3>
+                                            <p>Switch off to let users retake these quizzes as often as they like.</p>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="hidden" name="enabled" value="0">
+                                            <input type="checkbox" name="enabled" value="1" id="quiz-limit-enabled" {{ $quiz['enabled'] ? 'checked' : '' }}>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+
+                                    @foreach(\App\Support\QuizAttempts::LABELS as $level => $label)
+                                        <div class="settings-option">
+                                            <div>
+                                                <h3>{{ $label }}</h3>
+                                                <p>Tries per lesson, per day{{ $loop->first ? ' (the count starts again at midnight, '.$quiz['timezone'].')' : '' }}.</p>
+                                            </div>
+                                            <input type="number" name="attempts[{{ $level }}]" class="quiz-limit-number"
+                                                   min="1" max="{{ \App\Support\QuizAttempts::MAX_LIMIT }}" step="1" inputmode="numeric"
+                                                   value="{{ old('attempts.'.$level, $quiz['limits'][$level]) }}"
+                                                   style="width:90px;padding:8px 10px;border:1px solid #d7ddd9;border-radius:8px;font:inherit;"
+                                                   {{ $quiz['enabled'] ? '' : 'disabled' }}>
+                                        </div>
+                                    @endforeach
+
+                                    <div class="settings-actions" style="margin-top:6px;">
+                                        <button type="submit" class="settings-save-btn">Save quiz settings</button>
+                                    </div>
+                                </form>
+                                <script>
+                                    (function () {
+                                        var box = document.getElementById('quiz-limit-enabled');
+                                        var nums = document.querySelectorAll('.quiz-limit-number');
+                                        if (!box || !nums.length) return;
+                                        // A disabled input is not submitted, so keep the saved numbers by re-enabling them on submit.
+                                        box.addEventListener('change', function () { nums.forEach(function (n) { n.disabled = !box.checked; }); });
+                                        box.form.addEventListener('submit', function () { nums.forEach(function (n) { n.disabled = false; }); });
+                                    })();
+                                </script>
                             </div>
                         </div>
 

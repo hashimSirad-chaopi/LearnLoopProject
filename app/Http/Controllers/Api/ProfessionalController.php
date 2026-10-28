@@ -60,6 +60,33 @@ class ProfessionalController extends Controller
             }
         }
 
+        // Experience skill: no lessons, so no quiz. The certification goes straight to an admin.
+        if ($skill->experience_based) {
+            if ($record && $record->proof_path) {
+                Storage::disk('public')->delete($record->proof_path);
+            }
+            $file = $request->file('proof');
+
+            $record = Verification::updateOrCreate(
+                ['user_id' => $me, 'skill_id' => $skill->id],
+                [
+                    'status' => 'in_review',
+                    'proof_path' => $file->store('professional-proofs', 'public'),
+                    'proof_name' => mb_substr($file->getClientOriginalName(), 0, 255),
+                    'proof_note' => $request->note,
+                    'question_ids' => null,
+                    'quiz_score' => null,
+                    'quiz_total' => null,
+                    'retry_after' => null,
+                    'rejection_reason' => null,
+                    'reviewed_by' => null,
+                    'reviewed_at' => null,
+                ]
+            );
+
+            return response()->json($this->payload($skill, $record), 201);
+        }
+
         $pool = $this->questionPool($skill);
         if ($pool->count() < Verification::MIN_QUESTIONS) {
             return response()->json(['message' => 'The Professional quiz for '.$skill->title.' is not ready yet. Please check back later.'], 422);
@@ -154,17 +181,19 @@ class ProfessionalController extends Controller
 
     private function payload(Skill $skill, ?Verification $record): array
     {
-        $poolSize = $this->questionPool($skill)->count();
+        $experience = (bool) $skill->experience_based;
+        $poolSize = $experience ? 0 : $this->questionPool($skill)->count();
         $status = $record?->status;
 
         $out = [
             'skill_id' => $skill->id,
             'title' => $skill->title,
             'status' => $status,                               // null | quiz | failed | in_review | approved | rejected
-            'quiz_ready' => $poolSize >= Verification::MIN_QUESTIONS,
+            'experience_based' => $experience,                 // true: certification only, no quiz
+            'quiz_ready' => $experience || $poolSize >= Verification::MIN_QUESTIONS,
             'quiz_size' => min(Verification::QUIZ_SIZE, $poolSize),
             'pass_percent' => (int) (Verification::PASS_RATIO * 100),
-            'can_start' => $poolSize >= Verification::MIN_QUESTIONS
+            'can_start' => ($experience || $poolSize >= Verification::MIN_QUESTIONS)
                 && (! $record || $status === 'rejected' || ($status === 'failed' && ! $record->retry_after?->isFuture())),
             'retry_after' => $record?->retry_after?->toIso8601String(),
             'rejection_reason' => $status === 'rejected' ? $record->rejection_reason : null,

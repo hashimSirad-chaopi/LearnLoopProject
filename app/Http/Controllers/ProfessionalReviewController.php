@@ -96,6 +96,6 @@ class ProfessionalReviewController extends Controller
         );
         ActivityLog::record('professional.rejected', "Declined {$verification->user->name}'s Professional request for {$skill}");
 
-        return back()->with('success', 'Request declined. The member was told why and can send new proof.');
+        return back()->with('success', 'Request declined. The user was told why and can send new proof.');
     }
 }

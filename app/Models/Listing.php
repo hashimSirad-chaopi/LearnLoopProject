@@ -84,6 +84,12 @@ class Listing extends Model
         return $this->offers_skill_id === null && $this->wants_skill_id !== null;
     }
 
+    /** "I like to teach X": nothing is asked back, so there is no wanted skill. */
+    public function isTeachOnly(): bool
+    {
+        return $this->offers_skill_id !== null && $this->wants_skill_id === null;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

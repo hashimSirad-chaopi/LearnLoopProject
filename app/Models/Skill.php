@@ -11,7 +11,9 @@ class Skill extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'icon', 'status', 'created_by', 'category_id'];
+    protected $fillable = ['title', 'description', 'icon', 'status', 'created_by', 'category_id', 'experience_based'];
+
+    protected $casts = ['experience_based' => 'boolean'];
 
     public function category(): BelongsTo
     {

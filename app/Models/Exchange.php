@@ -12,6 +12,7 @@ class Exchange extends Model
         'provider_id', 'learner_id', 'requested_by', 'skill_offered', 'skill_wanted', 'status', 'admin_notes',
         'dispute_reason', 'disputed_by', 'disputed_at', 'resolved_at',
         'cancel_requested_by', 'cancel_reason', 'cancel_requested_at', 'cancel_declined_at', 'cancel_decline_note',
+        'finish_requested_by', 'finish_requested_at', 'finish_declined_at', 'finish_decline_note', 'is_professional',
     ];
 
     protected $casts = [
@@ -19,12 +20,32 @@ class Exchange extends Model
         'resolved_at' => 'datetime',
         'cancel_requested_at' => 'datetime',
         'cancel_declined_at' => 'datetime',
+        'finish_requested_at' => 'datetime',
+        'finish_declined_at' => 'datetime',
+        'is_professional' => 'boolean',
     ];
 
     /** A cancel request is waiting for the other member's answer. */
     public function hasOpenCancelRequest(): bool
     {
         return $this->cancel_requested_by !== null && $this->cancel_declined_at === null;
+    }
+
+    /** One member asked to finish and the other has not answered yet. */
+    public function hasOpenFinishRequest(): bool
+    {
+        return $this->finish_requested_by !== null && $this->finish_declined_at === null;
+    }
+
+    /** Forget any finish request (used when it is withdrawn or the exchange is completed). */
+    public function clearFinishRequest(): array
+    {
+        return [
+            'finish_requested_by' => null,
+            'finish_requested_at' => null,
+            'finish_declined_at' => null,
+            'finish_decline_note' => null,
+        ];
     }
 
     public function cancelRequestedBy()

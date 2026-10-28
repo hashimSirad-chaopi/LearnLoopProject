@@ -2,7 +2,7 @@
 
 @section('title', 'Notifications')
 @section('page-title', 'Notification Log')
-@section('page-subtitle', 'Every notification sent to LearnLoop members, plus manual sends.')
+@section('page-subtitle', 'Every notification sent to LearnLoop users, plus manual sends.')
 
 @section('content')
 

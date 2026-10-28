@@ -52,12 +52,16 @@ class ListingController extends Controller
             // The app posts the skill you WANT and the skill you OFFER. Leave offers out for a
             // learner-only listing ("I want to learn X", nothing to teach yet). The category is
             // taken from the skill (Listing::booted), so category_id is only a fallback.
-            'wants_skill_id' => 'required|exists:skills,id',
-            'offers_skill_id' => 'nullable|exists:skills,id|different:wants_skill_id',
+            // Swap: both. Learn only: wants only. Teach only: offers only (nothing is asked back).
+            'wants_skill_id' => 'nullable|required_without:offers_skill_id|exists:skills,id',
+            'offers_skill_id' => 'nullable|required_without:wants_skill_id|exists:skills,id|different:wants_skill_id',
             'offers_level' => 'nullable|in:easy,moderate,hard,expert,professional',
             'wants_level' => 'nullable|in:easy,moderate,hard,expert,professional',
             'budget' => 'nullable|integer|min:0|max:1000000',
             'category_id' => 'nullable|exists:categories,id',
+        ], [
+            'wants_skill_id.required_without' => 'Choose the skill you want to learn or the skill you teach.',
+            'offers_skill_id.required_without' => 'Choose the skill you teach or the skill you want to learn.',
         ]);
 
         if ($validator->fails()) {
@@ -79,8 +83,9 @@ class ListingController extends Controller
             'wants_skill_id' => $request->wants_skill_id,
             'offers_skill_id' => $request->offers_skill_id,
             'offers_level' => $offersLevel,
-            'wants_level' => $request->wants_level,
-            'budget' => $request->wants_level === 'professional' ? $request->budget : null,
+            // Teach only asks nothing back: no wanted skill, level or budget.
+            'wants_level' => $request->wants_skill_id ? $request->wants_level : null,
+            'budget' => ($request->wants_skill_id && $request->wants_level === 'professional') ? $request->budget : null,
             'category_id' => $request->category_id,
             'description' => $request->description,
             'status' => 'active', // live straight away; an admin monitors and can disable it with a reason
@@ -111,7 +116,7 @@ class ListingController extends Controller
             'title' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string',
             'category_id' => 'sometimes|nullable|exists:categories,id',
-            'wants_skill_id' => 'sometimes|required|exists:skills,id',
+            'wants_skill_id' => 'sometimes|nullable|exists:skills,id',
             'offers_skill_id' => 'sometimes|nullable|exists:skills,id',
             'offers_level' => 'sometimes|nullable|in:easy,moderate,hard,expert,professional',
             'wants_level' => 'sometimes|nullable|in:easy,moderate,hard,expert,professional',
@@ -123,6 +128,21 @@ class ListingController extends Controller
         }
 
         $listing->fill($request->only('title', 'description', 'category_id', 'wants_skill_id', 'offers_skill_id', 'offers_level', 'wants_level', 'budget'));
+
+        // A listing needs at least one skill: the one you teach, the one you want, or both.
+        if (! $listing->wants_skill_id && ! $listing->offers_skill_id) {
+            return response()->json([
+                'message' => 'Choose the skill you teach or the skill you want to learn.',
+                'errors' => ['offers_skill_id' => ['Choose the skill you teach or the skill you want to learn.']],
+            ], 422);
+        }
+        if ($listing->wants_skill_id && $listing->wants_skill_id === $listing->offers_skill_id) {
+            return response()->json(['message' => 'Pick a different skill than the one you teach', 'errors' => ['wants_skill_id' => ['Pick a different skill than the one you teach']]], 422);
+        }
+        // Teach only: nothing is asked back, so no level or budget either.
+        if (! $listing->wants_skill_id) {
+            $listing->wants_level = null;
+        }
 
         // Same rule as when posting: the skill you offer must be at a level you have earned.
         if ($listing->offers_skill_id) {
@@ -208,9 +228,10 @@ class ListingController extends Controller
     public function propose(Request $request, Listing $listing)
     {
         $learnerOnly = $listing->isLearnerOnly();
+        $teachOnly = $listing->isTeachOnly();
 
         $validator = Validator::make($request->all(), [
-            'skill_wanted' => ($learnerOnly ? 'nullable' : 'required').'|string|max:255',
+            'skill_wanted' => (($learnerOnly || $teachOnly) ? 'nullable' : 'required').'|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -234,11 +255,13 @@ class ListingController extends Controller
             ->where('provider_id', $provider)->where('learner_id', $learner)
             ->where(fn ($q) => $learnerOnly
                 ? $q->whereNull('skill_wanted')->where('skill_offered', $listing->wantsSkill?->title)
-                : $q->where('skill_offered', $listing->offersSkill?->title ?? $listing->title)->whereRaw('lower(skill_wanted) = ?', [mb_strtolower(trim((string) $request->skill_wanted))]))
+                : ($teachOnly
+                    ? $q->whereNull('skill_wanted')->where('skill_offered', $listing->offersSkill?->title)
+                    : $q->where('skill_offered', $listing->offersSkill?->title ?? $listing->title)->whereRaw('lower(skill_wanted) = ?', [mb_strtolower(trim((string) $request->skill_wanted))])))
             ->exists();
         $alreadyOpen = $learnerOnly ? $openBetween($me, $listing->user_id) : $openBetween($listing->user_id, $me);
         if ($alreadyOpen) {
-            return response()->json(['message' => 'You already have a pending or active exchange with this member for this listing. Wait for their answer, or finish it first.'], 409);
+            return response()->json(['message' => 'You already have a pending or active exchange with this user for this listing. Wait for their answer, or finish it first.'], 409);
         }
 
         if ($learnerOnly) {
@@ -254,6 +277,23 @@ class ListingController extends Controller
                 'skill_offered' => $skill->title,
                 'skill_wanted' => null,
                 'status' => 'pending',
+                // A paid listing: the caller is the professional and confirms when it is finished.
+                'is_professional' => $listing->wants_level === 'professional',
+            ]);
+        } elseif ($teachOnly) {
+            // Teach only ("I like to teach"): the POSTER teaches, the CALLER is the learner and
+            // nothing is swapped back. The poster must still be able to teach it.
+            if ($listing->offers_skill_id && ! TeachingLevels::canTeach($listing->user_id, (int) $listing->offers_skill_id, $listing->offers_level)) {
+                return response()->json(['message' => 'This user cannot teach that skill right now.'], 422);
+            }
+
+            $exchange = Exchange::create([
+                'provider_id' => $listing->user_id,
+                'learner_id' => $request->user()->id,
+                'requested_by' => $request->user()->id,
+                'skill_offered' => $listing->offersSkill->title,
+                'skill_wanted' => null,
+                'status' => 'pending',
             ]);
         } else {
             // The learner teaches `skill_wanted` back, so they must have earned it too.
@@ -267,7 +307,7 @@ class ListingController extends Controller
             }
             // ...and the poster must still be able to teach what they offer.
             if ($listing->offers_skill_id && ! TeachingLevels::canTeach($listing->user_id, (int) $listing->offers_skill_id, $listing->offers_level)) {
-                return response()->json(['message' => 'This member cannot teach that skill right now.'], 422);
+                return response()->json(['message' => 'This user cannot teach that skill right now.'], 422);
             }
 
             $exchange = Exchange::create([
@@ -293,10 +333,15 @@ class ListingController extends Controller
         $earned = TeachingLevels::earned($userId, $skillId);
         $title = Skill::whereKey($skillId)->value('title');
 
+        $experience = (bool) Skill::whereKey($skillId)->value('experience_based');
+
         if ($earned === null) {
-            return [null, "Finish the Easy lessons of {$title} before you offer to teach it. Open Learn > Continue Learning."];
+            return [null, $experience
+                ? "{$title} can only be taught as a verified Professional. Send your certification in Learn > Continue Learning and wait for an admin to approve it."
+                : "Finish the Easy lessons of {$title} before you offer to teach it. Open Learn > Continue Learning."];
         }
-        $level = $asked ?: $earned;
+        // An experience skill is only ever offered at the Professional level.
+        $level = $experience ? 'professional' : ($asked ?: $earned);
         if (! TeachingLevels::covers($earned, $level)) {
             return [null, $this->earnMessage($title, $level, 'offer')];
         }
